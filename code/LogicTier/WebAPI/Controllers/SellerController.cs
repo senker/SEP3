@@ -1,4 +1,3 @@
-using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +8,17 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SellerController : ControllerBase
 {
-    private readonly ISellerLogic sellerLogic;
+    private readonly ISellerLogic _sellerLogic;
     
     public SellerController(ISellerLogic sellerLogic)
     {
-        this.sellerLogic = sellerLogic;
+        _sellerLogic = sellerLogic;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Pong()
+    {
+        return Ok();
     }
     
     [HttpPost]
@@ -21,8 +26,10 @@ public class SellerController : ControllerBase
     {
         try
         {
-            SellerModel seller = await sellerLogic.CreateSellerAsync(dto);
-            return Created($"/users/{seller.User.Id}", seller);
+            SellerDto seller = await _sellerLogic.CreateSellerAsync(dto);
+            Console.WriteLine("Created seller: ", seller);
+            return Ok(seller);
+            // return Created($"/users/{seller.User.Id}", seller);
         }
         catch (Exception e)
         {
@@ -31,13 +38,13 @@ public class SellerController : ControllerBase
         }
     }
     
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? username)
+    /*[HttpGet]
+    public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? id)
     {
         try
         {
-            SearchSellerParametersDto parameters = new(username);
-            IEnumerable<SellerModel> sellers = await sellerLogic.GetAsync(parameters);
+            SearchSellerParametersDto parameters = new(id);
+            IEnumerable<SellerDto> sellers = await sellerLogic.GetAsync(parameters);
             return Ok(sellers);
         }
         catch (Exception e)
@@ -45,5 +52,5 @@ public class SellerController : ControllerBase
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
         }
-    }
+    }*/
 }

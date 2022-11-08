@@ -7,11 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.21.9" />
+        <PackageReference Include="Grpc.Net.Client" Version="2.50.0-pre1" />
+        <PackageReference Include="Grpc.Tools" Version="2.50.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
+      <ProjectReference Include="..\PersistenceDataAccess\PersistenceDataAccess.csproj" />
     </ItemGroup>
 
 </Project>

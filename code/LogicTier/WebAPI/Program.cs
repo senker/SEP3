@@ -1,18 +1,23 @@
 using Application.DaoInterfaces;
 using Application.Logic;
+using PersistenceDataAccess.DAOs;
+using PersistenceDataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Grpc
+builder.Services.AddSingleton<IGrpcService, GrpcService>();
+
+// App services
+builder.Services.AddScoped<ISellerDao, SellerDao>();
+builder.Services.AddScoped<ISellerLogic, SellerLogic>();
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//builder.Services.AddScoped<FileContext>();
-//builder.Services.AddScoped<IUserDao, UserFileDao>();
-//builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 var app = builder.Build();
 
