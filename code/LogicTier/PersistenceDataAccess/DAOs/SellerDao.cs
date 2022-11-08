@@ -51,7 +51,6 @@ public class SellerDao : ISellerDao
         {
             return null;
         }
-        throw new NotImplementedException();
     }
 
     private SellerDto responseToSellerDto(SellerResponse response)
@@ -79,8 +78,6 @@ public class SellerDao : ISellerDao
             Type = response.Type,
             Website = response.Website
         };
-        throw new NotImplementedException();
-
     }
 
     public Task<SellerDto?> GetByIdAsync(int id)

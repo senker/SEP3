@@ -16,9 +16,6 @@ builder.Services.AddSwaggerGen();
 // gRPC (channel) service must be added before other gRPC services
 builder.Services.AddSingleton<IGrpcService, GrpcService>();
 builder.Services.AddScoped<ISellerDao, SellerDao>();
-//builder.Services.AddScoped<FileContext>();
-//builder.Services.AddScoped<IUserDao, UserFileDao>();
-//builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 var app = builder.Build();
 

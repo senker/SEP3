@@ -32,11 +32,11 @@ public class SellerController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? username)
+    public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? id)
     {
         try
         {
-            SearchSellerParametersDto parameters = new(username);
+            SearchSellerParametersDto parameters = new(id);
             IEnumerable<SellerDto> sellers = await sellerLogic.GetAsync(parameters);
             return Ok(sellers);
         }
