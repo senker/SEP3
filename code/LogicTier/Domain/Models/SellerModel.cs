@@ -2,6 +2,7 @@ namespace Domain.Models;
 
 public class SellerModel
 {
+    public UserModel User { get; set; }
     public int Cvr { get; set; }
     public string CompanyName { get; set; }
     public string Description { get; set; }
