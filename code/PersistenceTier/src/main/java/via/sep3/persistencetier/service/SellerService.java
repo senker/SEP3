@@ -15,15 +15,19 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     SellerRepository sellerRepository;
     @Override
     public void createSeller(CreateSellerResponse request, StreamObserver<SellerResponse> responseObserver) {
-        Seller seller = new Seller(
-                request.getUser().getFirstName(),
-                request.getUser().getLastName(),
-                request.getUser().getAddress(),
-                request.getUser().getPhoneNumber(),
-                request.get);
+        Seller seller = new Seller();
+                request.getUser().getFirstName();
+                request.getUser().getLastName();
+                request.getUser().getAddress();
+                request.getUser().getPhoneNumber();
+                request.getUser().getEmail();
 
-        sellerRepository.save(seller);
+                sellerRepository.save(seller);
 
+                SellerResponse.Builder response = SellerResponse.newBuilder();
+
+                responseObserver.onNext(response.build());
+                responseObserver.onCompleted();
 
     }
 
@@ -32,5 +36,8 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         super.getSellerById(request, responseObserver);
 
         sellerRepository.getReferenceById((long) request.getId());
+        SellerResponse.Builder response = SellerResponse.newBuilder();
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
     }
 }
