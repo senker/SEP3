@@ -17,6 +17,7 @@ public class SellerLogic : ISellerLogic
     public async Task<SellerDto> CreateSellerAsync(SellerDto dto)
     {
         SellerDto? existing = await sellerDao.GetByIdAsync(dto.User.Id);
+        
         if (existing != null)
             throw new Exception("User id already in use!");
 

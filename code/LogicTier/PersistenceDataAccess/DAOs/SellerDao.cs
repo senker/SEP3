@@ -1,5 +1,3 @@
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
@@ -17,10 +15,12 @@ public class SellerDao : ISellerDao
     }
     public async Task<SellerDto> CreateSellerAsync(SellerModel seller)
     {
-        AddressModel address = new AddressModel();
-        address.City = seller.User.Address.City;
-        address.StreetName = seller.User.Address.Streetname;
-        address.PostCode = seller.User.Address.Postcode;
+        AddressModel address = new AddressModel
+        {
+            City = seller.User.Address.City,
+            StreetName = seller.User.Address.Streetname,
+            PostCode = seller.User.Address.Postcode
+        };
 
         CreateUserModelResponse user = new CreateUserModelResponse();
         user.FirstName = seller.User.FirstName;
@@ -28,10 +28,9 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
+        
         try
         {
-
-            
             var response = await _client.createSellerAsync(
                 new CreateSellerResponse
                 {
@@ -49,7 +48,7 @@ public class SellerDao : ISellerDao
         }
         catch
         {
-            return null;
+            throw new Exception("Failed to connect to the gRPC client");
         }
     }
 
@@ -80,9 +79,9 @@ public class SellerDao : ISellerDao
         };
     }
 
-    public Task<SellerDto?> GetByIdAsync(int id)
+    public async Task<SellerDto?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
