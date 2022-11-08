@@ -14,4 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //save
 
 public interface SellerRepository extends JpaRepository<Seller, Long> {
+
 }
