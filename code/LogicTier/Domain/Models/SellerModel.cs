@@ -1,6 +1,6 @@
 namespace Domain.Models;
 
-public class Seller
+public class SellerModel
 {
     public int Cvr { get; set; }
     public string CompanyName { get; set; }
