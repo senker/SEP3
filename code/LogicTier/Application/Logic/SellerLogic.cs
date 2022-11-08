@@ -14,11 +14,11 @@ public class SellerLogic : ISellerLogic
         this.sellerDao = sellerDao;
     }
     
-    public async Task<SellerModel> CreateSellerAsync(SellerDto dto)
+    public async Task<SellerDto> CreateSellerAsync(SellerDto dto)
     {
-        SellerModel? existing = await sellerDao.GetByEmailAsync(dto.User.Email);
+        SellerDto? existing = await sellerDao.GetByIdAsync(dto.User.Id);
         if (existing != null)
-            throw new Exception("Email address is in use!");
+            throw new Exception("User id already in use!");
 
         ValidateData(dto);
         SellerModel toCreate = new SellerModel()
@@ -32,7 +32,7 @@ public class SellerLogic : ISellerLogic
             Website = dto.Website
         };
     
-        SellerModel created = await sellerDao.CreateSellerAsync(toCreate);
+        SellerDto created = await sellerDao.CreateSellerAsync(toCreate);
     
         return created;
     }
@@ -48,7 +48,7 @@ public class SellerLogic : ISellerLogic
             throw new Exception("Username must be less than 16 characters!");
     }
 
-    public Task<IEnumerable<SellerModel>> GetAsync(SearchSellerParametersDto searchParameters)
+    public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
     {
         return sellerDao.GetAsync(searchParameters);
     }

@@ -21,7 +21,7 @@ public class SellerController : ControllerBase
     {
         try
         {
-            SellerModel seller = await sellerLogic.CreateSellerAsync(dto);
+            SellerDto seller = await sellerLogic.CreateSellerAsync(dto);
             return Created($"/users/{seller.User.Id}", seller);
         }
         catch (Exception e)
@@ -37,7 +37,7 @@ public class SellerController : ControllerBase
         try
         {
             SearchSellerParametersDto parameters = new(username);
-            IEnumerable<SellerModel> sellers = await sellerLogic.GetAsync(parameters);
+            IEnumerable<SellerDto> sellers = await sellerLogic.GetAsync(parameters);
             return Ok(sellers);
         }
         catch (Exception e)

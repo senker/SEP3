@@ -1,5 +1,8 @@
 using Application.DaoInterfaces;
 using Application.Logic;
+using PersistenceDataAccess;
+using PersistenceDataAccess.DAOs;
+using PersistenceDataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// gRPC (channel) service must be added before other gRPC services
+builder.Services.AddSingleton<IGrpcService, GrpcService>();
+builder.Services.AddScoped<ISellerDao, SellerDao>();
 //builder.Services.AddScoped<FileContext>();
 //builder.Services.AddScoped<IUserDao, UserFileDao>();
 //builder.Services.AddScoped<ISellerLogic, SellerLogic>();
