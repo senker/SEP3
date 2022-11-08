@@ -1,35 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj": {}
+    "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
+    "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\vlaro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\obj\\",
+        "projectPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\felly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vlaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\felly\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj"
+              "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj"
               }
             }
           }
@@ -63,24 +61,22 @@
         }
       }
     },
-    "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj": {
+    "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\vlaro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\felly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vlaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\felly\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -118,32 +114,30 @@
         }
       }
     },
-    "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj": {
+    "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
         "projectName": "PersistenceDataAccess",
-        "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
-        "packagesPath": "C:\\Users\\vlaro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\obj\\",
+        "projectPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
+        "packagesPath": "C:\\Users\\felly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vlaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\felly\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj"
+              "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\felly\\OneDrive\\Desktop\\VIAUC\\3rd sem\\SEP_3\\SEP_3 source code\\SEP3\\code\\LogicTier\\Application\\Application.csproj"
               }
             }
           }
