@@ -6,3 +6,10 @@
 /code/LogicTier/WebAPI/obj/
 /code/LogicTier/PersistenceDataAccess/bin/
 /code/LogicTier/PersistenceDataAccess/obj/
+/code/PresentationTier/Domain/bin/
+/code/PresentationTier/Domain/obj/
+/code/PresentationTier/HttpClients/bin/
+/code/PresentationTier/HttpClients/obj/
+/code/PresentationTier/WastelessWASM/bin/
+/code/PresentationTier/WastelessWASM/obj/
+
