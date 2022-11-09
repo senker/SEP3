@@ -8,7 +8,7 @@ public class GrpcService : IGrpcService
 
     public GrpcService()
     {
-        _channel = GrpcChannel.ForAddress("http://localhost:9090");
+        _channel = GrpcChannel.ForAddress("http://localhost:6565");
     }
 
     public GrpcChannel GetChannel()

@@ -55,9 +55,9 @@ public final class SellerProto {
     java.lang.String[] descriptorData = {
       "\n\021SellerProto.proto\"\033\n\rSellerRequest\022\n\n\002" +
       "id\030\001 \001(\005\"\202\001\n\027CreateUserModelResponse\022\021\n\t" +
-      "firstName\030\002 \001(\t\022\020\n\010lastName\030\003 \001(\t\022\036\n\007add" +
-      "ress\030\004 \001(\0132\r.AddressModel\022\023\n\013phoneNumber" +
-      "\030\005 \001(\005\022\r\n\005email\030\006 \001(\t\"\210\001\n\021UserModelRespo" +
+      "firstName\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t\022\036\n\007add" +
+      "ress\030\003 \001(\0132\r.AddressModel\022\023\n\013phoneNumber" +
+      "\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\"\210\001\n\021UserModelRespo" +
       "nse\022\n\n\002Id\030\001 \001(\005\022\021\n\tfirstName\030\002 \001(\t\022\020\n\010la" +
       "stName\030\003 \001(\t\022\036\n\007address\030\004 \001(\0132\r.AddressM" +
       "odel\022\023\n\013phoneNumber\030\005 \001(\005\022\r\n\005email\030\006 \001(\t" +

@@ -53,4 +53,9 @@ public class SellerLogic : ISellerLogic
     {
         return sellerDao.GetAsync(searchParameters);
     }
+
+    public Task<SellerDto> GetSellerByIdAsync(int id)
+    {
+        return sellerDao.GetByIdAsync(id);
+    }
 }

@@ -81,7 +81,18 @@ public class SellerDao : ISellerDao
 
     public async Task<SellerDto?> GetByIdAsync(int id)
     {
-        return null;
+        try
+        {
+            var response = await _client.getSellerByIdAsync(
+                new SellerRequest{ Id = id }
+            );
+
+            return responseToSellerDto(response);
+        }
+        catch
+        {
+            throw new Exception("Couldn't get the Id");
+        }
     }
 
     public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
