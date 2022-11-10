@@ -1,0 +1,15 @@
+/code/LogicTier/Application/obj/
+/code/LogicTier/Application/bin/
+/code/LogicTier/Domain/obj/
+/code/LogicTier/Domain/bin/
+/code/LogicTier/WebAPI/bin/
+/code/LogicTier/WebAPI/obj/
+/code/LogicTier/PersistenceDataAccess/bin/
+/code/LogicTier/PersistenceDataAccess/obj/
+/code/PresentationTier/Domain/bin/
+/code/PresentationTier/Domain/obj/
+/code/PresentationTier/HttpClients/bin/
+/code/PresentationTier/HttpClients/obj/
+/code/PresentationTier/WastelessWASM/bin/
+/code/PresentationTier/WastelessWASM/obj/
+

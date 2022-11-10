@@ -42,6 +42,7 @@ message CreateSellerResponse {
 
 message SellerResponse {
   UserModelResponse user = 1;
+  int32 cvr = 2;
   string companyName = 3;
   string description = 4;
   string type = 5;
