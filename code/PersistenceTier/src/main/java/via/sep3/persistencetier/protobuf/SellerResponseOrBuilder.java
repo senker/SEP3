@@ -4,21 +4,21 @@
 package via.sep3.persistencetier.protobuf;
 
 public interface SellerResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:SellerResponse)
+    // @@protoc_insertion_point(interface_extends:seller.SellerResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    * @return Whether the user field is set.
    */
   boolean hasUser();
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    * @return The user.
    */
   via.sep3.persistencetier.protobuf.UserModelResponse getUser();
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    */
   via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder();
 

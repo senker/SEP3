@@ -5,7 +5,7 @@ namespace Application.DaoInterfaces;
 
 public interface ISellerDao
 {
-    Task<SellerDto> CreateSellerAsync(SellerModel seller);
+    Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller);
     Task<SellerDto?> GetByIdAsync(int id);
-    public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters);
+    //public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters);
 }

@@ -1,3 +1,4 @@
+using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,23 +9,18 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SellerController : ControllerBase
 {
-    private readonly ISellerLogic _sellerLogic;
+    private readonly ISellerDao _sellerLogic;
     
-    public SellerController(ISellerLogic sellerLogic)
+    public SellerController(ISellerDao sellerLogic)
     {
         _sellerLogic = sellerLogic;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Pong()
-    {
-        return Ok();
-    }
-    
     [HttpPost]
-    public async Task<ActionResult<SellerModel>> CreateAsync(SellerDto dto)
+    [Route("/seller")]
+    public async Task<ActionResult> CreateSeller(SellerCreateDto seller)
     {
-        try
+        /*try
         {
             SellerDto seller = await _sellerLogic.CreateSellerAsync(dto);
             Console.WriteLine("Created seller: ", seller);
@@ -35,8 +31,21 @@ public class SellerController : ControllerBase
         {
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
-        }
+        }*/
+        return Ok(await _sellerLogic.CreateSellerAsync(seller));
     }
+    
+    
+    /*[HttpGet("{id}")]
+    public async Task<IActionResult> GetGuestById(int id)
+    {
+        var guest = await _sellerLogic.(id);
+
+        if (guest == null)
+            return NotFound("Guest not found");
+
+        return Ok(guest);
+    }*/
     
     /*[HttpGet]
     public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? id)

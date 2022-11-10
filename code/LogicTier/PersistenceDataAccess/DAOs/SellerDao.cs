@@ -13,7 +13,7 @@ public class SellerDao : ISellerDao
     {
         _client = new SellerServiceClient(grpcService.GetChannel());
     }
-    public async Task<SellerDto> CreateSellerAsync(SellerModel seller)
+    public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
         AddressModel address = new AddressModel
         {
@@ -22,7 +22,7 @@ public class SellerDao : ISellerDao
             PostCode = seller.User.Address.Postcode
         };
 
-        CreateUserModelResponse user = new CreateUserModelResponse();
+        CreateUserModelRequest user = new CreateUserModelRequest();
         user.FirstName = seller.User.FirstName;
         user.LastName = seller.User.LastName;
         user.Address = address;
@@ -31,8 +31,8 @@ public class SellerDao : ISellerDao
         
         try
         {
-            var response = await _client.createSellerAsync(
-                new CreateSellerResponse
+            var response =  await _client.createSellerAsync(
+                new CreateSellerRequest()
                 {
                     User = user,
                     CompanyName = seller.CompanyName,
@@ -46,18 +46,22 @@ public class SellerDao : ISellerDao
 
             return responseToSellerDto(response);
         }
-        catch
+        catch (Exception e)
         {
-            throw new Exception("Failed to connect to the gRPC client");
+            Console.WriteLine("{0} Exception caught.", e);
+            throw new Exception("",e);
+
         }
     }
 
     private SellerDto responseToSellerDto(SellerResponse response)
     {
-        Domain.Models.AddressModel address = new Domain.Models.AddressModel();
-        address.City = response.User.Address.City;
-        address.Streetname = response.User.Address.StreetName;
-        address.Postcode = response.User.Address.PostCode;
+        var address = new Domain.Models.AddressModel
+        {
+            City = response.User.Address.City,
+            Streetname = response.User.Address.StreetName,
+            Postcode = response.User.Address.PostCode
+        };
 
         UserModel user = new UserModel();
         user.Id = response.User.Id;
@@ -81,11 +85,22 @@ public class SellerDao : ISellerDao
 
     public async Task<SellerDto?> GetByIdAsync(int id)
     {
-        return null;
+        try
+        {
+            var response = await _client.getSellerByIdAsync(
+                new SellerRequest{ Id = id }
+            );
+
+            return responseToSellerDto(response);
+        }
+        catch
+        {
+            throw new Exception("Couldn't get the Id");
+        }
     }
 
-    public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
+    /*public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
     {
-        throw new NotImplementedException();
-    }
+        return null;
+    }*/
 }

@@ -11,30 +11,30 @@ public final class SellerServiceGrpc {
 
   private SellerServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "SellerService";
+  public static final String SERVICE_NAME = "seller.SellerService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerResponse,
+  private static volatile io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerRequest,
       via.sep3.persistencetier.protobuf.SellerResponse> getCreateSellerMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "createSeller",
-      requestType = via.sep3.persistencetier.protobuf.CreateSellerResponse.class,
+      requestType = via.sep3.persistencetier.protobuf.CreateSellerRequest.class,
       responseType = via.sep3.persistencetier.protobuf.SellerResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerResponse,
+  public static io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerRequest,
       via.sep3.persistencetier.protobuf.SellerResponse> getCreateSellerMethod() {
-    io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerResponse, via.sep3.persistencetier.protobuf.SellerResponse> getCreateSellerMethod;
+    io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.CreateSellerRequest, via.sep3.persistencetier.protobuf.SellerResponse> getCreateSellerMethod;
     if ((getCreateSellerMethod = SellerServiceGrpc.getCreateSellerMethod) == null) {
       synchronized (SellerServiceGrpc.class) {
         if ((getCreateSellerMethod = SellerServiceGrpc.getCreateSellerMethod) == null) {
           SellerServiceGrpc.getCreateSellerMethod = getCreateSellerMethod =
-              io.grpc.MethodDescriptor.<via.sep3.persistencetier.protobuf.CreateSellerResponse, via.sep3.persistencetier.protobuf.SellerResponse>newBuilder()
+              io.grpc.MethodDescriptor.<via.sep3.persistencetier.protobuf.CreateSellerRequest, via.sep3.persistencetier.protobuf.SellerResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "createSeller"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  via.sep3.persistencetier.protobuf.CreateSellerResponse.getDefaultInstance()))
+                  via.sep3.persistencetier.protobuf.CreateSellerRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   via.sep3.persistencetier.protobuf.SellerResponse.getDefaultInstance()))
               .setSchemaDescriptor(new SellerServiceMethodDescriptorSupplier("createSeller"))
@@ -126,7 +126,7 @@ public final class SellerServiceGrpc {
 
     /**
      */
-    public void createSeller(via.sep3.persistencetier.protobuf.CreateSellerResponse request,
+    public void createSeller(via.sep3.persistencetier.protobuf.CreateSellerRequest request,
         io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateSellerMethod(), responseObserver);
     }
@@ -144,7 +144,7 @@ public final class SellerServiceGrpc {
             getCreateSellerMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                via.sep3.persistencetier.protobuf.CreateSellerResponse,
+                via.sep3.persistencetier.protobuf.CreateSellerRequest,
                 via.sep3.persistencetier.protobuf.SellerResponse>(
                   this, METHODID_CREATE_SELLER)))
           .addMethod(
@@ -174,7 +174,7 @@ public final class SellerServiceGrpc {
 
     /**
      */
-    public void createSeller(via.sep3.persistencetier.protobuf.CreateSellerResponse request,
+    public void createSeller(via.sep3.persistencetier.protobuf.CreateSellerRequest request,
         io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCreateSellerMethod(), getCallOptions()), request, responseObserver);
@@ -205,7 +205,7 @@ public final class SellerServiceGrpc {
 
     /**
      */
-    public via.sep3.persistencetier.protobuf.SellerResponse createSeller(via.sep3.persistencetier.protobuf.CreateSellerResponse request) {
+    public via.sep3.persistencetier.protobuf.SellerResponse createSeller(via.sep3.persistencetier.protobuf.CreateSellerRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCreateSellerMethod(), getCallOptions(), request);
     }
@@ -235,7 +235,7 @@ public final class SellerServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<via.sep3.persistencetier.protobuf.SellerResponse> createSeller(
-        via.sep3.persistencetier.protobuf.CreateSellerResponse request) {
+        via.sep3.persistencetier.protobuf.CreateSellerRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCreateSellerMethod(), getCallOptions()), request);
     }
@@ -270,7 +270,7 @@ public final class SellerServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_CREATE_SELLER:
-          serviceImpl.createSeller((via.sep3.persistencetier.protobuf.CreateSellerResponse) request,
+          serviceImpl.createSeller((via.sep3.persistencetier.protobuf.CreateSellerRequest) request,
               (io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse>) responseObserver);
           break;
         case METHODID_GET_SELLER_BY_ID:

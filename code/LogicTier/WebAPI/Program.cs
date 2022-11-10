@@ -1,5 +1,6 @@
 using Application.DaoInterfaces;
-using Application.Logic;
+using PersistenceDataAccess;
+//using Application.Logic;
 using PersistenceDataAccess.DAOs;
 using PersistenceDataAccess.Services;
 
@@ -13,7 +14,7 @@ builder.Services.AddSingleton<IGrpcService, GrpcService>();
 
 // App services
 builder.Services.AddScoped<ISellerDao, SellerDao>();
-builder.Services.AddScoped<ISellerLogic, SellerLogic>();
+//builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

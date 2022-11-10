@@ -4,11 +4,11 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code SellerRequest}
+ * Protobuf type {@code seller.SellerRequest}
  */
 public final class SellerRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:SellerRequest)
+    // @@protoc_insertion_point(message_implements:seller.SellerRequest)
     SellerRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use SellerRequest.newBuilder() to construct.
@@ -76,13 +76,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerRequest_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerRequest_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.sep3.persistencetier.protobuf.SellerRequest.class, via.sep3.persistencetier.protobuf.SellerRequest.Builder.class);
   }
@@ -254,21 +254,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code SellerRequest}
+   * Protobuf type {@code seller.SellerRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:SellerRequest)
+      // @@protoc_insertion_point(builder_implements:seller.SellerRequest)
       via.sep3.persistencetier.protobuf.SellerRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerRequest_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerRequest_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.sep3.persistencetier.protobuf.SellerRequest.class, via.sep3.persistencetier.protobuf.SellerRequest.Builder.class);
     }
@@ -299,7 +299,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerRequest_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerRequest_descriptor;
     }
 
     @java.lang.Override
@@ -443,10 +443,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:SellerRequest)
+    // @@protoc_insertion_point(builder_scope:seller.SellerRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:SellerRequest)
+  // @@protoc_insertion_point(class_scope:seller.SellerRequest)
   private static final via.sep3.persistencetier.protobuf.SellerRequest DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.SellerRequest();

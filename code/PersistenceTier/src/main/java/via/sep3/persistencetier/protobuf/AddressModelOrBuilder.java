@@ -4,7 +4,7 @@
 package via.sep3.persistencetier.protobuf;
 
 public interface AddressModelOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:AddressModel)
+    // @@protoc_insertion_point(interface_extends:seller.AddressModel)
     com.google.protobuf.MessageOrBuilder {
 
   /**
