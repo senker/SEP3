@@ -55,9 +55,9 @@ public final class SellerProto {
     java.lang.String[] descriptorData = {
       "\n\021SellerProto.proto\"\033\n\rSellerRequest\022\n\n\002" +
       "id\030\001 \001(\005\"\202\001\n\027CreateUserModelResponse\022\021\n\t" +
-      "firstName\030\002 \001(\t\022\020\n\010lastName\030\003 \001(\t\022\036\n\007add" +
-      "ress\030\004 \001(\0132\r.AddressModel\022\023\n\013phoneNumber" +
-      "\030\005 \001(\005\022\r\n\005email\030\006 \001(\t\"\210\001\n\021UserModelRespo" +
+      "firstName\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t\022\036\n\007add" +
+      "ress\030\003 \001(\0132\r.AddressModel\022\023\n\013phoneNumber" +
+      "\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\"\210\001\n\021UserModelRespo" +
       "nse\022\n\n\002Id\030\001 \001(\005\022\021\n\tfirstName\030\002 \001(\t\022\020\n\010la" +
       "stName\030\003 \001(\t\022\036\n\007address\030\004 \001(\0132\r.AddressM" +
       "odel\022\023\n\013phoneNumber\030\005 \001(\005\022\r\n\005email\030\006 \001(\t" +
@@ -66,15 +66,15 @@ public final class SellerProto {
       "ellerResponse\022&\n\004user\030\001 \001(\0132\030.CreateUser" +
       "ModelResponse\022\013\n\003cvr\030\002 \001(\005\022\023\n\013companyNam" +
       "e\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\014\n\004type\030\005 \001" +
-      "(\t\022\017\n\007website\030\006 \001(\t\022\016\n\006rating\030\007 \001(\002\"\213\001\n\016" +
+      "(\t\022\017\n\007website\030\006 \001(\t\022\016\n\006rating\030\007 \001(\002\"\230\001\n\016" +
       "SellerResponse\022 \n\004user\030\001 \001(\0132\022.UserModel" +
-      "Response\022\023\n\013companyName\030\003 \001(\t\022\023\n\013descrip" +
-      "tion\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n\007website\030\006 \001(" +
-      "\t\022\016\n\006rating\030\007 \001(\0022y\n\rSellerService\0226\n\014cr" +
-      "eateSeller\022\025.CreateSellerResponse\032\017.Sell" +
-      "erResponse\0220\n\rgetSellerById\022\016.SellerRequ" +
-      "est\032\017.SellerResponseB%\n!via.sep3.persist" +
-      "encetier.protobufP\001b\006proto3"
+      "Response\022\013\n\003cvr\030\002 \001(\005\022\023\n\013companyName\030\003 \001" +
+      "(\t\022\023\n\013description\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n" +
+      "\007website\030\006 \001(\t\022\016\n\006rating\030\007 \001(\0022y\n\rSeller" +
+      "Service\0226\n\014createSeller\022\025.CreateSellerRe" +
+      "sponse\032\017.SellerResponse\0220\n\rgetSellerById" +
+      "\022\016.SellerRequest\032\017.SellerResponseB%\n!via" +
+      ".sep3.persistencetier.protobufP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -115,7 +115,7 @@ public final class SellerProto {
     internal_static_SellerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SellerResponse_descriptor,
-        new java.lang.String[] { "User", "CompanyName", "Description", "Type", "Website", "Rating", });
+        new java.lang.String[] { "User", "Cvr", "CompanyName", "Description", "Type", "Website", "Rating", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

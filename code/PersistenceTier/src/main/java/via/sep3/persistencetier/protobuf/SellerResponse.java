@@ -65,6 +65,11 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          case 16: {
+
+            cvr_ = input.readInt32();
+            break;
+          }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
@@ -152,6 +157,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder() {
     return getUser();
+  }
+
+  public static final int CVR_FIELD_NUMBER = 2;
+  private int cvr_;
+  /**
+   * <code>int32 cvr = 2;</code>
+   * @return The cvr.
+   */
+  @java.lang.Override
+  public int getCvr() {
+    return cvr_;
   }
 
   public static final int COMPANYNAME_FIELD_NUMBER = 3;
@@ -334,6 +350,9 @@ private static final long serialVersionUID = 0L;
     if (user_ != null) {
       output.writeMessage(1, getUser());
     }
+    if (cvr_ != 0) {
+      output.writeInt32(2, cvr_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, companyName_);
     }
@@ -361,6 +380,10 @@ private static final long serialVersionUID = 0L;
     if (user_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getUser());
+    }
+    if (cvr_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, cvr_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, companyName_);
@@ -398,6 +421,8 @@ private static final long serialVersionUID = 0L;
       if (!getUser()
           .equals(other.getUser())) return false;
     }
+    if (getCvr()
+        != other.getCvr()) return false;
     if (!getCompanyName()
         .equals(other.getCompanyName())) return false;
     if (!getDescription()
@@ -424,6 +449,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + USER_FIELD_NUMBER;
       hash = (53 * hash) + getUser().hashCode();
     }
+    hash = (37 * hash) + CVR_FIELD_NUMBER;
+    hash = (53 * hash) + getCvr();
     hash = (37 * hash) + COMPANYNAME_FIELD_NUMBER;
     hash = (53 * hash) + getCompanyName().hashCode();
     hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -574,6 +601,8 @@ private static final long serialVersionUID = 0L;
         user_ = null;
         userBuilder_ = null;
       }
+      cvr_ = 0;
+
       companyName_ = "";
 
       description_ = "";
@@ -615,6 +644,7 @@ private static final long serialVersionUID = 0L;
       } else {
         result.user_ = userBuilder_.build();
       }
+      result.cvr_ = cvr_;
       result.companyName_ = companyName_;
       result.description_ = description_;
       result.type_ = type_;
@@ -670,6 +700,9 @@ private static final long serialVersionUID = 0L;
       if (other == via.sep3.persistencetier.protobuf.SellerResponse.getDefaultInstance()) return this;
       if (other.hasUser()) {
         mergeUser(other.getUser());
+      }
+      if (other.getCvr() != 0) {
+        setCvr(other.getCvr());
       }
       if (!other.getCompanyName().isEmpty()) {
         companyName_ = other.companyName_;
@@ -836,6 +869,37 @@ private static final long serialVersionUID = 0L;
         user_ = null;
       }
       return userBuilder_;
+    }
+
+    private int cvr_ ;
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @return The cvr.
+     */
+    @java.lang.Override
+    public int getCvr() {
+      return cvr_;
+    }
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @param value The cvr to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCvr(int value) {
+      
+      cvr_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCvr() {
+      
+      cvr_ = 0;
+      onChanged();
+      return this;
     }
 
     private java.lang.Object companyName_ = "";

@@ -24,8 +24,7 @@ public class Address {
     @Column(name="postcode")
     private Integer postcode;
 
-    public Address(User user, Long id, String city, String streetName, Integer postcode) {
-        this.id = id;
+    public Address(String city, String streetName, Integer postcode) {
         this.city = city;
         this.streetName = streetName;
         this.postcode = postcode;
@@ -35,15 +34,6 @@ public class Address {
 
     }
 
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
 
     public String getCity() {
         return city;

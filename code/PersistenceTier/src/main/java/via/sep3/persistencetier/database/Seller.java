@@ -32,21 +32,21 @@ public class Seller extends User{
     @Column(name="cvr")
     private Long cvr;
     @Column(name="company_name",
-    columnDefinition="varchar(255)",
-    nullable=false)
+            columnDefinition="varchar(255)",
+            nullable=false)
     private String companyName;
     @Column(name="description",
-    columnDefinition="varchar(255)")
+            columnDefinition="varchar(255)")
     private String description;
     @Column(name="type",
-    columnDefinition="varchar(255)"
+            columnDefinition="varchar(255)"
     )
     private String type;
     @Column(name="website",
-    columnDefinition="varchar(255)")
+            columnDefinition="varchar(255)")
     private String website;
     @Column(name="rating",
-    columnDefinition="integer default 0")
+            columnDefinition="integer default 0")
     private Float rating;
 
 
@@ -57,11 +57,11 @@ public class Seller extends User{
             Long phoneNumber,
             String email,
             Long cvr,
-                  String companyName,
-                  String description,
-                  String type,
-                  String website,
-                  Float rating) {
+            String companyName,
+            String description,
+            String type,
+            String website,
+            Float rating) {
         super(firstName,lastName,address,phoneNumber,email);
         this.cvr = cvr;
         this.companyName = companyName;

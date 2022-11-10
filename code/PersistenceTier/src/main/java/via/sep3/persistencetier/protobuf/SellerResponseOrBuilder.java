@@ -23,6 +23,12 @@ public interface SellerResponseOrBuilder extends
   via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder();
 
   /**
+   * <code>int32 cvr = 2;</code>
+   * @return The cvr.
+   */
+  int getCvr();
+
+  /**
    * <code>string companyName = 3;</code>
    * @return The companyName.
    */
