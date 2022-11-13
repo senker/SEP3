@@ -36,30 +36,21 @@ public class SellerController : ControllerBase
     }
     
     
-    /*[HttpGet("{id}")]
-    public async Task<IActionResult> GetGuestById(int id)
+    [HttpGet("{cvr}")]
+    public async Task<IActionResult> GetSellerByCvr(int cvr)
     {
-        var guest = await _sellerLogic.(id);
+        var guest = await _sellerLogic.GetSellerByCvrAsync(cvr);
 
         if (guest == null)
-            return NotFound("Guest not found");
+            return NotFound("Seller not found");
 
         return Ok(guest);
-    }*/
+    }
     
-    /*[HttpGet]
-    public async Task<ActionResult<IEnumerable<SellerModel>>> GetAsync([FromQuery] string? id)
+    [HttpDelete("{cvr}")]
+    public async Task<IActionResult> DeleteSellerByCvr(int cvr)
     {
-        try
-        {
-            SearchSellerParametersDto parameters = new(id);
-            IEnumerable<SellerDto> sellers = await sellerLogic.GetAsync(parameters);
-            return Ok(sellers);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }
-    }*/
+        return Ok(await _sellerLogic.DeleteSellerByCvrAsync(cvr));
+    }
+    
 }

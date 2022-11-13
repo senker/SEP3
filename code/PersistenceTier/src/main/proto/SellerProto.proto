@@ -56,5 +56,6 @@ message SellerResponse {
 
 service SellerService {
   rpc createSeller(CreateSellerRequest) returns (SellerResponse);
-  rpc getSellerById(SellerRequest) returns (SellerResponse);
+  rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
+  rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
 }

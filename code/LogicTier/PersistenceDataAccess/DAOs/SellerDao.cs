@@ -44,7 +44,7 @@ public class SellerDao : ISellerDao
                 }
             );
 
-            return responseToSellerDto(response);
+            return ResponseToSellerDto(response);
         }
         catch (Exception e)
         {
@@ -54,7 +54,7 @@ public class SellerDao : ISellerDao
         }
     }
 
-    private SellerDto responseToSellerDto(SellerResponse response)
+    private SellerDto ResponseToSellerDto(SellerResponse response)
     {
         var address = new Domain.Models.AddressModel
         {
@@ -83,24 +83,35 @@ public class SellerDao : ISellerDao
         };
     }
 
-    public async Task<SellerDto?> GetByIdAsync(int id)
+    public async Task<SellerDto?> GetSellerByCvrAsync(int cvr)
     {
         try
         {
-            var response = await _client.getSellerByIdAsync(
-                new SellerRequest{ Id = id }
+            var response = await _client.getSellerByCvrAsync(
+                new SellerRequest{ Id = cvr }
             );
 
-            return responseToSellerDto(response);
+            return ResponseToSellerDto(response);
         }
         catch
         {
-            throw new Exception("Couldn't get the Id");
+            throw new Exception("Couldn't get the cvr");
         }
     }
 
-    /*public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
+    public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)
     {
-        return null;
-    }*/
+        try
+        {
+            var response = await _client.deleteSellerByCvrAsync(
+                new SellerRequest { Id = cvr }
+            );
+
+            return ResponseToSellerDto(response);
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }

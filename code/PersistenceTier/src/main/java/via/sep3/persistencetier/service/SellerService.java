@@ -65,8 +65,8 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     }
 
     @Override
-    public void getSellerById(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        super.getSellerById(request, responseObserver);
+    public void getSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
+        super.getSellerByCvr(request, responseObserver);
 
         sellerRepository.getReferenceById((long) request.getId());
         SellerResponse.Builder response = SellerResponse.newBuilder();

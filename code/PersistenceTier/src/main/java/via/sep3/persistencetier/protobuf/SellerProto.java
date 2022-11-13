@@ -71,12 +71,14 @@ public final class SellerProto {
       "\022\'\n\004user\030\001 \001(\0132\031.seller.UserModelRespons" +
       "e\022\013\n\003cvr\030\002 \001(\005\022\023\n\013companyName\030\003 \001(\t\022\023\n\013d" +
       "escription\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n\007websit" +
-      "e\030\006 \001(\t\022\016\n\006rating\030\007 \001(\0022\224\001\n\rSellerServic" +
+      "e\030\006 \001(\t\022\016\n\006rating\030\007 \001(\0022\331\001\n\rSellerServic" +
       "e\022C\n\014createSeller\022\033.seller.CreateSellerR" +
-      "equest\032\026.seller.SellerResponse\022>\n\rgetSel" +
-      "lerById\022\025.seller.SellerRequest\032\026.seller." +
-      "SellerResponseB%\n!via.sep3.persistenceti" +
-      "er.protobufP\001b\006proto3"
+      "equest\032\026.seller.SellerResponse\022?\n\016getSel" +
+      "lerByCvr\022\025.seller.SellerRequest\032\026.seller" +
+      ".SellerResponse\022B\n\021deleteSellerByCvr\022\025.s" +
+      "eller.SellerRequest\032\026.seller.SellerRespo" +
+      "nseB%\n!via.sep3.persistencetier.protobuf" +
+      "P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
