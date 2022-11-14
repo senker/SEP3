@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "PersistenceDataAccess";
+
+package customer;
+
+message CustomerRequest {
+  int32 id = 1;
+}
+
+message UserModelResponse{
+  int32 Id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  AddressModel address = 4;
+  int32 phoneNumber = 5;
+  string email = 6;
+}
+
+message AddressModel{
+  string city = 1;
+  string streetName = 2;
+  int32 postCode = 3;
+}
+
+message CreateUserModelRequest{
+  string firstName = 2;
+  string lastName = 3;
+  AddressModel address = 4;
+  int32 phoneNumber = 5;
+  string email = 6;
+}
+
+message CreateCustomerRequest {
+  CreateUserModelRequest user = 1;
+  string preference = 2;
+}
+
+message CustomerResponse {
+  UserModelResponse user = 1;
+  string preference = 2;
+}
+
+service SellerService {
+  rpc createCustomer(CreateCustomerRequest) returns (CustomerResponse);
+  rpc getSellerById(CustomerRequest) returns (CustomerResponse);
+  rpc deleteSellerById(CustomerRequest) returns (CustomerResponse);
+}
