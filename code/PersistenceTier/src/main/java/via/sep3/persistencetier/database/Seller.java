@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.grpc.stub.StreamObserver;
+import via.sep3.persistencetier.protobuf.*;
+
 
 /**
  * Seller EXAMPLE:
@@ -76,6 +79,7 @@ public class Seller extends User{
     }
 
 
+
     public Long getCvr() {
         return cvr;
     }
@@ -103,6 +107,7 @@ public class Seller extends User{
     public String getType() {
         return type;
     }
+
 
     public void setType(String type) {
         this.type = type;
