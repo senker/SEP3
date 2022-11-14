@@ -98,7 +98,33 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Override
     public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.getReferenceById((long) request.getId());
+        Seller seller = sellerRepository.getReferenceById((long) request.getId());
+        sellerRepository.delete(seller);
 
+        SellerResponse.Builder builder = SellerResponse.newBuilder();
+        builder.setUser(
+                UserModelResponse.newBuilder()
+                        .setId(seller.getCvr().intValue())
+                        .setFirstName(seller.getFirstName())
+                        .setLastName(seller.getLastName())
+                        .setAddress(
+                                AddressModel.newBuilder()
+                                        .setCity(seller.getAddress().getCity())
+                                        .setStreetName(seller.getAddress().getStreetName())
+                                        .setPostCode(seller.getAddress().getPostcode())
+                        )
+                        .setPhoneNumber(seller.getPhoneNumber().intValue())
+                        .setEmail(seller.getEmail())
+        );
+        builder.setCvr(seller.getCvr().intValue());
+        builder.setCompanyName(seller.getCompanyName());
+        builder.setDescription(seller.getDescription());
+        builder.setType(seller.getType());
+        builder.setWebsite(seller.getWebsite());
+        builder.setRating(seller.getRating().floatValue());
+
+
+        responseObserver.onNext(builder.build());
+        responseObserver.onCompleted();
     }
 }
