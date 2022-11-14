@@ -3,24 +3,24 @@
 
 package via.sep3.persistencetier.protobuf;
 
-public interface CreateSellerResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:CreateSellerResponse)
+public interface CreateSellerRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:seller.CreateSellerRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    * @return Whether the user field is set.
    */
   boolean hasUser();
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    * @return The user.
    */
-  via.sep3.persistencetier.protobuf.CreateUserModelResponse getUser();
+  via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser();
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    */
-  via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder getUserOrBuilder();
+  via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder();
 
   /**
    * <code>int32 cvr = 2;</code>

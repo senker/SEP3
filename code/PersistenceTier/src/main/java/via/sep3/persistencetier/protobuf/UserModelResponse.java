@@ -4,11 +4,11 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code UserModelResponse}
+ * Protobuf type {@code seller.UserModelResponse}
  */
 public final class UserModelResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:UserModelResponse)
+    // @@protoc_insertion_point(message_implements:seller.UserModelResponse)
     UserModelResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use UserModelResponse.newBuilder() to construct.
@@ -115,13 +115,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_UserModelResponse_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_UserModelResponse_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.sep3.persistencetier.protobuf.UserModelResponse.class, via.sep3.persistencetier.protobuf.UserModelResponse.Builder.class);
   }
@@ -216,7 +216,7 @@ private static final long serialVersionUID = 0L;
   public static final int ADDRESS_FIELD_NUMBER = 4;
   private via.sep3.persistencetier.protobuf.AddressModel address_;
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return Whether the address field is set.
    */
   @java.lang.Override
@@ -224,7 +224,7 @@ private static final long serialVersionUID = 0L;
     return address_ != null;
   }
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return The address.
    */
   @java.lang.Override
@@ -232,7 +232,7 @@ private static final long serialVersionUID = 0L;
     return address_ == null ? via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance() : address_;
   }
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    */
   @java.lang.Override
   public via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder() {
@@ -501,21 +501,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code UserModelResponse}
+   * Protobuf type {@code seller.UserModelResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:UserModelResponse)
+      // @@protoc_insertion_point(builder_implements:seller.UserModelResponse)
       via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_UserModelResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_UserModelResponse_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.sep3.persistencetier.protobuf.UserModelResponse.class, via.sep3.persistencetier.protobuf.UserModelResponse.Builder.class);
     }
@@ -560,7 +560,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_UserModelResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
     }
 
     @java.lang.Override
@@ -875,14 +875,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         via.sep3.persistencetier.protobuf.AddressModel, via.sep3.persistencetier.protobuf.AddressModel.Builder, via.sep3.persistencetier.protobuf.AddressModelOrBuilder> addressBuilder_;
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      * @return Whether the address field is set.
      */
     public boolean hasAddress() {
       return addressBuilder_ != null || address_ != null;
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      * @return The address.
      */
     public via.sep3.persistencetier.protobuf.AddressModel getAddress() {
@@ -893,7 +893,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public Builder setAddress(via.sep3.persistencetier.protobuf.AddressModel value) {
       if (addressBuilder_ == null) {
@@ -909,7 +909,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public Builder setAddress(
         via.sep3.persistencetier.protobuf.AddressModel.Builder builderForValue) {
@@ -923,7 +923,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public Builder mergeAddress(via.sep3.persistencetier.protobuf.AddressModel value) {
       if (addressBuilder_ == null) {
@@ -941,7 +941,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public Builder clearAddress() {
       if (addressBuilder_ == null) {
@@ -955,7 +955,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public via.sep3.persistencetier.protobuf.AddressModel.Builder getAddressBuilder() {
       
@@ -963,7 +963,7 @@ private static final long serialVersionUID = 0L;
       return getAddressFieldBuilder().getBuilder();
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     public via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder() {
       if (addressBuilder_ != null) {
@@ -974,7 +974,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.AddressModel address = 4;</code>
+     * <code>.seller.AddressModel address = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         via.sep3.persistencetier.protobuf.AddressModel, via.sep3.persistencetier.protobuf.AddressModel.Builder, via.sep3.persistencetier.protobuf.AddressModelOrBuilder> 
@@ -1109,10 +1109,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:UserModelResponse)
+    // @@protoc_insertion_point(builder_scope:seller.UserModelResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:UserModelResponse)
+  // @@protoc_insertion_point(class_scope:seller.UserModelResponse)
   private static final via.sep3.persistencetier.protobuf.UserModelResponse DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.UserModelResponse();

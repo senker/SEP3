@@ -4,18 +4,18 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code CreateSellerResponse}
+ * Protobuf type {@code seller.CreateSellerRequest}
  */
-public final class CreateSellerResponse extends
+public final class CreateSellerRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:CreateSellerResponse)
-    CreateSellerResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:seller.CreateSellerRequest)
+    CreateSellerRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use CreateSellerResponse.newBuilder() to construct.
-  private CreateSellerResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use CreateSellerRequest.newBuilder() to construct.
+  private CreateSellerRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private CreateSellerResponse() {
+  private CreateSellerRequest() {
     companyName_ = "";
     description_ = "";
     type_ = "";
@@ -26,7 +26,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new CreateSellerResponse();
+    return new CreateSellerRequest();
   }
 
   @java.lang.Override
@@ -34,7 +34,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private CreateSellerResponse(
+  private CreateSellerRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -53,11 +53,11 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder subBuilder = null;
+            via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder subBuilder = null;
             if (user_ != null) {
               subBuilder = user_.toBuilder();
             }
-            user_ = input.readMessage(via.sep3.persistencetier.protobuf.CreateUserModelResponse.parser(), extensionRegistry);
+            user_ = input.readMessage(via.sep3.persistencetier.protobuf.CreateUserModelRequest.parser(), extensionRegistry);
             if (subBuilder != null) {
               subBuilder.mergeFrom(user_);
               user_ = subBuilder.buildPartial();
@@ -122,21 +122,21 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_CreateSellerResponse_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_CreateSellerRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_CreateSellerResponse_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_CreateSellerRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            via.sep3.persistencetier.protobuf.CreateSellerResponse.class, via.sep3.persistencetier.protobuf.CreateSellerResponse.Builder.class);
+            via.sep3.persistencetier.protobuf.CreateSellerRequest.class, via.sep3.persistencetier.protobuf.CreateSellerRequest.Builder.class);
   }
 
   public static final int USER_FIELD_NUMBER = 1;
-  private via.sep3.persistencetier.protobuf.CreateUserModelResponse user_;
+  private via.sep3.persistencetier.protobuf.CreateUserModelRequest user_;
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    * @return Whether the user field is set.
    */
   @java.lang.Override
@@ -144,18 +144,18 @@ private static final long serialVersionUID = 0L;
     return user_ != null;
   }
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    * @return The user.
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.CreateUserModelResponse getUser() {
-    return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelResponse.getDefaultInstance() : user_;
+  public via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser() {
+    return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
   }
   /**
-   * <code>.CreateUserModelResponse user = 1;</code>
+   * <code>.seller.CreateUserModelRequest user = 1;</code>
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder getUserOrBuilder() {
+  public via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder() {
     return getUser();
   }
 
@@ -411,10 +411,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof via.sep3.persistencetier.protobuf.CreateSellerResponse)) {
+    if (!(obj instanceof via.sep3.persistencetier.protobuf.CreateSellerRequest)) {
       return super.equals(obj);
     }
-    via.sep3.persistencetier.protobuf.CreateSellerResponse other = (via.sep3.persistencetier.protobuf.CreateSellerResponse) obj;
+    via.sep3.persistencetier.protobuf.CreateSellerRequest other = (via.sep3.persistencetier.protobuf.CreateSellerRequest) obj;
 
     if (hasUser() != other.hasUser()) return false;
     if (hasUser()) {
@@ -467,69 +467,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(byte[] data)
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseDelimitedFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseDelimitedFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -542,7 +542,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(via.sep3.persistencetier.protobuf.CreateSellerResponse prototype) {
+  public static Builder newBuilder(via.sep3.persistencetier.protobuf.CreateSellerRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -558,26 +558,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code CreateSellerResponse}
+   * Protobuf type {@code seller.CreateSellerRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:CreateSellerResponse)
-      via.sep3.persistencetier.protobuf.CreateSellerResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:seller.CreateSellerRequest)
+      via.sep3.persistencetier.protobuf.CreateSellerRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_CreateSellerResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_CreateSellerRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_CreateSellerResponse_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_CreateSellerRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              via.sep3.persistencetier.protobuf.CreateSellerResponse.class, via.sep3.persistencetier.protobuf.CreateSellerResponse.Builder.class);
+              via.sep3.persistencetier.protobuf.CreateSellerRequest.class, via.sep3.persistencetier.protobuf.CreateSellerRequest.Builder.class);
     }
 
-    // Construct using via.sep3.persistencetier.protobuf.CreateSellerResponse.newBuilder()
+    // Construct using via.sep3.persistencetier.protobuf.CreateSellerRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -619,17 +619,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_CreateSellerResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_CreateSellerRequest_descriptor;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.CreateSellerResponse getDefaultInstanceForType() {
-      return via.sep3.persistencetier.protobuf.CreateSellerResponse.getDefaultInstance();
+    public via.sep3.persistencetier.protobuf.CreateSellerRequest getDefaultInstanceForType() {
+      return via.sep3.persistencetier.protobuf.CreateSellerRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.CreateSellerResponse build() {
-      via.sep3.persistencetier.protobuf.CreateSellerResponse result = buildPartial();
+    public via.sep3.persistencetier.protobuf.CreateSellerRequest build() {
+      via.sep3.persistencetier.protobuf.CreateSellerRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -637,8 +637,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.CreateSellerResponse buildPartial() {
-      via.sep3.persistencetier.protobuf.CreateSellerResponse result = new via.sep3.persistencetier.protobuf.CreateSellerResponse(this);
+    public via.sep3.persistencetier.protobuf.CreateSellerRequest buildPartial() {
+      via.sep3.persistencetier.protobuf.CreateSellerRequest result = new via.sep3.persistencetier.protobuf.CreateSellerRequest(this);
       if (userBuilder_ == null) {
         result.user_ = user_;
       } else {
@@ -688,16 +688,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof via.sep3.persistencetier.protobuf.CreateSellerResponse) {
-        return mergeFrom((via.sep3.persistencetier.protobuf.CreateSellerResponse)other);
+      if (other instanceof via.sep3.persistencetier.protobuf.CreateSellerRequest) {
+        return mergeFrom((via.sep3.persistencetier.protobuf.CreateSellerRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(via.sep3.persistencetier.protobuf.CreateSellerResponse other) {
-      if (other == via.sep3.persistencetier.protobuf.CreateSellerResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(via.sep3.persistencetier.protobuf.CreateSellerRequest other) {
+      if (other == via.sep3.persistencetier.protobuf.CreateSellerRequest.getDefaultInstance()) return this;
       if (other.hasUser()) {
         mergeUser(other.getUser());
       }
@@ -738,11 +738,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      via.sep3.persistencetier.protobuf.CreateSellerResponse parsedMessage = null;
+      via.sep3.persistencetier.protobuf.CreateSellerRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (via.sep3.persistencetier.protobuf.CreateSellerResponse) e.getUnfinishedMessage();
+        parsedMessage = (via.sep3.persistencetier.protobuf.CreateSellerRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -752,31 +752,31 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private via.sep3.persistencetier.protobuf.CreateUserModelResponse user_;
+    private via.sep3.persistencetier.protobuf.CreateUserModelRequest user_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.CreateUserModelResponse, via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder, via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder> userBuilder_;
+        via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder> userBuilder_;
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      * @return Whether the user field is set.
      */
     public boolean hasUser() {
       return userBuilder_ != null || user_ != null;
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      * @return The user.
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelResponse getUser() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser() {
       if (userBuilder_ == null) {
-        return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelResponse.getDefaultInstance() : user_;
+        return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
       } else {
         return userBuilder_.getMessage();
       }
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
-    public Builder setUser(via.sep3.persistencetier.protobuf.CreateUserModelResponse value) {
+    public Builder setUser(via.sep3.persistencetier.protobuf.CreateUserModelRequest value) {
       if (userBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -790,10 +790,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
     public Builder setUser(
-        via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder builderForValue) {
+        via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder builderForValue) {
       if (userBuilder_ == null) {
         user_ = builderForValue.build();
         onChanged();
@@ -804,13 +804,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
-    public Builder mergeUser(via.sep3.persistencetier.protobuf.CreateUserModelResponse value) {
+    public Builder mergeUser(via.sep3.persistencetier.protobuf.CreateUserModelRequest value) {
       if (userBuilder_ == null) {
         if (user_ != null) {
           user_ =
-            via.sep3.persistencetier.protobuf.CreateUserModelResponse.newBuilder(user_).mergeFrom(value).buildPartial();
+            via.sep3.persistencetier.protobuf.CreateUserModelRequest.newBuilder(user_).mergeFrom(value).buildPartial();
         } else {
           user_ = value;
         }
@@ -822,7 +822,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
     public Builder clearUser() {
       if (userBuilder_ == null) {
@@ -836,33 +836,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder getUserBuilder() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder getUserBuilder() {
       
       onChanged();
       return getUserFieldBuilder().getBuilder();
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder getUserOrBuilder() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder() {
       if (userBuilder_ != null) {
         return userBuilder_.getMessageOrBuilder();
       } else {
         return user_ == null ?
-            via.sep3.persistencetier.protobuf.CreateUserModelResponse.getDefaultInstance() : user_;
+            via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
       }
     }
     /**
-     * <code>.CreateUserModelResponse user = 1;</code>
+     * <code>.seller.CreateUserModelRequest user = 1;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.CreateUserModelResponse, via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder, via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder> 
+        via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder> 
         getUserFieldBuilder() {
       if (userBuilder_ == null) {
         userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            via.sep3.persistencetier.protobuf.CreateUserModelResponse, via.sep3.persistencetier.protobuf.CreateUserModelResponse.Builder, via.sep3.persistencetier.protobuf.CreateUserModelResponseOrBuilder>(
+            via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder>(
                 getUser(),
                 getParentForChildren(),
                 isClean());
@@ -1249,41 +1249,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:CreateSellerResponse)
+    // @@protoc_insertion_point(builder_scope:seller.CreateSellerRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:CreateSellerResponse)
-  private static final via.sep3.persistencetier.protobuf.CreateSellerResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:seller.CreateSellerRequest)
+  private static final via.sep3.persistencetier.protobuf.CreateSellerRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.CreateSellerResponse();
+    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.CreateSellerRequest();
   }
 
-  public static via.sep3.persistencetier.protobuf.CreateSellerResponse getDefaultInstance() {
+  public static via.sep3.persistencetier.protobuf.CreateSellerRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<CreateSellerResponse>
-      PARSER = new com.google.protobuf.AbstractParser<CreateSellerResponse>() {
+  private static final com.google.protobuf.Parser<CreateSellerRequest>
+      PARSER = new com.google.protobuf.AbstractParser<CreateSellerRequest>() {
     @java.lang.Override
-    public CreateSellerResponse parsePartialFrom(
+    public CreateSellerRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new CreateSellerResponse(input, extensionRegistry);
+      return new CreateSellerRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<CreateSellerResponse> parser() {
+  public static com.google.protobuf.Parser<CreateSellerRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<CreateSellerResponse> getParserForType() {
+  public com.google.protobuf.Parser<CreateSellerRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.CreateSellerResponse getDefaultInstanceForType() {
+  public via.sep3.persistencetier.protobuf.CreateSellerRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

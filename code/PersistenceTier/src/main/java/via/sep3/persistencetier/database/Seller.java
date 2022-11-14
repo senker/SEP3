@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.grpc.stub.StreamObserver;
+import via.sep3.persistencetier.protobuf.*;
+
 
 /**
  * Seller EXAMPLE:
@@ -32,21 +35,21 @@ public class Seller extends User{
     @Column(name="cvr")
     private Long cvr;
     @Column(name="company_name",
-    columnDefinition="varchar(255)",
-    nullable=false)
+            columnDefinition="varchar(255)",
+            nullable=false)
     private String companyName;
     @Column(name="description",
-    columnDefinition="varchar(255)")
+            columnDefinition="varchar(255)")
     private String description;
     @Column(name="type",
-    columnDefinition="varchar(255)"
+            columnDefinition="varchar(255)"
     )
     private String type;
     @Column(name="website",
-    columnDefinition="varchar(255)")
+            columnDefinition="varchar(255)")
     private String website;
     @Column(name="rating",
-    columnDefinition="integer default 0")
+            columnDefinition="integer default 0")
     private Float rating;
 
 
@@ -57,11 +60,11 @@ public class Seller extends User{
             Long phoneNumber,
             String email,
             Long cvr,
-                  String companyName,
-                  String description,
-                  String type,
-                  String website,
-                  Float rating) {
+            String companyName,
+            String description,
+            String type,
+            String website,
+            Float rating) {
         super(firstName,lastName,address,phoneNumber,email);
         this.cvr = cvr;
         this.companyName = companyName;
@@ -74,6 +77,7 @@ public class Seller extends User{
     public Seller() {
         super("","",null,0L,"");
     }
+
 
 
     public Long getCvr() {
@@ -103,6 +107,7 @@ public class Seller extends User{
     public String getType() {
         return type;
     }
+
 
     public void setType(String type) {
         this.type = type;

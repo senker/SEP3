@@ -4,11 +4,11 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code SellerResponse}
+ * Protobuf type {@code seller.SellerResponse}
  */
 public final class SellerResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:SellerResponse)
+    // @@protoc_insertion_point(message_implements:seller.SellerResponse)
     SellerResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use SellerResponse.newBuilder() to construct.
@@ -65,6 +65,11 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          case 16: {
+
+            cvr_ = input.readInt32();
+            break;
+          }
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
@@ -117,13 +122,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerResponse_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerResponse_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.sep3.persistencetier.protobuf.SellerResponse.class, via.sep3.persistencetier.protobuf.SellerResponse.Builder.class);
   }
@@ -131,7 +136,7 @@ private static final long serialVersionUID = 0L;
   public static final int USER_FIELD_NUMBER = 1;
   private via.sep3.persistencetier.protobuf.UserModelResponse user_;
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    * @return Whether the user field is set.
    */
   @java.lang.Override
@@ -139,7 +144,7 @@ private static final long serialVersionUID = 0L;
     return user_ != null;
   }
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    * @return The user.
    */
   @java.lang.Override
@@ -147,11 +152,22 @@ private static final long serialVersionUID = 0L;
     return user_ == null ? via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance() : user_;
   }
   /**
-   * <code>.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponse user = 1;</code>
    */
   @java.lang.Override
   public via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder() {
     return getUser();
+  }
+
+  public static final int CVR_FIELD_NUMBER = 2;
+  private int cvr_;
+  /**
+   * <code>int32 cvr = 2;</code>
+   * @return The cvr.
+   */
+  @java.lang.Override
+  public int getCvr() {
+    return cvr_;
   }
 
   public static final int COMPANYNAME_FIELD_NUMBER = 3;
@@ -334,6 +350,9 @@ private static final long serialVersionUID = 0L;
     if (user_ != null) {
       output.writeMessage(1, getUser());
     }
+    if (cvr_ != 0) {
+      output.writeInt32(2, cvr_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, companyName_);
     }
@@ -361,6 +380,10 @@ private static final long serialVersionUID = 0L;
     if (user_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getUser());
+    }
+    if (cvr_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, cvr_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(companyName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, companyName_);
@@ -398,6 +421,8 @@ private static final long serialVersionUID = 0L;
       if (!getUser()
           .equals(other.getUser())) return false;
     }
+    if (getCvr()
+        != other.getCvr()) return false;
     if (!getCompanyName()
         .equals(other.getCompanyName())) return false;
     if (!getDescription()
@@ -424,6 +449,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + USER_FIELD_NUMBER;
       hash = (53 * hash) + getUser().hashCode();
     }
+    hash = (37 * hash) + CVR_FIELD_NUMBER;
+    hash = (53 * hash) + getCvr();
     hash = (37 * hash) + COMPANYNAME_FIELD_NUMBER;
     hash = (53 * hash) + getCompanyName().hashCode();
     hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -531,21 +558,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code SellerResponse}
+   * Protobuf type {@code seller.SellerResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:SellerResponse)
+      // @@protoc_insertion_point(builder_implements:seller.SellerResponse)
       via.sep3.persistencetier.protobuf.SellerResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerResponse_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.sep3.persistencetier.protobuf.SellerResponse.class, via.sep3.persistencetier.protobuf.SellerResponse.Builder.class);
     }
@@ -574,6 +601,8 @@ private static final long serialVersionUID = 0L;
         user_ = null;
         userBuilder_ = null;
       }
+      cvr_ = 0;
+
       companyName_ = "";
 
       description_ = "";
@@ -590,7 +619,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_SellerResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_SellerResponse_descriptor;
     }
 
     @java.lang.Override
@@ -615,6 +644,7 @@ private static final long serialVersionUID = 0L;
       } else {
         result.user_ = userBuilder_.build();
       }
+      result.cvr_ = cvr_;
       result.companyName_ = companyName_;
       result.description_ = description_;
       result.type_ = type_;
@@ -671,6 +701,9 @@ private static final long serialVersionUID = 0L;
       if (other.hasUser()) {
         mergeUser(other.getUser());
       }
+      if (other.getCvr() != 0) {
+        setCvr(other.getCvr());
+      }
       if (!other.getCompanyName().isEmpty()) {
         companyName_ = other.companyName_;
         onChanged();
@@ -723,14 +756,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         via.sep3.persistencetier.protobuf.UserModelResponse, via.sep3.persistencetier.protobuf.UserModelResponse.Builder, via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder> userBuilder_;
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      * @return Whether the user field is set.
      */
     public boolean hasUser() {
       return userBuilder_ != null || user_ != null;
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      * @return The user.
      */
     public via.sep3.persistencetier.protobuf.UserModelResponse getUser() {
@@ -741,7 +774,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public Builder setUser(via.sep3.persistencetier.protobuf.UserModelResponse value) {
       if (userBuilder_ == null) {
@@ -757,7 +790,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public Builder setUser(
         via.sep3.persistencetier.protobuf.UserModelResponse.Builder builderForValue) {
@@ -771,7 +804,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public Builder mergeUser(via.sep3.persistencetier.protobuf.UserModelResponse value) {
       if (userBuilder_ == null) {
@@ -789,7 +822,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public Builder clearUser() {
       if (userBuilder_ == null) {
@@ -803,7 +836,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public via.sep3.persistencetier.protobuf.UserModelResponse.Builder getUserBuilder() {
       
@@ -811,7 +844,7 @@ private static final long serialVersionUID = 0L;
       return getUserFieldBuilder().getBuilder();
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     public via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder() {
       if (userBuilder_ != null) {
@@ -822,7 +855,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponse user = 1;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         via.sep3.persistencetier.protobuf.UserModelResponse, via.sep3.persistencetier.protobuf.UserModelResponse.Builder, via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder> 
@@ -836,6 +869,37 @@ private static final long serialVersionUID = 0L;
         user_ = null;
       }
       return userBuilder_;
+    }
+
+    private int cvr_ ;
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @return The cvr.
+     */
+    @java.lang.Override
+    public int getCvr() {
+      return cvr_;
+    }
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @param value The cvr to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCvr(int value) {
+      
+      cvr_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 cvr = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCvr() {
+      
+      cvr_ = 0;
+      onChanged();
+      return this;
     }
 
     private java.lang.Object companyName_ = "";
@@ -1185,10 +1249,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:SellerResponse)
+    // @@protoc_insertion_point(builder_scope:seller.SellerResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:SellerResponse)
+  // @@protoc_insertion_point(class_scope:seller.SellerResponse)
   private static final via.sep3.persistencetier.protobuf.SellerResponse DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.SellerResponse();

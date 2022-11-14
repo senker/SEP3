@@ -4,7 +4,7 @@
 package via.sep3.persistencetier.protobuf;
 
 public interface SellerRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:SellerRequest)
+    // @@protoc_insertion_point(interface_extends:seller.SellerRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**

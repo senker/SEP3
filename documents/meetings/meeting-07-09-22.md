@@ -1,0 +1,4 @@
+During today's meeting group formation took place. We got to know a little bit about each other and then we decided to start working on the group contract.
+Main points have been defined and more agreements took place about how the team work should take place. 
+Temporary decisions have been taken about how we should design every tier. Also choice of middleware in-between tiers took place.
+For the presentation tier C# has been chosen. It will communicate with the Logic tier which will be written in Java through gRPC. Logic tier will transmit information towards Data tier through REST. Data tier will be most probably written in Java aswell.

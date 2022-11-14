@@ -3,17 +3,12 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "via.sep3.persistencetier.protobuf";
 
+package seller;
+
 // service definitions
 
 message SellerRequest {
   int32 id = 1;
-}
-message CreateUserModelResponse{
-  string firstName = 1;
-  string lastName = 2;
-  AddressModel address = 3;
-  int32 phoneNumber = 4;
-  string email = 5;
 }
 
 message UserModelResponse{
@@ -28,10 +23,19 @@ message UserModelResponse{
 message AddressModel{
   string city = 1;
   string streetName = 2;
-  int32 postCode = 3 ;
+  int32 postCode = 3;
 }
-message CreateSellerResponse {
-  CreateUserModelResponse user = 1;
+
+message CreateUserModelRequest{
+  string firstName = 2;
+  string lastName = 3;
+  AddressModel address = 4;
+  int32 phoneNumber = 5;
+  string email = 6;
+}
+
+message CreateSellerRequest {
+  CreateUserModelRequest user = 1;
   int32 cvr = 2;
   string companyName = 3;
   string description = 4;
@@ -42,6 +46,7 @@ message CreateSellerResponse {
 
 message SellerResponse {
   UserModelResponse user = 1;
+  int32 cvr = 2;
   string companyName = 3;
   string description = 4;
   string type = 5;
@@ -50,6 +55,7 @@ message SellerResponse {
 }
 
 service SellerService {
-  rpc createSeller(CreateSellerResponse) returns (SellerResponse);
-  rpc getSellerById(SellerRequest) returns (SellerResponse);
+  rpc createSeller(CreateSellerRequest) returns (SellerResponse);
+  rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
+  rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
 }

@@ -1,4 +1,4 @@
-using Application.DaoInterfaces;
+/*using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 
@@ -14,15 +14,15 @@ public class SellerLogic : ISellerLogic
         this.sellerDao = sellerDao;
     }
     
-    public async Task<SellerDto> CreateSellerAsync(SellerDto dto)
+    public async Task<SellerDto> CreateSellerAsync(SellerCreateDto dto)
     {
-        SellerDto? existing = await sellerDao.GetByIdAsync(dto.User.Id);
+        SellerDto? existing = await sellerDao.GetByIdAsync(dto.User.);
         
         if (existing != null)
             throw new Exception("User id already in use!");
 
         ValidateData(dto);
-        SellerModel toCreate = new SellerModel()
+        SellerCreateModel toCreate = new SellerCreateModel()
         {
             User = dto.User,
             CompanyName = dto.CompanyName,
@@ -33,12 +33,12 @@ public class SellerLogic : ISellerLogic
             Website = dto.Website
         };
     
-        SellerDto created = await sellerDao.CreateSellerAsync(toCreate);
+        SellerDto created = await sellerDao.CreateSellerAsync(dto);
     
         return created;
     }
     
-    private static void ValidateData(SellerDto sellerToCreate)
+    private static void ValidateData(SellerCreateDto sellerToCreate)
     {
         string firstName = sellerToCreate.User.FirstName;
 
@@ -49,13 +49,13 @@ public class SellerLogic : ISellerLogic
             throw new Exception("Username must be less than 16 characters!");
     }
 
-    public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
+    /*public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters)
     {
         return sellerDao.GetAsync(searchParameters);
-    }
-
-    public Task<SellerDto> GetSellerByIdAsync(int id)
+    }#1#
+    
+    /*public Task<SellerDto> GetSellerByIdAsync(int id)
     {
         return sellerDao.GetByIdAsync(id);
-    }
-}
+    }#1#
+}*/

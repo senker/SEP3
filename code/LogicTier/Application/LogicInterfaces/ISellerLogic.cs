@@ -1,13 +1,9 @@
-using Domain.DTOs;
+/*using Domain.DTOs;
 using Domain.Models;
 
 
 public interface ISellerLogic
 {
-    Task<SellerDto> CreateSellerAsync(SellerDto userToCreate);
-    public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters);
-    
-    public Task<SellerDto> GetSellerByIdAsync(int id);
-    
-    
-}
+    Task<SellerDto> CreateSellerAsync(SellerCreateDto userToCreate);
+    //public Task<IEnumerable<SellerDto>> GetAsync(SearchSellerParametersDto searchParameters);
+}*/

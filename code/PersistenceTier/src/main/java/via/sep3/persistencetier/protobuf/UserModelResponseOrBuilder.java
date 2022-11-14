@@ -4,7 +4,7 @@
 package via.sep3.persistencetier.protobuf;
 
 public interface UserModelResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:UserModelResponse)
+    // @@protoc_insertion_point(interface_extends:seller.UserModelResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -38,17 +38,17 @@ public interface UserModelResponseOrBuilder extends
       getLastNameBytes();
 
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return Whether the address field is set.
    */
   boolean hasAddress();
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return The address.
    */
   via.sep3.persistencetier.protobuf.AddressModel getAddress();
   /**
-   * <code>.AddressModel address = 4;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    */
   via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder();
 

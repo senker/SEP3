@@ -3,62 +3,62 @@
 
 package via.sep3.persistencetier.protobuf;
 
-public interface CreateUserModelResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:CreateUserModelResponse)
+public interface CreateUserModelRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:seller.CreateUserModelRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string firstName = 1;</code>
+   * <code>string firstName = 2;</code>
    * @return The firstName.
    */
   java.lang.String getFirstName();
   /**
-   * <code>string firstName = 1;</code>
+   * <code>string firstName = 2;</code>
    * @return The bytes for firstName.
    */
   com.google.protobuf.ByteString
       getFirstNameBytes();
 
   /**
-   * <code>string lastName = 2;</code>
+   * <code>string lastName = 3;</code>
    * @return The lastName.
    */
   java.lang.String getLastName();
   /**
-   * <code>string lastName = 2;</code>
+   * <code>string lastName = 3;</code>
    * @return The bytes for lastName.
    */
   com.google.protobuf.ByteString
       getLastNameBytes();
 
   /**
-   * <code>.AddressModel address = 3;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return Whether the address field is set.
    */
   boolean hasAddress();
   /**
-   * <code>.AddressModel address = 3;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    * @return The address.
    */
   via.sep3.persistencetier.protobuf.AddressModel getAddress();
   /**
-   * <code>.AddressModel address = 3;</code>
+   * <code>.seller.AddressModel address = 4;</code>
    */
   via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder();
 
   /**
-   * <code>int32 phoneNumber = 4;</code>
+   * <code>int32 phoneNumber = 5;</code>
    * @return The phoneNumber.
    */
   int getPhoneNumber();
 
   /**
-   * <code>string email = 5;</code>
+   * <code>string email = 6;</code>
    * @return The email.
    */
   java.lang.String getEmail();
   /**
-   * <code>string email = 5;</code>
+   * <code>string email = 6;</code>
    * @return The bytes for email.
    */
   com.google.protobuf.ByteString

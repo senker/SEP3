@@ -4,11 +4,11 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code AddressModel}
+ * Protobuf type {@code seller.AddressModel}
  */
 public final class AddressModel extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:AddressModel)
+    // @@protoc_insertion_point(message_implements:seller.AddressModel)
     AddressModelOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use AddressModel.newBuilder() to construct.
@@ -90,13 +90,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_AddressModel_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_AddressModel_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.sep3.persistencetier.protobuf.AddressModel.class, via.sep3.persistencetier.protobuf.AddressModel.Builder.class);
   }
@@ -364,21 +364,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code AddressModel}
+   * Protobuf type {@code seller.AddressModel}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:AddressModel)
+      // @@protoc_insertion_point(builder_implements:seller.AddressModel)
       via.sep3.persistencetier.protobuf.AddressModelOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_AddressModel_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_AddressModel_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.sep3.persistencetier.protobuf.AddressModel.class, via.sep3.persistencetier.protobuf.AddressModel.Builder.class);
     }
@@ -413,7 +413,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_AddressModel_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
     }
 
     @java.lang.Override
@@ -719,10 +719,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:AddressModel)
+    // @@protoc_insertion_point(builder_scope:seller.AddressModel)
   }
 
-  // @@protoc_insertion_point(class_scope:AddressModel)
+  // @@protoc_insertion_point(class_scope:seller.AddressModel)
   private static final via.sep3.persistencetier.protobuf.AddressModel DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.AddressModel();

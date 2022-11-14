@@ -311,11 +311,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\vlaro\\Desktop\\gitrepos\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
       "projectName": "PersistenceDataAccess",
-      "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
+      "projectPath": "C:\\Users\\vlaro\\Desktop\\gitrepos\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\PersistenceDataAccess.csproj",
       "packagesPath": "C:\\Users\\vlaro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\obj\\",
+      "outputPath": "C:\\Users\\vlaro\\Desktop\\gitrepos\\SEP3\\code\\LogicTier\\PersistenceDataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vlaro\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -332,8 +332,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\vlaro\\Desktop\\SEP3\\code\\LogicTier\\Application\\Application.csproj"
+            "C:\\Users\\vlaro\\Desktop\\gitrepos\\SEP3\\code\\LogicTier\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\vlaro\\Desktop\\gitrepos\\SEP3\\code\\LogicTier\\Application\\Application.csproj"
             }
           }
         }
