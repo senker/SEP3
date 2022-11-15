@@ -53,11 +53,11 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder subBuilder = null;
+            via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder subBuilder = null;
             if (user_ != null) {
               subBuilder = user_.toBuilder();
             }
-            user_ = input.readMessage(via.sep3.persistencetier.protobuf.CreateUserModelRequest.parser(), extensionRegistry);
+            user_ = input.readMessage(via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.parser(), extensionRegistry);
             if (subBuilder != null) {
               subBuilder.mergeFrom(user_);
               user_ = subBuilder.buildPartial();
@@ -134,9 +134,9 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int USER_FIELD_NUMBER = 1;
-  private via.sep3.persistencetier.protobuf.CreateUserModelRequest user_;
+  private via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller user_;
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    * @return Whether the user field is set.
    */
   @java.lang.Override
@@ -144,18 +144,18 @@ private static final long serialVersionUID = 0L;
     return user_ != null;
   }
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    * @return The user.
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser() {
-    return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
+  public via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller getUser() {
+    return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.getDefaultInstance() : user_;
   }
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder() {
+  public via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder getUserOrBuilder() {
     return getUser();
   }
 
@@ -752,31 +752,31 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private via.sep3.persistencetier.protobuf.CreateUserModelRequest user_;
+    private via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller user_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder> userBuilder_;
+        via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller, via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder> userBuilder_;
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      * @return Whether the user field is set.
      */
     public boolean hasUser() {
       return userBuilder_ != null || user_ != null;
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      * @return The user.
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller getUser() {
       if (userBuilder_ == null) {
-        return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
+        return user_ == null ? via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.getDefaultInstance() : user_;
       } else {
         return userBuilder_.getMessage();
       }
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
-    public Builder setUser(via.sep3.persistencetier.protobuf.CreateUserModelRequest value) {
+    public Builder setUser(via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller value) {
       if (userBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -790,10 +790,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
     public Builder setUser(
-        via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder builderForValue) {
+        via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder builderForValue) {
       if (userBuilder_ == null) {
         user_ = builderForValue.build();
         onChanged();
@@ -804,13 +804,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
-    public Builder mergeUser(via.sep3.persistencetier.protobuf.CreateUserModelRequest value) {
+    public Builder mergeUser(via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller value) {
       if (userBuilder_ == null) {
         if (user_ != null) {
           user_ =
-            via.sep3.persistencetier.protobuf.CreateUserModelRequest.newBuilder(user_).mergeFrom(value).buildPartial();
+            via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.newBuilder(user_).mergeFrom(value).buildPartial();
         } else {
           user_ = value;
         }
@@ -822,7 +822,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
     public Builder clearUser() {
       if (userBuilder_ == null) {
@@ -836,33 +836,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder getUserBuilder() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder getUserBuilder() {
       
       onChanged();
       return getUserFieldBuilder().getBuilder();
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder() {
+    public via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder getUserOrBuilder() {
       if (userBuilder_ != null) {
         return userBuilder_.getMessageOrBuilder();
       } else {
         return user_ == null ?
-            via.sep3.persistencetier.protobuf.CreateUserModelRequest.getDefaultInstance() : user_;
+            via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.getDefaultInstance() : user_;
       }
     }
     /**
-     * <code>.seller.CreateUserModelRequest user = 1;</code>
+     * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder> 
+        via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller, via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder> 
         getUserFieldBuilder() {
       if (userBuilder_ == null) {
         userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            via.sep3.persistencetier.protobuf.CreateUserModelRequest, via.sep3.persistencetier.protobuf.CreateUserModelRequest.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder>(
+            via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller, via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder>(
                 getUser(),
                 getParentForChildren(),
                 isClean());

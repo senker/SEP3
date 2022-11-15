@@ -15,14 +15,14 @@ public class SellerDao : ISellerDao
     }
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
-        AddressModel address = new AddressModel
+        AddressModelSeller address = new AddressModelSeller()
         {
             City = seller.User.Address.City,
             StreetName = seller.User.Address.Streetname,
             PostCode = seller.User.Address.Postcode
         };
 
-        CreateUserModelRequest user = new CreateUserModelRequest();
+        CreateUserModelRequestSeller user = new CreateUserModelRequestSeller();
         user.FirstName = seller.User.FirstName;
         user.LastName = seller.User.LastName;
         user.Address = address;

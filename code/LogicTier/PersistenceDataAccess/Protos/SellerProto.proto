@@ -8,31 +8,31 @@ message SellerRequest {
   int32 id = 1;
 }
 
-message UserModelResponse{
+message UserModelResponseSeller{
   int32 Id = 1;
   string firstName = 2;
   string lastName = 3;
-  AddressModel address = 4;
+  AddressModelSeller address = 4;
   int32 phoneNumber = 5;
   string email = 6;
 }
 
-message AddressModel{
+message AddressModelSeller{
   string city = 1;
   string streetName = 2;
   int32 postCode = 3;
 }
 
-message CreateUserModelRequest{
+message CreateUserModelRequestSeller{
   string firstName = 2;
   string lastName = 3;
-  AddressModel address = 4;
+  AddressModelSeller address = 4;
   int32 phoneNumber = 5;
   string email = 6;
 }
 
 message CreateSellerRequest {
-  CreateUserModelRequest user = 1;
+  CreateUserModelRequestSeller user = 1;
   int32 cvr = 2;
   string companyName = 3;
   string description = 4;
@@ -42,7 +42,7 @@ message CreateSellerRequest {
 }
 
 message SellerResponse {
-  UserModelResponse user = 1;
+  UserModelResponseSeller user = 1;
   int32 cvr = 2;
   string companyName = 3;
   string description = 4;

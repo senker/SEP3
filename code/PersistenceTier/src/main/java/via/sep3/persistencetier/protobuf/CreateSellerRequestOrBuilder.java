@@ -8,19 +8,19 @@ public interface CreateSellerRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    * @return Whether the user field is set.
    */
   boolean hasUser();
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    * @return The user.
    */
-  via.sep3.persistencetier.protobuf.CreateUserModelRequest getUser();
+  via.sep3.persistencetier.protobuf.CreateUserModelRequestSeller getUser();
   /**
-   * <code>.seller.CreateUserModelRequest user = 1;</code>
+   * <code>.seller.CreateUserModelRequestSeller user = 1;</code>
    */
-  via.sep3.persistencetier.protobuf.CreateUserModelRequestOrBuilder getUserOrBuilder();
+  via.sep3.persistencetier.protobuf.CreateUserModelRequestSellerOrBuilder getUserOrBuilder();
 
   /**
    * <code>int32 cvr = 2;</code>

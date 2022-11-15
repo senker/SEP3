@@ -8,41 +8,41 @@ message CustomerRequest {
   int32 id = 1;
 }
 
-message UserModelResponse{
+message UserModelResponseCustomer{
   int32 Id = 1;
   string firstName = 2;
   string lastName = 3;
-  AddressModel address = 4;
+  AddressModelCustomer address = 4;
   int32 phoneNumber = 5;
   string email = 6;
 }
 
-message AddressModel{
+message AddressModelCustomer{
   string city = 1;
   string streetName = 2;
   int32 postCode = 3;
 }
 
-message CreateUserModelRequest{
+message CreateUserModelRequestCustomer{
   string firstName = 2;
   string lastName = 3;
-  AddressModel address = 4;
+  AddressModelCustomer address = 4;
   int32 phoneNumber = 5;
   string email = 6;
 }
 
 message CreateCustomerRequest {
-  CreateUserModelRequest user = 1;
+  CreateUserModelRequestCustomer user = 1;
   string preference = 2;
 }
 
 message CustomerResponse {
-  UserModelResponse user = 1;
+  UserModelResponseCustomer user = 1;
   string preference = 2;
 }
 
-service SellerService {
+service CustomerService {
   rpc createCustomer(CreateCustomerRequest) returns (CustomerResponse);
-  rpc getSellerById(CustomerRequest) returns (CustomerResponse);
-  rpc deleteSellerById(CustomerRequest) returns (CustomerResponse);
+  rpc getCustomerById(CustomerRequest) returns (CustomerResponse);
+  rpc deleteCustomerById(CustomerRequest) returns (CustomerResponse);
 }

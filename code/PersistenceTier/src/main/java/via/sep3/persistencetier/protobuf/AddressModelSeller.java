@@ -4,18 +4,18 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code seller.AddressModel}
+ * Protobuf type {@code seller.AddressModelSeller}
  */
-public final class AddressModel extends
+public final class AddressModelSeller extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:seller.AddressModel)
-    AddressModelOrBuilder {
+    // @@protoc_insertion_point(message_implements:seller.AddressModelSeller)
+    AddressModelSellerOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use AddressModel.newBuilder() to construct.
-  private AddressModel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use AddressModelSeller.newBuilder() to construct.
+  private AddressModelSeller(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private AddressModel() {
+  private AddressModelSeller() {
     city_ = "";
     streetName_ = "";
   }
@@ -24,7 +24,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new AddressModel();
+    return new AddressModelSeller();
   }
 
   @java.lang.Override
@@ -32,7 +32,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private AddressModel(
+  private AddressModelSeller(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -90,15 +90,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModelSeller_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModelSeller_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            via.sep3.persistencetier.protobuf.AddressModel.class, via.sep3.persistencetier.protobuf.AddressModel.Builder.class);
+            via.sep3.persistencetier.protobuf.AddressModelSeller.class, via.sep3.persistencetier.protobuf.AddressModelSeller.Builder.class);
   }
 
   public static final int CITY_FIELD_NUMBER = 1;
@@ -240,10 +240,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof via.sep3.persistencetier.protobuf.AddressModel)) {
+    if (!(obj instanceof via.sep3.persistencetier.protobuf.AddressModelSeller)) {
       return super.equals(obj);
     }
-    via.sep3.persistencetier.protobuf.AddressModel other = (via.sep3.persistencetier.protobuf.AddressModel) obj;
+    via.sep3.persistencetier.protobuf.AddressModelSeller other = (via.sep3.persistencetier.protobuf.AddressModelSeller) obj;
 
     if (!getCity()
         .equals(other.getCity())) return false;
@@ -273,69 +273,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(byte[] data)
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseDelimitedFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseDelimitedFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.AddressModel parseFrom(
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -348,7 +348,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(via.sep3.persistencetier.protobuf.AddressModel prototype) {
+  public static Builder newBuilder(via.sep3.persistencetier.protobuf.AddressModelSeller prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -364,26 +364,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code seller.AddressModel}
+   * Protobuf type {@code seller.AddressModelSeller}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:seller.AddressModel)
-      via.sep3.persistencetier.protobuf.AddressModelOrBuilder {
+      // @@protoc_insertion_point(builder_implements:seller.AddressModelSeller)
+      via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModelSeller_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModelSeller_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              via.sep3.persistencetier.protobuf.AddressModel.class, via.sep3.persistencetier.protobuf.AddressModel.Builder.class);
+              via.sep3.persistencetier.protobuf.AddressModelSeller.class, via.sep3.persistencetier.protobuf.AddressModelSeller.Builder.class);
     }
 
-    // Construct using via.sep3.persistencetier.protobuf.AddressModel.newBuilder()
+    // Construct using via.sep3.persistencetier.protobuf.AddressModelSeller.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -413,17 +413,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModel_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_AddressModelSeller_descriptor;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.AddressModel getDefaultInstanceForType() {
-      return via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance();
+    public via.sep3.persistencetier.protobuf.AddressModelSeller getDefaultInstanceForType() {
+      return via.sep3.persistencetier.protobuf.AddressModelSeller.getDefaultInstance();
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.AddressModel build() {
-      via.sep3.persistencetier.protobuf.AddressModel result = buildPartial();
+    public via.sep3.persistencetier.protobuf.AddressModelSeller build() {
+      via.sep3.persistencetier.protobuf.AddressModelSeller result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -431,8 +431,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.AddressModel buildPartial() {
-      via.sep3.persistencetier.protobuf.AddressModel result = new via.sep3.persistencetier.protobuf.AddressModel(this);
+    public via.sep3.persistencetier.protobuf.AddressModelSeller buildPartial() {
+      via.sep3.persistencetier.protobuf.AddressModelSeller result = new via.sep3.persistencetier.protobuf.AddressModelSeller(this);
       result.city_ = city_;
       result.streetName_ = streetName_;
       result.postCode_ = postCode_;
@@ -474,16 +474,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof via.sep3.persistencetier.protobuf.AddressModel) {
-        return mergeFrom((via.sep3.persistencetier.protobuf.AddressModel)other);
+      if (other instanceof via.sep3.persistencetier.protobuf.AddressModelSeller) {
+        return mergeFrom((via.sep3.persistencetier.protobuf.AddressModelSeller)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(via.sep3.persistencetier.protobuf.AddressModel other) {
-      if (other == via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance()) return this;
+    public Builder mergeFrom(via.sep3.persistencetier.protobuf.AddressModelSeller other) {
+      if (other == via.sep3.persistencetier.protobuf.AddressModelSeller.getDefaultInstance()) return this;
       if (!other.getCity().isEmpty()) {
         city_ = other.city_;
         onChanged();
@@ -510,11 +510,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      via.sep3.persistencetier.protobuf.AddressModel parsedMessage = null;
+      via.sep3.persistencetier.protobuf.AddressModelSeller parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (via.sep3.persistencetier.protobuf.AddressModel) e.getUnfinishedMessage();
+        parsedMessage = (via.sep3.persistencetier.protobuf.AddressModelSeller) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -719,41 +719,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:seller.AddressModel)
+    // @@protoc_insertion_point(builder_scope:seller.AddressModelSeller)
   }
 
-  // @@protoc_insertion_point(class_scope:seller.AddressModel)
-  private static final via.sep3.persistencetier.protobuf.AddressModel DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:seller.AddressModelSeller)
+  private static final via.sep3.persistencetier.protobuf.AddressModelSeller DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.AddressModel();
+    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.AddressModelSeller();
   }
 
-  public static via.sep3.persistencetier.protobuf.AddressModel getDefaultInstance() {
+  public static via.sep3.persistencetier.protobuf.AddressModelSeller getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AddressModel>
-      PARSER = new com.google.protobuf.AbstractParser<AddressModel>() {
+  private static final com.google.protobuf.Parser<AddressModelSeller>
+      PARSER = new com.google.protobuf.AbstractParser<AddressModelSeller>() {
     @java.lang.Override
-    public AddressModel parsePartialFrom(
+    public AddressModelSeller parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new AddressModel(input, extensionRegistry);
+      return new AddressModelSeller(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<AddressModel> parser() {
+  public static com.google.protobuf.Parser<AddressModelSeller> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AddressModel> getParserForType() {
+  public com.google.protobuf.Parser<AddressModelSeller> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.AddressModel getDefaultInstanceForType() {
+  public via.sep3.persistencetier.protobuf.AddressModelSeller getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -57,12 +57,12 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     private void sellerResponseBuilder(StreamObserver<SellerResponse> responseObserver, Seller seller) {
         SellerResponse.Builder builder = SellerResponse.newBuilder();
         builder.setUser(
-                UserModelResponse.newBuilder()
+                UserModelResponseSeller.newBuilder()
                         .setId(seller.getCvr().intValue())
                         .setFirstName(seller.getFirstName())
                         .setLastName(seller.getLastName())
                         .setAddress(
-                                AddressModel.newBuilder()
+                                AddressModelSeller.newBuilder()
                                         .setCity(seller.getAddress().getCity())
                                         .setStreetName(seller.getAddress().getStreetName())
                                         .setPostCode(seller.getAddress().getPostcode())

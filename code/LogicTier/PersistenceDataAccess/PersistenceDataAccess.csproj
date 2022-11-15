@@ -11,6 +11,7 @@
     </ItemGroup>
     <ItemGroup>
         <Protobuf Include="Protos\SellerProto.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\CustomerProto.proto" GrpcServices="Client" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Google.Protobuf" Version="3.21.9" />

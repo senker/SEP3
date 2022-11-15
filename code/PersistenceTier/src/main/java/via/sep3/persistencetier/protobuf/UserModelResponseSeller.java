@@ -4,18 +4,18 @@
 package via.sep3.persistencetier.protobuf;
 
 /**
- * Protobuf type {@code seller.UserModelResponse}
+ * Protobuf type {@code seller.UserModelResponseSeller}
  */
-public final class UserModelResponse extends
+public final class UserModelResponseSeller extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:seller.UserModelResponse)
-    UserModelResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:seller.UserModelResponseSeller)
+    UserModelResponseSellerOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use UserModelResponse.newBuilder() to construct.
-  private UserModelResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use UserModelResponseSeller.newBuilder() to construct.
+  private UserModelResponseSeller(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private UserModelResponse() {
+  private UserModelResponseSeller() {
     firstName_ = "";
     lastName_ = "";
     email_ = "";
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new UserModelResponse();
+    return new UserModelResponseSeller();
   }
 
   @java.lang.Override
@@ -33,7 +33,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private UserModelResponse(
+  private UserModelResponseSeller(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -69,11 +69,11 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 34: {
-            via.sep3.persistencetier.protobuf.AddressModel.Builder subBuilder = null;
+            via.sep3.persistencetier.protobuf.AddressModelSeller.Builder subBuilder = null;
             if (address_ != null) {
               subBuilder = address_.toBuilder();
             }
-            address_ = input.readMessage(via.sep3.persistencetier.protobuf.AddressModel.parser(), extensionRegistry);
+            address_ = input.readMessage(via.sep3.persistencetier.protobuf.AddressModelSeller.parser(), extensionRegistry);
             if (subBuilder != null) {
               subBuilder.mergeFrom(address_);
               address_ = subBuilder.buildPartial();
@@ -115,15 +115,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponseSeller_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_fieldAccessorTable
+    return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponseSeller_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            via.sep3.persistencetier.protobuf.UserModelResponse.class, via.sep3.persistencetier.protobuf.UserModelResponse.Builder.class);
+            via.sep3.persistencetier.protobuf.UserModelResponseSeller.class, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -214,9 +214,9 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int ADDRESS_FIELD_NUMBER = 4;
-  private via.sep3.persistencetier.protobuf.AddressModel address_;
+  private via.sep3.persistencetier.protobuf.AddressModelSeller address_;
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    * @return Whether the address field is set.
    */
   @java.lang.Override
@@ -224,18 +224,18 @@ private static final long serialVersionUID = 0L;
     return address_ != null;
   }
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    * @return The address.
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.AddressModel getAddress() {
-    return address_ == null ? via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance() : address_;
+  public via.sep3.persistencetier.protobuf.AddressModelSeller getAddress() {
+    return address_ == null ? via.sep3.persistencetier.protobuf.AddressModelSeller.getDefaultInstance() : address_;
   }
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder() {
+  public via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder getAddressOrBuilder() {
     return getAddress();
   }
 
@@ -360,10 +360,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof via.sep3.persistencetier.protobuf.UserModelResponse)) {
+    if (!(obj instanceof via.sep3.persistencetier.protobuf.UserModelResponseSeller)) {
       return super.equals(obj);
     }
-    via.sep3.persistencetier.protobuf.UserModelResponse other = (via.sep3.persistencetier.protobuf.UserModelResponse) obj;
+    via.sep3.persistencetier.protobuf.UserModelResponseSeller other = (via.sep3.persistencetier.protobuf.UserModelResponseSeller) obj;
 
     if (getId()
         != other.getId()) return false;
@@ -410,69 +410,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(byte[] data)
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseDelimitedFrom(java.io.InputStream input)
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseDelimitedFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.sep3.persistencetier.protobuf.UserModelResponse parseFrom(
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -485,7 +485,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(via.sep3.persistencetier.protobuf.UserModelResponse prototype) {
+  public static Builder newBuilder(via.sep3.persistencetier.protobuf.UserModelResponseSeller prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -501,26 +501,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code seller.UserModelResponse}
+   * Protobuf type {@code seller.UserModelResponseSeller}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:seller.UserModelResponse)
-      via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:seller.UserModelResponseSeller)
+      via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponseSeller_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_fieldAccessorTable
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponseSeller_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              via.sep3.persistencetier.protobuf.UserModelResponse.class, via.sep3.persistencetier.protobuf.UserModelResponse.Builder.class);
+              via.sep3.persistencetier.protobuf.UserModelResponseSeller.class, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder.class);
     }
 
-    // Construct using via.sep3.persistencetier.protobuf.UserModelResponse.newBuilder()
+    // Construct using via.sep3.persistencetier.protobuf.UserModelResponseSeller.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -560,17 +560,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponse_descriptor;
+      return via.sep3.persistencetier.protobuf.SellerProto.internal_static_seller_UserModelResponseSeller_descriptor;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.UserModelResponse getDefaultInstanceForType() {
-      return via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance();
+    public via.sep3.persistencetier.protobuf.UserModelResponseSeller getDefaultInstanceForType() {
+      return via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance();
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.UserModelResponse build() {
-      via.sep3.persistencetier.protobuf.UserModelResponse result = buildPartial();
+    public via.sep3.persistencetier.protobuf.UserModelResponseSeller build() {
+      via.sep3.persistencetier.protobuf.UserModelResponseSeller result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -578,8 +578,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public via.sep3.persistencetier.protobuf.UserModelResponse buildPartial() {
-      via.sep3.persistencetier.protobuf.UserModelResponse result = new via.sep3.persistencetier.protobuf.UserModelResponse(this);
+    public via.sep3.persistencetier.protobuf.UserModelResponseSeller buildPartial() {
+      via.sep3.persistencetier.protobuf.UserModelResponseSeller result = new via.sep3.persistencetier.protobuf.UserModelResponseSeller(this);
       result.id_ = id_;
       result.firstName_ = firstName_;
       result.lastName_ = lastName_;
@@ -628,16 +628,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof via.sep3.persistencetier.protobuf.UserModelResponse) {
-        return mergeFrom((via.sep3.persistencetier.protobuf.UserModelResponse)other);
+      if (other instanceof via.sep3.persistencetier.protobuf.UserModelResponseSeller) {
+        return mergeFrom((via.sep3.persistencetier.protobuf.UserModelResponseSeller)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(via.sep3.persistencetier.protobuf.UserModelResponse other) {
-      if (other == via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(via.sep3.persistencetier.protobuf.UserModelResponseSeller other) {
+      if (other == via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance()) return this;
       if (other.getId() != 0) {
         setId(other.getId());
       }
@@ -674,11 +674,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      via.sep3.persistencetier.protobuf.UserModelResponse parsedMessage = null;
+      via.sep3.persistencetier.protobuf.UserModelResponseSeller parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (via.sep3.persistencetier.protobuf.UserModelResponse) e.getUnfinishedMessage();
+        parsedMessage = (via.sep3.persistencetier.protobuf.UserModelResponseSeller) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -871,31 +871,31 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private via.sep3.persistencetier.protobuf.AddressModel address_;
+    private via.sep3.persistencetier.protobuf.AddressModelSeller address_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.AddressModel, via.sep3.persistencetier.protobuf.AddressModel.Builder, via.sep3.persistencetier.protobuf.AddressModelOrBuilder> addressBuilder_;
+        via.sep3.persistencetier.protobuf.AddressModelSeller, via.sep3.persistencetier.protobuf.AddressModelSeller.Builder, via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder> addressBuilder_;
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      * @return Whether the address field is set.
      */
     public boolean hasAddress() {
       return addressBuilder_ != null || address_ != null;
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      * @return The address.
      */
-    public via.sep3.persistencetier.protobuf.AddressModel getAddress() {
+    public via.sep3.persistencetier.protobuf.AddressModelSeller getAddress() {
       if (addressBuilder_ == null) {
-        return address_ == null ? via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance() : address_;
+        return address_ == null ? via.sep3.persistencetier.protobuf.AddressModelSeller.getDefaultInstance() : address_;
       } else {
         return addressBuilder_.getMessage();
       }
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
-    public Builder setAddress(via.sep3.persistencetier.protobuf.AddressModel value) {
+    public Builder setAddress(via.sep3.persistencetier.protobuf.AddressModelSeller value) {
       if (addressBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -909,10 +909,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
     public Builder setAddress(
-        via.sep3.persistencetier.protobuf.AddressModel.Builder builderForValue) {
+        via.sep3.persistencetier.protobuf.AddressModelSeller.Builder builderForValue) {
       if (addressBuilder_ == null) {
         address_ = builderForValue.build();
         onChanged();
@@ -923,13 +923,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
-    public Builder mergeAddress(via.sep3.persistencetier.protobuf.AddressModel value) {
+    public Builder mergeAddress(via.sep3.persistencetier.protobuf.AddressModelSeller value) {
       if (addressBuilder_ == null) {
         if (address_ != null) {
           address_ =
-            via.sep3.persistencetier.protobuf.AddressModel.newBuilder(address_).mergeFrom(value).buildPartial();
+            via.sep3.persistencetier.protobuf.AddressModelSeller.newBuilder(address_).mergeFrom(value).buildPartial();
         } else {
           address_ = value;
         }
@@ -941,7 +941,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
     public Builder clearAddress() {
       if (addressBuilder_ == null) {
@@ -955,33 +955,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
-    public via.sep3.persistencetier.protobuf.AddressModel.Builder getAddressBuilder() {
+    public via.sep3.persistencetier.protobuf.AddressModelSeller.Builder getAddressBuilder() {
       
       onChanged();
       return getAddressFieldBuilder().getBuilder();
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
-    public via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder() {
+    public via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder getAddressOrBuilder() {
       if (addressBuilder_ != null) {
         return addressBuilder_.getMessageOrBuilder();
       } else {
         return address_ == null ?
-            via.sep3.persistencetier.protobuf.AddressModel.getDefaultInstance() : address_;
+            via.sep3.persistencetier.protobuf.AddressModelSeller.getDefaultInstance() : address_;
       }
     }
     /**
-     * <code>.seller.AddressModel address = 4;</code>
+     * <code>.seller.AddressModelSeller address = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.AddressModel, via.sep3.persistencetier.protobuf.AddressModel.Builder, via.sep3.persistencetier.protobuf.AddressModelOrBuilder> 
+        via.sep3.persistencetier.protobuf.AddressModelSeller, via.sep3.persistencetier.protobuf.AddressModelSeller.Builder, via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder> 
         getAddressFieldBuilder() {
       if (addressBuilder_ == null) {
         addressBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            via.sep3.persistencetier.protobuf.AddressModel, via.sep3.persistencetier.protobuf.AddressModel.Builder, via.sep3.persistencetier.protobuf.AddressModelOrBuilder>(
+            via.sep3.persistencetier.protobuf.AddressModelSeller, via.sep3.persistencetier.protobuf.AddressModelSeller.Builder, via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder>(
                 getAddress(),
                 getParentForChildren(),
                 isClean());
@@ -1109,41 +1109,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:seller.UserModelResponse)
+    // @@protoc_insertion_point(builder_scope:seller.UserModelResponseSeller)
   }
 
-  // @@protoc_insertion_point(class_scope:seller.UserModelResponse)
-  private static final via.sep3.persistencetier.protobuf.UserModelResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:seller.UserModelResponseSeller)
+  private static final via.sep3.persistencetier.protobuf.UserModelResponseSeller DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.UserModelResponse();
+    DEFAULT_INSTANCE = new via.sep3.persistencetier.protobuf.UserModelResponseSeller();
   }
 
-  public static via.sep3.persistencetier.protobuf.UserModelResponse getDefaultInstance() {
+  public static via.sep3.persistencetier.protobuf.UserModelResponseSeller getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<UserModelResponse>
-      PARSER = new com.google.protobuf.AbstractParser<UserModelResponse>() {
+  private static final com.google.protobuf.Parser<UserModelResponseSeller>
+      PARSER = new com.google.protobuf.AbstractParser<UserModelResponseSeller>() {
     @java.lang.Override
-    public UserModelResponse parsePartialFrom(
+    public UserModelResponseSeller parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new UserModelResponse(input, extensionRegistry);
+      return new UserModelResponseSeller(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<UserModelResponse> parser() {
+  public static com.google.protobuf.Parser<UserModelResponseSeller> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<UserModelResponse> getParserForType() {
+  public com.google.protobuf.Parser<UserModelResponseSeller> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.UserModelResponse getDefaultInstanceForType() {
+  public via.sep3.persistencetier.protobuf.UserModelResponseSeller getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
