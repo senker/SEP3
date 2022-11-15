@@ -6,10 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import io.grpc.stub.StreamObserver;
-import via.sep3.persistencetier.protobuf.*;
-
-
 /**
  * Seller EXAMPLE:
  * firstName: David,

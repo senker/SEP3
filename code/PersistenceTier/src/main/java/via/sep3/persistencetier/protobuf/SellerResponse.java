@@ -53,11 +53,11 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
-            via.sep3.persistencetier.protobuf.UserModelResponse.Builder subBuilder = null;
+            via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder subBuilder = null;
             if (user_ != null) {
               subBuilder = user_.toBuilder();
             }
-            user_ = input.readMessage(via.sep3.persistencetier.protobuf.UserModelResponse.parser(), extensionRegistry);
+            user_ = input.readMessage(via.sep3.persistencetier.protobuf.UserModelResponseSeller.parser(), extensionRegistry);
             if (subBuilder != null) {
               subBuilder.mergeFrom(user_);
               user_ = subBuilder.buildPartial();
@@ -134,9 +134,9 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int USER_FIELD_NUMBER = 1;
-  private via.sep3.persistencetier.protobuf.UserModelResponse user_;
+  private via.sep3.persistencetier.protobuf.UserModelResponseSeller user_;
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    * @return Whether the user field is set.
    */
   @java.lang.Override
@@ -144,18 +144,18 @@ private static final long serialVersionUID = 0L;
     return user_ != null;
   }
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    * @return The user.
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.UserModelResponse getUser() {
-    return user_ == null ? via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance() : user_;
+  public via.sep3.persistencetier.protobuf.UserModelResponseSeller getUser() {
+    return user_ == null ? via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance() : user_;
   }
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    */
   @java.lang.Override
-  public via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder() {
+  public via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder getUserOrBuilder() {
     return getUser();
   }
 
@@ -752,31 +752,31 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private via.sep3.persistencetier.protobuf.UserModelResponse user_;
+    private via.sep3.persistencetier.protobuf.UserModelResponseSeller user_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.UserModelResponse, via.sep3.persistencetier.protobuf.UserModelResponse.Builder, via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder> userBuilder_;
+        via.sep3.persistencetier.protobuf.UserModelResponseSeller, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder, via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder> userBuilder_;
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      * @return Whether the user field is set.
      */
     public boolean hasUser() {
       return userBuilder_ != null || user_ != null;
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      * @return The user.
      */
-    public via.sep3.persistencetier.protobuf.UserModelResponse getUser() {
+    public via.sep3.persistencetier.protobuf.UserModelResponseSeller getUser() {
       if (userBuilder_ == null) {
-        return user_ == null ? via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance() : user_;
+        return user_ == null ? via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance() : user_;
       } else {
         return userBuilder_.getMessage();
       }
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
-    public Builder setUser(via.sep3.persistencetier.protobuf.UserModelResponse value) {
+    public Builder setUser(via.sep3.persistencetier.protobuf.UserModelResponseSeller value) {
       if (userBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -790,10 +790,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
     public Builder setUser(
-        via.sep3.persistencetier.protobuf.UserModelResponse.Builder builderForValue) {
+        via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder builderForValue) {
       if (userBuilder_ == null) {
         user_ = builderForValue.build();
         onChanged();
@@ -804,13 +804,13 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
-    public Builder mergeUser(via.sep3.persistencetier.protobuf.UserModelResponse value) {
+    public Builder mergeUser(via.sep3.persistencetier.protobuf.UserModelResponseSeller value) {
       if (userBuilder_ == null) {
         if (user_ != null) {
           user_ =
-            via.sep3.persistencetier.protobuf.UserModelResponse.newBuilder(user_).mergeFrom(value).buildPartial();
+            via.sep3.persistencetier.protobuf.UserModelResponseSeller.newBuilder(user_).mergeFrom(value).buildPartial();
         } else {
           user_ = value;
         }
@@ -822,7 +822,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
     public Builder clearUser() {
       if (userBuilder_ == null) {
@@ -836,33 +836,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.UserModelResponse.Builder getUserBuilder() {
+    public via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder getUserBuilder() {
       
       onChanged();
       return getUserFieldBuilder().getBuilder();
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
-    public via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder() {
+    public via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder getUserOrBuilder() {
       if (userBuilder_ != null) {
         return userBuilder_.getMessageOrBuilder();
       } else {
         return user_ == null ?
-            via.sep3.persistencetier.protobuf.UserModelResponse.getDefaultInstance() : user_;
+            via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance() : user_;
       }
     }
     /**
-     * <code>.seller.UserModelResponse user = 1;</code>
+     * <code>.seller.UserModelResponseSeller user = 1;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        via.sep3.persistencetier.protobuf.UserModelResponse, via.sep3.persistencetier.protobuf.UserModelResponse.Builder, via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder> 
+        via.sep3.persistencetier.protobuf.UserModelResponseSeller, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder, via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder> 
         getUserFieldBuilder() {
       if (userBuilder_ == null) {
         userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            via.sep3.persistencetier.protobuf.UserModelResponse, via.sep3.persistencetier.protobuf.UserModelResponse.Builder, via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder>(
+            via.sep3.persistencetier.protobuf.UserModelResponseSeller, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder, via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder>(
                 getUser(),
                 getParentForChildren(),
                 isClean());

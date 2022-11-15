@@ -3,8 +3,8 @@
 
 package via.sep3.persistencetier.protobuf;
 
-public interface UserModelResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:seller.UserModelResponse)
+public interface UserModelResponseSellerOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:seller.UserModelResponseSeller)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -38,19 +38,19 @@ public interface UserModelResponseOrBuilder extends
       getLastNameBytes();
 
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    * @return Whether the address field is set.
    */
   boolean hasAddress();
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    * @return The address.
    */
-  via.sep3.persistencetier.protobuf.AddressModel getAddress();
+  via.sep3.persistencetier.protobuf.AddressModelSeller getAddress();
   /**
-   * <code>.seller.AddressModel address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 4;</code>
    */
-  via.sep3.persistencetier.protobuf.AddressModelOrBuilder getAddressOrBuilder();
+  via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder getAddressOrBuilder();
 
   /**
    * <code>int32 phoneNumber = 5;</code>

@@ -37,45 +37,32 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
         var savedSeller = sellerRepository.save(seller);
 
-        SellerResponse.Builder builder = SellerResponse.newBuilder();
-        builder.setUser(
-                UserModelResponse.newBuilder()
-                        .setId(savedSeller.getCvr().intValue())
-                        .setFirstName(savedSeller.getFirstName())
-                        .setLastName(savedSeller.getLastName())
-                        .setAddress(
-                                AddressModel.newBuilder()
-                                        .setCity(savedSeller.getAddress().getCity())
-                                        .setStreetName(savedSeller.getAddress().getStreetName())
-                                        .setPostCode(savedSeller.getAddress().getPostcode())
-                        )
-                        .setPhoneNumber(savedSeller.getPhoneNumber().intValue())
-                        .setEmail(savedSeller.getEmail())
-        );
-        builder.setCvr(savedSeller.getCvr().intValue());
-        builder.setCompanyName(savedSeller.getCompanyName());
-        builder.setDescription(savedSeller.getDescription());
-        builder.setType(savedSeller.getType());
-        builder.setWebsite(savedSeller.getWebsite());
-        builder.setRating(savedSeller.getRating().floatValue());
-        var response = builder
-                .build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
+        sellerResponseBuilder(responseObserver, savedSeller);
     }
 
     @Override
     public void getSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
         var seller = sellerRepository.getReferenceById((long) request.getId());
+        sellerResponseBuilder(responseObserver, seller);
+    }
+
+    @Override
+    public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
+        Seller seller = sellerRepository.getReferenceById((long) request.getId());
+        sellerRepository.delete(seller);
+
+        sellerResponseBuilder(responseObserver, seller);
+    }
+
+    private void sellerResponseBuilder(StreamObserver<SellerResponse> responseObserver, Seller seller) {
         SellerResponse.Builder builder = SellerResponse.newBuilder();
         builder.setUser(
-                UserModelResponse.newBuilder()
+                UserModelResponseSeller.newBuilder()
                         .setId(seller.getCvr().intValue())
                         .setFirstName(seller.getFirstName())
                         .setLastName(seller.getLastName())
                         .setAddress(
-                                AddressModel.newBuilder()
+                                AddressModelSeller.newBuilder()
                                         .setCity(seller.getAddress().getCity())
                                         .setStreetName(seller.getAddress().getStreetName())
                                         .setPostCode(seller.getAddress().getPostcode())
@@ -94,11 +81,5 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();
-    }
-
-    @Override
-    public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.getReferenceById((long) request.getId());
-
     }
 }

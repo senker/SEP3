@@ -14,6 +14,7 @@ builder.Services.AddSingleton<IGrpcService, GrpcService>();
 
 // App services
 builder.Services.AddScoped<ISellerDao, SellerDao>();
+builder.Services.AddScoped<ICustomerDao, CustomerDao>();
 //builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 // Swagger

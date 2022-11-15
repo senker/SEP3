@@ -8,19 +8,19 @@ public interface SellerResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    * @return Whether the user field is set.
    */
   boolean hasUser();
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    * @return The user.
    */
-  via.sep3.persistencetier.protobuf.UserModelResponse getUser();
+  via.sep3.persistencetier.protobuf.UserModelResponseSeller getUser();
   /**
-   * <code>.seller.UserModelResponse user = 1;</code>
+   * <code>.seller.UserModelResponseSeller user = 1;</code>
    */
-  via.sep3.persistencetier.protobuf.UserModelResponseOrBuilder getUserOrBuilder();
+  via.sep3.persistencetier.protobuf.UserModelResponseSellerOrBuilder getUserOrBuilder();
 
   /**
    * <code>int32 cvr = 2;</code>
