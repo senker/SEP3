@@ -42,16 +42,15 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Override
     public void getSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.getReferenceById((long) request.getId());
-        sellerResponseBuilder(responseObserver, seller);
+        var seller = sellerRepository.findById((long) request.getId());
+        sellerResponseBuilder(responseObserver, seller.get());
     }
 
     @Override
     public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        Seller seller = sellerRepository.getReferenceById((long) request.getId());
-        sellerRepository.delete(seller);
-
-        sellerResponseBuilder(responseObserver, seller);
+        var seller = sellerRepository.findById((long) request.getId());
+        sellerRepository.delete(seller.get());
+        sellerResponseBuilder(responseObserver, seller.get());
     }
 
     private void sellerResponseBuilder(StreamObserver<SellerResponse> responseObserver, Seller seller) {
