@@ -1,0 +1,91 @@
+@page "/RegisterInto"
+<PageTitle>Register</PageTitle>
+<style>
+    body {background: #48b1bf; }
+</style>
+ <AuthorizeView>
+     
+     <NotAuthorized>
+         
+         <div class="card">
+                 <h3 style="text-align: center">Register</h3>
+             <div class="field">
+                 <label>First Name:</label>
+                 <input type="text" @bind="firstName"/>
+             </div>
+             <div class="field">
+                 <label>Last Name:</label>
+                 <input type="text" @bind="lastName"/>
+             </div>
+             
+             <div class="field">
+                 <label>Email:</label>
+                 <input type="text" @bind="email"/>
+             </div>
+             <div class="field">
+                             <label>Address:</label>
+                             <input type="text" @bind="address"/>
+                         </div>
+             <div class="field">
+                 <label style="text-align: center">Password:</label>
+                 <input type="password" @bind="password"/>
+             </div>
+             <div class="field">
+                                 <label style="text-align: center">Repeat password:</label>
+                                 <input type="password" @bind="repeatedPassword"/>
+                             </div>
+                         @if (!string.IsNullOrEmpty(errorLabel))
+                         {
+                             <div class="field">
+                                 <label style="color: red">
+                                     @errorLabel
+                                 </label>
+                             </div>
+                         }
+                         <h4 style="text-align: center">Chose user type</h4>
+                         <div class="choseType">
+                             <div class="form-check form-check-inline">
+                                 <input class="form-check-input" type="radio" name="user" id="customer" value="1"/>
+                                 <label class="form-check-label" for="customer">Customer</label>
+                             </div>
+                             <div class="form-check form-check-inline">
+                                 <input class="form-check-input" type="radio" name="user" id="seller" value="2"/>
+                                 <label class="form-check-label" for="seller">Seller</label>
+                                 </div>
+                         </div>
+                         
+                         <div class="field">
+                             <button class="registerIntoBtn" @onclick="">Next</button>
+                         </div>
+                     </div>
+ 
+     </NotAuthorized>
+ </AuthorizeView>
+ 
+ @code {
+     private string? firstName;
+     private string? lastName;
+     private string? email;
+     private string? address;
+     private string? password;
+     private string? repeatedPassword;
+     private string? errorLabel;
+ 
+     private async Task RegisterAsync()
+     {
+         errorLabel = "";
+         try
+         {
+             if (!repeatedPassword.Equals(password))
+             {
+                 throw new Exception("Passwords are not matching");
+             }
+             
+         }
+         catch (Exception e)
+         {
+             errorLabel = e.Message;
+         }
+     }
+ 
+ }
