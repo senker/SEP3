@@ -17,3 +17,11 @@ public class AddressModel
     public int Postcode { get; set; }
 }
 
+public class UserCreateModel
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public AddressModel Address { get; set; }
+    public int PhoneNumber { get; set; }
+    public string Email { get; set; }
+}
