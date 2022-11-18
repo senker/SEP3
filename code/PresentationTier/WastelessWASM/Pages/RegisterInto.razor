@@ -1,4 +1,8 @@
 @page "/RegisterInto"
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
+@using Domain.Models
+@inject ISellerService sellerService;
 <PageTitle>Register</PageTitle>
 <style>
     body {background: #48b1bf; }
@@ -11,22 +15,61 @@
                  <h3 style="text-align: center">Register</h3>
              <div class="field">
                  <label>First Name:</label>
-                 <input type="text" @bind="firstName"/>
+                 <input type="text" @bind="firstName" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Last Name:</label>
-                 <input type="text" @bind="lastName"/>
+                 <input type="text" @bind="lastName" @bind:event="oninput"/>
              </div>
              
              <div class="field">
                  <label>Email:</label>
-                 <input type="text" @bind="email"/>
+                 <input type="text" @bind="email" @bind:event="oninput"/>
              </div>
              <div class="field">
-                             <label>Address:</label>
-                             <input type="text" @bind="address"/>
-                         </div>
+                 <label>City:</label>
+                 <input type="text" @bind="city" @bind:event="oninput"/>
+             </div>
              <div class="field">
+                 <label>Street name:</label>
+                 <input type="text" @bind="streetName" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Post code:</label>
+                 <input type="text" @bind="postcode" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Phone number:</label>
+                 <input type="text" @bind="phoneNumber" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Cvr:</label>
+                 <input type="text" @bind="cvr" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Company name:</label>
+                 <input type="text" @bind="companyName" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Description:</label>
+                 <input type="text" @bind="description" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Type of restaurant:</label>
+                 <input type="text" @bind="type" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Website:</label>
+                 <input type="text" @bind="website" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Rating:</label>
+                 <input type="text" @bind="rating" @bind:event="oninput"/>
+             </div>
+             
+             
+             
+             @*<div class="field">
                  <label style="text-align: center">Password:</label>
                  <input type="password" @bind="password"/>
              </div>
@@ -41,7 +84,7 @@
                                      @errorLabel
                                  </label>
                              </div>
-                         }
+                         }*@
                          <h4 style="text-align: center">Chose user type</h4>
                          <div class="choseType">
                              <div class="form-check form-check-inline">
@@ -55,7 +98,7 @@
                          </div>
                          
                          <div class="field">
-                             <button class="registerIntoBtn" @onclick="RegisterAsync">Next</button>
+                             <button class="registerIntoBtn" @onclick="CreateSeller">Next</button>
                          </div>
                      </div>
  
@@ -66,14 +109,29 @@
      private string? firstName;
      private string? lastName;
      private string? email;
-     private string? address;
+     private string? city;
+     private string? streetName;
+     private int? postcode;
+     private int? phoneNumber;
+     private string emailAddress;
+
+     private int cvr;
+     private string companyName;
+     private string description;
+     private string type;
+     private string website;
+     private float rating;
+     
+     private string resultMsg = "";
+     private string color = "";
+     /*
      private string? password;
      private string? repeatedPassword;
-     private string? errorLabel;
- 
+     private string? errorLabel;*/
+
      private async Task RegisterAsync()
      {
-         errorLabel = "";
+     /*errorLabel = "";
          try
          {
              if (!repeatedPassword.Equals(password))
@@ -85,7 +143,39 @@
          catch (Exception e)
          {
              errorLabel = e.Message;
-         }
+         }*/
      }
+
+     private async Task CreateSeller()
+         {
+             resultMsg = "";
+             var addressModel = new AddressModel(city, streetName, postcode);
+         var userModel =
+             new UserCreateModel(firstName, lastName, addressModel, phoneNumber, email);
+                    
+             try
+             {
+                 await sellerService.CreateSeller(new SellerCreateDto(
+                     new SellerCreateModel(
+                         userModel,
+                         cvr,
+                         companyName,
+                         description,
+                         type,
+                         website,
+                         rating  )
+                     ));
+                     
+                 resultMsg = "User successfully created";
+                 color = "green";
+             }
+             catch (Exception e)
+             {
+                 Console.WriteLine(e);
+                 resultMsg = e.Message;
+                 color = "red";
+             }
+         }
+     
  
  }

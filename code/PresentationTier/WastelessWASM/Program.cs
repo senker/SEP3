@@ -1,3 +1,5 @@
+using HttpClients.ClientInterfaces;
+using HttpClients.Implementations;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WastelessWASM;
@@ -9,8 +11,11 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(
     sp => 
         new HttpClient { 
-            BaseAddress = new Uri("https://localhost:7133") 
+            BaseAddress = new Uri("http://localhost:5283") 
         }
 );
+
+builder.Services.AddScoped<ISellerService, SellerHttpClient>();
+
 
 await builder.Build().RunAsync();
