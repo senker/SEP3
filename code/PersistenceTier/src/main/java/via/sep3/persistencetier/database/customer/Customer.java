@@ -16,13 +16,12 @@ public class Customer extends User {
     @Column(name="id")
     private int id;
 
-    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
-    private List<Preference> preferences;
+    private String preference;
 
-    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, List<String> preferences) {
+    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String preference) {
         super(firstName, lastName, address, phoneNumber, email);
 
-        this.preferences = convertToListOfPreferences(preferences);
+        this.preference = this.preference;
     }
 
     public Customer(){
@@ -37,19 +36,11 @@ public class Customer extends User {
         this.id = id;
     }
 
-     public List<Preference> getPreferences() {
-        return preferences;}
+     public String getPreferences() {
+        return preference;}
 
-    public void setPreferences(List<Preference> preferences) {
-        this.preferences = preferences;
+    public void setPreferences(String preference) {
+        this.preference = preference;
     }
 
-    private List<Preference> convertToListOfPreferences(List<String> preferences)
-    {
-        ArrayList<Preference> tmpList = new ArrayList<>();
-        for(int i=0; i< preferences.size(); i++){
-            this.preferences.add(new Preference(preferences.get(i)));
-        }
-        return tmpList;
-    }
 }

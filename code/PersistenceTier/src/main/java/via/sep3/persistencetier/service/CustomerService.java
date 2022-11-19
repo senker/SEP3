@@ -29,13 +29,14 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                 ),
                 (long) request.getUser().getPhoneNumber(),
                 request.getUser().getEmail(),
-                request.getPreferenceList()
+                request.getPreference()
         );
 
         var savedCustomer = customerRepository.save(customer);
 
         customerResponseBuilder(responseObserver, savedCustomer);
     }
+
 
 
     private void customerResponseBuilder(StreamObserver<CustomerResponse> responseObserver, Customer customer) {
@@ -53,10 +54,8 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         .setPhoneNumber(customer.getPhoneNumber().intValue())
                         .setEmail(customer.getEmail())
         );
-        for(int i=0; i<customer.getPreferences().size(); i++)
-        {
-            builder.setPreference(i, String.valueOf(customer.getPreferences().get(i)));
-        }
+        builder.setPreference(customer.getPreferences());
+
         var response = builder
                 .build();
 
