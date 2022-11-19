@@ -1,5 +1,8 @@
-package via.sep3.persistencetier.database;
+package via.sep3.persistencetier.database.seller;
 
+
+import via.sep3.persistencetier.database.Address;
+import via.sep3.persistencetier.database.User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +29,7 @@ import javax.persistence.Table;
 
 @Entity(name="Seller")
 @Table(name="seller")
-public class Seller extends User{
+public class Seller extends User {
     @Id
     @Column(name="cvr")
     private Long cvr;

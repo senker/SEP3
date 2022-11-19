@@ -1,7 +1,7 @@
-package via.sep3.persistencetier.database;
+package via.sep3.persistencetier.database.seller;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import via.sep3.persistencetier.database.seller.Seller;
 
 
 //for seller example use findById(123456789)

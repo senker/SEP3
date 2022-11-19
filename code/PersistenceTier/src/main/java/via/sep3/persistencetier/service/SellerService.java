@@ -4,8 +4,8 @@ import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
-import via.sep3.persistencetier.database.Seller;
-import via.sep3.persistencetier.database.SellerRepository;
+import via.sep3.persistencetier.database.seller.Seller;
+import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 @GRpcService
@@ -13,6 +13,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Autowired
     SellerRepository sellerRepository;
+
     @Override
     public void createSeller(CreateSellerRequest request, StreamObserver<SellerResponse> responseObserver) {
         System.out.println("Creating a new seller");
