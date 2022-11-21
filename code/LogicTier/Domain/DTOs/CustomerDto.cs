@@ -4,7 +4,7 @@ using Domain.Models;
 public class CustomerDto
 {
     public UserModel User { get; set; }
-    public string? Preference { get; set; }
+    public string Preference { get; set; }
 
     public CustomerDto() {
     }
@@ -17,7 +17,7 @@ public class CustomerDto
 public class CustomerCreateDto
 {
     public UserCreateModel User { get; set; }
-    public string? Preference { get; set; }
+    public string Preference { get; set; }
 
     public CustomerCreateDto() {
     }
