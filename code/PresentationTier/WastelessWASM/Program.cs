@@ -15,6 +15,7 @@ builder.Services.AddScoped(
         }
 );
 
+
 builder.Services.AddScoped<ISellerService, SellerHttpClient>();
 
 

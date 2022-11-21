@@ -1,152 +1,94 @@
 @page "/RegisterInto"
 @using HttpClients.ClientInterfaces
-@using Domain.DTOs
-@using Domain.Models
 @inject ISellerService sellerService;
+@inject NavigationManager UriHelper
+@inject IJSRuntime JSRuntime
 <PageTitle>Register</PageTitle>
 <style>
     body {background: #48b1bf; }
 </style>
  <AuthorizeView>
-     
      <NotAuthorized>
-         
          <div class="card">
-                 <h3 style="text-align: center">Register</h3>
+             <h3 style="text-align: center">Register</h3>
              <div class="field">
                  <label>First Name:</label>
-                 <input type="text" @bind="firstName" @bind:event="oninput"/>
+                 <input type="text" @bind="_firstName" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Last Name:</label>
-                 <input type="text" @bind="lastName" @bind:event="oninput"/>
+                 <input type="text" @bind="_lastName" @bind:event="oninput"/>
              </div>
              
              <div class="field">
                  <label>Email:</label>
-                 <input type="text" @bind="email" @bind:event="oninput"/>
+                 <input type="text" @bind="_email" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>City:</label>
-                 <input type="text" @bind="city" @bind:event="oninput"/>
+                 <input type="text" @bind="_city" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Street name:</label>
-                 <input type="text" @bind="streetName" @bind:event="oninput"/>
+                 <input type="text" @bind="_streetName" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Post code:</label>
-                 <input type="text" @bind="postcode" @bind:event="oninput"/>
+                 <input type="text" @bind="_postcode" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Phone number:</label>
-                 <input type="text" @bind="phoneNumber" @bind:event="oninput"/>
+                 <input type="text" @bind="_phoneNumber" @bind:event="oninput"/>
+             </div>
+             <h4 style="text-align: center">Chose user type</h4>
+             <div class="buttonRow">
+                 <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="user" id="customer" value="customer" onchange="@OnSelect"/>
+                     <label class="form-check-label" for="customer">Customer</label>
+                 </div>
+                 <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="user" id="seller" value="seller" onchange="@OnSelect"/>
+                     <label class="form-check-label" for="seller">Seller</label>
+                 </div>
              </div>
              <div class="field">
-                 <label>Cvr:</label>
-                 <input type="text" @bind="cvr" @bind:event="oninput"/>
+                 <button class="registerIntoBtn" @onclick="nextStep">Next</button>
              </div>
-             <div class="field">
-                 <label>Company name:</label>
-                 <input type="text" @bind="companyName" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Description:</label>
-                 <input type="text" @bind="description" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Type of restaurant:</label>
-                 <input type="text" @bind="type" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Website:</label>
-                 <input type="text" @bind="website" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Rating:</label>
-                 <input type="text" @bind="rating" @bind:event="oninput"/>
-             </div>
-             
-             
-             
-             @*<div class="field">
-                 <label style="text-align: center">Password:</label>
-                 <input type="password" @bind="password"/>
-             </div>
-             <div class="field">
-                                 <label style="text-align: center">Repeat password:</label>
-                                 <input type="password" @bind="repeatedPassword"/>
-                             </div>
-                         @if (!string.IsNullOrEmpty(errorLabel))
-                         {
-                             <div class="field">
-                                 <label style="color: red">
-                                     @errorLabel
-                                 </label>
-                             </div>
-                         }*@
-                         <h4 style="text-align: center">Chose user type</h4>
-                         <div class="choseType">
-                             <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="user" id="customer" value="1"/>
-                                 <label class="form-check-label" for="customer">Customer</label>
-                             </div>
-                             <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="user" id="seller" value="2"/>
-                                 <label class="form-check-label" for="seller">Seller</label>
-                                 </div>
-                         </div>
-                         
-                         <div class="field">
-                             <button class="registerIntoBtn" @onclick="CreateSeller">Next</button>
-                         </div>
-                     </div>
- 
+         </div>
      </NotAuthorized>
  </AuthorizeView>
  
  @code {
-     private string? firstName;
-     private string? lastName;
-     private string? email;
-     private string? city;
-     private string? streetName;
-     private int? postcode;
-     private int? phoneNumber;
-     private string emailAddress;
+     private string? _firstName;
+     private string? _lastName;
+     private string? _email;
+     private string? _city;
+     private string? _streetName;
+     private int? _postcode;
+     private int? _phoneNumber;
+     private string _emailAddress;
 
-     private int cvr;
-     private string companyName;
-     private string description;
-     private string type;
-     private string website;
-     private float rating;
-     
+     private string? value = "customer";
      private string resultMsg = "";
      private string color = "";
-     /*
-     private string? password;
-     private string? repeatedPassword;
-     private string? errorLabel;*/
 
-     private async Task RegisterAsync()
+     private void OnSelect(ChangeEventArgs args) => value = (string)args.Value!;
+
+
+
+     private void nextStep()
      {
-     /*errorLabel = "";
-         try
+         if (value.Equals("seller"))
          {
-             if (!repeatedPassword.Equals(password))
-             {
-                 throw new Exception("Passwords are not matching");
-             }
-             
+             UriHelper.NavigateTo("RegisterSeller");
          }
-         catch (Exception e)
+         else
          {
-             errorLabel = e.Message;
-         }*/
+             UriHelper.NavigateTo("RegisterCustomer");
+         }
      }
 
-     private async Task CreateSeller()
+     /*private async Task CreateSeller()
          {
              resultMsg = "";
              var addressModel = new AddressModel(city, streetName, postcode);
@@ -175,7 +117,58 @@
                  resultMsg = e.Message;
                  color = "red";
              }
-         }
-     
- 
+         }*/
+
+
  }
+ 
+@*<div class="field">
+                 <label style="text-align: center">Password:</label>
+                 <input type="password" @bind="password"/>
+             </div>
+             <div class="field">
+                                 <label style="text-align: center">Repeat password:</label>
+                                 <input type="password" @bind="repeatedPassword"/>
+                             </div>
+                         @if (!string.IsNullOrEmpty(errorLabel))
+                         {
+                             <div class="field">
+                                 <label style="color: red">
+                                     @errorLabel
+                                 </label>
+                             </div>
+                         }*@
+                         
+                         
+@*/*private int cvr;
+private string companyName;
+private string description;
+private string type;
+private string website;
+private float rating;*/*@
+
+
+
+     @*/*
+     private string? password;
+     private string? repeatedPassword;
+     private string? errorLabel;*/*@
+
+@*private async Task RegisterAsync()
+{
+/*errorLabel = "";
+try
+{
+if (!repeatedPassword.Equals(password))
+{
+throw new Exception("Passwords are not matching");
+}
+             
+}
+catch (Exception e)
+{
+errorLabel = e.Message;
+}*/
+}*@
+
+

@@ -5,41 +5,48 @@
 </style>
 <PageTitle>Register</PageTitle>
 <AuthorizeView>
-    
     <NotAuthorized>
-        
         <div class="card">
-                <h3 style="text-align: center">Register</h3>
-            
-                <label>Company name:</label>
-                <input type="text" @bind="companyName"/>
-            </div>
-        <div class="field">
-            <label>CVR:</label>
-            <input type="text" @bind="cvr"/>
+            <h3 style="text-align: center">Seller</h3>
+            <div class="field">
+                        <label>Cvr:</label>
+                        <input type="text" @bind="_cvr" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <label>Company name:</label>
+                        <input type="text" @bind="_companyName" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <label>Description:</label>
+                        <input type="text" @bind="_description" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <label>Type of restaurant:</label>
+                        <input type="text" @bind="_type" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <label>Website:</label>
+                        <input type="text" @bind="_website" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <label>Rating:</label>
+                        <input type="text" @bind="_rating" @bind:event="oninput"/>
+                    </div>
+                    <div class="field">
+                        <button class="registerbtn">Register</button>
+                    </div>
         </div>
-        <div class="field">
-            <label>Phone number</label>
-            <input type="text" @bind="phoneNumber"/>
-        </div>
-       
-                   
-           
-           
-                        <div class="field">
-                            <button class="registerbtn">Register</button>
-                        </div>
-                    
-
     </NotAuthorized>
 </AuthorizeView>
 
 @code {
    
-    private string? cvr;
-    private string? companyName;
-    private string? phoneNumber;
-    private string? errorLabel;
+    private string? _cvr;
+    private string? _companyName;
+    private string? _description;
+    private string? _type;
+    private string? _website;
+    private string? _rating;
 
     
 
