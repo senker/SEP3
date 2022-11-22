@@ -1,13 +1,14 @@
 package via.sep3.persistencetier.service;
 
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
-
+@GRpcService
 public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
 
     @Autowired
@@ -38,6 +39,17 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     }
 
 
+    @Override
+    public void getCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
+        var customer = customerRepository.findByEmail(request.getEmail());
+        customerResponseBuilder(responseObserver, customer);
+    }
+
+    @Override
+    public void deleteCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
+        var customer = customerRepository.deleteByEmail(request.getEmail());
+        customerResponseBuilder(responseObserver, customer);
+    }
 
     private void customerResponseBuilder(StreamObserver<CustomerResponse> responseObserver, Customer customer) {
         CustomerResponse.Builder builder = CustomerResponse.newBuilder();
@@ -54,7 +66,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         .setPhoneNumber(customer.getPhoneNumber().intValue())
                         .setEmail(customer.getEmail())
         );
-        builder.setPreference(customer.getPreferences());
+        builder.setPreference(customer.getPreference());
 
         var response = builder
                 .build();

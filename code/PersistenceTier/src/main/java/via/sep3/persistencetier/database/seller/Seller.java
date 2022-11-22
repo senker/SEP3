@@ -1,13 +1,12 @@
 package via.sep3.persistencetier.database.seller;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Seller EXAMPLE:
@@ -29,7 +28,9 @@ import javax.persistence.Table;
 
 @Entity(name="Seller")
 @Table(name="seller")
-public class Seller extends User {
+@IdClass(SellerId.class)
+public class Seller extends User{
+
     @Id
     @Column(name="cvr")
     private Long cvr;

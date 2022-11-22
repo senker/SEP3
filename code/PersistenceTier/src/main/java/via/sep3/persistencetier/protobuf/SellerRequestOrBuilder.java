@@ -8,8 +8,8 @@ public interface SellerRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 id = 1;</code>
-   * @return The id.
+   * <code>int32 cvr = 1;</code>
+   * @return The cvr.
    */
-  int getId();
+  int getCvr();
 }

@@ -7,40 +7,34 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name="Customer")
 @Table(name="customer")
 public class Customer extends User {
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    //@Id
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
+    //@Column(name="id")
+    //private int id;
 
     private String preference;
 
     public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String preference) {
         super(firstName, lastName, address, phoneNumber, email);
 
-        this.preference = this.preference;
+        this.preference = preference;
     }
 
     public Customer(){
         super("","",null,0L,"");
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-     public String getPreferences() {
+     public String getPreference() {
         return preference;}
 
-    public void setPreferences(String preference) {
+    public void setPreference(String preference) {
         this.preference = preference;
     }
+
 
 }

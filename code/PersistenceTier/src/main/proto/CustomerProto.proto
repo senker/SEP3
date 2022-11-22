@@ -42,5 +42,6 @@ message UserModelResponseCustomer{
 
 service CustomerService {
   rpc createCustomer(CreateCustomerRequest) returns (CustomerResponse);
+  rpc getCustomerByEmail(CustomerRequest) returns (CustomerResponse);
   rpc deleteCustomerByEmail(CustomerRequest) returns (CustomerResponse);
 }

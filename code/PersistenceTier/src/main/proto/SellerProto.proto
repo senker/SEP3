@@ -6,11 +6,11 @@ option java_package = "via.sep3.persistencetier.protobuf";
 package seller;
 
 message SellerRequest {
-  int32 id = 1;
+  int32 cvr = 1;
 }
 
 message UserModelResponseSeller{
-  int32 Id = 1;
+  int32 cvr = 1;
   string firstName = 2;
   string lastName = 3;
   AddressModelSeller address = 4;
