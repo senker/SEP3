@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class CustomerController : ControllerBase
@@ -33,7 +32,7 @@ public class CustomerController : ControllerBase
 
         return Ok(guest);
     }
-    
+   
     [HttpDelete("{cvr}")]
     public async Task<IActionResult> DeleteCustomerById(int id)
     {

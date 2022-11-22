@@ -50,6 +50,41 @@ public class CustomerDao : ICustomerDao
 
         }
     }
+    
+    public async Task<CustomerDto?> CreateCustomerAsync(CustomerCreateDto customer)
+    {
+        AddressModelCustomer address = new AddressModelCustomer()
+        {
+            City = customer.User.Address.City,
+            StreetName = customer.User.Address.Streetname,
+            PostCode = customer.User.Address.Postcode
+        };
+        
+        
+        CreateUserModelRequestCustomer user = new CreateUserModelRequestCustomer();
+        user.FirstName = customer.User.FirstName;
+        user.LastName = customer.User.LastName;
+        user.Address = address;
+        user.PhoneNumber = customer.User.PhoneNumber;
+        user.Email = customer.User.Email;
+        
+        try
+        {
+            var response =  await _client.createCustomerAsync(
+                new CreateCustomerRequest()
+                {
+                    User = user,
+                    Preference = customer.Preference
+                }
+            );
+
+            return ResponseToCustomerDto(response);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("{0} Exception caught.", e);
+            throw new Exception("",e);
+
 
     public async Task<CustomerDto?> GetCustomerByIdAsync(int id)
     {

@@ -8,10 +8,10 @@ public interface UserModelResponseSellerOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 Id = 1;</code>
-   * @return The id.
+   * <code>int32 cvr = 1;</code>
+   * @return The cvr.
    */
-  int getId();
+  int getCvr();
 
   /**
    * <code>string firstName = 2;</code>

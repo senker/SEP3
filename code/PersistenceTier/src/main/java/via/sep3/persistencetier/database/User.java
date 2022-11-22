@@ -14,6 +14,8 @@ public class User {
     private Address address;
     @Column(name="phone_number")
     private Long phoneNumber;
+
+    @Id
     @Column(name="email")
     private String email;
 

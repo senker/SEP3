@@ -53,7 +53,7 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            id_ = input.readInt32();
+            cvr_ = input.readInt32();
             break;
           }
           case 18: {
@@ -126,15 +126,15 @@ private static final long serialVersionUID = 0L;
             via.sep3.persistencetier.protobuf.UserModelResponseSeller.class, via.sep3.persistencetier.protobuf.UserModelResponseSeller.Builder.class);
   }
 
-  public static final int ID_FIELD_NUMBER = 1;
-  private int id_;
+  public static final int CVR_FIELD_NUMBER = 1;
+  private int cvr_;
   /**
-   * <code>int32 Id = 1;</code>
-   * @return The id.
+   * <code>int32 cvr = 1;</code>
+   * @return The cvr.
    */
   @java.lang.Override
-  public int getId() {
-    return id_;
+  public int getCvr() {
+    return cvr_;
   }
 
   public static final int FIRSTNAME_FIELD_NUMBER = 2;
@@ -302,8 +302,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (id_ != 0) {
-      output.writeInt32(1, id_);
+    if (cvr_ != 0) {
+      output.writeInt32(1, cvr_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(firstName_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, firstName_);
@@ -329,9 +329,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (id_ != 0) {
+    if (cvr_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, id_);
+        .computeInt32Size(1, cvr_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(firstName_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, firstName_);
@@ -365,8 +365,8 @@ private static final long serialVersionUID = 0L;
     }
     via.sep3.persistencetier.protobuf.UserModelResponseSeller other = (via.sep3.persistencetier.protobuf.UserModelResponseSeller) obj;
 
-    if (getId()
-        != other.getId()) return false;
+    if (getCvr()
+        != other.getCvr()) return false;
     if (!getFirstName()
         .equals(other.getFirstName())) return false;
     if (!getLastName()
@@ -391,8 +391,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId();
+    hash = (37 * hash) + CVR_FIELD_NUMBER;
+    hash = (53 * hash) + getCvr();
     hash = (37 * hash) + FIRSTNAME_FIELD_NUMBER;
     hash = (53 * hash) + getFirstName().hashCode();
     hash = (37 * hash) + LASTNAME_FIELD_NUMBER;
@@ -538,7 +538,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      id_ = 0;
+      cvr_ = 0;
 
       firstName_ = "";
 
@@ -580,7 +580,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public via.sep3.persistencetier.protobuf.UserModelResponseSeller buildPartial() {
       via.sep3.persistencetier.protobuf.UserModelResponseSeller result = new via.sep3.persistencetier.protobuf.UserModelResponseSeller(this);
-      result.id_ = id_;
+      result.cvr_ = cvr_;
       result.firstName_ = firstName_;
       result.lastName_ = lastName_;
       if (addressBuilder_ == null) {
@@ -638,8 +638,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(via.sep3.persistencetier.protobuf.UserModelResponseSeller other) {
       if (other == via.sep3.persistencetier.protobuf.UserModelResponseSeller.getDefaultInstance()) return this;
-      if (other.getId() != 0) {
-        setId(other.getId());
+      if (other.getCvr() != 0) {
+        setCvr(other.getCvr());
       }
       if (!other.getFirstName().isEmpty()) {
         firstName_ = other.firstName_;
@@ -688,33 +688,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int id_ ;
+    private int cvr_ ;
     /**
-     * <code>int32 Id = 1;</code>
-     * @return The id.
+     * <code>int32 cvr = 1;</code>
+     * @return The cvr.
      */
     @java.lang.Override
-    public int getId() {
-      return id_;
+    public int getCvr() {
+      return cvr_;
     }
     /**
-     * <code>int32 Id = 1;</code>
-     * @param value The id to set.
+     * <code>int32 cvr = 1;</code>
+     * @param value The cvr to set.
      * @return This builder for chaining.
      */
-    public Builder setId(int value) {
+    public Builder setCvr(int value) {
       
-      id_ = value;
+      cvr_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 Id = 1;</code>
+     * <code>int32 cvr = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearId() {
+    public Builder clearCvr() {
       
-      id_ = 0;
+      cvr_ = 0;
       onChanged();
       return this;
     }
