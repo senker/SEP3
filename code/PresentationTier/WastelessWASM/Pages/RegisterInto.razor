@@ -1,32 +1,197 @@
 @page "/RegisterInto"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@using Domain.DTOs
+@inject ISellerService sellerService;
+@inject NavigationManager UriHelper
+@inject IJSRuntime JSRuntime
 <PageTitle>Register</PageTitle>
 <style>
     body {background: #48b1bf; }
 </style>
  <AuthorizeView>
-     
      <NotAuthorized>
-         
+         @if (_userFormType == null) {
          <div class="card">
-                 <h3 style="text-align: center">Register</h3>
+             <h3 style="text-align: center">Register</h3>
              <div class="field">
                  <label>First Name:</label>
-                 <input type="text" @bind="firstName"/>
+                 <input type="text" @bind="_firstName" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>Last Name:</label>
-                 <input type="text" @bind="lastName"/>
+                 <input type="text" @bind="_lastName" @bind:event="oninput"/>
              </div>
-             
+
              <div class="field">
                  <label>Email:</label>
-                 <input type="text" @bind="email"/>
+                 <input type="text" @bind="_email" @bind:event="oninput"/>
              </div>
              <div class="field">
-                             <label>Address:</label>
-                             <input type="text" @bind="address"/>
-                         </div>
+                 <label>City:</label>
+                 <input type="text" @bind="_city" @bind:event="oninput"/>
+             </div>
              <div class="field">
+                 <label>Street name:</label>
+                 <input type="text" @bind="_streetName" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Post code:</label>
+                 <input type="text" @bind="_postcode" @bind:event="oninput"/>
+             </div>
+             <div class="field">
+                 <label>Phone number:</label>
+                 <input type="text" @bind="_phoneNumber" @bind:event="oninput"/>
+             </div>
+             <h4 style="text-align: center">Chose user type</h4>
+             <div class="buttonRow">
+                 <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="user" id="customer" value="customer" onchange="@OnSelect"/>
+                     <label class="form-check-label" for="customer">Customer</label>
+                 </div>
+                 <div class="form-check form-check-inline">
+                     <input class="form-check-input" type="radio" name="user" id="seller" value="seller" onchange="@OnSelect"/>
+                     <label class="form-check-label" for="seller">Seller</label>
+                 </div>
+             </div>
+             <div class="field">
+                 <button class="registerIntoBtn" @onclick="nextStep">Next</button>
+             </div>
+         </div>
+         }
+         
+         @if (_userFormType is "seller")
+         {
+             <AuthorizeView>
+                 <NotAuthorized>
+                     <div class="card">
+                         <h3 style="text-align: center">Seller</h3>
+                         <div class="field">
+                                     <label>Cvr:</label>
+                                     <input type="text" @bind="_cvr" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <label>Company name:</label>
+                                     <input type="text" @bind="_companyName" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <label>Description:</label>
+                                     <input type="text" @bind="_description" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <label>Type of restaurant:</label>
+                                     <input type="text" @bind="_type" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <label>Website:</label>
+                                     <input type="text" @bind="_website" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <label>Rating:</label>
+                                     <input type="text" @bind="_rating" @bind:event="oninput"/>
+                                 </div>
+                                 <div class="field">
+                                     <button class="registerbtn" @onclick="CreateSeller">Register</button>
+                                 </div>
+                     </div>
+                 </NotAuthorized>
+             </AuthorizeView>
+         }
+         
+        @if (_userFormType is "customer")
+        {
+            <AuthorizeView>
+    
+                <NotAuthorized>
+        
+                    <div class="card">
+                        <h3 style="text-align: center">Customer</h3>
+                        <div class="field">
+                            <label>Preferences:</label>
+                            <input type="text" @bind="_preferences" @bind:event="oninput"/>
+                        </div>
+                        <div class="field">
+                            <button class="registerbtn">Register</button>
+                        </div>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+        }
+     </NotAuthorized>
+ </AuthorizeView>
+@code {
+    //User creation fields
+     private string? _firstName;
+     private string? _lastName;
+     private string? _email;
+     private string? _city;
+     private string? _streetName;
+     private int? _postcode;
+     private int? _phoneNumber;
+
+    //Seller creation fields
+    
+    private static int _cvr;
+    private static string? _companyName;
+    private static string? _description;
+    private static string? _type;
+    private static string? _website;
+    private static float _rating;
+
+    // Customer creation field
+    private string? _preferences;
+    
+    
+    private string? _userFormType;
+     
+    private string? _value;
+    private string _resultMsg = "";
+    private string _color = "";
+    
+    private void OnSelect(ChangeEventArgs args) => _value = (string)args.Value!;
+    
+
+     private void nextStep()
+     {
+         _userFormType = _value;
+     }
+
+     private async Task CreateSeller()
+         {
+            Console.WriteLine("Managed to click the button successfully!");
+            _resultMsg = "";
+            var addressModel = new AddressModel(_city, _streetName, _postcode);
+            var userModel =
+            new UserCreateModel(_firstName, _lastName, addressModel, _phoneNumber, _email);
+                    
+            try
+             {
+                 await sellerService.CreateSeller(new SellerCreateDto(
+                     new SellerCreateModel(
+                         userModel,
+                         _cvr,
+                         _companyName!,
+                         _description!,
+                         _type!,
+                         _website!,
+                         _rating  )
+                     ));
+                     
+                 _resultMsg = "User successfully created";
+                 _color = "green";
+             }
+             catch (Exception e)
+             {
+                 Console.WriteLine(e);
+                 _resultMsg = e.Message;
+                 _color = "red";
+             }
+         }
+
+
+ }
+ 
+@*<div class="field">
                  <label style="text-align: center">Password:</label>
                  <input type="password" @bind="password"/>
              </div>
@@ -41,51 +206,28 @@
                                      @errorLabel
                                  </label>
                              </div>
-                         }
-                         <h4 style="text-align: center">Chose user type</h4>
-                         <div class="choseType">
-                             <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="user" id="customer" value="1"/>
-                                 <label class="form-check-label" for="customer">Customer</label>
-                             </div>
-                             <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="user" id="seller" value="2"/>
-                                 <label class="form-check-label" for="seller">Seller</label>
-                                 </div>
-                         </div>
-                         
-                         <div class="field">
-                             <button class="registerIntoBtn" @onclick="RegisterAsync">Next</button>
-                         </div>
-                     </div>
- 
-     </NotAuthorized>
- </AuthorizeView>
- 
- @code {
-     private string? firstName;
-     private string? lastName;
-     private string? email;
-     private string? address;
+                         }*@
+
+@*/*
      private string? password;
      private string? repeatedPassword;
-     private string? errorLabel;
- 
-     private async Task RegisterAsync()
-     {
-         errorLabel = "";
-         try
-         {
-             if (!repeatedPassword.Equals(password))
-             {
-                 throw new Exception("Passwords are not matching");
-             }
+     private string? errorLabel;*/*@
+
+@*private async Task RegisterAsync()
+{
+/*errorLabel = "";
+try
+{
+if (!repeatedPassword.Equals(password))
+{
+throw new Exception("Passwords are not matching");
+}
              
-         }
-         catch (Exception e)
-         {
-             errorLabel = e.Message;
-         }
-     }
- 
- }
+}
+catch (Exception e)
+{
+errorLabel = e.Message;
+}*/
+}*@
+
+

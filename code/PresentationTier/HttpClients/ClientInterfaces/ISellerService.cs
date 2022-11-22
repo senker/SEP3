@@ -3,7 +3,7 @@ using Domain.Models;
 
 namespace HttpClients.ClientInterfaces;
 
-public interface ISellerInterface
+public interface ISellerService
 {
     Task<SellerModel> CreateSeller(SellerCreateDto dto);
 }

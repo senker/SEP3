@@ -6,7 +6,7 @@ using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
 
-public class SellerHttpClient : ISellerInterface
+public class SellerHttpClient : ISellerService
 {
     
     private readonly HttpClient client;

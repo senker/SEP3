@@ -14,41 +14,28 @@ public class CustomerController : ControllerBase
     {
         _customerLogic = customerLogic;
     }
-
+    
     [HttpPost]
     [Route("/customer")]
     public async Task<ActionResult> CreateCustomer(CustomerCreateDto customer)
     {
-        /*try
-        {
-            SellerDto seller = await _sellerLogic.CreateSellerAsync(dto);
-            Console.WriteLine("Created seller: ", seller);
-            return Ok(seller);
-            // return Created($"/users/{seller.User.Id}", seller);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }*/
         return Ok(await _customerLogic.CreateCustomerAsync(customer));
     }
-
-
-    [HttpGet("{email}")]
-    public async Task<IActionResult> GetCustomerByEmail(string email)
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCustomerById(int id)
     {
-        var guest = await _customerLogic.GetCustomerByEmailAsync(email);
+        var guest = await _customerLogic.GetCustomerByIdAsync(id);
 
         if (guest == null)
             return NotFound("Customer not found");
 
         return Ok(guest);
     }
-
-    [HttpDelete("{email}")]
-    public async Task<IActionResult> DeleteCustomerByEmail(string email)
+   
+    [HttpDelete("{cvr}")]
+    public async Task<IActionResult> DeleteCustomerById(int id)
     {
-        return Ok(await _customerLogic.DeleteCustomerByEmailAsync(email));
+        return Ok(await _customerLogic.DeleteCustomerByIdAsync(id));
     }
 }
