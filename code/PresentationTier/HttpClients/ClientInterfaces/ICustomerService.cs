@@ -1,8 +1,9 @@
+using Domain.DTOs;
 using Domain.Models;
 
 namespace HttpClients.ClientInterfaces;
 
 public interface ICustomerService
 {
-    Task<CustomerModel> CreateCustomer(CustomerCreateModel dto);
+    Task<CustomerModel> CreateCustomer(CustomerCreateDto dto);
 }

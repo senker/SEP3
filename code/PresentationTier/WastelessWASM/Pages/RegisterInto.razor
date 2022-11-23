@@ -2,7 +2,8 @@
 @using HttpClients.ClientInterfaces
 @using Domain.Models
 @using Domain.DTOs
-@inject ISellerService sellerService;
+@inject ISellerService SellerService;
+@inject ICustomerService CustomerService;
 @inject NavigationManager UriHelper
 @inject IJSRuntime JSRuntime
 <PageTitle>Register</PageTitle>
@@ -55,7 +56,7 @@
                  </div>
              </div>
              <div class="field">
-                 <button class="registerIntoBtn" @onclick="nextStep">Next</button>
+                 <button class="registerIntoBtn" @onclick="NextStep">Next</button>
              </div>
          </div>
          }
@@ -111,7 +112,7 @@
                             <input type="text" @bind="_preferences" @bind:event="oninput"/>
                         </div>
                         <div class="field">
-                            <button class="registerbtn">Register</button>
+                            <button class="registerbtn" @onclick="CreateCustomer">Register</button>
                         </div>
                     </div>
                 </NotAuthorized>
@@ -131,12 +132,12 @@
 
     //Seller creation fields
     
-    private static int _cvr;
-    private static string? _companyName;
-    private static string? _description;
-    private static string? _type;
-    private static string? _website;
-    private static float _rating;
+    private int _cvr;
+    private string? _companyName;
+    private string? _description;
+    private string? _type;
+    private string? _website;
+    private float _rating;
 
     // Customer creation field
     private string? _preferences;
@@ -151,42 +152,66 @@
     private void OnSelect(ChangeEventArgs args) => _value = (string)args.Value!;
     
 
-     private void nextStep()
+     private void NextStep()
      {
          _userFormType = _value;
      }
 
      private async Task CreateSeller()
-         {
-            Console.WriteLine("Managed to click the button successfully!");
-            _resultMsg = "";
-            var addressModel = new AddressModel(_city, _streetName, _postcode);
-            var userModel =
+     {
+        _resultMsg = "";
+        var addressModel = new AddressModel(_city, _streetName, _postcode);
+        var userModel =
+        new UserCreateModel(_firstName, _lastName, addressModel, _phoneNumber, _email);
+                    
+        try
+        {
+            await SellerService.CreateSeller(new SellerCreateDto(
+            new SellerCreateModel(
+                userModel,
+                _cvr,
+                _companyName!,
+                _description!,
+                _type!,
+                _website!,
+                _rating  )
+            ));
+            _resultMsg = "User successfully created";
+            _color = "green";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                _resultMsg = e.Message;
+                _color = "red";
+            }
+     }
+    
+    private async Task CreateCustomer()
+    {
+        _resultMsg = "";
+        var addressModel = new AddressModel(_city, _streetName, _postcode);
+        var userModel =
             new UserCreateModel(_firstName, _lastName, addressModel, _phoneNumber, _email);
                     
-            try
-             {
-                 await sellerService.CreateSeller(new SellerCreateDto(
-                     new SellerCreateModel(
-                         userModel,
-                         _cvr,
-                         _companyName!,
-                         _description!,
-                         _type!,
-                         _website!,
-                         _rating  )
-                     ));
+        try
+        {
+            await CustomerService.CreateCustomer(new CustomerCreateDto(
+                new CustomerCreateModel(
+                    userModel,
+                    _preferences )
+                ));
                      
-                 _resultMsg = "User successfully created";
-                 _color = "green";
-             }
-             catch (Exception e)
-             {
-                 Console.WriteLine(e);
-                 _resultMsg = e.Message;
-                 _color = "red";
-             }
-         }
+            _resultMsg = "User successfully created";
+            _color = "green";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _resultMsg = e.Message;
+            _color = "red";
+        }
+    }
 
 
  }
