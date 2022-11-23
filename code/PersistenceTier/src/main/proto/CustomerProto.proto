@@ -3,8 +3,9 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "via.sep3.persistencetier.protobuf";
 
+package customer;
 
-message CustomerRequest{
+message CustomerRequest {
   string email = 1;
 }
 
@@ -12,6 +13,14 @@ message AddressModelCustomer{
   string city = 1;
   string streetName = 2;
   int32 postCode = 3;
+}
+
+message UserModelResponseCustomer{
+  string firstName = 1;
+  string lastName = 2;
+  AddressModelCustomer address = 3;
+  int32 phoneNumber = 4;
+  string email = 5;
 }
 
 message CreateUserModelRequestCustomer{
@@ -30,14 +39,6 @@ message CreateCustomerRequest {
 message CustomerResponse {
   UserModelResponseCustomer user = 1;
   string preference = 2;
-}
-
-message UserModelResponseCustomer{
-  string firstName = 1;
-  string lastName = 2;
-  AddressModelCustomer address = 3;
-  int32 phoneNumber = 4;
-  string email = 5;
 }
 
 service CustomerService {

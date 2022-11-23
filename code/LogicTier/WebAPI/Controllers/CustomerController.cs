@@ -22,10 +22,10 @@ public class CustomerController : ControllerBase
         return Ok(await _customerLogic.CreateCustomerAsync(customer));
     }
     
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetCustomerById(int id)
+    [HttpGet("{email}")]
+    public async Task<IActionResult> GetCustomerByEmail(string email)
     {
-        var guest = await _customerLogic.GetCustomerByIdAsync(id);
+        var guest = await _customerLogic.GetCustomerByEmailAsync(email);
 
         if (guest == null)
             return NotFound("Customer not found");
@@ -33,9 +33,9 @@ public class CustomerController : ControllerBase
         return Ok(guest);
     }
    
-    [HttpDelete("{cvr}")]
-    public async Task<IActionResult> DeleteCustomerById(int id)
+    [HttpDelete("{email}")]
+    public async Task<IActionResult> DeleteCustomerByEmail(string email)
     {
-        return Ok(await _customerLogic.DeleteCustomerByIdAsync(id));
+        return Ok(await _customerLogic.DeleteCustomerByEmailAsync(email));
     }
 }

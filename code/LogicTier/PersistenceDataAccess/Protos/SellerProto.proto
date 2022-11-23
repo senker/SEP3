@@ -8,6 +8,12 @@ message SellerRequest {
   int32 id = 1;
 }
 
+message AddressModelSeller{
+  string city = 1;
+  string streetName = 2;
+  int32 postCode = 3;
+}
+
 message UserModelResponseSeller{
   int32 Id = 1;
   string firstName = 2;
@@ -15,12 +21,6 @@ message UserModelResponseSeller{
   AddressModelSeller address = 4;
   int32 phoneNumber = 5;
   string email = 6;
-}
-
-message AddressModelSeller{
-  string city = 1;
-  string streetName = 2;
-  int32 postCode = 3;
 }
 
 message CreateUserModelRequestSeller{
