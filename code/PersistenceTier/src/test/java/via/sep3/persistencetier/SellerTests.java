@@ -1,17 +1,18 @@
 package via.sep3.persistencetier;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.protobuf.Descriptors;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 //import org.junit.runner.RunWith;
 //import org.junit.runners.JUnit4;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,46 +26,44 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import via.sep3.persistencetier.protobuf.*;
 import via.sep3.persistencetier.service.SellerService;
 
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
-//import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 @ExtendWith(SpringExtension.class)
-//@RunWith(JUnit4.class)
+@RunWith(JUnit4.class)
 @WebMvcTest
-class PersistenceTierApplicationTests {
+class SellerTests {
 
 	@Autowired
-	//private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
 	@MockBean
 	private SellerService sellerService;
 
 	@Autowired
-	//private ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 
-//	ManagedChannel managedChannel = ManagedChannelBuilder
-//			.forAddress("localhost", 6565)
-//			.usePlaintext()
-//			.build();
+	ManagedChannel managedChannel = ManagedChannelBuilder
+			.forAddress("localhost", 6565)
+			.usePlaintext()
+			.build();
 
-//	SellerServiceGrpc.SellerServiceBlockingStub synchronousStub;
+	SellerServiceGrpc.SellerServiceBlockingStub synchronousStub;
 
-//	SellerServiceGrpc.SellerServiceStub asynchronousStub;
+	SellerServiceGrpc.SellerServiceStub asynchronousStub;
 
-/*	@BeforeEach
+	@BeforeEach
 	public void setup()
 	{
 		synchronousStub = SellerServiceGrpc.newBlockingStub(managedChannel);
 		asynchronousStub = SellerServiceGrpc.newStub(managedChannel);
 		sellerService = new SellerService();
-	}*/
+	}
 
-/*	@Test
+	@Test
 	public void grpcCreateSeller() throws Exception{
 		CreateSellerRequest request = setRandomSellerRequest();
 
@@ -72,9 +71,33 @@ class PersistenceTierApplicationTests {
 
 		CreateSellerRequest responseToCreateSellerRequest = convertToCreateSellerRequest(response);
 
-		//assertEquals(request, responseToCreateSellerRequest);
-	}*/
-/*
+		assertEquals(request, responseToCreateSellerRequest);
+	}
+
+	@Test
+	public void grpcGetAllSellers() throws Exception{
+		List<SellerResponse> sellerResponseList = new ArrayList<>();
+			asynchronousStub.getAllSellers(Empty.newBuilder().build(), new StreamObserver<SellerResponse>() {
+			@Override
+			public void onNext(SellerResponse sellerResponse) {
+				sellerResponseList.add(sellerResponse);
+			}
+
+			@Override
+			public void onError(Throwable throwable) {
+
+			}
+
+			@Override
+			public void onCompleted() {
+
+			}
+		});
+			Thread.sleep(5000);
+
+		assertEquals(sellerResponseList.get(0).getCvr(), 0);
+	}
+
 
 	@Test
 	public void CreateSellerRest() throws Exception{
@@ -113,7 +136,6 @@ class PersistenceTierApplicationTests {
 	}
 
 
- */
 
 
 

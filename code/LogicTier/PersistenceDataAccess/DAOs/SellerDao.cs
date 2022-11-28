@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Grpc.Core;
 using PersistenceDataAccess.Services;
 using static PersistenceDataAccess.SellerService;
 namespace PersistenceDataAccess.DAOs;
@@ -96,6 +97,28 @@ public class SellerDao : ISellerDao
         catch
         {
             throw new Exception("Couldn't get the cvr");
+        }
+    }
+
+
+  public async  Task<List<SellerDto>> GetAllSellers()
+    {
+        
+        try
+        {
+            List<SellerDto> sellerList = new List<SellerDto>();
+            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new Empty());
+            while (await response.ResponseStream.MoveNext())
+            {
+                SellerResponse current = response.ResponseStream.Current;
+                sellerList.Add(ResponseToSellerDto(current));
+            }
+
+            return sellerList;
+        }
+        catch
+        {
+            throw new Exception("Couldn't load all sellers");
         }
     }
 

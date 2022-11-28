@@ -1,6 +1,8 @@
+using System.Transactions;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Google.Protobuf;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -46,6 +48,16 @@ public class SellerController : ControllerBase
 
         return Ok(guest);
     }
+
+    [HttpGet]
+    [Route("/all-sellers")]
+    public async Task<IActionResult> GetAllSellers()
+    {
+        var sellers = await _sellerLogic.GetAllSellers();
+
+        return Ok(sellers);
+    }
+    
     
     [HttpDelete("{cvr}")]
     public async Task<IActionResult> DeleteSellerByCvr(int cvr)

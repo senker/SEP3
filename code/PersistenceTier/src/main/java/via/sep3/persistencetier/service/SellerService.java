@@ -9,7 +9,12 @@ import via.sep3.persistencetier.database.seller.SellerId;
 import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Stream;
+
 @GRpcService
+@Transactional
 public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Autowired
@@ -40,6 +45,39 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         var savedSeller = sellerRepository.save(seller);
 
         sellerResponseBuilder(responseObserver, savedSeller);
+    }
+
+    @Override
+    public void getAllSellers(Empty empty, StreamObserver<SellerResponse> responseObserver)
+    {
+        SellerResponse.Builder sellerResponseBuilder = SellerResponse.newBuilder();
+        Stream<Seller> sellerList = sellerRepository.findAllStream();
+        sellerList.forEach(seller ->{
+                    sellerResponseBuilder
+                            .setUser(
+                                    UserModelResponseSeller.newBuilder()
+                                            .setCvr(seller.getCvr().intValue())
+                                            .setFirstName(seller.getFirstName())
+                                            .setLastName(seller.getLastName())
+                                            .setAddress(
+                                                    AddressModelSeller.newBuilder()
+                                                            .setCity(seller.getAddress().getCity())
+                                                            .setStreetName(seller.getAddress().getStreetName())
+                                                            .setPostCode(seller.getAddress().getPostcode())
+                                            )
+                                            .setPhoneNumber(seller.getPhoneNumber().intValue())
+                                            .setEmail(seller.getEmail())
+                            )
+                            .setCvr(seller.getCvr().intValue())
+                            .setCompanyName(seller.getCompanyName())
+                            .setDescription(seller.getDescription())
+                            .setType(seller.getType())
+                            .setWebsite(seller.getWebsite())
+                            .setRating(seller.getRating());
+            System.out.println(seller.getCvr());
+                            responseObserver.onNext(sellerResponseBuilder.build());
+        });
+        responseObserver.onCompleted();
     }
 
     @Override
