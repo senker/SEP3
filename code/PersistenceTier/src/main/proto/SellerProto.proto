@@ -3,7 +3,12 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "via.sep3.persistencetier.protobuf";
 
+
 package seller;
+
+message Empty{
+
+}
 
 message SellerRequest {
   int32 cvr = 1;
@@ -55,5 +60,6 @@ message SellerResponse {
 service SellerService {
   rpc createSeller(CreateSellerRequest) returns (SellerResponse);
   rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
+  rpc getAllSellers(Empty) returns (stream SellerResponse);
   rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
 }

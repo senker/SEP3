@@ -6,6 +6,7 @@ import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.seller.Seller;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 
 //for seller example use findById(123456789)
@@ -24,4 +25,7 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
 
     @Query(value = "Delete from Seller where Seller.cvr=?1", nativeQuery = true)
     Seller deleteByCvr(Long cvr);
+
+    @Query(value="select * from Seller", nativeQuery = true)
+    Stream<Seller> findAllStream();
 }
