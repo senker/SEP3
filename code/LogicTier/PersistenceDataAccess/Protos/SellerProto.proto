@@ -1,12 +1,9 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "PersistenceDataAccess";
 
 package seller;
-
-message Empty{
-
-}
 
 message SellerRequest {
   int32 id = 1;
@@ -58,6 +55,6 @@ message SellerResponse {
 service SellerService {
   rpc createSeller(CreateSellerRequest) returns (SellerResponse);
   rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
-  rpc getAllSellers(Empty) returns (stream SellerResponse);
+  rpc getAllSellers(google.protobuf.Empty) returns (stream SellerResponse);
   rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
 }

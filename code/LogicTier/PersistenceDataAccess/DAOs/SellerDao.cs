@@ -107,7 +107,7 @@ public class SellerDao : ISellerDao
         try
         {
             List<SellerDto> sellerList = new List<SellerDto>();
-            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new Empty());
+            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new Google.Protobuf.WellKnownTypes.Empty());
             while (await response.ResponseStream.MoveNext())
             {
                 SellerResponse current = response.ResponseStream.Current;
@@ -122,7 +122,17 @@ public class SellerDao : ISellerDao
         }
     }
 
-    public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)
+  public Task<SellerDto> GetSeller(string username, string password)
+  {
+      throw new NotImplementedException();
+  }
+
+  public Task RegisterSeller(SellerDto seller)
+  {
+      throw new NotImplementedException();
+  }
+
+  public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)
     {
         try
         {

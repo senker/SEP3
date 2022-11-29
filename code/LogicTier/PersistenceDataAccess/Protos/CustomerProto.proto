@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "PersistenceDataAccess";
 
@@ -44,4 +45,5 @@ service CustomerService {
   rpc createCustomer(CreateCustomerRequest) returns (CustomerResponse);
   rpc getCustomerByEmail(CustomerRequest) returns (CustomerResponse);
   rpc deleteCustomerByEmail(CustomerRequest) returns (CustomerResponse);
+  rpc getAllCustomers(google.protobuf.Empty) returns (stream CustomerResponse);
 }
