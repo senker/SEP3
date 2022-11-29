@@ -1,0 +1,236 @@
+﻿@page "/Restaurant"
+
+<link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css" />
+
+<style>
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100%;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="top-section">
+            <div id="upper-banner">
+              <h1>
+                Babunia
+              </h1>
+              <p class="banner_description">Polish best food at low price</p>
+              <button class="tag">SUBSRIBE</button>
+            </div>
+            <div class="tags">
+              <div class="tag" style="background-color: green">
+                VEGAN
+              </div>
+              <div class="tag" style="background-color: lightgreen">
+                VEGETARIAN
+              </div>
+              <div class="tag" style="background-color: darkred">
+                MEAT
+              </div>
+              <div class="tag" style="background-color: lightgray">
+                GLUTEN-FREE
+              </div>
+            </div>
+
+        </div>
+
+        <div class="retaurant_info">    
+
+            <div id="mapContainer">
+              <script suppress-error="BL9992">
+                var map = new google.maps.Map(document.getElementById("mapContainer"), {
+                  zoom: 15,
+                  center: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                const infowindow = new google.maps.InfoWindow({
+                  content: "Sønderbrogade 7, 8700 Horsens",
+                  ariaLabel: "Sønderbrogade 7, 8700 Horsens",
+                });
+                let marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                  map: map,
+                  animation: google.maps.Animation.DROP
+                });
+                infowindow.open({
+                  anchor: marker,
+                  map
+                });
+              </script>
+            </div>
+
+            <div class="restaurant_description">
+              <p>RATING: 8.0/10.0 </p>                  
+              <p>Bulevardul Dacia 15</p>      
+              <p>Open everyday 8:00 - 16:00</p>
+              <p>Available boxes today: X</p>
+              <p></p>
+            </div>
+        </div>
+
+        <div class="container" style="margin:  0; padding: 0">
+          <div class="row item">
+            <div class="col-md-4 col-md-offset-2 item_photo">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
+            </div>
+            <div class="col-md-5 item_description">
+              <div class="row">
+                <div class="col-lg-12" style="text-align: center">
+                  <p>CONTENT:</p>
+                </div>
+              </div>
+              <div class="row item" style="border-bottom:none">
+                <div class="col-lg-6" style="text-align: center">
+                  <p>5 Apples</p>
+                  <p>2 Bananas</p>
+                  <p>3 Pears</p>
+                </div>
+                <div class="col-lg-6" style="text-align: center">
+                  <p>1 Orange</p>
+                  <p>1 kiwi</p>
+                  <p>1 Mangoe</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 item_add">
+              <button class="add_btn">
+                <img src="img/basket.svg" alt="basket" />
+                <p>ADD</p>
+              </button>
+            </div>
+          </div>
+
+            <div class="row item">
+              <div class="col-md-4 col-md-offset-2 item_photo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
+              </div>
+              <div class="col-md-5 item_description">
+                <p>CONTENT: </p>
+                <p>-Apples</p>
+                <p>-Bananas</p>
+                <p>-Mangoes</p>
+              </div>
+              <div class="col-md-1 item_add">
+                <button class="add_btn">
+                  <img src="img/basket.svg" alt="basket" />
+                  <p>ADD</p>
+                </button>
+              </div>
+            </div>
+            <div class="row item">
+              <div class="col-md-4 col-md-offset-2 item_photo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
+              </div>
+              <div class="col-md-5 item_description">
+                <p>CONTENT: </p>
+                <p>-Apples</p>
+                <p>-Bananas</p>
+                <p>-Mangoes</p>
+              </div>
+              <div class="col-md-1 item_add">
+                <button class="add_btn">
+                  <img src="img/basket.svg" alt="basket" />
+                  <p>ADD</p>
+                </button>
+              </div>
+            </div>
+            <div class="row item">
+              <div class="col-md-4 col-md-offset-2 item_photo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
+              </div>
+              <div class="col-md-5 item_description">
+                <p>CONTENT: </p>
+                <p>-Apples</p>
+                <p>-Bananas</p>
+                <p>-Mangoes</p>
+              </div>
+              <div class="col-md-1 item_add">
+                <button class="add_btn">
+                  <img src="img/basket.svg" alt="basket" />
+                  <p>ADD</p>
+                </button>
+              </div>
+            </div>
+        </div>
+
+        <!--
+            <div class="item">
+                <div class="item_add">
+                    <button>
+                        <img src="img/basket.svg" alt="basket"/>
+                        <picture>ADD</picture>
+                    </button>
+                </div>
+                <div class="item_description">
+                </div>
+                <div class="item_photo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item_add">
+                    <button>
+                        <img src="img/basket.svg" alt="basket"/>
+                        <picture>ADD</picture>
+                    </button>
+                </div>
+                <div class="item_description">
+                    <p>CONTENT: </p>
+                    <p>-Apples</p>
+                    <p>-Bananas</p>
+                    <p>-Mangoes</p>
+                </div>
+                <div class="item_photo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
+                </div>
+            </div>
+            -->
+
+        <!--
+            <section>
+                <div class="listitem">
+                    <a class="list_item_link" href="http://google.com">
+                        <div class="content">
+                            <div class="text_content">
+                                <p>Babunia spaciality</p>
+                                <p>
+                                    lorem ipsum de la tomatoe soup
+                                </p>
+                                <p>
+                                    DKK&nbsp;105.00
+                                </p>
+
+
+                            </div>
+                            <div class="list_item_image">
+
+                                <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/a8/77/b8/received-1480876638637036.jpg" alt="babunia"/>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </section>
+            -->
+      </div>
+      <!--
+    <div class="col-3 d-none d-md-block" >
+        <div class="basket">
+            <h1>BASKET:</h1>
+        </div>
+    </div>
+    -->
+    </div>
+  </div>
+</body>
+
+@code {
+
+}
