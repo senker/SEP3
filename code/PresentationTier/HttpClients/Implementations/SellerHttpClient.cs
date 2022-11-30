@@ -31,4 +31,20 @@ public class SellerHttpClient : ISellerService
         })!;
         return seller;
     }
+
+    public async Task<List<SellerModel>> GetSellers()
+    {
+        HttpResponseMessage response = await client.GetAsync("/all-sellers");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        List<SellerModel> sellers = JsonSerializer.Deserialize<List<SellerModel>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return sellers;
+    }
 }

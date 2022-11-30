@@ -1,133 +1,46 @@
 ﻿@page "/"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
 @inject NavigationManager navMgr
+@inject ISellerService sellerService; 
+@inject SavedRestaurant _savedRestaurant;
 
 <PageTitle>Index</PageTitle>
 
 <div class="introPage" align="center">
-    <h1>Wasteless</h1>
-    <p>Let's start saving food</p>
-</div>
+        <h1>Wasteless</h1>
+        <p>Let's start saving food</p>
+    </div>
 
-<div class="restaurants">
-    <div class="content">
-        <img src="img/babunia.jpg" alt="babunia" class="restaurant_image"/>
-        <div class="tags">
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-        </div>
-        <h3>Babunia</h3>
-        <div classs="images">
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star.svg" alt="star"/>
-            <img src="img/star.svg" alt="star"/>
-        </div>
-        <button class="read_more" @onclick="ReadMore">Read more</button>
+    <div class="restaurants">    
+                       
+        @for(int i=0; i<@_number_of_restaurants; i++)
+        {
+            seller = @_sellers.ElementAt(i);
 
+            <div class="content">
+                <img src="img/babunia.jpg" alt="babunia" class="restaurant_image"/>
+                <div class="tags">
+                    <div class="tag">@seller.Type</div>
+                </div>
+                <h3>@seller.CompanyName</h3>
+                <div classs="images">                            
+                    @for(int j=0; j<seller.Rating; j++)
+                    {
+                        <img src="img/star-fill.svg" alt="star"/>
+                    }
+                    @for(int k=0; k<5-seller.Rating; k++)
+                    {
+                        <img src="img/star.svg" alt="star"/>
+                    }
+                </div>
+                <button class="read_more" @onclick="ReadMore">Read more</button>
+
+            </div>
+        }
     </div>
-    
-    
-    
-    <div class="content">
-        <img src="img/mcdonald.png" alt="mcdonald" class="restaurant_image"/>
-        <div class="tags">
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-        </div>
-        <h3>McDonald's</h3>
-        <div classs="images">
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-        </div>
-        <button class="read_more" @onclick="ReadMore">Read more</button>
-   
-    </div>
-    <div class="content">
-        <img src="img/mcdonald.png" alt="mcdonald" class="restaurant_image"/>
-        <div class="tags">
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-        </div>
-        <h3>McDonald's</h3>
-        <div classs="images">
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-        </div>
-        <button class="read_more" @onclick="ReadMore">Read more</button>
-       
-    </div>
-    <div class="content">
-        <img src="img/mcdonald.png" alt="mcdonald" class="restaurant_image"/>
-        <div class="tags">
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-        </div>
-        <h3>McDonald's</h3>
-        <div classs="images">
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-        </div>
-        <button class="read_more" @onclick="ReadMore">Read more</button>
-       
-    </div>
-    <div class="content">
-        <img src="img/mcdonald.png" alt="mcdonald" class="restaurant_image"/>
-        <div class="tags">
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-            <div class="tag">vegan</div>
-            <div class="tag">vegetarian</div>
-        </div>
-        <h3>McDonald's</h3>
-        <div classs="images">
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-            <img src="img/star-fill.svg" alt="star"/>
-        </div>
-        <button class="read_more" @onclick="ReadMore">Read more</button>
-       
-    </div>
-       <div class="content">
-               <img src="img/mcdonald.png" alt="mcdonald" class="restaurant_image"/>
-               <div class="tags">
-                   <div class="tag">vegan</div>
-                   <div class="tag">vegetarian</div>
-                   <div class="tag">vegan</div>
-                   <div class="tag">vegetarian</div>
-               </div>
-               <h3>McDonald's</h3>
-               <div classs="images">
-                   <img src="img/star-fill.svg" alt="star"/>
-                   <img src="img/star-fill.svg" alt="star"/>
-                   <img src="img/star-fill.svg" alt="star"/>
-                   <img src="img/star-fill.svg" alt="star"/>
-                   <img src="img/star-fill.svg" alt="star"/>
-               </div>
-               <button class="read_more" @onclick="ReadMore">Read more</button>
-       
-           </div>
-</div>
-<style>
+
+    <style>
     body {
         
         background: #48b1bf; 
@@ -135,18 +48,23 @@
 </style>
 <script suppress-error="BL9992" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY"></script>
 
-
 @code {
 
-    private string errorLabel;
-    
 
-    private async Task ReadMore()
+    private string errorLabel;
+    private IEnumerable<SellerModel>? _sellers;
+    private string msg = "";
+    private int? _number_of_restaurants=0;
+    private SellerModel seller = null;
+
+    private Task  ReadMore()
     {
+
         errorLabel = "";
         try
         {
-            // await authService.LoginAsync(userName, password);
+            _savedRestaurant.SetSeller(seller);
+
             navMgr.NavigateTo("/Restaurant");
         }
         catch (Exception e)
@@ -154,5 +72,21 @@
             Console.WriteLine(e);
             errorLabel = $"Error: {e.Message}";
         }
+        return Task.CompletedTask;
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+            {
+                _sellers = await sellerService.GetSellers();
+                _number_of_restaurants = _sellers.Count();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                msg = e.Message;
+            }
+        }
+
 }
