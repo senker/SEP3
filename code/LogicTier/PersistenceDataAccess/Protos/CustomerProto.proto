@@ -32,6 +32,7 @@ message CreateUserModelRequestCustomer{
   AddressModelCustomer address = 3;
   int32 phoneNumber = 4;
   string email = 5;
+  string password = 6;
 }
 
 message CreateCustomerRequest {

@@ -33,6 +33,7 @@ message CreateUserModelRequestSeller{
   AddressModelSeller address = 4;
   int32 phoneNumber = 5;
   string email = 6;
+  string password = 7;
 }
 
 message CreateSellerRequest {

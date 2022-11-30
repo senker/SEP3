@@ -30,6 +30,7 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
+        user.Password = seller.User.Password;
         
         try
         {
