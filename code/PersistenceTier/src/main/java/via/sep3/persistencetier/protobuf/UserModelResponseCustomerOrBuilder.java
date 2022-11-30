@@ -63,4 +63,16 @@ public interface UserModelResponseCustomerOrBuilder extends
    */
   com.google.protobuf.ByteString
       getEmailBytes();
+
+  /**
+   * <code>string password = 6;</code>
+   * @return The password.
+   */
+  java.lang.String getPassword();
+  /**
+   * <code>string password = 6;</code>
+   * @return The bytes for password.
+   */
+  com.google.protobuf.ByteString
+      getPasswordBytes();
 }

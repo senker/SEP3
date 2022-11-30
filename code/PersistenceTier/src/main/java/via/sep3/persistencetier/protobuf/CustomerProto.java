@@ -61,30 +61,30 @@ public final class CustomerProto {
       "\n\023CustomerProto.proto\022\010customer\"\017\n\rEmpty" +
       "Customer\" \n\017CustomerRequest\022\r\n\005email\030\001 \001" +
       "(\t\"J\n\024AddressModelCustomer\022\014\n\004city\030\001 \001(\t" +
-      "\022\022\n\nstreetName\030\002 \001(\t\022\020\n\010postCode\030\003 \001(\005\"\225" +
+      "\022\022\n\nstreetName\030\002 \001(\t\022\020\n\010postCode\030\003 \001(\005\"\247" +
       "\001\n\031UserModelResponseCustomer\022\021\n\tfirstNam" +
       "e\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t\022/\n\007address\030\003 \001" +
       "(\0132\036.customer.AddressModelCustomer\022\023\n\013ph" +
-      "oneNumber\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\"\254\001\n\036Creat" +
-      "eUserModelRequestCustomer\022\021\n\tfirstName\030\001" +
-      " \001(\t\022\020\n\010lastName\030\002 \001(\t\022/\n\007address\030\003 \001(\0132" +
-      "\036.customer.AddressModelCustomer\022\023\n\013phone" +
-      "Number\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\022\020\n\010password\030" +
-      "\006 \001(\t\"c\n\025CreateCustomerRequest\0226\n\004user\030\001" +
-      " \001(\0132(.customer.CreateUserModelRequestCu" +
-      "stomer\022\022\n\npreference\030\002 \001(\t\"Y\n\020CustomerRe" +
-      "sponse\0221\n\004user\030\001 \001(\0132#.customer.UserMode" +
-      "lResponseCustomer\022\022\n\npreference\030\002 \001(\t2\307\002" +
-      "\n\017CustomerService\022M\n\016createCustomer\022\037.cu" +
-      "stomer.CreateCustomerRequest\032\032.customer." +
-      "CustomerResponse\022K\n\022getCustomerByEmail\022\031" +
-      ".customer.CustomerRequest\032\032.customer.Cus" +
-      "tomerResponse\022N\n\025deleteCustomerByEmail\022\031" +
-      ".customer.CustomerRequest\032\032.customer.Cus" +
-      "tomerResponse\022H\n\017getAllCustomers\022\027.custo" +
-      "mer.EmptyCustomer\032\032.customer.CustomerRes" +
-      "ponse0\001B%\n!via.sep3.persistencetier.prot" +
-      "obufP\001b\006proto3"
+      "oneNumber\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\022\020\n\010passwo" +
+      "rd\030\006 \001(\t\"\254\001\n\036CreateUserModelRequestCusto" +
+      "mer\022\021\n\tfirstName\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t" +
+      "\022/\n\007address\030\003 \001(\0132\036.customer.AddressMode" +
+      "lCustomer\022\023\n\013phoneNumber\030\004 \001(\005\022\r\n\005email\030" +
+      "\005 \001(\t\022\020\n\010password\030\006 \001(\t\"c\n\025CreateCustome" +
+      "rRequest\0226\n\004user\030\001 \001(\0132(.customer.Create" +
+      "UserModelRequestCustomer\022\022\n\npreference\030\002" +
+      " \001(\t\"Y\n\020CustomerResponse\0221\n\004user\030\001 \001(\0132#" +
+      ".customer.UserModelResponseCustomer\022\022\n\np" +
+      "reference\030\002 \001(\t2\307\002\n\017CustomerService\022M\n\016c" +
+      "reateCustomer\022\037.customer.CreateCustomerR" +
+      "equest\032\032.customer.CustomerResponse\022K\n\022ge" +
+      "tCustomerByEmail\022\031.customer.CustomerRequ" +
+      "est\032\032.customer.CustomerResponse\022N\n\025delet" +
+      "eCustomerByEmail\022\031.customer.CustomerRequ" +
+      "est\032\032.customer.CustomerResponse\022H\n\017getAl" +
+      "lCustomers\022\027.customer.EmptyCustomer\032\032.cu" +
+      "stomer.CustomerResponse0\001B%\n!via.sep3.pe" +
+      "rsistencetier.protobufP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -113,7 +113,7 @@ public final class CustomerProto {
     internal_static_customer_UserModelResponseCustomer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_UserModelResponseCustomer_descriptor,
-        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", });
+        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", "Password", });
     internal_static_customer_CreateUserModelRequestCustomer_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_customer_CreateUserModelRequestCustomer_fieldAccessorTable = new

@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
 
@@ -86,7 +88,6 @@ public class CustomerDao : ICustomerDao
     
     public async  Task<List<CustomerDto>> GetAllCustomers()
     {
-        
         try
         {
             List<CustomerDto> customerList = new List<CustomerDto>();
@@ -107,36 +108,42 @@ public class CustomerDao : ICustomerDao
 
     public Task<CustomerDto> ValidateCustomer(string username, string password)
     {
-        /*AsyncServerStreamingCall<CustomerResponse>  existingCustomers = _client.getAllCustomers(new Google.Protobuf.WellKnownTypes.Empty());
-        List<CustomerDto> customerList = new List<CustomerDto>();
-        while (existingCustomers.ResponseStream.MoveNext())
-        {
-            CustomerResponse current = existingCustomers.ResponseStream.Current;
-            customerList.Add(ResponseToCustomerDto(current));
-        }*/
-        /*List<CustomerDto> customerList = new List<CustomerDto>();
-        customerList.Add(GetAllCustomers());*/
         var customerList = GetAllCustomers();
-        var existingCustomer = customerList.Result.FirstOrDefault(u => 
-        u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
+        var list = customerList.Result;
+        var existingCustomer = list.FirstOrDefault(u => 
+            u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
 
-        
+
         if (existingCustomer == null)
         {
             throw new Exception("User not found");
         }
 
-        /*if (!existingCustomer.Password.Equals(password))
+        if (!existingCustomer.User.Password.Equals(password))
         {
             throw new Exception("Password mismatch");
-        }*/
+        }
 
         return Task.FromResult(existingCustomer);
     }
 
     public Task RegisterCustomer(CustomerDto customer)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(customer.User.Email))
+        {
+            throw new ValidationException("Username cannot be null");
+        }
+
+        if (string.IsNullOrEmpty(customer.User.Password))
+        {
+            throw new ValidationException("Password cannot be null");
+        }
+        // Do more user info validation here
+        
+        // save to persistence instead of list
+        
+        
+        return Task.CompletedTask;
     }
 
     private CustomerDto ResponseToCustomerDto(CustomerResponse response)
@@ -154,6 +161,7 @@ public class CustomerDao : ICustomerDao
         user.Address = address;
         user.PhoneNumber = response.User.PhoneNumber;
         user.Email = response.User.Email;
+        user.Password = response.User.Password;
 
         return new CustomerDto()
         {

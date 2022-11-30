@@ -105,7 +105,6 @@ public class SellerDao : ISellerDao
 
   public async  Task<List<SellerDto>> GetAllSellers()
     {
-        
         try
         {
             List<SellerDto> sellerList = new List<SellerDto>();

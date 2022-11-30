@@ -20,5 +20,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findByFirstNameAndLastName(String firstName, String LastName);
 
     @Query(value="select * from Customer", nativeQuery = true)
-    Stream<Customer> findAllCustomersStream();
+    Stream<Customer> findAllStream();
 }
