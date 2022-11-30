@@ -19,16 +19,22 @@ public class User {
     @Column(name="email")
     private String email;
 
+    @Column(name="password",
+            columnDefinition = "varchar(255)")
+    private String password;
+
     public User(String firstName,
                 String lastName,
                 Address address,
                 Long phoneNumber,
-                String email) {
+                String email,
+                String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -69,5 +75,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

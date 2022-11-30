@@ -89,7 +89,7 @@ public class CustomerDao : ICustomerDao
         try
         {
             List<CustomerDto> customerList = new List<CustomerDto>();
-            AsyncServerStreamingCall<CustomerResponse> response = _client.getAllCustomers(new Google.Protobuf.WellKnownTypes.Empty());
+            AsyncServerStreamingCall<CustomerResponse> response = _client.getAllCustomers(new EmptyCustomer());
             while (await response.ResponseStream.MoveNext())
             {
                 CustomerResponse current = response.ResponseStream.Current;

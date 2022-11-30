@@ -8,6 +8,7 @@ public class UserModel
     public AddressModel Address { get; set; }
     public int PhoneNumber { get; set; }
     public string Email { get; set; }
+    public string Password { get; set; }
 }
 
 public class AddressModel
@@ -24,4 +25,5 @@ public class UserCreateModel
     public AddressModel Address { get; set; }
     public int PhoneNumber { get; set; }
     public string Email { get; set; }
+    public string Password { get; set; }
 }

@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
 using static PersistenceDataAccess.SellerService;
@@ -107,7 +108,7 @@ public class SellerDao : ISellerDao
         try
         {
             List<SellerDto> sellerList = new List<SellerDto>();
-            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new Google.Protobuf.WellKnownTypes.Empty());
+            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new EmptySeller());
             while (await response.ResponseStream.MoveNext())
             {
                 SellerResponse current = response.ResponseStream.Current;

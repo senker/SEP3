@@ -34,6 +34,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                 ),
                 (long) request.getUser().getPhoneNumber(),
                 request.getUser().getEmail(),
+                request.getUser().getPassword(),
                 (long) request.getCvr(),
                 request.getCompanyName(),
                 request.getDescription(),
@@ -48,7 +49,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     }
 
     @Override
-    public void getAllSellers(Empty empty, StreamObserver<SellerResponse> responseObserver)
+    public void getAllSellers(EmptySeller empty, StreamObserver<SellerResponse> responseObserver)
     {
         SellerResponse.Builder sellerResponseBuilder = SellerResponse.newBuilder();
         Stream<Seller> sellerList = sellerRepository.findAllStream();

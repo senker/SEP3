@@ -8,11 +8,12 @@ public class UserDto
     public AddressModel Address { get; set; }
     public int PhoneNumber { get; set; }
     public string Email { get; set; }
-    
+    public string Password { get; set; }
+
     public UserDto() {
     }
 
     public UserDto(UserModel user) =>
-        (Id, FirstName, LastName, Address, PhoneNumber, Email) = (
-            user.Id, user.FirstName, user.LastName, user.Address, user.PhoneNumber, user.Email);
+        (Id, FirstName, LastName, Address, PhoneNumber, Email, Password) = (
+            user.Id, user.FirstName, user.LastName, user.Address, user.PhoneNumber, user.Email, user.Password);
 }
