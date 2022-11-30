@@ -1,4 +1,6 @@
 ﻿@page "/Restaurant"
+@using Domain.Models        
+@inject SavedRestaurant _savedRestaurant;
 
 <link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css" />
 
@@ -17,7 +19,6 @@
         <div id="top-section">
             <div id="upper-banner">
               <h1>
-                Babunia
               </h1>
               <p class="banner_description">Polish best food at low price</p>
               <button class="tag">SUBSRIBE</button>
@@ -233,4 +234,9 @@
 
 @code {
 
+  protected override async Task OnInitializedAsync()
+  {
+    string seller = await _savedRestaurant.GetSeller();
+    Console.WriteLine(seller);
+  }
 }

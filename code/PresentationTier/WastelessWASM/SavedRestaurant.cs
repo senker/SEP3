@@ -17,11 +17,8 @@ public class SavedRestaurant
         _memoryCache.Set("seller", sellerModel, TimeSpan.FromMinutes(1));
     }
 
-    public Task<SellerModel> GetSeller()
+    public async Task<string> GetSeller()
     {
-        SellerModel output;
-
-        output = _memoryCache.Get<SellerModel>("seller");
-        return Task.FromResult(output);
+        return _memoryCache.Get<SellerModel>("seller").ToString();
     }
 }

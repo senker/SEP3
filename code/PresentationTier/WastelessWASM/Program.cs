@@ -11,12 +11,14 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(
     sp => 
         new HttpClient { 
-            BaseAddress = new Uri("http://localhost:5283") 
+            BaseAddress = new Uri("https://localhost:7133") 
         }
 );
 
 
 builder.Services.AddScoped<ISellerService, SellerHttpClient>();
 builder.Services.AddScoped<ICustomerService, CustomerHttpClient>();
+builder.Services.AddTransient<SavedRestaurant>();
+builder.Services.AddMemoryCache();
 
 await builder.Build().RunAsync();
