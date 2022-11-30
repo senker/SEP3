@@ -5,6 +5,10 @@ option java_package = "via.sep3.persistencetier.protobuf";
 
 package customer;
 
+message EmptyCustomer{
+
+}
+
 message CustomerRequest {
   string email = 1;
 }
@@ -29,6 +33,7 @@ message CreateUserModelRequestCustomer{
   AddressModelCustomer address = 3;
   int32 phoneNumber = 4;
   string email = 5;
+  string password = 6;
 }
 
 message CreateCustomerRequest {
@@ -45,4 +50,5 @@ service CustomerService {
   rpc createCustomer(CreateCustomerRequest) returns (CustomerResponse);
   rpc getCustomerByEmail(CustomerRequest) returns (CustomerResponse);
   rpc deleteCustomerByEmail(CustomerRequest) returns (CustomerResponse);
+  rpc getAllCustomers(EmptyCustomer) returns (stream CustomerResponse);
 }

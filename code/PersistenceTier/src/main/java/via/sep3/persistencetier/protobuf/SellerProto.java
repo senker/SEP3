@@ -15,10 +15,10 @@ public final class SellerProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_seller_Empty_descriptor;
+    internal_static_seller_EmptySeller_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_seller_Empty_fieldAccessorTable;
+      internal_static_seller_EmptySeller_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_seller_SellerRequest_descriptor;
   static final 
@@ -58,45 +58,45 @@ public final class SellerProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021SellerProto.proto\022\006seller\"\007\n\005Empty\"\034\n\r" +
-      "SellerRequest\022\013\n\003cvr\030\001 \001(\005\"\234\001\n\027UserModel" +
-      "ResponseSeller\022\013\n\003cvr\030\001 \001(\005\022\021\n\tfirstName" +
-      "\030\002 \001(\t\022\020\n\010lastName\030\003 \001(\t\022+\n\007address\030\004 \001(" +
-      "\0132\032.seller.AddressModelSeller\022\023\n\013phoneNu" +
-      "mber\030\005 \001(\005\022\r\n\005email\030\006 \001(\t\"H\n\022AddressMode" +
-      "lSeller\022\014\n\004city\030\001 \001(\t\022\022\n\nstreetName\030\002 \001(" +
-      "\t\022\020\n\010postCode\030\003 \001(\005\"\224\001\n\034CreateUserModelR" +
-      "equestSeller\022\021\n\tfirstName\030\002 \001(\t\022\020\n\010lastN" +
-      "ame\030\003 \001(\t\022+\n\007address\030\004 \001(\0132\032.seller.Addr" +
-      "essModelSeller\022\023\n\013phoneNumber\030\005 \001(\005\022\r\n\005e" +
-      "mail\030\006 \001(\t\"\257\001\n\023CreateSellerRequest\0222\n\004us" +
-      "er\030\001 \001(\0132$.seller.CreateUserModelRequest" +
-      "Seller\022\013\n\003cvr\030\002 \001(\005\022\023\n\013companyName\030\003 \001(\t" +
-      "\022\023\n\013description\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n\007w" +
-      "ebsite\030\006 \001(\t\022\016\n\006rating\030\007 \001(\002\"\245\001\n\016SellerR" +
-      "esponse\022-\n\004user\030\001 \001(\0132\037.seller.UserModel" +
-      "ResponseSeller\022\013\n\003cvr\030\002 \001(\005\022\023\n\013companyNa" +
-      "me\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\014\n\004type\030\005 " +
-      "\001(\t\022\017\n\007website\030\006 \001(\t\022\016\n\006rating\030\007 \001(\0022\223\002\n" +
-      "\rSellerService\022C\n\014createSeller\022\033.seller." +
-      "CreateSellerRequest\032\026.seller.SellerRespo" +
-      "nse\022?\n\016getSellerByCvr\022\025.seller.SellerReq" +
-      "uest\032\026.seller.SellerResponse\0228\n\rgetAllSe" +
-      "llers\022\r.seller.Empty\032\026.seller.SellerResp" +
-      "onse0\001\022B\n\021deleteSellerByCvr\022\025.seller.Sel" +
-      "lerRequest\032\026.seller.SellerResponseB%\n!vi" +
-      "a.sep3.persistencetier.protobufP\001b\006proto" +
-      "3"
+      "\n\021SellerProto.proto\022\006seller\"\r\n\013EmptySell" +
+      "er\"\034\n\rSellerRequest\022\013\n\003cvr\030\001 \001(\005\"\234\001\n\027Use" +
+      "rModelResponseSeller\022\013\n\003cvr\030\001 \001(\005\022\021\n\tfir" +
+      "stName\030\002 \001(\t\022\020\n\010lastName\030\003 \001(\t\022+\n\007addres" +
+      "s\030\004 \001(\0132\032.seller.AddressModelSeller\022\023\n\013p" +
+      "honeNumber\030\005 \001(\005\022\r\n\005email\030\006 \001(\t\"H\n\022Addre" +
+      "ssModelSeller\022\014\n\004city\030\001 \001(\t\022\022\n\nstreetNam" +
+      "e\030\002 \001(\t\022\020\n\010postCode\030\003 \001(\005\"\246\001\n\034CreateUser" +
+      "ModelRequestSeller\022\021\n\tfirstName\030\002 \001(\t\022\020\n" +
+      "\010lastName\030\003 \001(\t\022+\n\007address\030\004 \001(\0132\032.selle" +
+      "r.AddressModelSeller\022\023\n\013phoneNumber\030\005 \001(" +
+      "\005\022\r\n\005email\030\006 \001(\t\022\020\n\010password\030\007 \001(\t\"\257\001\n\023C" +
+      "reateSellerRequest\0222\n\004user\030\001 \001(\0132$.selle" +
+      "r.CreateUserModelRequestSeller\022\013\n\003cvr\030\002 " +
+      "\001(\005\022\023\n\013companyName\030\003 \001(\t\022\023\n\013description\030" +
+      "\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n\007website\030\006 \001(\t\022\016\n\006" +
+      "rating\030\007 \001(\002\"\245\001\n\016SellerResponse\022-\n\004user\030" +
+      "\001 \001(\0132\037.seller.UserModelResponseSeller\022\013" +
+      "\n\003cvr\030\002 \001(\005\022\023\n\013companyName\030\003 \001(\t\022\023\n\013desc" +
+      "ription\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\017\n\007website\030\006" +
+      " \001(\t\022\016\n\006rating\030\007 \001(\0022\231\002\n\rSellerService\022C" +
+      "\n\014createSeller\022\033.seller.CreateSellerRequ" +
+      "est\032\026.seller.SellerResponse\022?\n\016getSeller" +
+      "ByCvr\022\025.seller.SellerRequest\032\026.seller.Se" +
+      "llerResponse\022>\n\rgetAllSellers\022\023.seller.E" +
+      "mptySeller\032\026.seller.SellerResponse0\001\022B\n\021" +
+      "deleteSellerByCvr\022\025.seller.SellerRequest" +
+      "\032\026.seller.SellerResponseB%\n!via.sep3.per" +
+      "sistencetier.protobufP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_seller_Empty_descriptor =
+    internal_static_seller_EmptySeller_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_seller_Empty_fieldAccessorTable = new
+    internal_static_seller_EmptySeller_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_seller_Empty_descriptor,
+        internal_static_seller_EmptySeller_descriptor,
         new java.lang.String[] { });
     internal_static_seller_SellerRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
@@ -121,7 +121,7 @@ public final class SellerProto {
     internal_static_seller_CreateUserModelRequestSeller_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_seller_CreateUserModelRequestSeller_descriptor,
-        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", });
+        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", "Password", });
     internal_static_seller_CreateSellerRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_seller_CreateSellerRequest_fieldAccessorTable = new

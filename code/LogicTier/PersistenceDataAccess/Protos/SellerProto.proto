@@ -4,8 +4,8 @@ option csharp_namespace = "PersistenceDataAccess";
 
 package seller;
 
-message Empty{
-
+message EmptySeller {
+  
 }
 
 message SellerRequest {
@@ -33,6 +33,7 @@ message CreateUserModelRequestSeller{
   AddressModelSeller address = 4;
   int32 phoneNumber = 5;
   string email = 6;
+  string password = 7;
 }
 
 message CreateSellerRequest {
@@ -58,6 +59,6 @@ message SellerResponse {
 service SellerService {
   rpc createSeller(CreateSellerRequest) returns (SellerResponse);
   rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
-  rpc getAllSellers(Empty) returns (stream SellerResponse);
+  rpc getAllSellers(EmptySeller) returns (stream SellerResponse);
   rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
 }

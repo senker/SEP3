@@ -3,7 +3,7 @@
 
 package via.sep3.persistencetier.protobuf;
 
-public interface EmptyOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:seller.Empty)
+public interface EmptySellerOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:seller.EmptySeller)
     com.google.protobuf.MessageOrBuilder {
 }

@@ -21,5 +21,17 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="obj\Debug\net6.0\Protos" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="obj\**" />
+    </ItemGroup>
 
 </Project>

@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
+import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.protobuf.*;
+
+import java.util.stream.Stream;
 
 @GRpcService
 public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
@@ -30,6 +33,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                 ),
                 (long) request.getUser().getPhoneNumber(),
                 request.getUser().getEmail(),
+                request.getUser().getPassword(),
                 request.getPreference()
         );
 
@@ -38,6 +42,32 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
         customerResponseBuilder(responseObserver, savedCustomer);
     }
 
+    @Override
+    public void getAllCustomers(EmptyCustomer empty, StreamObserver<CustomerResponse> responseObserver)
+    {
+        CustomerResponse.Builder customerResponseBuilder = CustomerResponse.newBuilder();
+        Stream<Customer> customerList = customerRepository.findAllCustomersStream();
+        customerList.forEach(customer ->{
+            customerResponseBuilder
+                    .setUser(
+                            UserModelResponseCustomer.newBuilder()
+                                    .setFirstName(customer.getFirstName())
+                                    .setLastName(customer.getLastName())
+                                    .setAddress(
+                                            AddressModelCustomer.newBuilder()
+                                                    .setCity(customer.getAddress().getCity())
+                                                    .setStreetName(customer.getAddress().getStreetName())
+                                                    .setPostCode(customer.getAddress().getPostcode())
+                                    )
+                                    .setPhoneNumber(customer.getPhoneNumber().intValue())
+                                    .setEmail(customer.getEmail())
+                    )
+                    .setPreference(customer.getPreference());
+            System.out.println(customer.getEmail());
+            responseObserver.onNext(customerResponseBuilder.build());
+        });
+        responseObserver.onCompleted();
+    }
 
     @Override
     public void getCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {

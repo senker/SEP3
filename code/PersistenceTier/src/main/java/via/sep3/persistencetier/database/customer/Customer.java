@@ -18,14 +18,14 @@ public class Customer extends User {
 
     private String preference;
 
-    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String preference) {
-        super(firstName, lastName, address, phoneNumber, email);
+    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, String preference) {
+        super(firstName, lastName, address, phoneNumber, password, email);
 
         this.preference = preference;
     }
 
     public Customer(){
-        super("","",null,0L,"");
+        super("","",null,0L,"", "");
     }
 
 

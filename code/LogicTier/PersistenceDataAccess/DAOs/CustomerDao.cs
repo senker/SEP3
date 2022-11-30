@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Grpc.Core;
 using PersistenceDataAccess.Services;
 
 namespace PersistenceDataAccess.DAOs;
@@ -29,6 +30,7 @@ public class CustomerDao : ICustomerDao
         user.Address = address;
         user.PhoneNumber = customer.User.PhoneNumber;
         user.Email = customer.User.Email;
+        user.Password = customer.User.Password;
 
         try
         {
@@ -50,6 +52,22 @@ public class CustomerDao : ICustomerDao
         }
     }
 
+    public async Task<CustomerDto?> DeleteCustomerByEmailAsync(string email)
+    {
+        try
+        {
+            var response = await _client.deleteCustomerByEmailAsync(
+                new CustomerRequest() { Email = email }
+            );
+
+            return ResponseToCustomerDto(response);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    
     public async Task<CustomerDto?> GetCustomerByEmailAsync(string email)
     {
         try
@@ -65,21 +83,60 @@ public class CustomerDao : ICustomerDao
             throw new Exception("Couldn't get the email");
         }
     }
-
-    public async Task<CustomerDto?> DeleteCustomerByEmailAsync(string email)
+    
+    public async  Task<List<CustomerDto>> GetAllCustomers()
     {
+        
         try
         {
-            var response = await _client.deleteCustomerByEmailAsync(
-                new CustomerRequest() { Email = email }
-            );
+            List<CustomerDto> customerList = new List<CustomerDto>();
+            AsyncServerStreamingCall<CustomerResponse> response = _client.getAllCustomers(new EmptyCustomer());
+            while (await response.ResponseStream.MoveNext())
+            {
+                CustomerResponse current = response.ResponseStream.Current;
+                customerList.Add(ResponseToCustomerDto(current));
+            }
 
-            return ResponseToCustomerDto(response);
+            return customerList;
         }
         catch
         {
-            return null;
+            throw new Exception("Couldn't load all customers");
         }
+    }
+
+    public Task<CustomerDto> ValidateCustomer(string username, string password)
+    {
+        /*AsyncServerStreamingCall<CustomerResponse>  existingCustomers = _client.getAllCustomers(new Google.Protobuf.WellKnownTypes.Empty());
+        List<CustomerDto> customerList = new List<CustomerDto>();
+        while (existingCustomers.ResponseStream.MoveNext())
+        {
+            CustomerResponse current = existingCustomers.ResponseStream.Current;
+            customerList.Add(ResponseToCustomerDto(current));
+        }*/
+        /*List<CustomerDto> customerList = new List<CustomerDto>();
+        customerList.Add(GetAllCustomers());*/
+        var customerList = GetAllCustomers();
+        var existingCustomer = customerList.Result.FirstOrDefault(u => 
+        u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
+
+        
+        if (existingCustomer == null)
+        {
+            throw new Exception("User not found");
+        }
+
+        /*if (!existingCustomer.Password.Equals(password))
+        {
+            throw new Exception("Password mismatch");
+        }*/
+
+        return Task.FromResult(existingCustomer);
+    }
+
+    public Task RegisterCustomer(CustomerDto customer)
+    {
+        throw new NotImplementedException();
     }
 
     private CustomerDto ResponseToCustomerDto(CustomerResponse response)
