@@ -9,9 +9,11 @@ import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.protobuf.*;
 
+import javax.transaction.Transactional;
 import java.util.stream.Stream;
 
 @GRpcService
+@Transactional
 public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
 
     @Autowired
@@ -46,7 +48,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     public void getAllCustomers(EmptyCustomer empty, StreamObserver<CustomerResponse> responseObserver)
     {
         CustomerResponse.Builder customerResponseBuilder = CustomerResponse.newBuilder();
-        Stream<Customer> customerList = customerRepository.findAllCustomersStream();
+        Stream<Customer> customerList = customerRepository.findAllStream();
         customerList.forEach(customer ->{
             customerResponseBuilder
                     .setUser(
@@ -61,6 +63,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                                     )
                                     .setPhoneNumber(customer.getPhoneNumber().intValue())
                                     .setEmail(customer.getEmail())
+                                    .setPassword(customer.getPassword())
                     )
                     .setPreference(customer.getPreference());
             System.out.println(customer.getEmail());

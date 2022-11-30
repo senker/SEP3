@@ -1,0 +1,5 @@
+// log in as string
+POST  http://localhost:5283/auth/login
+Content-Type: application/json
+
+{ "Username" : "string", "Password" : "string" }
