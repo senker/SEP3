@@ -18,14 +18,15 @@
       <div class="col-md-12">
         <div id="top-section">
             <div id="upper-banner">
-              <h1>
+              <h1>   
+                @company_name
               </h1>
-              <p class="banner_description">Polish best food at low price</p>
+              <p class="banner_description">@description</p>
               <button class="tag">SUBSRIBE</button>
             </div>
             <div class="tags">
               <div class="tag" style="background-color: green">
-                VEGAN
+                @type
               </div>
               <div class="tag" style="background-color: lightgreen">
                 VEGETARIAN
@@ -44,30 +45,71 @@
 
             <div id="mapContainer">
               <script suppress-error="BL9992">
-                var map = new google.maps.Map(document.getElementById("mapContainer"), {
-                  zoom: 15,
-                  center: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
-                  mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
-                const infowindow = new google.maps.InfoWindow({
-                  content: "Sønderbrogade 7, 8700 Horsens",
-                  ariaLabel: "Sønderbrogade 7, 8700 Horsens",
-                });
-                let marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
-                  map: map,
-                  animation: google.maps.Animation.DROP
-                });
-                infowindow.open({
-                  anchor: marker,
-                  map
-                });
+                  async function foo(){
+                      let obj;
+                      
+              
+                                    const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
+                                    obj = await res.json();
+                                    
+                                    console.log(obj)       
+                                    
+                                    let lng = obj.results[0].geometry.location.lng;
+                                    let lat = obj.results[0].geometry.location.lat;
+                                    
+                                    
+                                    var map = new google.maps.Map(document.getElementById("mapContainer"), {
+                                                      zoom: 15,
+                                                      center: new google.maps.LatLng(lat, lng),
+                                                      mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                    });
+                                                    const infowindow = new google.maps.InfoWindow({
+                                                      content: "Borgergade 7, 8700 Horsens",
+                                                      ariaLabel: "Borgergade 7, 8700 Horsens",
+                                                    });
+                                                    let marker = new google.maps.Marker({
+                                                      position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                                                      map: map,
+                                                      animation: google.maps.Animation.DROP
+                                                    });
+                                                    infowindow.open({
+                                                      anchor: marker,
+                                                      map
+                                                    });   
+                    }
+                    foo();
+             
+              
+              
+              
+              
+              
+               /*
+              var latVariable;
+              var lngVariable;
+              fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Sønderbrogade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
+                               .then((response) => {
+                                   return response.json();
+                               })
+                               .then((jsonData)=>{
+                                       latVariable = jsonData.results[0].geometry.location.lat;
+                                       lngVariable = jsonData.results[0].geometry.location.lng;
+                               });
+              
+                console.log(latVariable);
+                console.log(lngVariable);
+             
+                */
+               
+            
+            
+        
               </script>
             </div>
 
             <div class="restaurant_description">
-              <p>RATING: 8.0/10.0 </p>                  
-              <p>Bulevardul Dacia 15</p>      
+              <p>RATING: @rating </p>                  
+              <p>@street_name</p>      
               <p>Open everyday 8:00 - 16:00</p>
               <p>Available boxes today: X</p>
               <p></p>
@@ -234,9 +276,36 @@
 
 @code {
 
+  private int user_id;
+  private string first_name;
+  private string last_name;
+  private string street_name;
+  private string city;
+  private int post_code;
+  private int phone_number;
+  private string email;
+  private int cvr;
+  private string company_name;
+  private string description;
+  private string type;
+  private string website;
+  private float rating;
+
+
   protected override async Task OnInitializedAsync()
   {
-    string seller = await _savedRestaurant.GetSeller();
-    Console.WriteLine(seller);
+    List<string> seller =  _savedRestaurant.GetSeller();
+    user_id = Convert.ToInt32(seller[0]);
+    first_name = seller[1];
+    last_name = seller[2];
+    city = seller[3];
+    post_code = Convert.ToInt32(seller[4]);
+    street_name = seller[5];
+    cvr = Convert.ToInt32(seller[6]);
+    company_name = seller[7];
+    description = seller[8];
+    type = seller[9];
+    website = seller[10];
+    rating = Convert.ToSingle((seller[11]));
   }
 }
