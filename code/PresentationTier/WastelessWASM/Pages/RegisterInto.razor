@@ -2,10 +2,11 @@
 @using HttpClients.ClientInterfaces
 @using Domain.Models
 @using Domain.DTOs
+@using System.Reflection.Metadata
 @inject ISellerService SellerService;
 @inject ICustomerService CustomerService;
 @inject NavigationManager UriHelper
-@inject IJSRuntime JSRuntime
+@inject IJSRuntime JSRuntime 
 <PageTitle>Register</PageTitle>
 <style>
     body {background: #48b1bf; }
@@ -66,8 +67,11 @@
              <AuthorizeView>
                  <NotAuthorized>
                      <div class="card">
-                         <h3 style="text-align: center">Seller</h3>
-                         <div class="field">
+                     <h3 style="text-align: center">Seller</h3>    
+                     <form   id="form"
+                                 enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;"
+                                 >
+                     <div class="field">
                                      <label>Cvr:</label>
                                      <input type="text" @bind="_cvr" @bind:event="oninput"/>
                                  </div>
@@ -90,11 +94,44 @@
                                  <div class="field">
                                      <label>Rating:</label>
                                      <input type="text" @bind="_rating" @bind:event="oninput"/>
-                                 </div>
-                                 <div class="field">
-                                     <button class="registerbtn" @onclick="CreateSeller">Register</button>
-                                 </div>
-                     </div>
+                                 </div>       
+                                <label asp-for="FileUpload">Choose photo</label>
+                                                      
+                                                              <!-- id="FileUpload.FormFile" , name="FileUpload.FormFile" -->
+                            <input asp-for="FileUpload" type="file" id="fileInput" accept="image/png, image/jpg, image/jpeg">
+                         <div class="field">
+                             <button class="registerbtn" type="submit">Register</button>
+                         </div> 
+                            <output name="result"></output>
+                     </form>
+                     </div>                                                                                                  
+                     
+                     
+                    <script suppress-error="BL9992">
+                        async function AJAXSubmit(oFormElement)
+                        {
+         
+                            const userFile = document.getElementById('fileInput').files[0];
+                            const formData = new FormData();
+                            formData.append('user-file', userFile);
+             
+                            try{
+                                
+                             await fetch('https://httpbin.org/post', {
+                              method: "POST",
+                              body: formData,  
+                            })
+                            .then(res => res.json())
+                            .then(data =>console.log(data));
+                               
+                         
+                            }catch (error){
+                                console.error('Error:', error);    
+                            }
+                        
+                            
+                        }
+                    </script>
                  </NotAuthorized>
              </AuthorizeView>
          }
@@ -144,10 +181,11 @@
     
     
     private string? _userFormType;
-     
+
     private string? _value;
     private string _resultMsg = "";
     private string _color = "";
+
     
     private void OnSelect(ChangeEventArgs args) => _value = (string)args.Value!;
     
@@ -254,5 +292,3 @@ catch (Exception e)
 errorLabel = e.Message;
 }*/
 }*@
-
-
