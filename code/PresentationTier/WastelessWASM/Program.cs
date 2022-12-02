@@ -2,6 +2,7 @@ using HttpClients.ClientInterfaces;
 using HttpClients.Implementations;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Http;
 using WastelessWASM;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
