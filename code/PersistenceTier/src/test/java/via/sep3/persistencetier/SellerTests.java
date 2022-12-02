@@ -1,3 +1,4 @@
+/*
 package via.sep3.persistencetier;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,8 +8,6 @@ import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-//import org.junit.runner.RunWith;
-//import org.junit.runners.JUnit4;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,3 +178,4 @@ class SellerTests {
 	}
 }
 
+*/

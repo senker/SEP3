@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
 using static PersistenceDataAccess.SellerService;
@@ -29,6 +30,7 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
+        user.Password = seller.User.Password;
         
         try
         {
@@ -103,11 +105,10 @@ public class SellerDao : ISellerDao
 
   public async  Task<List<SellerDto>> GetAllSellers()
     {
-        
         try
         {
             List<SellerDto> sellerList = new List<SellerDto>();
-            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new Empty());
+            AsyncServerStreamingCall<SellerResponse> response = _client.getAllSellers(new EmptySeller());
             while (await response.ResponseStream.MoveNext())
             {
                 SellerResponse current = response.ResponseStream.Current;
@@ -122,7 +123,17 @@ public class SellerDao : ISellerDao
         }
     }
 
-    public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)
+  public Task<SellerDto> GetSeller(string username, string password)
+  {
+      throw new NotImplementedException();
+  }
+
+  public Task RegisterSeller(SellerDto seller)
+  {
+      throw new NotImplementedException();
+  }
+
+  public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)
     {
         try
         {

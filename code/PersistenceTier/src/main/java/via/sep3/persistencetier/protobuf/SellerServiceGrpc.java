@@ -76,27 +76,27 @@ public final class SellerServiceGrpc {
     return getGetSellerByCvrMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.Empty,
+  private static volatile io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptySeller,
       via.sep3.persistencetier.protobuf.SellerResponse> getGetAllSellersMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getAllSellers",
-      requestType = via.sep3.persistencetier.protobuf.Empty.class,
+      requestType = via.sep3.persistencetier.protobuf.EmptySeller.class,
       responseType = via.sep3.persistencetier.protobuf.SellerResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.Empty,
+  public static io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptySeller,
       via.sep3.persistencetier.protobuf.SellerResponse> getGetAllSellersMethod() {
-    io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.Empty, via.sep3.persistencetier.protobuf.SellerResponse> getGetAllSellersMethod;
+    io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptySeller, via.sep3.persistencetier.protobuf.SellerResponse> getGetAllSellersMethod;
     if ((getGetAllSellersMethod = SellerServiceGrpc.getGetAllSellersMethod) == null) {
       synchronized (SellerServiceGrpc.class) {
         if ((getGetAllSellersMethod = SellerServiceGrpc.getGetAllSellersMethod) == null) {
           SellerServiceGrpc.getGetAllSellersMethod = getGetAllSellersMethod =
-              io.grpc.MethodDescriptor.<via.sep3.persistencetier.protobuf.Empty, via.sep3.persistencetier.protobuf.SellerResponse>newBuilder()
+              io.grpc.MethodDescriptor.<via.sep3.persistencetier.protobuf.EmptySeller, via.sep3.persistencetier.protobuf.SellerResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAllSellers"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  via.sep3.persistencetier.protobuf.Empty.getDefaultInstance()))
+                  via.sep3.persistencetier.protobuf.EmptySeller.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   via.sep3.persistencetier.protobuf.SellerResponse.getDefaultInstance()))
               .setSchemaDescriptor(new SellerServiceMethodDescriptorSupplier("getAllSellers"))
@@ -202,7 +202,7 @@ public final class SellerServiceGrpc {
 
     /**
      */
-    public void getAllSellers(via.sep3.persistencetier.protobuf.Empty request,
+    public void getAllSellers(via.sep3.persistencetier.protobuf.EmptySeller request,
         io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllSellersMethod(), responseObserver);
     }
@@ -234,7 +234,7 @@ public final class SellerServiceGrpc {
             getGetAllSellersMethod(),
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
               new MethodHandlers<
-                via.sep3.persistencetier.protobuf.Empty,
+                via.sep3.persistencetier.protobuf.EmptySeller,
                 via.sep3.persistencetier.protobuf.SellerResponse>(
                   this, METHODID_GET_ALL_SELLERS)))
           .addMethod(
@@ -280,7 +280,7 @@ public final class SellerServiceGrpc {
 
     /**
      */
-    public void getAllSellers(via.sep3.persistencetier.protobuf.Empty request,
+    public void getAllSellers(via.sep3.persistencetier.protobuf.EmptySeller request,
         io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGetAllSellersMethod(), getCallOptions()), request, responseObserver);
@@ -326,7 +326,7 @@ public final class SellerServiceGrpc {
     /**
      */
     public java.util.Iterator<via.sep3.persistencetier.protobuf.SellerResponse> getAllSellers(
-        via.sep3.persistencetier.protobuf.Empty request) {
+        via.sep3.persistencetier.protobuf.EmptySeller request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGetAllSellersMethod(), getCallOptions(), request);
     }
@@ -409,7 +409,7 @@ public final class SellerServiceGrpc {
               (io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse>) responseObserver);
           break;
         case METHODID_GET_ALL_SELLERS:
-          serviceImpl.getAllSellers((via.sep3.persistencetier.protobuf.Empty) request,
+          serviceImpl.getAllSellers((via.sep3.persistencetier.protobuf.EmptySeller) request,
               (io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.SellerResponse>) responseObserver);
           break;
         case METHODID_DELETE_SELLER_BY_CVR:

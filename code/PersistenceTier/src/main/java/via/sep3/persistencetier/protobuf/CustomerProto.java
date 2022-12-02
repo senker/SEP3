@@ -15,6 +15,11 @@ public final class CustomerProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_customer_EmptyCustomer_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_customer_EmptyCustomer_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_customer_CustomerRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -53,67 +58,76 @@ public final class CustomerProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023CustomerProto.proto\022\010customer\" \n\017Custo" +
-      "merRequest\022\r\n\005email\030\001 \001(\t\"J\n\024AddressMode" +
-      "lCustomer\022\014\n\004city\030\001 \001(\t\022\022\n\nstreetName\030\002 " +
-      "\001(\t\022\020\n\010postCode\030\003 \001(\005\"\225\001\n\031UserModelRespo" +
-      "nseCustomer\022\021\n\tfirstName\030\001 \001(\t\022\020\n\010lastNa" +
-      "me\030\002 \001(\t\022/\n\007address\030\003 \001(\0132\036.customer.Add" +
-      "ressModelCustomer\022\023\n\013phoneNumber\030\004 \001(\005\022\r" +
-      "\n\005email\030\005 \001(\t\"\232\001\n\036CreateUserModelRequest" +
-      "Customer\022\021\n\tfirstName\030\001 \001(\t\022\020\n\010lastName\030" +
-      "\002 \001(\t\022/\n\007address\030\003 \001(\0132\036.customer.Addres" +
-      "sModelCustomer\022\023\n\013phoneNumber\030\004 \001(\005\022\r\n\005e" +
-      "mail\030\005 \001(\t\"c\n\025CreateCustomerRequest\0226\n\004u" +
-      "ser\030\001 \001(\0132(.customer.CreateUserModelRequ" +
-      "estCustomer\022\022\n\npreference\030\002 \001(\t\"Y\n\020Custo" +
-      "merResponse\0221\n\004user\030\001 \001(\0132#.customer.Use" +
-      "rModelResponseCustomer\022\022\n\npreference\030\002 \001" +
-      "(\t2\375\001\n\017CustomerService\022M\n\016createCustomer" +
-      "\022\037.customer.CreateCustomerRequest\032\032.cust" +
-      "omer.CustomerResponse\022K\n\022getCustomerByEm" +
-      "ail\022\031.customer.CustomerRequest\032\032.custome" +
-      "r.CustomerResponse\022N\n\025deleteCustomerByEm" +
-      "ail\022\031.customer.CustomerRequest\032\032.custome" +
-      "r.CustomerResponseB%\n!via.sep3.persisten" +
-      "cetier.protobufP\001b\006proto3"
+      "\n\023CustomerProto.proto\022\010customer\"\017\n\rEmpty" +
+      "Customer\" \n\017CustomerRequest\022\r\n\005email\030\001 \001" +
+      "(\t\"J\n\024AddressModelCustomer\022\014\n\004city\030\001 \001(\t" +
+      "\022\022\n\nstreetName\030\002 \001(\t\022\020\n\010postCode\030\003 \001(\005\"\247" +
+      "\001\n\031UserModelResponseCustomer\022\021\n\tfirstNam" +
+      "e\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t\022/\n\007address\030\003 \001" +
+      "(\0132\036.customer.AddressModelCustomer\022\023\n\013ph" +
+      "oneNumber\030\004 \001(\005\022\r\n\005email\030\005 \001(\t\022\020\n\010passwo" +
+      "rd\030\006 \001(\t\"\254\001\n\036CreateUserModelRequestCusto" +
+      "mer\022\021\n\tfirstName\030\001 \001(\t\022\020\n\010lastName\030\002 \001(\t" +
+      "\022/\n\007address\030\003 \001(\0132\036.customer.AddressMode" +
+      "lCustomer\022\023\n\013phoneNumber\030\004 \001(\005\022\r\n\005email\030" +
+      "\005 \001(\t\022\020\n\010password\030\006 \001(\t\"c\n\025CreateCustome" +
+      "rRequest\0226\n\004user\030\001 \001(\0132(.customer.Create" +
+      "UserModelRequestCustomer\022\022\n\npreference\030\002" +
+      " \001(\t\"Y\n\020CustomerResponse\0221\n\004user\030\001 \001(\0132#" +
+      ".customer.UserModelResponseCustomer\022\022\n\np" +
+      "reference\030\002 \001(\t2\307\002\n\017CustomerService\022M\n\016c" +
+      "reateCustomer\022\037.customer.CreateCustomerR" +
+      "equest\032\032.customer.CustomerResponse\022K\n\022ge" +
+      "tCustomerByEmail\022\031.customer.CustomerRequ" +
+      "est\032\032.customer.CustomerResponse\022N\n\025delet" +
+      "eCustomerByEmail\022\031.customer.CustomerRequ" +
+      "est\032\032.customer.CustomerResponse\022H\n\017getAl" +
+      "lCustomers\022\027.customer.EmptyCustomer\032\032.cu" +
+      "stomer.CustomerResponse0\001B%\n!via.sep3.pe" +
+      "rsistencetier.protobufP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_customer_CustomerRequest_descriptor =
+    internal_static_customer_EmptyCustomer_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_customer_EmptyCustomer_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_customer_EmptyCustomer_descriptor,
+        new java.lang.String[] { });
+    internal_static_customer_CustomerRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_customer_CustomerRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_CustomerRequest_descriptor,
         new java.lang.String[] { "Email", });
     internal_static_customer_AddressModelCustomer_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_customer_AddressModelCustomer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_AddressModelCustomer_descriptor,
         new java.lang.String[] { "City", "StreetName", "PostCode", });
     internal_static_customer_UserModelResponseCustomer_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_customer_UserModelResponseCustomer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_UserModelResponseCustomer_descriptor,
-        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", });
+        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", "Password", });
     internal_static_customer_CreateUserModelRequestCustomer_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_customer_CreateUserModelRequestCustomer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_CreateUserModelRequestCustomer_descriptor,
-        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", });
+        new java.lang.String[] { "FirstName", "LastName", "Address", "PhoneNumber", "Email", "Password", });
     internal_static_customer_CreateCustomerRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_customer_CreateCustomerRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_CreateCustomerRequest_descriptor,
         new java.lang.String[] { "User", "Preference", });
     internal_static_customer_CustomerResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_customer_CustomerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_customer_CustomerResponse_descriptor,

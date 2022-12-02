@@ -59,13 +59,14 @@ public class Seller extends User{
             Address address,
             Long phoneNumber,
             String email,
+            String password,
             Long cvr,
             String companyName,
             String description,
             String type,
             String website,
             Float rating) {
-        super(firstName,lastName,address,phoneNumber,email);
+        super(firstName,lastName,address,phoneNumber,email, password);
         this.cvr = cvr;
         this.companyName = companyName;
         this.description = description;
@@ -75,7 +76,7 @@ public class Seller extends User{
     }
 
     public Seller() {
-        super("","",null,0L,"");
+        super("","",null,0L,"", "");
     }
 
 

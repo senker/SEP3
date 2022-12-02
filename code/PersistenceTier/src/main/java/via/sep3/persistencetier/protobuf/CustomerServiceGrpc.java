@@ -107,6 +107,37 @@ public final class CustomerServiceGrpc {
     return getDeleteCustomerByEmailMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptyCustomer,
+      via.sep3.persistencetier.protobuf.CustomerResponse> getGetAllCustomersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getAllCustomers",
+      requestType = via.sep3.persistencetier.protobuf.EmptyCustomer.class,
+      responseType = via.sep3.persistencetier.protobuf.CustomerResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptyCustomer,
+      via.sep3.persistencetier.protobuf.CustomerResponse> getGetAllCustomersMethod() {
+    io.grpc.MethodDescriptor<via.sep3.persistencetier.protobuf.EmptyCustomer, via.sep3.persistencetier.protobuf.CustomerResponse> getGetAllCustomersMethod;
+    if ((getGetAllCustomersMethod = CustomerServiceGrpc.getGetAllCustomersMethod) == null) {
+      synchronized (CustomerServiceGrpc.class) {
+        if ((getGetAllCustomersMethod = CustomerServiceGrpc.getGetAllCustomersMethod) == null) {
+          CustomerServiceGrpc.getGetAllCustomersMethod = getGetAllCustomersMethod =
+              io.grpc.MethodDescriptor.<via.sep3.persistencetier.protobuf.EmptyCustomer, via.sep3.persistencetier.protobuf.CustomerResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAllCustomers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.sep3.persistencetier.protobuf.EmptyCustomer.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.sep3.persistencetier.protobuf.CustomerResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new CustomerServiceMethodDescriptorSupplier("getAllCustomers"))
+              .build();
+        }
+      }
+    }
+    return getGetAllCustomersMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -176,6 +207,13 @@ public final class CustomerServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteCustomerByEmailMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getAllCustomers(via.sep3.persistencetier.protobuf.EmptyCustomer request,
+        io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.CustomerResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllCustomersMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -199,6 +237,13 @@ public final class CustomerServiceGrpc {
                 via.sep3.persistencetier.protobuf.CustomerRequest,
                 via.sep3.persistencetier.protobuf.CustomerResponse>(
                   this, METHODID_DELETE_CUSTOMER_BY_EMAIL)))
+          .addMethod(
+            getGetAllCustomersMethod(),
+            io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+              new MethodHandlers<
+                via.sep3.persistencetier.protobuf.EmptyCustomer,
+                via.sep3.persistencetier.protobuf.CustomerResponse>(
+                  this, METHODID_GET_ALL_CUSTOMERS)))
           .build();
     }
   }
@@ -240,6 +285,14 @@ public final class CustomerServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteCustomerByEmailMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getAllCustomers(via.sep3.persistencetier.protobuf.EmptyCustomer request,
+        io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.CustomerResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetAllCustomersMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -275,6 +328,14 @@ public final class CustomerServiceGrpc {
     public via.sep3.persistencetier.protobuf.CustomerResponse deleteCustomerByEmail(via.sep3.persistencetier.protobuf.CustomerRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteCustomerByEmailMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<via.sep3.persistencetier.protobuf.CustomerResponse> getAllCustomers(
+        via.sep3.persistencetier.protobuf.EmptyCustomer request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetAllCustomersMethod(), getCallOptions(), request);
     }
   }
 
@@ -320,6 +381,7 @@ public final class CustomerServiceGrpc {
   private static final int METHODID_CREATE_CUSTOMER = 0;
   private static final int METHODID_GET_CUSTOMER_BY_EMAIL = 1;
   private static final int METHODID_DELETE_CUSTOMER_BY_EMAIL = 2;
+  private static final int METHODID_GET_ALL_CUSTOMERS = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -348,6 +410,10 @@ public final class CustomerServiceGrpc {
           break;
         case METHODID_DELETE_CUSTOMER_BY_EMAIL:
           serviceImpl.deleteCustomerByEmail((via.sep3.persistencetier.protobuf.CustomerRequest) request,
+              (io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.CustomerResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL_CUSTOMERS:
+          serviceImpl.getAllCustomers((via.sep3.persistencetier.protobuf.EmptyCustomer) request,
               (io.grpc.stub.StreamObserver<via.sep3.persistencetier.protobuf.CustomerResponse>) responseObserver);
           break;
         default:
@@ -414,6 +480,7 @@ public final class CustomerServiceGrpc {
               .addMethod(getCreateCustomerMethod())
               .addMethod(getGetCustomerByEmailMethod())
               .addMethod(getDeleteCustomerByEmailMethod())
+              .addMethod(getGetAllCustomersMethod())
               .build();
         }
       }

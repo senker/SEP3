@@ -1,6 +1,8 @@
+using System.Text;
 using Application.DaoInterfaces;
-using PersistenceDataAccess;
-//using Application.Logic;
+using Domain.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using PersistenceDataAccess.DAOs;
 using PersistenceDataAccess.Services;
 
@@ -32,6 +34,23 @@ builder.Services.AddScoped<ICustomerDao, CustomerDao>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//JwtBearerDefaults
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+AuthorizationPolicies.AddPolicies(builder.Services);
+
 var app = builder.Build();
 
 app.UseCors(x => x
@@ -48,6 +67,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Casting authentication and authorization to the project
+app.UseAuthentication();
 
 app.UseAuthorization();
 

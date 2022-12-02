@@ -32,6 +32,15 @@ public class CustomerController : ControllerBase
 
         return Ok(guest);
     }
+    
+    [HttpGet]
+    [Route("/all-customers")]
+    public async Task<IActionResult> GetAllCustomers()
+    {
+        var customers = await _customerLogic.GetAllCustomers();
+
+        return Ok(customers);
+    }
    
     [HttpDelete("{email}")]
     public async Task<IActionResult> DeleteCustomerByEmail(string email)
