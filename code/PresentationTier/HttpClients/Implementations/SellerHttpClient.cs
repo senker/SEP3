@@ -47,4 +47,26 @@ public class SellerHttpClient : ISellerService
         })!;
         return sellers;
     }
+
+
+    public async Task<string> GetImage()
+    {
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync("/image");
+            string result = await response.Content.ReadAsStringAsync();
+            if(!response.IsSuccessStatusCode)
+            {
+                throw new Exception(result);
+            }
+            //string imageUrl = JsonSerializer.Deserialize<string>(result)!;
+            //return imageUrl;
+            return result;
+        }catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return null;
+       
+    }
 }

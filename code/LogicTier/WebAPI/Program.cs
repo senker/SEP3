@@ -14,6 +14,17 @@ builder.Services.AddControllers();
 // Grpc
 builder.Services.AddSingleton<IGrpcService, GrpcService>();
 
+
+builder.Services.AddDistributedMemoryCache();
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // App services
 builder.Services.AddScoped<ISellerDao, SellerDao>();
 builder.Services.AddScoped<ICustomerDao, CustomerDao>();
@@ -63,5 +74,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseSession();
 
 app.Run();
