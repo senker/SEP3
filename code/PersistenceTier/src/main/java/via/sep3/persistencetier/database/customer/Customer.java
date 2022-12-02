@@ -6,6 +6,7 @@ import via.sep3.persistencetier.database.User;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 @Entity(name="Customer")
 @Table(name="customer")
@@ -16,12 +17,13 @@ public class Customer extends User {
     //@Column(name="id")
     //private int id;
 
-    private String preference;
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
+    private List<Preference> preferences;
 
-    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, String preference) {
+    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, List<Preference> preferences) {
         super(firstName, lastName, address, phoneNumber, password, email);
 
-        this.preference = preference;
+        this.preferences = preferences;
     }
 
     public Customer(){
@@ -29,11 +31,11 @@ public class Customer extends User {
     }
 
 
-     public String getPreference() {
-        return preference;}
+     public List<Preference> getPreference() {
+        return preferences;}
 
-    public void setPreference(String preference) {
-        this.preference = preference;
+    public void setPreference(List<Preference> preferences) {
+        this.preferences = preferences;
     }
 
 
