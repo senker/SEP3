@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using HttpClients.ClientInterfaces
 @using Domain.Models
+@using System.Text.RegularExpressions
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
 @inject SavedRestaurant _savedRestaurant;
@@ -37,7 +38,8 @@
                 <button class="read_more" @onclick="() => ReadMore(seller)">Read more</button>
 
             </div>
-        }
+        }         
+        <img src="@_imageURL"/>
     </div>
 
     <style>
@@ -56,6 +58,8 @@
     private string msg = "";
     private int? _number_of_restaurants=0;
     private SellerModel _seller = null;
+    private string _imageURL;
+
 
     private void  ReadMore(SellerModel seller)
     {
@@ -82,6 +86,7 @@
         try
             {
                 _sellers = await sellerService.GetSellers();
+                _imageURL = await sellerService.GetImage();
                 _number_of_restaurants = _sellers.Count();
             }
             catch (Exception e)

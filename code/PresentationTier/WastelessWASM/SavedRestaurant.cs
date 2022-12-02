@@ -13,6 +13,19 @@ public class SavedRestaurant
         _memoryCache = memoryCache;
     }
 
+
+
+    public async void SetString(string value)
+    {
+        _memoryCache.Set("URL", value, TimeSpan.FromMinutes(1));
+    }
+
+    public async void GetString(string value)
+    {
+        _memoryCache.Get<string>("URL");
+    }
+
+
     public async void SetSeller(SellerModel sellerModel)
     {
         _memoryCache.Set("user_id", sellerModel.User.Id, TimeSpan.FromMinutes(1));

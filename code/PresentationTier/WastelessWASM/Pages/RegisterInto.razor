@@ -3,15 +3,23 @@
 @using Domain.Models
 @using Domain.DTOs
 @using System.Reflection.Metadata
+@using Microsoft.AspNetCore.Http
 @inject ISellerService SellerService;
 @inject ICustomerService CustomerService;
 @inject NavigationManager UriHelper
-@inject IJSRuntime JSRuntime 
-<PageTitle>Register</PageTitle>
+@inject IJSRuntime JSRuntime  
+@inject SavedRestaurant _savedRestaurant;
+
+<PageTitle>Register</PageTitle>      
+
+<head>   
+    <title>Register</title>
+    <script suppress-error="BL9992" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
 <style>
     body {background: #48b1bf; }
 </style>
- <AuthorizeView>
+<AuthorizeView>
      <NotAuthorized>
          @if (_userFormType == null) {
          <div class="card">
@@ -67,10 +75,7 @@
              <AuthorizeView>
                  <NotAuthorized>
                      <div class="card">
-                     <h3 style="text-align: center">Seller</h3>    
-                     <form   id="form"
-                                 enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;"
-                                 >
+                     <h3 style="text-align: center">Seller</h3>
                      <div class="field">
                                      <label>Cvr:</label>
                                      <input type="text" @bind="_cvr" @bind:event="oninput"/>
@@ -94,11 +99,12 @@
                                  <div class="field">
                                      <label>Rating:</label>
                                      <input type="text" @bind="_rating" @bind:event="oninput"/>
-                                 </div>       
-                                <label asp-for="FileUpload">Choose photo</label>
+                                 </div> 
+                     <form   id="form" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;" >
+                     <label asp-for="FileUpload.FormFile">Choose photo</label>
                                                       
                                                               <!-- id="FileUpload.FormFile" , name="FileUpload.FormFile" -->
-                            <input asp-for="FileUpload" type="file" id="fileInput" accept="image/png, image/jpg, image/jpeg">
+                            <input asp-for="FileUpload.FormFile" type="file" id="fileInput" accept="image/png, image/jpg, image/jpeg" name="file">
                          <div class="field">
                              <button class="registerbtn" type="submit">Register</button>
                          </div> 
@@ -110,27 +116,55 @@
                     <script suppress-error="BL9992">
                         async function AJAXSubmit(oFormElement)
                         {
-         
+                             
                             const userFile = document.getElementById('fileInput').files[0];
                             const formData = new FormData();
-                            formData.append('user-file', userFile);
-             
-                            try{
-                                
-                             await fetch('https://httpbin.org/post', {
-                              method: "POST",
-                              body: formData,  
-                            })
-                            .then(res => res.json())
-                            .then(data =>console.log(data));
-                               
-                         
-                            }catch (error){
-                                console.error('Error:', error);    
-                            }
-                        
                             
-                        }
+                            formData.append('user-file', userFile);
+                
+                            
+                            console.log( formData.get('user-file'));
+                             window.localStorage.setItem("data",JSON.stringify(formData.get('user-file')));
+                                   window.localStorage.setItem("data2",JSON.stringify(formData.get('user-file').name));
+                                   
+                                window.localStorage.setItem("file", document.getElementById('fileInput').files[0]);
+                            
+                                
+                                
+                              const reader = new FileReader();
+                              var urlResult;
+                              reader.onloadend=() =>{
+                                       console.log(reader.result);
+                                       window.localStorage.setItem("resultURL", reader.result); 
+                                       urlResult = reader.result;
+                                  };
+                            
+                             reader.readAsDataURL(userFile);
+                             
+                             console.log("url from localstorage");
+                             console.log(window.localStorage.getItem("resultURL"));
+                             
+                                 sessionStorage.setItem("url", window.localStorage.getItem("resultURL"));
+                                
+                                await $.ajax({
+                                   type: "POST",
+                                   url: "https://localhost:7133/post-image",
+                                   data: JSON.stringify(window.localStorage.getItem("resultURL")),
+                                   headers: {
+                                        'Content-Type': 'application/json'   
+                                    },
+                                   success: function (result){
+                                        console.log(result);    
+                                   },
+                                   error: function (error){
+                                        alert(error);    
+                                   }
+                                });
+                               
+                                 
+                              }  
+                          
+                        
                     </script>
                  </NotAuthorized>
              </AuthorizeView>
@@ -164,17 +198,17 @@
      private string? _email;
      private string? _city;
      private string? _streetName;
-     private int? _postcode;
-     private int? _phoneNumber;
+     private string? _postcode;
+     private string? _phoneNumber;
 
     //Seller creation fields
     
-    private int _cvr;
+    private string _cvr;
     private string? _companyName;
     private string? _description;
     private string? _type;
     private string? _website;
-    private float _rating;
+    private string _rating;
 
     // Customer creation field
     private string? _preferences;
@@ -186,7 +220,14 @@
     private string _resultMsg = "";
     private string _color = "";
 
-    
+
+    private IFormFile formFile;
+
+
+
+   
+
+
     private void OnSelect(ChangeEventArgs args) => _value = (string)args.Value!;
     
 
@@ -198,21 +239,21 @@
      private async Task CreateSeller()
      {
         _resultMsg = "";
-        var addressModel = new AddressModel(_city, _streetName, _postcode);
+        var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-        new UserCreateModel(_firstName, _lastName, addressModel, _phoneNumber, _email);
+        new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email);
                     
         try
         {
             await SellerService.CreateSeller(new SellerCreateDto(
             new SellerCreateModel(
                 userModel,
-                _cvr,
+                Convert.ToInt32(_cvr),
                 _companyName!,
                 _description!,
                 _type!,
                 _website!,
-                _rating  )
+                Convert.ToSingle(_rating)  )
             ));
             _resultMsg = "User successfully created";
             _color = "green";
@@ -228,9 +269,9 @@
     private async Task CreateCustomer()
     {
         _resultMsg = "";
-        var addressModel = new AddressModel(_city, _streetName, _postcode);
+        var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-            new UserCreateModel(_firstName, _lastName, addressModel, _phoneNumber, _email);
+            new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email);
                     
         try
         {
