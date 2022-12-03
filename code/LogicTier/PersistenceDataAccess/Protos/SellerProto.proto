@@ -1,15 +1,29 @@
 syntax = "proto3";
 
-option csharp_namespace = "PersistenceDataAccess";
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
+
 
 package seller;
 
-message EmptySeller {
-  
+message EmptySeller{
+
 }
 
 message SellerRequest {
-  int32 id = 1;
+  int32 cvr = 1;
+}
+
+message ImageModelRequestSeller{
+  string imageUrl = 1;
+}
+
+message UserModelResponseSeller{
+  string firstName = 1;
+  string lastName = 2;
+  AddressModelSeller address = 3;
+  int32 phoneNumber = 4;
+  string email = 5;
 }
 
 message AddressModelSeller{
@@ -18,22 +32,13 @@ message AddressModelSeller{
   int32 postCode = 3;
 }
 
-message UserModelResponseSeller{
-  int32 Id = 1;
-  string firstName = 2;
-  string lastName = 3;
-  AddressModelSeller address = 4;
-  int32 phoneNumber = 5;
-  string email = 6;
-}
-
 message CreateUserModelRequestSeller{
-  string firstName = 2;
-  string lastName = 3;
-  AddressModelSeller address = 4;
-  int32 phoneNumber = 5;
-  string email = 6;
-  string password = 7;
+  string firstName = 1;
+  string lastName = 2;
+  AddressModelSeller address = 3;
+  int32 phoneNumber = 4;
+  string email = 5;
+  string password = 6;
 }
 
 message CreateSellerRequest {
@@ -44,6 +49,7 @@ message CreateSellerRequest {
   string type = 5;
   string website = 6;
   float rating = 7;
+  ImageModelRequestSeller image = 8;
 }
 
 message SellerResponse {
@@ -54,6 +60,7 @@ message SellerResponse {
   string type = 5;
   string website = 6;
   float rating = 7;
+  ImageModelRequestSeller image = 8;
 }
 
 service SellerService {

@@ -4,16 +4,16 @@ using Domain.Models;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
-using static PersistenceDataAccess.SellerService;
+using Seller;
 namespace PersistenceDataAccess.DAOs;
 
 public class SellerDao : ISellerDao
 {
-    private readonly SellerServiceClient _client;
+    private readonly SellerService.SellerServiceClient _client;
     
     public SellerDao(IGrpcService grpcService)
     {
-        _client = new SellerServiceClient(grpcService.GetChannel());
+        _client = new SellerService.SellerServiceClient(grpcService.GetChannel());
     }
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
@@ -30,7 +30,10 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
-        user.Password = seller.User.Password;
+        user.Password = seller.User.Password;    
+
+        ImageModelRequestSeller image = new ImageModelRequestSeller();
+        image.ImageUrl = seller.Image;
         
         try
         {
@@ -38,12 +41,13 @@ public class SellerDao : ISellerDao
                 new CreateSellerRequest()
                 {
                     User = user,
-                    CompanyName = seller.CompanyName,
                     Cvr = seller.Cvr,
+                    CompanyName = seller.CompanyName,
                     Description = seller.Description,
-                    Rating = seller.Rating,
                     Type = seller.Type,
-                    Website = seller.Website
+                    Website = seller.Website,
+                    Rating = seller.Rating,
+                    Image = image
                 }
             );
 
@@ -67,12 +71,13 @@ public class SellerDao : ISellerDao
         };
 
         UserModel user = new UserModel();
-        user.Id = response.User.Id;
         user.FirstName = response.User.FirstName;
         user.LastName = response.User.LastName;
         user.Address = address;
         user.PhoneNumber = response.User.PhoneNumber;
-        user.Email = response.User.Email;
+        user.Email = response.User.Email;  
+
+
         
         return new SellerDto
         {
@@ -82,7 +87,8 @@ public class SellerDao : ISellerDao
             Description = response.Description,
             Rating = response.Rating,
             Type = response.Type,
-            Website = response.Website
+            Website = response.Website,
+            Image = response.Image.ImageUrl
         };
     }
 
@@ -91,7 +97,7 @@ public class SellerDao : ISellerDao
         try
         {
             var response = await _client.getSellerByCvrAsync(
-                new SellerRequest{ Id = cvr }
+                new SellerRequest{ Cvr = cvr }
             );
 
             return ResponseToSellerDto(response);
@@ -138,7 +144,7 @@ public class SellerDao : ISellerDao
         try
         {
             var response = await _client.deleteSellerByCvrAsync(
-                new SellerRequest { Id = cvr }
+                new SellerRequest { Cvr = cvr }
             );
 
             return ResponseToSellerDto(response);

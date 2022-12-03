@@ -4,11 +4,13 @@
 @using Domain.DTOs
 @using System.Reflection.Metadata
 @using Microsoft.AspNetCore.Http
+@using System.Net.Mime
 @inject ISellerService SellerService;
 @inject ICustomerService CustomerService;
-@inject NavigationManager UriHelper
+@inject NavigationManager navMgr;
 @inject IJSRuntime JSRuntime  
-@inject SavedRestaurant _savedRestaurant;
+@inject SavedRestaurant _savedRestaurant;       
+
 
 <PageTitle>Register</PageTitle>      
 
@@ -36,6 +38,10 @@
              <div class="field">
                  <label>Email:</label>
                  <input type="text" @bind="_email" @bind:event="oninput"/>
+             </div>   
+             <div class="field">
+                 <label>Password:</label>
+                 <input type="text" @bind="_password" @bind:event="oninput"/>
              </div>
              <div class="field">
                  <label>City:</label>
@@ -104,68 +110,17 @@
                      <label asp-for="FileUpload.FormFile">Choose photo</label>
                                                       
                                                               <!-- id="FileUpload.FormFile" , name="FileUpload.FormFile" -->
-                            <input asp-for="FileUpload.FormFile" type="file" id="fileInput" accept="image/png, image/jpg, image/jpeg" name="file">
-                         <div class="field">
-                             <button class="registerbtn" type="submit">Register</button>
+                                                              <input asp-for="FileUpload.FormFile" type="file" id="fileInput" accept="image/png, image/jpg, image/jpeg" name="file">      
+                                                              <button class="saveImage" type="submit">Save image</button>
+                                                              <div class="field">
+                             <button class="registerbtn" @onclick="CreateSeller">Register</button>
                          </div> 
-                            <output name="result"></output>
+                                                              <label id="labelId" runat="server">Title</label>
                      </form>
                      </div>                                                                                                  
                      
                      
-                    <script suppress-error="BL9992">
-                        async function AJAXSubmit(oFormElement)
-                        {
-                             
-                            const userFile = document.getElementById('fileInput').files[0];
-                            const formData = new FormData();
-                            
-                            formData.append('user-file', userFile);
-                
-                            
-                            console.log( formData.get('user-file'));
-                             window.localStorage.setItem("data",JSON.stringify(formData.get('user-file')));
-                                   window.localStorage.setItem("data2",JSON.stringify(formData.get('user-file').name));
-                                   
-                                window.localStorage.setItem("file", document.getElementById('fileInput').files[0]);
-                            
-                                
-                                
-                              const reader = new FileReader();
-                              var urlResult;
-                              reader.onloadend=() =>{
-                                       console.log(reader.result);
-                                       window.localStorage.setItem("resultURL", reader.result); 
-                                       urlResult = reader.result;
-                                  };
-                            
-                             reader.readAsDataURL(userFile);
-                             
-                             console.log("url from localstorage");
-                             console.log(window.localStorage.getItem("resultURL"));
-                             
-                                 sessionStorage.setItem("url", window.localStorage.getItem("resultURL"));
-                                
-                                await $.ajax({
-                                   type: "POST",
-                                   url: "https://localhost:7133/post-image",
-                                   data: JSON.stringify(window.localStorage.getItem("resultURL")),
-                                   headers: {
-                                        'Content-Type': 'application/json'   
-                                    },
-                                   success: function (result){
-                                        console.log(result);    
-                                   },
-                                   error: function (error){
-                                        alert(error);    
-                                   }
-                                });
-                               
-                                 
-                              }  
-                          
-                        
-                    </script>
+                    
                  </NotAuthorized>
              </AuthorizeView>
          }
@@ -184,7 +139,8 @@
                         </div>
                         <div class="field">
                             <button class="registerbtn" @onclick="CreateCustomer">Register</button>
-                        </div>
+                        </div>    
+
                     </div>
                 </NotAuthorized>
             </AuthorizeView>
@@ -196,6 +152,7 @@
      private string? _firstName;
      private string? _lastName;
      private string? _email;
+     private string? _password;
      private string? _city;
      private string? _streetName;
      private string? _postcode;
@@ -219,12 +176,23 @@
     private string? _value;
     private string _resultMsg = "";
     private string _color = "";
+    private static string _image ="image";
+    private static string _imageInput;
 
 
     private IFormFile formFile;
 
 
 
+    [JSInvokable]
+    public static async Task<string> ReturnString(string imageFromJS)
+    {
+        _imageInput = imageFromJS;
+        RegisterInto registerInto = new RegisterInto();
+        await registerInto.CreateSeller();
+
+        return null;
+    }
    
 
 
@@ -238,10 +206,11 @@
 
      private async Task CreateSeller()
      {
+         Console.WriteLine("Creating seller in RegisterInto");
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-        new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email);
+        new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password);
                     
         try
         {
@@ -253,7 +222,8 @@
                 _description!,
                 _type!,
                 _website!,
-                Convert.ToSingle(_rating)  )
+                Convert.ToSingle(_rating), 
+                "")
             ));
             _resultMsg = "User successfully created";
             _color = "green";
@@ -268,10 +238,12 @@
     
     private async Task CreateCustomer()
     {
+
+
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-            new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email);
+            new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password);
                     
         try
         {
@@ -293,7 +265,60 @@
     }
 
 
- }
+}      
+
+ <script suppress-error="BL9992" type="text/javascript">
+                        async function AJAXSubmit(oFormElement)
+                        {
+                             
+                 
+                            const formData = new FormData();
+                            
+                
+             
+                            
+                               
+                                
+                              const reader = new FileReader();
+                              var urlResult;
+                              reader.onloadend=() =>{
+                                       console.log(reader.result);
+                                       window.localStorage.setItem("resultURL", reader.result); 
+                                       urlResult = reader.result;
+                                  };
+                            
+                 
+                             
+                             console.log("url from localstorage");
+                             console.log(JSON.stringify(window.localStorage.getItem("resultURL")));
+
+                                // DotNet.invokeMethodAsync('WastelessWASM', 'ReturnString', JSON.stringify(window.localStorage.getItem("resultURL")));
+      
+                               
+                                await $.ajax({
+                                   type: "POST",
+                                   url: "https://localhost:7133/image",
+                                   data: JSON.stringify(window.localStorage.getItem("resultURL")),
+                                   headers: {
+                                        'Content-Type': 'application/json'   
+                                    },
+                                   success: function (){
+                                       console.log("ajax success!");
+                                   },
+                                   error: function (error){
+                                        alert(error);    
+                                   }
+                                });
+      
+                               
+                                 
+                              }  
+                          
+                        
+                    </script>
+
+
+
  
 @*<div class="field">
                  <label style="text-align: center">Password:</label>

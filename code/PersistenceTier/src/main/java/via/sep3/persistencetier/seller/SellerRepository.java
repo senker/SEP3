@@ -1,11 +1,8 @@
-package via.sep3.persistencetier.database.seller;
+package via.sep3.persistencetier.seller;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import via.sep3.persistencetier.database.customer.Customer;
-import via.sep3.persistencetier.database.seller.Seller;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 
@@ -18,7 +15,7 @@ import java.util.stream.Stream;
 //findById(ID id)
 //save
 
-public interface SellerRepository extends JpaRepository<Seller, Long> {
+public interface SellerRepository extends JpaRepository<Seller, String> {
 
     @Query(value = "select * from Seller where Seller.cvr=?1", nativeQuery = true)
     Seller findByCvr(Long cvr);

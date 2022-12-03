@@ -14,7 +14,30 @@ public class Preference {
     private String preference;
 
     @ManyToOne
-    @JoinColumn(name="customer_id")
+    @PrimaryKeyJoinColumn
     private Customer customer;
 
+    public Preference() {
+    }
+
+    public Preference(String preference, Customer customer) {
+        this.preference = preference;
+        this.customer = customer;
+    }
+
+    public String getPreference() {
+        return preference;
+    }
+
+    public void setPreference(String preference) {
+        this.preference = preference;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

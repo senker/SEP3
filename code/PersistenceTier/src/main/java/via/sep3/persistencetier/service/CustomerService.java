@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
-import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
@@ -36,7 +35,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                 (long) request.getUser().getPhoneNumber(),
                 request.getUser().getEmail(),
                 request.getUser().getPassword(),
-                request.getPreference()
+                null
         );
 
         var savedCustomer = customerRepository.save(customer);
@@ -65,7 +64,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                                     .setEmail(customer.getEmail())
                                     .setPassword(customer.getPassword())
                     )
-                    .setPreference(customer.getPreference());
+                    .setPreference(null);
             System.out.println(customer.getEmail());
             responseObserver.onNext(customerResponseBuilder.build());
         });
@@ -99,7 +98,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         .setPhoneNumber(customer.getPhoneNumber().intValue())
                         .setEmail(customer.getEmail())
         );
-        builder.setPreference(customer.getPreference());
+        builder.setPreference(null);
 
         var response = builder
                 .build();

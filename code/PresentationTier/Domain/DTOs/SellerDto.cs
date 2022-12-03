@@ -10,13 +10,14 @@ public class SellerDto
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+    public string Image{get;set;}
 
     public SellerDto() {
     }
 
     public SellerDto(SellerModel seller) =>
-        (User, Cvr, CompanyName, Description, Type, Website, Rating) = (
-            seller.User, seller.Cvr, seller.CompanyName, seller.Description, seller.Type, seller.Website, seller.Rating);
+        (User, Cvr, CompanyName, Description, Type, Website, Rating, Image) = (
+            seller.User, seller.Cvr, seller.CompanyName, seller.Description, seller.Type, seller.Website, seller.Rating, seller.Image);
 }
 
 public class SellerCreateDto
@@ -28,11 +29,12 @@ public class SellerCreateDto
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+    public string Image{get;set;}
 
     public SellerCreateDto() {
     }
 
     public SellerCreateDto(SellerCreateModel seller) =>
-        (User, Cvr, CompanyName, Description, Type, Website, Rating) = (
-            seller.User, seller.Cvr, seller.CompanyName, seller.Description, seller.Type, seller.Website, seller.Rating);
+        (User, Cvr, CompanyName, Description, Type, Website, Rating, Image) = (
+            seller.User, seller.Cvr, seller.CompanyName, seller.Description, seller.Type, seller.Website, seller.Rating, seller.Image);
 }

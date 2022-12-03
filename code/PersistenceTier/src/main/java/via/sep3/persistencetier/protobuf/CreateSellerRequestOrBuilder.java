@@ -81,4 +81,19 @@ public interface CreateSellerRequestOrBuilder extends
    * @return The rating.
    */
   float getRating();
+
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   * @return Whether the image field is set.
+   */
+  boolean hasImage();
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   * @return The image.
+   */
+  via.sep3.persistencetier.protobuf.ImageModelRequestSeller getImage();
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   */
+  via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder getImageOrBuilder();
 }

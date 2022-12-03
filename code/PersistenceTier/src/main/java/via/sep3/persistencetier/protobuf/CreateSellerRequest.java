@@ -99,6 +99,19 @@ private static final long serialVersionUID = 0L;
             rating_ = input.readFloat();
             break;
           }
+          case 66: {
+            via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder subBuilder = null;
+            if (image_ != null) {
+              subBuilder = image_.toBuilder();
+            }
+            image_ = input.readMessage(via.sep3.persistencetier.protobuf.ImageModelRequestSeller.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(image_);
+              image_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -333,6 +346,32 @@ private static final long serialVersionUID = 0L;
     return rating_;
   }
 
+  public static final int IMAGE_FIELD_NUMBER = 8;
+  private via.sep3.persistencetier.protobuf.ImageModelRequestSeller image_;
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   * @return Whether the image field is set.
+   */
+  @java.lang.Override
+  public boolean hasImage() {
+    return image_ != null;
+  }
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   * @return The image.
+   */
+  @java.lang.Override
+  public via.sep3.persistencetier.protobuf.ImageModelRequestSeller getImage() {
+    return image_ == null ? via.sep3.persistencetier.protobuf.ImageModelRequestSeller.getDefaultInstance() : image_;
+  }
+  /**
+   * <code>.seller.ImageModelRequestSeller image = 8;</code>
+   */
+  @java.lang.Override
+  public via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder getImageOrBuilder() {
+    return getImage();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -368,6 +407,9 @@ private static final long serialVersionUID = 0L;
     if (java.lang.Float.floatToRawIntBits(rating_) != 0) {
       output.writeFloat(7, rating_);
     }
+    if (image_ != null) {
+      output.writeMessage(8, getImage());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -400,6 +442,10 @@ private static final long serialVersionUID = 0L;
     if (java.lang.Float.floatToRawIntBits(rating_) != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeFloatSize(7, rating_);
+    }
+    if (image_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, getImage());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -434,6 +480,11 @@ private static final long serialVersionUID = 0L;
     if (java.lang.Float.floatToIntBits(getRating())
         != java.lang.Float.floatToIntBits(
             other.getRating())) return false;
+    if (hasImage() != other.hasImage()) return false;
+    if (hasImage()) {
+      if (!getImage()
+          .equals(other.getImage())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -462,6 +513,10 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + RATING_FIELD_NUMBER;
     hash = (53 * hash) + java.lang.Float.floatToIntBits(
         getRating());
+    if (hasImage()) {
+      hash = (37 * hash) + IMAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getImage().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -613,6 +668,12 @@ private static final long serialVersionUID = 0L;
 
       rating_ = 0F;
 
+      if (imageBuilder_ == null) {
+        image_ = null;
+      } else {
+        image_ = null;
+        imageBuilder_ = null;
+      }
       return this;
     }
 
@@ -650,6 +711,11 @@ private static final long serialVersionUID = 0L;
       result.type_ = type_;
       result.website_ = website_;
       result.rating_ = rating_;
+      if (imageBuilder_ == null) {
+        result.image_ = image_;
+      } else {
+        result.image_ = imageBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -722,6 +788,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getRating() != 0F) {
         setRating(other.getRating());
+      }
+      if (other.hasImage()) {
+        mergeImage(other.getImage());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1235,6 +1304,125 @@ private static final long serialVersionUID = 0L;
       rating_ = 0F;
       onChanged();
       return this;
+    }
+
+    private via.sep3.persistencetier.protobuf.ImageModelRequestSeller image_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        via.sep3.persistencetier.protobuf.ImageModelRequestSeller, via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder> imageBuilder_;
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     * @return Whether the image field is set.
+     */
+    public boolean hasImage() {
+      return imageBuilder_ != null || image_ != null;
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     * @return The image.
+     */
+    public via.sep3.persistencetier.protobuf.ImageModelRequestSeller getImage() {
+      if (imageBuilder_ == null) {
+        return image_ == null ? via.sep3.persistencetier.protobuf.ImageModelRequestSeller.getDefaultInstance() : image_;
+      } else {
+        return imageBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public Builder setImage(via.sep3.persistencetier.protobuf.ImageModelRequestSeller value) {
+      if (imageBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        image_ = value;
+        onChanged();
+      } else {
+        imageBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public Builder setImage(
+        via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder builderForValue) {
+      if (imageBuilder_ == null) {
+        image_ = builderForValue.build();
+        onChanged();
+      } else {
+        imageBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public Builder mergeImage(via.sep3.persistencetier.protobuf.ImageModelRequestSeller value) {
+      if (imageBuilder_ == null) {
+        if (image_ != null) {
+          image_ =
+            via.sep3.persistencetier.protobuf.ImageModelRequestSeller.newBuilder(image_).mergeFrom(value).buildPartial();
+        } else {
+          image_ = value;
+        }
+        onChanged();
+      } else {
+        imageBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public Builder clearImage() {
+      if (imageBuilder_ == null) {
+        image_ = null;
+        onChanged();
+      } else {
+        image_ = null;
+        imageBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder getImageBuilder() {
+      
+      onChanged();
+      return getImageFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    public via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder getImageOrBuilder() {
+      if (imageBuilder_ != null) {
+        return imageBuilder_.getMessageOrBuilder();
+      } else {
+        return image_ == null ?
+            via.sep3.persistencetier.protobuf.ImageModelRequestSeller.getDefaultInstance() : image_;
+      }
+    }
+    /**
+     * <code>.seller.ImageModelRequestSeller image = 8;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        via.sep3.persistencetier.protobuf.ImageModelRequestSeller, via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder> 
+        getImageFieldBuilder() {
+      if (imageBuilder_ == null) {
+        imageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            via.sep3.persistencetier.protobuf.ImageModelRequestSeller, via.sep3.persistencetier.protobuf.ImageModelRequestSeller.Builder, via.sep3.persistencetier.protobuf.ImageModelRequestSellerOrBuilder>(
+                getImage(),
+                getParentForChildren(),
+                isClean());
+        image_ = null;
+      }
+      return imageBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

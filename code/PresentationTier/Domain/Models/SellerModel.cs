@@ -9,6 +9,7 @@ public class SellerModel
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+    public string Image{get;set;}
 }
 
 public class SellerCreateModel
@@ -21,8 +22,9 @@ public class SellerCreateModel
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+    public string Image{get;set;}
 
-    public SellerCreateModel(UserCreateModel user, int cvr, string companyName, string description, string type, string website, float rating)
+    public SellerCreateModel(UserCreateModel user, int cvr, string companyName, string description, string type, string website, float rating, string image)
     {
         User = user;
         Cvr = cvr;
@@ -31,5 +33,6 @@ public class SellerCreateModel
         Type = type;
         Website = website;
         Rating = rating;
+        Image = image;
     }
 }

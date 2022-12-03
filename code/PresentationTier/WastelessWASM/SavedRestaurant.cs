@@ -28,7 +28,6 @@ public class SavedRestaurant
 
     public async void SetSeller(SellerModel sellerModel)
     {
-        _memoryCache.Set("user_id", sellerModel.User.Id, TimeSpan.FromMinutes(1));
         _memoryCache.Set("first_name", sellerModel.User.FirstName, TimeSpan.FromMinutes(1));
         _memoryCache.Set("last_name", sellerModel.User.LastName, TimeSpan.FromMinutes(1));
         _memoryCache.Set("city", sellerModel.User.Address.City, TimeSpan.FromMinutes(1));
@@ -40,12 +39,12 @@ public class SavedRestaurant
         _memoryCache.Set("type", sellerModel.Type, TimeSpan.FromMinutes(1));
         _memoryCache.Set("website", sellerModel.Website, TimeSpan.FromMinutes(1));
         _memoryCache.Set("rating", sellerModel.Rating, TimeSpan.FromMinutes(1));
+        _memoryCache.Set("image", sellerModel.Image, TimeSpan.FromMinutes(1));
     }
 
     public List<string> GetSeller()
     {
         List<string> sellerList = new List<string>();
-        sellerList.Add(_memoryCache.Get<int>("user_id").ToString());
         sellerList.Add(_memoryCache.Get<string>("first_name"));
         sellerList.Add(_memoryCache.Get<string>("last_name"));
         sellerList.Add(_memoryCache.Get<string>("city"));
@@ -57,6 +56,7 @@ public class SavedRestaurant
             sellerList.Add(_memoryCache.Get<string>("type"));
             sellerList.Add(_memoryCache.Get<string>("website"));
             sellerList.Add(string.Format("{0:N2}", _memoryCache.Get<float>("rating")));
+            sellerList.Add(string.Format("{0:N2}", _memoryCache.Get<string>("image")));
         //return _memoryCache.Get<SellerModel>("seller").ToString();
         return sellerList;
     }

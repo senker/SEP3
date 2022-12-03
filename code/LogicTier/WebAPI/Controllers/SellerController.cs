@@ -12,11 +12,34 @@ namespace WebAPI.Controllers;
 public class SellerController : ControllerBase
 {
     private readonly ISellerDao _sellerLogic;
-    
+    private static string? _imageUrl;
+
     public SellerController(ISellerDao sellerLogic)
     {
         _sellerLogic = sellerLogic;
     }
+
+    [NonAction]
+    public string GetImage()
+    {
+        if(_imageUrl == "")
+        {
+            Console.WriteLine(_imageUrl);
+            Thread.Sleep(1000);
+        }
+        Console.WriteLine(_imageUrl);
+        return _imageUrl!;
+    }
+
+
+    [HttpPost]
+    [Route("/image")]
+    public Task PostImage([FromBody] string imageInController)
+    {
+        _imageUrl = imageInController;
+        return Task.CompletedTask;
+    }
+
 
     [HttpPost]
     [Route("/seller")]
@@ -34,7 +57,14 @@ public class SellerController : ControllerBase
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
         }*/
-        return Ok(await _sellerLogic.CreateSellerAsync(seller));
+        if(_imageUrl != null)
+            {
+                seller.Image = _imageUrl;
+                Console.WriteLine("We are in Create Seller Controller hurah");
+                Console.WriteLine(seller.Image);
+            }
+            
+            return Ok(await _sellerLogic.CreateSellerAsync(seller));
     }
     
     

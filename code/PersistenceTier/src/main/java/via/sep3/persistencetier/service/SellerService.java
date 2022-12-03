@@ -1,15 +1,18 @@
 package via.sep3.persistencetier.service;
 
+
+import com.google.common.base.Splitter;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
-import via.sep3.persistencetier.database.seller.Seller;
-import via.sep3.persistencetier.database.seller.SellerId;
-import via.sep3.persistencetier.database.seller.SellerRepository;
+import via.sep3.persistencetier.seller.Image;
+import via.sep3.persistencetier.seller.Seller;
+import via.sep3.persistencetier.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -20,28 +23,49 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     @Autowired
     SellerRepository sellerRepository;
 
+
+
+    String s = "ABCDEFGHIJK";
+    int chunkSize = 8000;
+    Iterable<String> chunks = Splitter.fixedLength(chunkSize).split(s);
+
+
     @Override
     public void createSeller(CreateSellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        System.out.println("Creating a new seller");
+        String s = request.getImage().getImageUrl();
+        int chunkSize = 8000;
+        Iterable<String> chunks = Splitter.fixedLength(chunkSize).split(s);
 
-        Seller seller = new Seller(
-                request.getUser().getFirstName(),
-                request.getUser().getLastName(),
-                new Address(
-                        request.getUser().getAddress().getCity(),
-                        request.getUser().getAddress().getStreetName(),
-                        request.getUser().getAddress().getPostCode()
-                ),
-                (long) request.getUser().getPhoneNumber(),
-                request.getUser().getEmail(),
-                request.getUser().getPassword(),
-                (long) request.getCvr(),
-                request.getCompanyName(),
-                request.getDescription(),
-                request.getType(),
-                request.getWebsite(),
-                request.getRating()
-        );
+        List<Image> listOfPartialImage = new ArrayList<>();
+
+        for(String chunk : chunks)
+        {
+            listOfPartialImage.add(new Image(chunk));
+        }
+
+           // byte[] byteData = request.getImage().getImageUrl().getBytes();
+
+            Seller seller = new Seller(
+                    request.getUser().getFirstName(),
+                    request.getUser().getLastName(),
+                    new Address(
+                            request.getUser().getAddress().getCity(),
+                            request.getUser().getAddress().getStreetName(),
+                            request.getUser().getAddress().getPostCode()
+                    ),
+                    (long) request.getUser().getPhoneNumber(),
+                    request.getUser().getEmail(),
+                    request.getUser().getPassword(),
+                    (long) request.getCvr(),
+                    request.getCompanyName(),
+                    request.getDescription(),
+                    request.getType(),
+                    request.getWebsite(),
+                    request.getRating(),
+                    listOfPartialImage
+                    //request.getImage().getImageUrl()
+            );
+
 
         var savedSeller = sellerRepository.save(seller);
 
@@ -51,13 +75,23 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     @Override
     public void getAllSellers(EmptySeller empty, StreamObserver<SellerResponse> responseObserver)
     {
+
+
         SellerResponse.Builder sellerResponseBuilder = SellerResponse.newBuilder();
         Stream<Seller> sellerList = sellerRepository.findAllStream();
         sellerList.forEach(seller ->{
+
+                    String fullImageUrl="";
+                    List<Image> sellerPartialImages = seller.getImage();
+                    for(Image image : sellerPartialImages)
+                    {
+                        fullImageUrl+=image;
+                    }
+
+
                     sellerResponseBuilder
                             .setUser(
                                     UserModelResponseSeller.newBuilder()
-                                            .setCvr(seller.getCvr().intValue())
                                             .setFirstName(seller.getFirstName())
                                             .setLastName(seller.getLastName())
                                             .setAddress(
@@ -74,7 +108,11 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                             .setDescription(seller.getDescription())
                             .setType(seller.getType())
                             .setWebsite(seller.getWebsite())
-                            .setRating(seller.getRating());
+                            .setRating(seller.getRating())
+                            .setImage(
+                                    ImageModelRequestSeller.newBuilder()
+                                            .setImageUrl(fullImageUrl)
+                            );
             System.out.println(seller.getCvr());
                             responseObserver.onNext(sellerResponseBuilder.build());
         });
@@ -94,10 +132,16 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     }
 
     private void sellerResponseBuilder(StreamObserver<SellerResponse> responseObserver, Seller seller) {
+        String fullImageUrl="";
+        List<Image> sellerPartialImages = seller.getImage();
+        for(Image image : sellerPartialImages)
+        {
+            fullImageUrl+=image;
+        }
+
         SellerResponse.Builder builder = SellerResponse.newBuilder();
         builder.setUser(
                 UserModelResponseSeller.newBuilder()
-                        .setCvr(seller.getCvr().intValue())
                         .setFirstName(seller.getFirstName())
                         .setLastName(seller.getLastName())
                         .setAddress(
@@ -115,6 +159,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         builder.setType(seller.getType());
         builder.setWebsite(seller.getWebsite());
         builder.setRating(seller.getRating().floatValue());
+        builder.setImage(ImageModelRequestSeller.newBuilder().setImageUrl(fullImageUrl));
         var response = builder
                 .build();
 

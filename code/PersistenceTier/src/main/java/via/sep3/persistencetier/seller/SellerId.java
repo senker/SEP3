@@ -1,4 +1,4 @@
-package via.sep3.persistencetier.database.seller;
+package via.sep3.persistencetier.seller;
 
 import java.io.Serializable;
 

@@ -8,69 +8,69 @@ public interface CreateUserModelRequestSellerOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string firstName = 2;</code>
+   * <code>string firstName = 1;</code>
    * @return The firstName.
    */
   java.lang.String getFirstName();
   /**
-   * <code>string firstName = 2;</code>
+   * <code>string firstName = 1;</code>
    * @return The bytes for firstName.
    */
   com.google.protobuf.ByteString
       getFirstNameBytes();
 
   /**
-   * <code>string lastName = 3;</code>
+   * <code>string lastName = 2;</code>
    * @return The lastName.
    */
   java.lang.String getLastName();
   /**
-   * <code>string lastName = 3;</code>
+   * <code>string lastName = 2;</code>
    * @return The bytes for lastName.
    */
   com.google.protobuf.ByteString
       getLastNameBytes();
 
   /**
-   * <code>.seller.AddressModelSeller address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 3;</code>
    * @return Whether the address field is set.
    */
   boolean hasAddress();
   /**
-   * <code>.seller.AddressModelSeller address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 3;</code>
    * @return The address.
    */
   via.sep3.persistencetier.protobuf.AddressModelSeller getAddress();
   /**
-   * <code>.seller.AddressModelSeller address = 4;</code>
+   * <code>.seller.AddressModelSeller address = 3;</code>
    */
   via.sep3.persistencetier.protobuf.AddressModelSellerOrBuilder getAddressOrBuilder();
 
   /**
-   * <code>int32 phoneNumber = 5;</code>
+   * <code>int32 phoneNumber = 4;</code>
    * @return The phoneNumber.
    */
   int getPhoneNumber();
 
   /**
-   * <code>string email = 6;</code>
+   * <code>string email = 5;</code>
    * @return The email.
    */
   java.lang.String getEmail();
   /**
-   * <code>string email = 6;</code>
+   * <code>string email = 5;</code>
    * @return The bytes for email.
    */
   com.google.protobuf.ByteString
       getEmailBytes();
 
   /**
-   * <code>string password = 7;</code>
+   * <code>string password = 6;</code>
    * @return The password.
    */
   java.lang.String getPassword();
   /**
-   * <code>string password = 7;</code>
+   * <code>string password = 6;</code>
    * @return The bytes for password.
    */
   com.google.protobuf.ByteString

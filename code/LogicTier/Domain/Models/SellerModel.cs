@@ -9,6 +9,8 @@ public class SellerModel
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+
+    public string Image{get;set;}
 }
 
 public class SellerCreateModel
@@ -20,4 +22,6 @@ public class SellerCreateModel
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
+
+    public string Image {get;set;}
 }

@@ -1,12 +1,13 @@
-package via.sep3.persistencetier.database.seller;
+package via.sep3.persistencetier.seller;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Where;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.User;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Seller EXAMPLE:
@@ -26,7 +27,7 @@ import java.io.Serializable;
  * Seller EXAMPLE 2 - ID: 987654321
  */
 
-@Entity(name="Seller")
+@Entity
 @Table(name="seller")
 @IdClass(SellerId.class)
 public class Seller extends User{
@@ -53,6 +54,9 @@ public class Seller extends User{
     private Float rating;
 
 
+    @OneToMany(mappedBy="seller", cascade = CascadeType.ALL)
+    private List<Image> images;
+
     public Seller(
             String firstName,
             String lastName,
@@ -65,7 +69,8 @@ public class Seller extends User{
             String description,
             String type,
             String website,
-            Float rating) {
+            Float rating,
+            List<Image> images) {
         super(firstName,lastName,address,phoneNumber,email, password);
         this.cvr = cvr;
         this.companyName = companyName;
@@ -73,6 +78,7 @@ public class Seller extends User{
         this.type = type;
         this.website = website;
         this.rating = rating;
+        this.images = images;
     }
 
     public Seller() {
@@ -128,5 +134,13 @@ public class Seller extends User{
 
     public void setRating(Float rating) {
         this.rating = rating;
+    }
+
+    public List<Image> getImage() {
+        return images;
+    }
+
+    public void setImage(List<Image> images) {
+        this.images = images;
     }
 }
