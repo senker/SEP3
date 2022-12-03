@@ -75,10 +75,10 @@ public class SellerDao : ISellerDao
         user.LastName = response.User.LastName;
         user.Address = address;
         user.PhoneNumber = response.User.PhoneNumber;
-        user.Email = response.User.Email;  
+        user.Email = response.User.Email;
 
 
-        
+
         return new SellerDto
         {
             User = user,

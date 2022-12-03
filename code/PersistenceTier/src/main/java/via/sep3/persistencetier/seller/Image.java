@@ -23,8 +23,9 @@ public class Image {
 
     }
 
-    public Image(String partialImage) {
+    public Image(String partialImage, Seller seller) {
         this.partialImage = partialImage;
+        this.seller = seller;
     }
 
     public int getId() {

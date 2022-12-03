@@ -20,7 +20,7 @@
             SellerModel seller = @_sellers.ElementAt(i);
 
             <div class="content">
-                <img src="img/babunia.jpg" alt="babunia" class="restaurant_image"/>
+                <img src="@seller.Image" alt="babunia" class="restaurant_image"/>
                 <div class="tags">
                     <div class="tag">@seller.Type</div>
                 </div>
@@ -38,8 +38,7 @@
                 <button class="read_more" @onclick="() => ReadMore(seller)">Read more</button>
 
             </div>
-        }         
-        <img src="@_imageURL"/>
+        }
     </div>
 
     <style>
@@ -86,7 +85,6 @@
         try
             {
                 _sellers = await sellerService.GetSellers();
-                _imageURL = await sellerService.GetImage();
                 _number_of_restaurants = _sellers.Count();
             }
             catch (Exception e)

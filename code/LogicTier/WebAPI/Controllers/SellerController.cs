@@ -58,13 +58,11 @@ public class SellerController : ControllerBase
             return StatusCode(500, e.Message);
         }*/
         if(_imageUrl != null)
-            {
+        {
                 seller.Image = _imageUrl;
-                Console.WriteLine("We are in Create Seller Controller hurah");
-                Console.WriteLine(seller.Image);
-            }
+        }else {seller.Image = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80";}
             
-            return Ok(await _sellerLogic.CreateSellerAsync(seller));
+        return Ok(await _sellerLogic.CreateSellerAsync(seller));
     }
     
     
@@ -84,6 +82,8 @@ public class SellerController : ControllerBase
     public async Task<IActionResult> GetAllSellers()
     {
         var sellers = await _sellerLogic.GetAllSellers();
+
+        Console.WriteLine(sellers[0].Image);
 
         return Ok(sellers);
     }

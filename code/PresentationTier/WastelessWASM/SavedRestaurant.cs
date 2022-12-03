@@ -56,8 +56,8 @@ public class SavedRestaurant
             sellerList.Add(_memoryCache.Get<string>("type"));
             sellerList.Add(_memoryCache.Get<string>("website"));
             sellerList.Add(string.Format("{0:N2}", _memoryCache.Get<float>("rating")));
-            sellerList.Add(string.Format("{0:N2}", _memoryCache.Get<string>("image")));
-        //return _memoryCache.Get<SellerModel>("seller").ToString();
+            sellerList.Add(_memoryCache.Get<string>("image"));
+            //return _memoryCache.Get<SellerModel>("seller").ToString();
         return sellerList;
     }
 }

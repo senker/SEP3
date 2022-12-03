@@ -38,11 +38,6 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
         List<Image> listOfPartialImage = new ArrayList<>();
 
-        for(String chunk : chunks)
-        {
-            listOfPartialImage.add(new Image(chunk));
-        }
-
            // byte[] byteData = request.getImage().getImageUrl().getBytes();
 
             Seller seller = new Seller(
@@ -62,9 +57,16 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                     request.getType(),
                     request.getWebsite(),
                     request.getRating(),
-                    listOfPartialImage
+                    null
                     //request.getImage().getImageUrl()
             );
+
+        for(String chunk : chunks)
+        {
+            listOfPartialImage.add(new Image(chunk, seller));
+        }
+
+        seller.setImage(listOfPartialImage);
 
 
         var savedSeller = sellerRepository.save(seller);
@@ -83,10 +85,14 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
                     String fullImageUrl="";
                     List<Image> sellerPartialImages = seller.getImage();
+                    if(sellerPartialImages == null) System.out.println("seller images list is null");
                     for(Image image : sellerPartialImages)
                     {
-                        fullImageUrl+=image;
+                        System.out.println("partial image");
+                        System.out.println("partial image url: " + image.getPartialImage());
+                        fullImageUrl+=image.getPartialImage();
                     }
+                    System.out.println("full image Url: " + fullImageUrl);
 
 
                     sellerResponseBuilder
