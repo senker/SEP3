@@ -270,27 +270,27 @@
  <script suppress-error="BL9992" type="text/javascript">
                         async function AJAXSubmit(oFormElement)
                         {
-                             
+                             const userFile = document.getElementById('fileInput').files[0];
                  
                             const formData = new FormData();
-                            
-                
-             
-                            
-                               
-                                
+                            formData.append('user-file', userFile);
+                           
                               const reader = new FileReader();
+                              reader.readAsDataURL(userFile);
                               var urlResult;
                               reader.onloadend=() =>{
+                                  console.log("onloadend");
                                        console.log(reader.result);
                                        window.localStorage.setItem("resultURL", reader.result); 
                                        urlResult = reader.result;
                                   };
+                             //  window.localStorage.setItem("resultURL", reader.result); 
+                          
                             
                  
                              
-                             console.log("url from localstorage");
-                             console.log(JSON.stringify(window.localStorage.getItem("resultURL")));
+                           //  console.log("url from localstorage");
+                         //    console.log(JSON.stringify(window.localStorage.getItem("resultURL")));
 
                                 // DotNet.invokeMethodAsync('WastelessWASM', 'ReturnString', JSON.stringify(window.localStorage.getItem("resultURL")));
       
