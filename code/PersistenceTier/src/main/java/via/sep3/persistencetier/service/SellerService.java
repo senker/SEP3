@@ -57,7 +57,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                     request.getType(),
                     request.getWebsite(),
                     request.getRating(),
-                    null
+                    null, null
                     //request.getImage().getImageUrl()
             );
 
