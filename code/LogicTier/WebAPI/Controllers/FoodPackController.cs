@@ -15,6 +15,8 @@ public class FoodPackController : ControllerBase
         _foodPackDao = foodPackDao;
     }
     
+    [HttpPost]
+    [Route("/food-pack")]
     public async Task<ActionResult> CreateFoodPack(FoodPackCreateDto foodPack)
     {
         return Ok(await _foodPackDao.CreateFoodPackAsync(foodPack));
