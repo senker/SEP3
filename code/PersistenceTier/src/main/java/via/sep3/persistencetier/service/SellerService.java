@@ -25,11 +25,6 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
 
 
-    String s = "ABCDEFGHIJK";
-    int chunkSize = 8000;
-    Iterable<String> chunks = Splitter.fixedLength(chunkSize).split(s);
-
-
     @Override
     public void createSeller(CreateSellerRequest request, StreamObserver<SellerResponse> responseObserver) {
         String s = request.getImage().getImageUrl();
@@ -57,8 +52,8 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                     request.getType(),
                     request.getWebsite(),
                     request.getRating(),
-                    null, null
-                    //request.getImage().getImageUrl()
+                    null,
+                    null
             );
 
         for(String chunk : chunks)

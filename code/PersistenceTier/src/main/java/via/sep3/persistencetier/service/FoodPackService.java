@@ -43,37 +43,49 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
-/*
+
     @Override
     public void searchFoodPacks(SearchFoodPacks request, StreamObserver<FoodPackResponse> responseObserver)
     {
         FoodPackResponse.Builder foodPackResponseBuilder = FoodPackResponse.newBuilder();
-        Stream<FoodPack> foodPackList = packRepository.findAllStream();
-        foodPackList.forEach(pack ->{
 
-            String title = "";
-            boolean isPrepared = false;
-            String type = "";
-            Double price = Double.valueOf(0);
-            Integer postCode = 0;
+            String title;
+            boolean isPrepared;
+            String type;
+            Double price;
+            Integer postCode;
 
-            if(pack.getTitle().toLowerCase().contains(request.getTitle().toLowerCase())) title = request.getTitle();
-            if(pack.isIs_prepared() == request.getIsPrepared() == true) isPrepared=true;
-            if(pack.getType().toLowerCase().equals().)
-            && ())
-
+            title = request.getTitle();
+            isPrepared=request.getIsPrepared();
+            type = request.getType();
+            postCode = request.getPostcode();
+            price = request.getPrice()==0 ? 0 : request.getPrice();
 
 
-            pack.getTitle().equals(request.getTitle()) ?
+            Stream<FoodPack> streamOfSellers;
 
+           if(price==0)
+           {
+               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, postCode);
+           }
+           else{
+               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, price, postCode);
+           }
 
-                    foodPackResponseBuilder
-                            .setTitle()
-                            .setDescription()
-        });
+           streamOfSellers.forEach(pack -> {
+               foodPackResponseBuilder
+                       .setId(pack.getId())
+                       .setTitle(pack.getTitle())
+                       .setDescription(pack.getDescription())
+                       .setType(pack.getType())
+                       .setIsPrepared(pack.isIs_prepared())
+                       .setPrice(pack.getPrice());
+               responseObserver.onNext(foodPackResponseBuilder.build());
+           });
+        responseObserver.onCompleted();
+
     }
 
- */
 
 
 private void foodPackResponseBuilder(StreamObserver<FoodPackResponse> responseObserver, FoodPack foodPack){
