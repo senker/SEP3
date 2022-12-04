@@ -5,29 +5,33 @@ option java_package = "via.sep3.persistencetier.protobuf";
 
 package packPackage;
 
-service FoodPackService{
-  rpc createFoodPack(createFoodPackRequest) returns(foodPackRespons);
-  rpc getFoodPackById(foodPackRequest) returns(foodPackRespons);
-  rpc searchFoodPacks(EmptyPack) returns (stream foodPackRespons);
-  rpc deleteFoodPack(foodPackRequest) returns(foodPackRespons);
+
+message EmptyFoodPack{
+
 }
 
+message FoodPackRequest{
+  int32 id = 1;
+}
 
-message createFoodPackRequest{
-  int32  id = 1;
-  string title = 2;
-  string description = 3;
+message CreateFoodPackRequest {
+  string title = 1;
+  string description = 2;
+  string type = 3;
   bool is_prepared = 4;
   double price = 5;
-  string type = 6;
-
-
 }
 
-message EmptyPack{
-
+message FoodPackResponse {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string type = 4;
+  bool is_prepared = 5;
+  double price = 6;
 }
-message searchFoodPacks{
+
+message SearchFoodPacks{
   bool is_prepared = 1;
   string title = 2;
   string type = 3;
@@ -35,18 +39,11 @@ message searchFoodPacks{
   int32 postcode = 5;
 
 }
-message foodPackRequest{
-int32 id = 1;
-    }
 
-
-
-message foodPackRespons{
-  int32  id = 1;
-  string title = 2;
-  string description = 3;
-  bool is_prepared = 4;
-  double price = 5;
-  string type = 6;
-
+service FoodPackService {
+  rpc createFoodPack(CreateFoodPackRequest) returns (FoodPackResponse);
+  rpc getFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc deleteFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc searchFoodPacks(SearchFoodPacks) returns (stream FoodPackResponse);
+  rpc getAllFoodPacks(EmptyFoodPack) returns (stream FoodPackResponse);
 }

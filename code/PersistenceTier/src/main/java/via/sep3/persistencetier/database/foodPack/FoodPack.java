@@ -40,8 +40,7 @@ public class FoodPack {
         this.seller = seller;
     }
 
-    public FoodPack(int id, String title, String description, String type, boolean is_prepared, double price, Seller seller) {
-        this.id = id;
+    public FoodPack(String title, String description, String type, boolean is_prepared, double price, Seller seller) {
         this.title = title;
         this.description = description;
         this.type = type;
@@ -54,13 +53,6 @@ public class FoodPack {
 
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

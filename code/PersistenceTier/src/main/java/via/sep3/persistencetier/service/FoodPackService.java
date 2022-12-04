@@ -8,6 +8,7 @@ import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
+import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
@@ -17,9 +18,8 @@ public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase
 PackRepository packRepository;
 
 @Override
-    public void createFoodPack(createFoodPackRequest packRequest, StreamObserver<foodPackRespons> responseObserver){
+    public void createFoodPack(CreateFoodPackRequest packRequest, StreamObserver<FoodPackResponse> responseObserver){
     FoodPack foodPack = new FoodPack(
-            packRequest.getId(),
             packRequest.getTitle(),
             packRequest.getDescription(),
             packRequest.getType(),
@@ -32,21 +32,52 @@ PackRepository packRepository;
 }
 
 @Override
-public void getFoodPackById(foodPackRequest foodPackRequest, StreamObserver<foodPackRespons> responseObserver) {
-    var foodPack = packRepository.findById(foodPackRequest);
+public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
+    var foodPack = packRepository.findById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
 @Override
-public void deleteFoodPack(foodPackRequest foodPackRequest, StreamObserver<foodPackRespons> responseObserver) {
-    var foodPack = packRepository.deleteById(foodPackRequest);
+public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
+    var foodPack = packRepository.deleteById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
+/*
+    @Override
+    public void searchFoodPacks(SearchFoodPacks request, StreamObserver<FoodPackResponse> responseObserver)
+    {
+        FoodPackResponse.Builder foodPackResponseBuilder = FoodPackResponse.newBuilder();
+        Stream<FoodPack> foodPackList = packRepository.findAllStream();
+        foodPackList.forEach(pack ->{
 
-private void foodPackResponseBuilder(StreamObserver<foodPackRespons> responseObserver, FoodPack foodPack){
-    foodPackRespons.Builder builder = foodPackRespons.newBuilder()
-            .setId(foodPack.getId())
+            String title = "";
+            boolean isPrepared = false;
+            String type = "";
+            Double price = Double.valueOf(0);
+            Integer postCode = 0;
+
+            if(pack.getTitle().toLowerCase().contains(request.getTitle().toLowerCase())) title = request.getTitle();
+            if(pack.isIs_prepared() == request.getIsPrepared() == true) isPrepared=true;
+            if(pack.getType().toLowerCase().equals().)
+            && ())
+
+
+
+            pack.getTitle().equals(request.getTitle()) ?
+
+
+                    foodPackResponseBuilder
+                            .setTitle()
+                            .setDescription()
+        });
+    }
+
+ */
+
+
+private void foodPackResponseBuilder(StreamObserver<FoodPackResponse> responseObserver, FoodPack foodPack){
+    FoodPackResponse.Builder builder = FoodPackResponse.newBuilder()
             .setType(foodPack.getType())
             .setDescription(foodPack.getDescription())
             .setTitle(foodPack.getTitle())

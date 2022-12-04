@@ -3,69 +3,47 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "via.sep3.persistencetier.protobuf";
 
+package packPackage;
 
-package seller;
 
-message EmptySeller{
+message EmptyFoodPack{
 
 }
 
-message SellerRequest {
-  int32 cvr = 1;
+message FoodPackRequest{
+  int32 id = 1;
 }
 
-message ImageModelRequestSeller{
-  string imageUrl = 1;
+message CreateFoodPackRequest {
+  string title = 1;
+  string description = 2;
+  string type = 3;
+  bool is_prepared = 4;
+  double price = 5;
 }
 
-message UserModelResponseSeller{
-  string firstName = 1;
-  string lastName = 2;
-  AddressModelSeller address = 3;
-  int32 phoneNumber = 4;
-  string email = 5;
+message FoodPackResponse {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string type = 4;
+  bool is_prepared = 5;
+  double price = 6;
 }
 
-message AddressModelSeller{
-  string city = 1;
-  string streetName = 2;
-  int32 postCode = 3;
+message SearchFoodPacks{
+  bool is_prepared = 1;
+  string title = 2;
+  string type = 3;
+  double price = 4;
+  int32 postcode = 5;
+
 }
 
-message CreateUserModelRequestSeller{
-  string firstName = 1;
-  string lastName = 2;
-  AddressModelSeller address = 3;
-  int32 phoneNumber = 4;
-  string email = 5;
-  string password = 6;
-}
-
-message CreateSellerRequest {
-  CreateUserModelRequestSeller user = 1;
-  int32 cvr = 2;
-  string companyName = 3;
-  string description = 4;
-  string type = 5;
-  string website = 6;
-  float rating = 7;
-  ImageModelRequestSeller image = 8;
-}
-
-message SellerResponse {
-  UserModelResponseSeller user = 1;
-  int32 cvr = 2;
-  string companyName = 3;
-  string description = 4;
-  string type = 5;
-  string website = 6;
-  float rating = 7;
-  ImageModelRequestSeller image = 8;
-}
-
-service SellerService {
-  rpc createSeller(CreateSellerRequest) returns (SellerResponse);
-  rpc getSellerByCvr(SellerRequest) returns (SellerResponse);
-  rpc getAllSellers(EmptySeller) returns (stream SellerResponse);
-  rpc deleteSellerByCvr(SellerRequest) returns (SellerResponse);
+service FoodPackService {
+  rpc createFoodPack(CreateFoodPackRequest) returns (FoodPackResponse);
+  rpc getFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc deleteFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc searchFoodPacks(SearchFoodPacks) returns (stream FoodPackResponse);
+  rpc getAllFoodPacks(EmptyFoodPack) returns (stream FoodPackResponse);
 }
