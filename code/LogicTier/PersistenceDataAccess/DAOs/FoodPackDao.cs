@@ -7,13 +7,12 @@ namespace PersistenceDataAccess.DAOs;
 
 public class FoodPackDao : IFoodPackDao
 {
-    /*
-    private readonly _client;
+    private readonly FoodPackService.FoodPackServiceClient _client;
     
-    public SellerDao(IGrpcService grpcService)
+    public FoodPackDao(IGrpcService grpcService)
     {
-        _client = new SellerService.SellerServiceClient(grpcService.GetChannel());
-    }*/
+        _client = new FoodPackService.FoodPackServiceClient(grpcService.GetChannel());
+    }
     
     public Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto seller)
     {
