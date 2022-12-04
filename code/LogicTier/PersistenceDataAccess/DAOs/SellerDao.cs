@@ -151,7 +151,7 @@ public class SellerDao : ISellerDao
         }
         catch
         {
-            return null;
+            throw new Exception("Could not delete the seller");
         }
     }
 }

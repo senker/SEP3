@@ -1,3 +1,5 @@
+using Domain.Models;
+
 namespace Domain.DTOs;
 
 public class FoodPackDto
@@ -9,15 +11,13 @@ public class FoodPackDto
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
-    public FoodPackDto(int id, string title, string description, string type, bool isPrepared, double price)
+    public FoodPackDto()
     {
-        Id = id;
-        Title = title;
-        Description = description;
-        Type = type;
-        IsPrepared = isPrepared;
-        Price = price;
     }
+
+    public FoodPackDto(FoodPackModel foodPack) =>
+        (Id, Title, Description, Type, IsPrepared, Price) = (
+            foodPack.Id, foodPack.Title, foodPack.Description, foodPack.Type, foodPack.IsPrepared, foodPack.Price);
 }
 
 public class FoodPackCreateDto
@@ -28,12 +28,11 @@ public class FoodPackCreateDto
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
-    public FoodPackCreateDto(string title, string description, string type, bool isPrepared, double price)
+    public FoodPackCreateDto()
     {
-        Title = title;
-        Description = description;
-        Type = type;
-        IsPrepared = isPrepared;
-        Price = price;
     }
+
+    public FoodPackCreateDto(FoodPackCreateModel foodPack) =>
+        (Title, Description, Type, IsPrepared, Price) = (
+            foodPack.Title, foodPack.Description, foodPack.Type, foodPack.IsPrepared, foodPack.Price);
 }
