@@ -1,7 +1,10 @@
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using Application.DaoInterfaces;
+using Customer;
 using Domain.DTOs;
 using Domain.Models;
+using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
@@ -34,13 +37,18 @@ public class CustomerDao : ICustomerDao
         user.Email = customer.User.Email;
         user.Password = customer.User.Password;
 
+        RepeatedField<string> preferences = new RepeatedField<string>();
+        foreach(string preference in customer.Preferences)
+        {
+            preferences.Add(preference);
+        }
         try
         {
             var response = await _client.createCustomerAsync(
                 new CreateCustomerRequest()
                 {
                     User = user,
-                    Preference = customer.Preference
+                    Preference = { preferences }
                 }
             );
 
@@ -162,11 +170,20 @@ public class CustomerDao : ICustomerDao
         user.PhoneNumber = response.User.PhoneNumber;
         user.Email = response.User.Email;
         user.Password = response.User.Password;
+        
+        List<string> preferences = new List<string>();
+
+        IEnumerator<string> em = response.Preference.GetEnumerator();
+
+        while(em.MoveNext())
+        {
+            preferences.Add(em.Current);
+        }
 
         return new CustomerDto()
         {
             User = user,
-            Preference = response.Preference
+            Preferences = preferences
         };
     }
 
