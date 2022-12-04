@@ -23,14 +23,27 @@ public interface CreateCustomerRequestOrBuilder extends
   via.sep3.persistencetier.protobuf.CreateUserModelRequestCustomerOrBuilder getUserOrBuilder();
 
   /**
-   * <code>string preference = 2;</code>
-   * @return The preference.
+   * <code>repeated string preference = 2;</code>
+   * @return A list containing the preference.
    */
-  java.lang.String getPreference();
+  java.util.List<java.lang.String>
+      getPreferenceList();
   /**
-   * <code>string preference = 2;</code>
-   * @return The bytes for preference.
+   * <code>repeated string preference = 2;</code>
+   * @return The count of preference.
+   */
+  int getPreferenceCount();
+  /**
+   * <code>repeated string preference = 2;</code>
+   * @param index The index of the element to return.
+   * @return The preference at the given index.
+   */
+  java.lang.String getPreference(int index);
+  /**
+   * <code>repeated string preference = 2;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the preference at the given index.
    */
   com.google.protobuf.ByteString
-      getPreferenceBytes();
+      getPreferenceBytes(int index);
 }

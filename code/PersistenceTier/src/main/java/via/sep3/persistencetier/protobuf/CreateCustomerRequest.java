@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private CreateCustomerRequest() {
-    preference_ = "";
+    preference_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -39,6 +39,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -64,8 +65,11 @@ private static final long serialVersionUID = 0L;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
-
-            preference_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              preference_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            preference_.add(s);
             break;
           }
           default: {
@@ -85,6 +89,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        preference_ = preference_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -129,41 +136,38 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PREFERENCE_FIELD_NUMBER = 2;
-  private volatile java.lang.Object preference_;
+  private com.google.protobuf.LazyStringList preference_;
   /**
-   * <code>string preference = 2;</code>
-   * @return The preference.
+   * <code>repeated string preference = 2;</code>
+   * @return A list containing the preference.
    */
-  @java.lang.Override
-  public java.lang.String getPreference() {
-    java.lang.Object ref = preference_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      preference_ = s;
-      return s;
-    }
+  public com.google.protobuf.ProtocolStringList
+      getPreferenceList() {
+    return preference_;
   }
   /**
-   * <code>string preference = 2;</code>
-   * @return The bytes for preference.
+   * <code>repeated string preference = 2;</code>
+   * @return The count of preference.
    */
-  @java.lang.Override
+  public int getPreferenceCount() {
+    return preference_.size();
+  }
+  /**
+   * <code>repeated string preference = 2;</code>
+   * @param index The index of the element to return.
+   * @return The preference at the given index.
+   */
+  public java.lang.String getPreference(int index) {
+    return preference_.get(index);
+  }
+  /**
+   * <code>repeated string preference = 2;</code>
+   * @param index The index of the value to return.
+   * @return The bytes of the preference at the given index.
+   */
   public com.google.protobuf.ByteString
-      getPreferenceBytes() {
-    java.lang.Object ref = preference_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      preference_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+      getPreferenceBytes(int index) {
+    return preference_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -183,8 +187,8 @@ private static final long serialVersionUID = 0L;
     if (user_ != null) {
       output.writeMessage(1, getUser());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(preference_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, preference_);
+    for (int i = 0; i < preference_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, preference_.getRaw(i));
     }
     unknownFields.writeTo(output);
   }
@@ -199,8 +203,13 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getUser());
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(preference_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, preference_);
+    {
+      int dataSize = 0;
+      for (int i = 0; i < preference_.size(); i++) {
+        dataSize += computeStringSizeNoTag(preference_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getPreferenceList().size();
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -222,8 +231,8 @@ private static final long serialVersionUID = 0L;
       if (!getUser()
           .equals(other.getUser())) return false;
     }
-    if (!getPreference()
-        .equals(other.getPreference())) return false;
+    if (!getPreferenceList()
+        .equals(other.getPreferenceList())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -239,8 +248,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + USER_FIELD_NUMBER;
       hash = (53 * hash) + getUser().hashCode();
     }
-    hash = (37 * hash) + PREFERENCE_FIELD_NUMBER;
-    hash = (53 * hash) + getPreference().hashCode();
+    if (getPreferenceCount() > 0) {
+      hash = (37 * hash) + PREFERENCE_FIELD_NUMBER;
+      hash = (53 * hash) + getPreferenceList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -380,8 +391,8 @@ private static final long serialVersionUID = 0L;
         user_ = null;
         userBuilder_ = null;
       }
-      preference_ = "";
-
+      preference_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
@@ -408,10 +419,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public via.sep3.persistencetier.protobuf.CreateCustomerRequest buildPartial() {
       via.sep3.persistencetier.protobuf.CreateCustomerRequest result = new via.sep3.persistencetier.protobuf.CreateCustomerRequest(this);
+      int from_bitField0_ = bitField0_;
       if (userBuilder_ == null) {
         result.user_ = user_;
       } else {
         result.user_ = userBuilder_.build();
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        preference_ = preference_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.preference_ = preference_;
       onBuilt();
@@ -465,8 +481,14 @@ private static final long serialVersionUID = 0L;
       if (other.hasUser()) {
         mergeUser(other.getUser());
       }
-      if (!other.getPreference().isEmpty()) {
-        preference_ = other.preference_;
+      if (!other.preference_.isEmpty()) {
+        if (preference_.isEmpty()) {
+          preference_ = other.preference_;
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          ensurePreferenceIsMutable();
+          preference_.addAll(other.preference_);
+        }
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -497,6 +519,7 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
     private via.sep3.persistencetier.protobuf.CreateUserModelRequestCustomer user_;
     private com.google.protobuf.SingleFieldBuilderV3<
@@ -617,78 +640,112 @@ private static final long serialVersionUID = 0L;
       return userBuilder_;
     }
 
-    private java.lang.Object preference_ = "";
-    /**
-     * <code>string preference = 2;</code>
-     * @return The preference.
-     */
-    public java.lang.String getPreference() {
-      java.lang.Object ref = preference_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        preference_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    private com.google.protobuf.LazyStringList preference_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensurePreferenceIsMutable() {
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        preference_ = new com.google.protobuf.LazyStringArrayList(preference_);
+        bitField0_ |= 0x00000001;
+       }
     }
     /**
-     * <code>string preference = 2;</code>
-     * @return The bytes for preference.
+     * <code>repeated string preference = 2;</code>
+     * @return A list containing the preference.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getPreferenceList() {
+      return preference_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string preference = 2;</code>
+     * @return The count of preference.
+     */
+    public int getPreferenceCount() {
+      return preference_.size();
+    }
+    /**
+     * <code>repeated string preference = 2;</code>
+     * @param index The index of the element to return.
+     * @return The preference at the given index.
+     */
+    public java.lang.String getPreference(int index) {
+      return preference_.get(index);
+    }
+    /**
+     * <code>repeated string preference = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the preference at the given index.
      */
     public com.google.protobuf.ByteString
-        getPreferenceBytes() {
-      java.lang.Object ref = preference_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        preference_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getPreferenceBytes(int index) {
+      return preference_.getByteString(index);
     }
     /**
-     * <code>string preference = 2;</code>
+     * <code>repeated string preference = 2;</code>
+     * @param index The index to set the value at.
      * @param value The preference to set.
      * @return This builder for chaining.
      */
     public Builder setPreference(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePreferenceIsMutable();
+      preference_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string preference = 2;</code>
+     * @param value The preference to add.
+     * @return This builder for chaining.
+     */
+    public Builder addPreference(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  
-      preference_ = value;
+  ensurePreferenceIsMutable();
+      preference_.add(value);
       onChanged();
       return this;
     }
     /**
-     * <code>string preference = 2;</code>
+     * <code>repeated string preference = 2;</code>
+     * @param values The preference to add.
+     * @return This builder for chaining.
+     */
+    public Builder addAllPreference(
+        java.lang.Iterable<java.lang.String> values) {
+      ensurePreferenceIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, preference_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string preference = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearPreference() {
-      
-      preference_ = getDefaultInstance().getPreference();
+      preference_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string preference = 2;</code>
-     * @param value The bytes for preference to set.
+     * <code>repeated string preference = 2;</code>
+     * @param value The bytes of the preference to add.
      * @return This builder for chaining.
      */
-    public Builder setPreferenceBytes(
+    public Builder addPreferenceBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-      
-      preference_ = value;
+      ensurePreferenceIsMutable();
+      preference_.add(value);
       onChanged();
       return this;
     }

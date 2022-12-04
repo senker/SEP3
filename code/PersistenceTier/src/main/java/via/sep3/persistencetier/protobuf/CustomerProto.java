@@ -73,9 +73,9 @@ public final class CustomerProto {
       "\005 \001(\t\022\020\n\010password\030\006 \001(\t\"c\n\025CreateCustome" +
       "rRequest\0226\n\004user\030\001 \001(\0132(.customer.Create" +
       "UserModelRequestCustomer\022\022\n\npreference\030\002" +
-      " \001(\t\"Y\n\020CustomerResponse\0221\n\004user\030\001 \001(\0132#" +
+      " \003(\t\"Y\n\020CustomerResponse\0221\n\004user\030\001 \001(\0132#" +
       ".customer.UserModelResponseCustomer\022\022\n\np" +
-      "reference\030\002 \001(\t2\307\002\n\017CustomerService\022M\n\016c" +
+      "reference\030\002 \003(\t2\307\002\n\017CustomerService\022M\n\016c" +
       "reateCustomer\022\037.customer.CreateCustomerR" +
       "equest\032\032.customer.CustomerResponse\022K\n\022ge" +
       "tCustomerByEmail\022\031.customer.CustomerRequ" +

@@ -39,12 +39,12 @@ message CreateUserModelRequestCustomer{
 
 message CreateCustomerRequest {
   CreateUserModelRequestCustomer user = 1;
-  string preference = 2;
+  repeated string preference = 2;
 }
 
 message CustomerResponse {
   UserModelResponseCustomer user = 1;
-  string preference = 2;
+  repeated string preference = 2;
 }
 
 service CustomerService {
