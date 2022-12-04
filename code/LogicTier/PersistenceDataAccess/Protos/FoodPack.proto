@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "via.sep3.persistencetier.protobuf";
+option csharp_namespace = "PersistenceDataAccess";
 
 package packPackage;
 
