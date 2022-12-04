@@ -1,8 +1,10 @@
 syntax = "proto3";
 
-option csharp_namespace = "PersistenceDataAccess";
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
 
-package pack;
+package packPackage;
+
 
 message EmptyFoodPack{
 
@@ -29,9 +31,19 @@ message FoodPackResponse {
   double price = 6;
 }
 
+message SearchFoodPacks{
+  bool is_prepared = 1;
+  string title = 2;
+  string type = 3;
+  double price = 4;
+  int32 postcode = 5;
+
+}
+
 service FoodPackService {
   rpc createFoodPack(CreateFoodPackRequest) returns (FoodPackResponse);
   rpc getFoodPackById(FoodPackRequest) returns (FoodPackResponse);
   rpc deleteFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc searchFoodPacks(SearchFoodPacks) returns (stream FoodPackResponse);
   rpc getAllFoodPacks(EmptyFoodPack) returns (stream FoodPackResponse);
 }
