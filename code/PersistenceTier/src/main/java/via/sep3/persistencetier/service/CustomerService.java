@@ -7,6 +7,7 @@ import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.customer.Preference;
+import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,9 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
 
     @Autowired
     CustomerRepository customerRepository;
+
+    @Autowired
+    PackRepository packRepository;
 
 
     @Override
@@ -76,10 +80,15 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                                     .setEmail(customer.getEmail())
                                     .setPassword(customer.getPassword())
                     );
+
+
+            List<String> preferences = new ArrayList<>();
             for(int i=0; i<customer.getPreference().size(); i++)
             {
-                customerResponseBuilder.setPreference(i, customer.getPreference().get(i).getPreference());
+                preferences.add(customer.getPreference().get(i).getPreference());
             }
+            customerResponseBuilder.addAllPreference(preferences);
+
             System.out.println(customer.getEmail());
             responseObserver.onNext(customerResponseBuilder.build());
         });
