@@ -5,6 +5,8 @@ import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
+import via.sep3.persistencetier.database.seller.Seller;
+import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
@@ -17,6 +19,9 @@ public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase
 @Autowired
 PackRepository packRepository;
 
+@Autowired
+    SellerRepository sellerRepository;
+
 @Override
     public void createFoodPack(CreateFoodPackRequest packRequest, StreamObserver<FoodPackResponse> responseObserver){
     FoodPack foodPack = new FoodPack(
@@ -25,7 +30,7 @@ PackRepository packRepository;
             packRequest.getType(),
             packRequest.getIsPrepared(),
             packRequest.getPrice(),
-            null
+            sellerRepository.findByCvr((long) packRequest.getCvr())
     );
     var savedFoodPack = packRepository.save(foodPack);
     foodPackResponseBuilder(responseObserver, savedFoodPack);
@@ -54,6 +59,28 @@ public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<Food
     var foodPack = packRepository.findById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
+
+@Override
+public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest, StreamObserver<FoodPackResponse> responseObserver)
+{
+    System.out.println("Inside get food packs by seller cvr");
+    FoodPackResponse.Builder response = FoodPackResponse.newBuilder();
+    Seller seller = sellerRepository.findByCvr((long) foodPackSellerRequest.getCvr());
+    Stream<FoodPack> foodPackStream = packRepository.findBySeller(seller);
+
+    foodPackStream.forEach(pack ->{
+        response
+                .setId(pack.getId())
+                .setTitle(pack.getTitle())
+                .setDescription(pack.getDescription())
+                .setType(pack.getType())
+                .setIsPrepared(pack.isIs_prepared())
+                .setPrice(pack.getPrice());
+        responseObserver.onNext(response.build());
+    });
+    responseObserver.onCompleted();
+}
+
 
 @Override
 public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {

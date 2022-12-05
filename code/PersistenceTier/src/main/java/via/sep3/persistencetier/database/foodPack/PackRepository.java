@@ -26,6 +26,8 @@ public interface PackRepository extends JpaRepository<FoodPack, Integer> {
     @Modifying
     void deleteBySeller(Seller seller);
 
+    Stream<FoodPack> findBySeller(Seller seller);
+
 
     @Query(value="select * from food_pack", nativeQuery = true)
     Stream<FoodPack> findAllStream();
