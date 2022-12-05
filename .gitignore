@@ -963,4 +963,5 @@ $RECYCLE.BIN/
 /code/PresentationTier/HttpClients/obj/
 /code/PresentationTier/WastelessWASM/bin/
 /code/PresentationTier/WastelessWASM/obj/
+/code/PersistenceTier/src/main/java/via/sep3/persistencetier/protobuf
 
