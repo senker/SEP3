@@ -1,5 +1,7 @@
 package via.sep3.persistencetier.database.foodPack;
 
+import via.sep3.persistencetier.seller.Seller;
+
 import javax.persistence.*;
 
 
@@ -26,13 +28,25 @@ public class FoodPack {
     @Column(name = "price")
     private double price;
 
-    public FoodPack(int id, String title, String description, String type, boolean is_prepared, double price) {
-        this.id = id;
+    @ManyToOne
+    @JoinColumn(name = "seller_cvr")
+    private Seller seller;
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public FoodPack(String title, String description, String type, boolean is_prepared, double price, Seller seller) {
         this.title = title;
         this.description = description;
         this.type = type;
         this.is_prepared = is_prepared;
         this.price = price;
+        this.seller = seller;
     }
 
     public FoodPack() {

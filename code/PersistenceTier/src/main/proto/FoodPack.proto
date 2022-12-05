@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
+
+package packPackage;
+
+
+message EmptyFoodPack{
+
+}
+
+message FoodPackRequest{
+  int32 id = 1;
+}
+
+message CreateFoodPackRequest {
+  string title = 1;
+  string description = 2;
+  string type = 3;
+  bool is_prepared = 4;
+  double price = 5;
+}
+
+message FoodPackResponse {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string type = 4;
+  bool is_prepared = 5;
+  double price = 6;
+}
+
+message SearchFoodPacks{
+  bool is_prepared = 1;
+  string title = 2;
+  string type = 3;
+  double price = 4;
+  int32 postcode = 5;
+
+}
+
+service FoodPackService {
+  rpc createFoodPack(CreateFoodPackRequest) returns (FoodPackResponse);
+  rpc getFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc deleteFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc searchFoodPacks(SearchFoodPacks) returns (stream FoodPackResponse);
+  rpc getAllFoodPacks(EmptyFoodPack) returns (stream FoodPackResponse);
+}

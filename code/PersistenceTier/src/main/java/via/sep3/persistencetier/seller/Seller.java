@@ -1,13 +1,12 @@
 package via.sep3.persistencetier.seller;
 
 
-import org.hibernate.annotations.Where;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.User;
+import via.sep3.persistencetier.database.foodPack.FoodPack;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Seller EXAMPLE:
@@ -53,7 +52,8 @@ public class Seller extends User{
             columnDefinition="integer default 0")
     private Float rating;
 
-
+   @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+   private  List<FoodPack> packs;
     @OneToMany(mappedBy="seller", cascade = CascadeType.ALL)
     private List<Image> images;
 
@@ -70,7 +70,7 @@ public class Seller extends User{
             String type,
             String website,
             Float rating,
-            List<Image> images) {
+            List<FoodPack> packs, List<Image> images) {
         super(firstName,lastName,address,phoneNumber,email, password);
         this.cvr = cvr;
         this.companyName = companyName;
@@ -78,6 +78,7 @@ public class Seller extends User{
         this.type = type;
         this.website = website;
         this.rating = rating;
+        this.packs = packs;
         this.images = images;
     }
 
