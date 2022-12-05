@@ -1,6 +1,4 @@
-package via.sep3.persistencetier.seller;
-
-import via.sep3.persistencetier.database.customer.Customer;
+package via.sep3.persistencetier.database.seller;
 
 import javax.persistence.*;
 

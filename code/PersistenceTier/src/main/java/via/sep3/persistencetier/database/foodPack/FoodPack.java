@@ -1,6 +1,6 @@
 package via.sep3.persistencetier.database.foodPack;
 
-import via.sep3.persistencetier.seller.Seller;
+import via.sep3.persistencetier.database.seller.Seller;
 
 import javax.persistence.*;
 

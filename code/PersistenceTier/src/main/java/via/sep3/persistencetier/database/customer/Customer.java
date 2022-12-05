@@ -1,5 +1,7 @@
 package via.sep3.persistencetier.database.customer;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.User;
 
@@ -17,7 +19,7 @@ public class Customer extends User {
     //@Column(name="id")
     //private int id;
 
-    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Preference> preferences;
 
 
