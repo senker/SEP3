@@ -17,6 +17,8 @@ public class Preference {
     @PrimaryKeyJoinColumn
     private Customer customer;
 
+
+
     public Preference() {
     }
 

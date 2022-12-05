@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name="food_pack")
 public class FoodPack {
 
     @Id

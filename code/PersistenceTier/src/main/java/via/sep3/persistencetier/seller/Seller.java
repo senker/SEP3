@@ -144,4 +144,12 @@ public class Seller extends User{
     public void setImage(List<Image> images) {
         this.images = images;
     }
+
+    public List<FoodPack> getPacks() {
+        return packs;
+    }
+
+    public void setPacks(List<FoodPack> packs) {
+        this.packs = packs;
+    }
 }

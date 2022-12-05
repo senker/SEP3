@@ -32,6 +32,24 @@ PackRepository packRepository;
 }
 
 @Override
+    public void getAllFoodPacks(EmptyFoodPack packRequest, StreamObserver<FoodPackResponse> responseObserver)
+{
+    FoodPackResponse.Builder foodPackResponseBuilder = FoodPackResponse.newBuilder();
+    Stream<FoodPack> foodPackStream = packRepository.findAllStream();
+
+    foodPackStream.forEach(pack ->{
+       foodPackResponseBuilder
+               .setId(pack.getId())
+               .setTitle(pack.getTitle())
+               .setDescription(pack.getDescription())
+               .setIsPrepared(pack.isIs_prepared())
+               .setPrice(pack.getPrice());
+        responseObserver.onNext(foodPackResponseBuilder.build());
+    });
+    responseObserver.onCompleted();
+}
+
+@Override
 public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
     var foodPack = packRepository.findById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);

@@ -20,6 +20,7 @@ public class Customer extends User {
     @OneToMany(mappedBy="customer", cascade = CascadeType.ALL)
     private List<Preference> preferences;
 
+
     public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, List<Preference> preferences) {
         super(firstName, lastName, address, phoneNumber, password, email);
 
