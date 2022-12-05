@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
+import via.sep3.persistencetier.database.customer.Preference;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 @GRpcService
@@ -23,6 +26,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     public void createCustomer(CreateCustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
         System.out.println("Creating a new customer");
 
+        List<Preference> preferenceList = new ArrayList<>();
 
         Customer customer = new Customer(
                 request.getUser().getFirstName(),
@@ -35,8 +39,12 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                 (long) request.getUser().getPhoneNumber(),
                 request.getUser().getEmail(),
                 request.getUser().getPassword(),
-                null
+                preferenceList
         );
+        for(String preference : request.getPreferenceList())
+        {
+            preferenceList.add(new Preference(preference, customer));
+        }
 
         var savedCustomer = customerRepository.save(customer);
 
@@ -49,6 +57,10 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
         CustomerResponse.Builder customerResponseBuilder = CustomerResponse.newBuilder();
         Stream<Customer> customerList = customerRepository.findAllStream();
         customerList.forEach(customer ->{
+
+
+
+
             customerResponseBuilder
                     .setUser(
                             UserModelResponseCustomer.newBuilder()
@@ -63,8 +75,11 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                                     .setPhoneNumber(customer.getPhoneNumber().intValue())
                                     .setEmail(customer.getEmail())
                                     .setPassword(customer.getPassword())
-                    )
-                    .setPreference(null);
+                    );
+            for(int i=0; i<customer.getPreference().size(); i++)
+            {
+                customerResponseBuilder.setPreference(i, customer.getPreference().get(i).getPreference());
+            }
             System.out.println(customer.getEmail());
             responseObserver.onNext(customerResponseBuilder.build());
         });
@@ -98,7 +113,19 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         .setPhoneNumber(customer.getPhoneNumber().intValue())
                         .setEmail(customer.getEmail())
         );
-        builder.setPreference(null);
+        if(customer.getPreference() == null)
+        {
+            builder.setPreference(0, "");
+        }
+        else{
+            List<String> tempList = new ArrayList<>();
+            for(int i=0; i<customer.getPreference().size(); i++)
+            {
+                tempList.add(customer.getPreference().get(i).getPreference());
+            }
+            builder.addAllPreference(tempList);
+        }
+
 
         var response = builder
                 .build();
