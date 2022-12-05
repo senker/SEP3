@@ -1,4 +1,4 @@
-package via.sep3.persistencetier.seller;
+package via.sep3.persistencetier.database.seller;
 
 
 import via.sep3.persistencetier.database.Address;

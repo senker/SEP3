@@ -6,9 +6,9 @@ import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
-import via.sep3.persistencetier.seller.Image;
-import via.sep3.persistencetier.seller.Seller;
-import via.sep3.persistencetier.seller.SellerRepository;
+import via.sep3.persistencetier.database.seller.Image;
+import via.sep3.persistencetier.database.seller.Seller;
+import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
