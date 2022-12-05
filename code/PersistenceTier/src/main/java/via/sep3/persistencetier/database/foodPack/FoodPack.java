@@ -29,7 +29,7 @@ public class FoodPack {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "seller_cvr")
+    @PrimaryKeyJoinColumn
     private Seller seller;
 
     public Seller getSeller() {
