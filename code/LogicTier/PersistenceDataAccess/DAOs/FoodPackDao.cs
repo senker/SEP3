@@ -24,9 +24,9 @@ public class FoodPackDao : IFoodPackDao
                 {
                     Title = foodPack.Title,
                     Description = foodPack.Description,
+                    Type = foodPack.Type,
                     IsPrepared = foodPack.IsPrepared,
                     Price = foodPack.Price,
-                    Type = foodPack.Type,
                 }
             );
 

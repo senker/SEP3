@@ -5,6 +5,7 @@
 @using System.Reflection.Metadata
 @using Microsoft.AspNetCore.Http
 @using System.Net.Mime
+@using System.ComponentModel
 @inject ISellerService SellerService;
 @inject ICustomerService CustomerService;
 @inject NavigationManager navMgr;
@@ -135,7 +136,7 @@
                         <h3 style="text-align: center">Customer</h3>
                         <div class="field">
                             <label>Preferences:</label>
-                            <input type="text" @bind="_preferences" @bind:event="oninput"/>
+                            <input type="text" @bind="tempPref" @bind:event="oninput"/>
                         </div>
                         <div class="field">
                             <button class="registerbtn" @onclick="CreateCustomer">Register</button>
@@ -168,7 +169,8 @@
     private string _rating;
 
     // Customer creation field
-    private string? _preferences;
+    private string tempPref;
+    private List<string> _preferences;
     
     
     private string? _userFormType;
@@ -244,7 +246,7 @@
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
             new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password);
-                    
+        _preferences = new List<string> { tempPref };
         try
         {
             await CustomerService.CreateCustomer(new CustomerCreateDto(

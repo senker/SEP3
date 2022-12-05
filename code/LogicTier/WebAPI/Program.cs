@@ -28,6 +28,7 @@ builder.Services.AddSession(options =>
 // App services
 builder.Services.AddScoped<ISellerDao, SellerDao>();
 builder.Services.AddScoped<ICustomerDao, CustomerDao>();
+builder.Services.AddScoped<IFoodPackDao, FoodPackDao>();
 //builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 // Swagger

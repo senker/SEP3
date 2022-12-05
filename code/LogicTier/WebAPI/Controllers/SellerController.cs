@@ -24,10 +24,10 @@ public class SellerController : ControllerBase
     {
         if(_imageUrl == "")
         {
-            Console.WriteLine(_imageUrl);
+            //Console.WriteLine(_imageUrl);
             Thread.Sleep(1000);
         }
-        Console.WriteLine(_imageUrl);
+        //Console.WriteLine(_imageUrl);
         return _imageUrl!;
     }
 
@@ -83,7 +83,7 @@ public class SellerController : ControllerBase
     {
         var sellers = await _sellerLogic.GetAllSellers();
 
-        Console.WriteLine(sellers[0].Image);
+        //Console.WriteLine(sellers[0].Image);
 
         return Ok(sellers);
     }
