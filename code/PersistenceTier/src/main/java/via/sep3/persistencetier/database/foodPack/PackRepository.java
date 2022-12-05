@@ -1,6 +1,9 @@
 package via.sep3.persistencetier.database.foodPack;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import via.sep3.persistencetier.database.customer.Customer;
+import via.sep3.persistencetier.database.seller.Seller;
 
 import java.util.stream.Stream;
 
@@ -19,6 +22,9 @@ public interface PackRepository extends JpaRepository<FoodPack, Integer> {
     @Query(value = "select * from food_pack where food_pack.id=?1", nativeQuery = true)
     FoodPack findById(int id);
 
+
+    @Modifying
+    void deleteBySeller(Seller seller);
 
 
     @Query(value="select * from food_pack", nativeQuery = true)

@@ -7,6 +7,7 @@ import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.customer.Preference;
+import via.sep3.persistencetier.database.customer.PreferenceRepository;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.protobuf.*;
 
@@ -24,6 +25,9 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
 
     @Autowired
     PackRepository packRepository;
+
+    @Autowired
+    PreferenceRepository preferenceRepository;
 
 
     @Override
@@ -103,8 +107,37 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
 
     @Override
     public void deleteCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
-        var customer = customerRepository.deleteByEmail(request.getEmail());
+
+
+        Customer customer = customerRepository.findByEmail(request.getEmail());
+        preferenceRepository.deleteByCustomer(customer);
+        customerRepository.deleteByEmail(request.getEmail());
         customerResponseBuilder(responseObserver, customer);
+
+/*
+
+        Stream<Preference> preferencesToRemove = preferenceRepository.findByEmail(request.getEmail());
+        preferencesToRemove.forEach(preference -> {
+            System.out.println(preference.getPreference());
+            preferenceRepository.deleteById(preference.getId());
+        });
+        Customer customer = customerRepository.findByEmail(request.getEmail());
+        customerRepository.deleteByEmail(request.getEmail());
+        customerResponseBuilder(responseObserver, customerRepository.findByEmail(request.getEmail()));
+
+
+ */
+        /*
+        Stream<String> preferencesToRemove = preferenceRepository.findByEmail(request.getEmail());
+        Customer customer = customerRepository.findByEmail(request.getEmail());
+
+        preferencesToRemove.forEach(preference ->{
+            customer.getPreference().remove(preference);
+        });
+        preferenceRepository.delete();
+
+        customerResponseBuilder(responseObserver, customer);
+  */
     }
 
     private void customerResponseBuilder(StreamObserver<CustomerResponse> responseObserver, Customer customer) {

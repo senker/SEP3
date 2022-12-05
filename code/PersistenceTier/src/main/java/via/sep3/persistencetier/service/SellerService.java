@@ -6,7 +6,10 @@ import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.Address;
+import via.sep3.persistencetier.database.customer.Customer;
+import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.database.seller.Image;
+import via.sep3.persistencetier.database.seller.ImageRepository;
 import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
@@ -22,6 +25,12 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    PackRepository packRepository;
+
+    @Autowired
+    ImageRepository imageRepository;
 
 
 
@@ -128,7 +137,11 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Override
     public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.deleteByCvr((long) request.getCvr());
+        Seller seller = sellerRepository.findByCvr((long) request.getCvr());
+
+        packRepository.deleteBySeller(seller);
+        imageRepository.deleteBySeller(seller);
+        sellerRepository.deleteByCvr((long) request.getCvr());
         sellerResponseBuilder(responseObserver, seller);
     }
 

@@ -1,5 +1,8 @@
 package via.sep3.persistencetier.database.customer;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +17,7 @@ public class Preference {
     private String preference;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @PrimaryKeyJoinColumn
     private Customer customer;
 
@@ -25,6 +29,14 @@ public class Preference {
     public Preference(String preference, Customer customer) {
         this.preference = preference;
         this.customer = customer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPreference() {
