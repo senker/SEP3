@@ -113,10 +113,19 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         .setPhoneNumber(customer.getPhoneNumber().intValue())
                         .setEmail(customer.getEmail())
         );
-        for(int i=0; i<customer.getPreference().size(); i++)
+        if(customer.getPreference() == null)
         {
-            builder.setPreference(i, customer.getPreference().get(i).getPreference());
+            builder.setPreference(0, "");
         }
+        else{
+            List<String> tempList = new ArrayList<>();
+            for(int i=0; i<customer.getPreference().size(); i++)
+            {
+                tempList.add(customer.getPreference().get(i).getPreference());
+            }
+            builder.addAllPreference(tempList);
+        }
+
 
         var response = builder
                 .build();
