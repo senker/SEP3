@@ -16,11 +16,10 @@ public interface PackRepository extends JpaRepository<FoodPack, Integer> {
     Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Integer postCode);
 
 
-    @Query(value = "select * from food_pack where FoodPack.id=?1", nativeQuery = true)
+    @Query(value = "select * from food_pack where food_pack.id=?1", nativeQuery = true)
     FoodPack findById(int id);
 
-    @Query(value = "select * from food_pack where FoodPack.id=?1", nativeQuery = true)
-    FoodPack deleteById(int id);
+
 
     @Query(value="select * from food_pack", nativeQuery = true)
     Stream<FoodPack> findAllStream();

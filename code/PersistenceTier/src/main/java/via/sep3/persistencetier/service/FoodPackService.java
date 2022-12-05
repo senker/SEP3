@@ -57,7 +57,8 @@ public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<Food
 
 @Override
 public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
-    var foodPack = packRepository.deleteById(foodPackRequest.getId());
+    FoodPack foodPack = packRepository.findById(foodPackRequest.getId());
+    packRepository.deleteById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
@@ -108,6 +109,7 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
 
 private void foodPackResponseBuilder(StreamObserver<FoodPackResponse> responseObserver, FoodPack foodPack){
     FoodPackResponse.Builder builder = FoodPackResponse.newBuilder()
+            .setId(foodPack.getId())
             .setType(foodPack.getType())
             .setDescription(foodPack.getDescription())
             .setTitle(foodPack.getTitle())
