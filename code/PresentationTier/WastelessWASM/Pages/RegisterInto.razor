@@ -13,6 +13,8 @@
 @inject SavedRestaurant _savedRestaurant;       
 
 
+<AuthorizeView>
+<NotAuthorized>
 <PageTitle>Register</PageTitle>      
 
 <head>   
@@ -22,61 +24,60 @@
 <style>
     body {background: #48b1bf; }
 </style>
-<AuthorizeView>
-     <NotAuthorized>
-         @if (_userFormType == null) {
-         <div class="card">
-             <h3 style="text-align: center">Register</h3>
-             <div class="field">
-                 <label>First Name:</label>
-                 <input type="text" @bind="_firstName" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Last Name:</label>
-                 <input type="text" @bind="_lastName" @bind:event="oninput"/>
-             </div>
+    @if (_userFormType == null) {
+        <div class="card">
+            <h3 style="text-align: center">Register</h3>
+            <div class="field">
+                <label>First Name:</label>
+                <input type="text" @bind="_firstName" @bind:event="oninput"/>
+            </div>
+            <div class="field">
+                <label>Last Name:</label>
+                <input type="text" @bind="_lastName" @bind:event="oninput"/>
+            </div>
 
-             <div class="field">
-                 <label>Email:</label>
-                 <input type="text" @bind="_email" @bind:event="oninput"/>
-             </div>   
-             <div class="field">
-                 <label>Password:</label>
-                 <input type="text" @bind="_password" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>City:</label>
-                 <input type="text" @bind="_city" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Street name:</label>
-                 <input type="text" @bind="_streetName" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Post code:</label>
-                 <input type="text" @bind="_postcode" @bind:event="oninput"/>
-             </div>
-             <div class="field">
-                 <label>Phone number:</label>
-                 <input type="text" @bind="_phoneNumber" @bind:event="oninput"/>
-             </div>
-             <h4 style="text-align: center">Chose user type</h4>
-             <div class="buttonRow">
-                 <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="user" id="customer" value="customer" onchange="@OnSelect"/>
-                     <label class="form-check-label" for="customer">Customer</label>
-                 </div>
-                 <div class="form-check form-check-inline">
-                     <input class="form-check-input" type="radio" name="user" id="seller" value="seller" onchange="@OnSelect"/>
-                     <label class="form-check-label" for="seller">Seller</label>
-                 </div>
-             </div>
-             <div class="field">
-                 <button class="registerIntoBtn" @onclick="NextStep">Next</button>
-             </div>
-         </div>
-         }
-         
+            <div class="field">
+                <label>Email:</label>
+                <input type="text" @bind="_email" @bind:event="oninput"/>
+            </div>   
+            <div class="field">
+                <label>Password:</label>
+                <input type="text" @bind="_password" @bind:event="oninput"/>
+            </div>
+            <div class="field">
+                <label>City:</label>
+                <input type="text" @bind="_city" @bind:event="oninput"/>
+            </div>
+            <div class="field">
+                <label>Street name:</label>
+                <input type="text" @bind="_streetName" @bind:event="oninput"/>
+            </div>
+            <div class="field">
+                <label>Post code:</label>
+                <input type="text" @bind="_postcode" @bind:event="oninput"/>
+            </div>
+            <div class="field">
+                <label>Phone number:</label>
+                <input type="text" @bind="_phoneNumber" @bind:event="oninput"/>
+            </div>
+            <h4 style="text-align: center">Chose user type</h4>
+            <div class="buttonRow">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user" id="customer" value="customer" onchange="@OnSelect"/>
+                    <label class="form-check-label" for="customer">Customer</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user" id="seller" value="seller" onchange="@OnSelect"/>
+                    <label class="form-check-label" for="seller">Seller</label>
+                </div>
+            </div>
+            <div class="field">
+                <button class="registerIntoBtn" @onclick="NextStep">Next</button>
+            </div>
+        </div>
+    }
+</NotAuthorized>
+</AuthorizeView>
          @if (_userFormType is "seller")
          {
              <AuthorizeView>
@@ -146,8 +147,6 @@
                 </NotAuthorized>
             </AuthorizeView>
         }
-     </NotAuthorized>
- </AuthorizeView>
 @code {
     //User creation fields
      private string? _firstName;

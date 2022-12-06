@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text;
 using System.Text.Json;
 using Domain.DTOs;
 using HttpClients.ClientInterfaces;
@@ -11,14 +12,39 @@ public class JwtAuthService : IAuthService
     private readonly HttpClient client = new();
     public static string? Jwt { get; private set; } = "";
 
-    public Task LoginAsync(string username, string password)
+    public async Task LoginAsync(string username, string password)
     {
-        throw new NotImplementedException();
+        UserLoginDto userLoginDto = new()
+        {
+            Username = username,
+            Password = password
+        };
+
+        string userAsJson = JsonSerializer.Serialize(userLoginDto);
+        StringContent content = new(userAsJson, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await client.PostAsync("http://localhost:5283/auth/login", content);
+        string responseContent = await response.Content.ReadAsStringAsync();
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(responseContent);
+        }
+
+        string token = responseContent;
+        Jwt = token;
+
+        ClaimsPrincipal principal = CreateClaimsPrincipal();
+
+        OnAuthStateChanged.Invoke(principal);
     }
 
     public Task LogoutAsync()
     {
-        throw new NotImplementedException();
+        Jwt = null;
+        ClaimsPrincipal principal = new();
+        OnAuthStateChanged.Invoke(principal);
+        return Task.CompletedTask;
     }
 
     public Task RegisterCustomerAsync(CustomerDto customer)
@@ -33,7 +59,8 @@ public class JwtAuthService : IAuthService
 
     public Task<ClaimsPrincipal> GetAuthAsync()
     {
-        throw new NotImplementedException();
+        ClaimsPrincipal principal = CreateClaimsPrincipal();
+        return Task.FromResult(principal);
     }
     
     // Below 2 methods stolen from https://github.com/SteveSandersonMS/presentation-2019-06-NDCOslo/blob/master/demos/MissionControl/MissionControl.Client/Util/ServiceExtensions.cs
