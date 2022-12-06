@@ -21,6 +21,9 @@ public interface SellerRepository extends JpaRepository<Seller, String> {
     @Query(value = "select * from Seller where Seller.cvr=?1", nativeQuery = true)
     Seller findByCvr(Long cvr);
 
+    @Query(value="select * from Seller where Seller.address.postcode=?1", nativeQuery = true)
+    Seller findByPostCode(int postcode);
+
     @Modifying
     @Query(value = "Delete from Seller where Seller.cvr=?1", nativeQuery = true)
     void deleteByCvr(Long cvr);

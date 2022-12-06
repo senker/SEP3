@@ -105,8 +105,11 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
             isPrepared=request.getIsPrepared();
             type = request.getType();
             postCode = request.getPostcode();
-            price = request.getPrice()==0 ? 0 : request.getPrice();
+            price = request.getPrice();
 
+
+            Seller seller = sellerRepository.findByPostCode(postCode);
+        System.out.println(seller);
 
             Stream<FoodPack> streamOfSellers;
 
