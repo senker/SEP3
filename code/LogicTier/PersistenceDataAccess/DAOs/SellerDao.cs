@@ -30,7 +30,8 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
-        user.Password = seller.User.Password;    
+        user.Password = seller.User.Password;
+        user.Role = seller.User.Role;
 
         ImageModelRequestSeller image = new ImageModelRequestSeller();
         image.ImageUrl = seller.Image;

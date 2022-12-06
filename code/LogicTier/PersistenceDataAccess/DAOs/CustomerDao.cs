@@ -36,6 +36,7 @@ public class CustomerDao : ICustomerDao
         user.PhoneNumber = customer.User.PhoneNumber;
         user.Email = customer.User.Email;
         user.Password = customer.User.Password;
+        user.Role = customer.User.Role;
 
         RepeatedField<string> preferences = new RepeatedField<string>();
         foreach(string preference in customer.Preferences)

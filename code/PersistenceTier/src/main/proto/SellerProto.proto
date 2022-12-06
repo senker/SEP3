@@ -39,6 +39,7 @@ message CreateUserModelRequestSeller{
   int32 phoneNumber = 4;
   string email = 5;
   string password = 6;
+  string role = 7;
 }
 
 message CreateSellerRequest {
