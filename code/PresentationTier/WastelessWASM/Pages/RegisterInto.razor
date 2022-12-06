@@ -158,6 +158,7 @@
      private string? _streetName;
      private string? _postcode;
      private string? _phoneNumber;
+    private string? _role;
 
     //Seller creation fields
     
@@ -212,7 +213,7 @@
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-        new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password);
+        new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password, _role);
                     
         try
         {
@@ -245,7 +246,7 @@
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
-            new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password);
+            new UserCreateModel(_firstName, _lastName, addressModel, Convert.ToInt32(_phoneNumber), _email, _password, _role);
         _preferences = new List<string> { tempPref };
         try
         {
