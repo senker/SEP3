@@ -17,6 +17,11 @@ public class SellerDao : ISellerDao
     }
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
+        // TODO: we have to implement getSellerByEmail and use it in this context
+        var foundSeller = await GetSellerByCvrAsync(seller.Cvr);
+
+        if (foundSeller != null) return null;
+        
         AddressModelSeller address = new AddressModelSeller()
         {
             City = seller.User.Address.City,
@@ -130,25 +135,13 @@ public class SellerDao : ISellerDao
         }
     }
 
-  public Task<SellerDto> ValidateSeller(string username, string password)
+  public async Task<SellerDto?> ValidateSeller(string username, string password)
   {
-      var sellerList = GetAllSellers();
-      var list = sellerList.Result;
-      var existingSeller = list.FirstOrDefault(u => 
+      var sellerList = await GetAllSellers();
+      var existingSeller = sellerList.FirstOrDefault(u => 
           u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
 
-
-      if (existingSeller == null)
-      {
-          throw new Exception("User not found");
-      }
-
-      if (!existingSeller.User.Password.Equals(password))
-      {
-          throw new Exception("Password mismatch");
-      }
-
-      return Task.FromResult(existingSeller);
+      return existingSeller;
   }
 
   public Task RegisterSeller(SellerDto seller)

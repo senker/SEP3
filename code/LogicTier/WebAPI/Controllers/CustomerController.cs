@@ -16,10 +16,13 @@ public class CustomerController : ControllerBase
     }
     
     [HttpPost]
-    [Route("/customer")]
     public async Task<ActionResult> CreateCustomer(CustomerCreateDto customer)
     {
-        return Ok(await _customerLogic.CreateCustomerAsync(customer));
+        var createdCustomer = await _customerLogic.CreateCustomerAsync(customer);
+
+        if (createdCustomer == null) return Conflict("Email already exists");
+        
+        return Ok(createdCustomer);
     }
     
     [HttpGet("{email}")]

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using Application.DaoInterfaces;
 using Customer;
 using Domain.DTOs;
@@ -22,6 +23,13 @@ public class CustomerDao : ICustomerDao
 
     public async Task<CustomerDto?> CreateCustomerAsync(CustomerCreateDto customer)
     {
+        var foundCustomer = await GetCustomerByEmailAsync(customer.User.Email);
+
+        if (foundCustomer != null)
+        {
+            return null;
+        }
+        
         AddressModelCustomer address = new AddressModelCustomer()
         {
             City = customer.User.Address.City,
@@ -95,7 +103,7 @@ public class CustomerDao : ICustomerDao
         }
     }
     
-    public async  Task<List<CustomerDto>> GetAllCustomers()
+    public async Task<List<CustomerDto>> GetAllCustomers()
     {
         try
         {
@@ -115,25 +123,14 @@ public class CustomerDao : ICustomerDao
         }
     }
 
-    public Task<CustomerDto> ValidateCustomer(string username, string password)
+    public async Task<CustomerDto?> ValidateCustomer(string username, string password)
     {
-        var customerList = GetAllCustomers();
-        var list = customerList.Result;
-        var existingCustomer = list.FirstOrDefault(u => 
+        var customerList = await GetAllCustomers();
+        
+        var existingCustomer = customerList.FirstOrDefault(u => 
             u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
-
-
-        if (existingCustomer == null)
-        {
-            throw new Exception("User not found");
-        }
-
-        if (!existingCustomer.User.Password.Equals(password))
-        {
-            throw new Exception("Password mismatch");
-        }
-
-        return Task.FromResult(existingCustomer);
+        
+        return existingCustomer;
     }
 
     public Task RegisterCustomer(CustomerDto customer)
