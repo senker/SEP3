@@ -10,6 +10,11 @@ message EmptyFoodPack{
 
 }
 
+message FoodPackSellerRequest{
+  int32 cvr = 1;
+}
+
+
 message FoodPackRequest{
   int32 id = 1;
 }
@@ -20,6 +25,7 @@ message CreateFoodPackRequest {
   string type = 3;
   bool is_prepared = 4;
   double price = 5;
+  int32 cvr =6;
 }
 
 message FoodPackResponse {
@@ -43,6 +49,7 @@ message SearchFoodPacks{
 service FoodPackService {
   rpc createFoodPack(CreateFoodPackRequest) returns (FoodPackResponse);
   rpc getFoodPackById(FoodPackRequest) returns (FoodPackResponse);
+  rpc getFoodPacksBySellerCvr(FoodPackSellerRequest) returns (stream FoodPackResponse);
   rpc deleteFoodPackById(FoodPackRequest) returns (FoodPackResponse);
   rpc searchFoodPacks(SearchFoodPacks) returns (stream FoodPackResponse);
   rpc getAllFoodPacks(EmptyFoodPack) returns (stream FoodPackResponse);

@@ -33,6 +33,23 @@ public class FoodPackController : ControllerBase
         return Ok(foodPack);
     }
 
+    [HttpGet("{isPrepared}/{title}/{type}/{price}/{postcode}")]
+    public async Task<IActionResult> SearchFoodPacks(bool isPrepared,  string title,
+    string type, double price, int postcode)
+    {
+
+        var foodPacks = await _foodPackDao.SearchFoodPacks(isPrepared, title,  type, price, postcode);
+        return Ok(foodPacks);
+    }
+
+    [HttpGet]
+    [Route("/by-seller-cvr/{cvr}")]
+    public async Task<IActionResult> GetFoodPacksBySellerCvr(int cvr)
+    {
+        var foodPacks = await _foodPackDao.GetFoodPacksBySellerCvr(cvr);
+        return Ok(foodPacks);
+    }
+
     [HttpGet]
     [Route("/all-food-packs")]
     public async Task<IActionResult> GetAllFoodPacks()
