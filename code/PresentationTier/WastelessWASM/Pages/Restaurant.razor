@@ -24,7 +24,7 @@
                 @company_name
               </h1>
               <p class="banner_description">@description</p>
-              <button class="tag">SUBSRIBE</button>
+              <button class="tag">SUBSCRIBE</button>
             </div>
             <div class="tags">
               <div class="tag" style="background-color: green">
@@ -123,10 +123,10 @@
           {
               FoodPackModel pack = @foodPackModels.ElementAt(i);
               <div class="row item">
-                  <div class="col-md-4 col-md-offset-2 item_photo">
+                  <div class="col-md-4 item_photo">
                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
                   </div>
-                  <div class="col-md-5 item_description">
+                  <div class="col-md-6 item_description">
                       <div class="row">
                           <div class="col-lg-12" style="text-align: center">
                               <h2>Title:  @pack.Title</h2>
@@ -137,8 +137,7 @@
                               <div class="row item" style="border-bottom:none">
                                         <div class="col-lg-6">
                                             <p>Type: @pack.Type</p>
-                                            <p>Prepared: @pack.IsPrepared</p>  
-                                            <h1>@pack.Price DKK</h1>
+                                            <p>Prepared: @pack.IsPrepared</p>
                                         </div>     
                                         <div class="col-lg-6">
                                             <p>Description</p> 
@@ -149,8 +148,9 @@
                           </div>
                       </div>
                   </div>
-                  <div class="col-md-1 item_add">
-                      <button class="add_btn">
+                  <div class="col-md-2 item_add">    
+                      <p style="float:left; align-items:  center">@pack.Price DKK</p>
+                      <button class="add_btn" style="float:right">
                           <img src="img/basket.svg" alt="basket" />
                           <p>ADD</p>
                       </button>

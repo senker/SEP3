@@ -11,12 +11,12 @@ import java.util.stream.Stream;
 public interface PackRepository extends JpaRepository<FoodPack, Integer> {
 
 
-    @Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.price<=?4 and p.seller.address.postcode=?5", nativeQuery = true)
-    Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Double price, Integer postCode);
+    @Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.price<=?4 and p.seller_cvr=?5", nativeQuery = true)
+    Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Double price, Long cvr);
 
 
-    @Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.seller=?4", nativeQuery = true)
-    Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Integer postCode);
+    @Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.seller_cvr=?4", nativeQuery = true)
+    Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Long cvr);
 
 
     @Query(value = "select * from food_pack where food_pack.id=?1", nativeQuery = true)

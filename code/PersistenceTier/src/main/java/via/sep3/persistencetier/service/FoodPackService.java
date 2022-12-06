@@ -1,8 +1,10 @@
 package via.sep3.persistencetier.service;
 
 import io.grpc.stub.StreamObserver;
+import net.bytebuddy.utility.nullability.AlwaysNull;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.sep3.persistencetier.database.AddressRepository;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.database.seller.Seller;
@@ -21,6 +23,9 @@ PackRepository packRepository;
 
 @Autowired
     SellerRepository sellerRepository;
+
+@Autowired
+    AddressRepository addressRepository;
 
 @Override
     public void createFoodPack(CreateFoodPackRequest packRequest, StreamObserver<FoodPackResponse> responseObserver){
@@ -107,18 +112,18 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
             postCode = request.getPostcode();
             price = request.getPrice();
 
-
-            Seller seller = sellerRepository.findByPostCode(postCode);
-        System.out.println(seller);
+            Long address_id = addressRepository.findByPostCode(postCode);
 
             Stream<FoodPack> streamOfSellers;
 
+            Long cvr = sellerRepository.findByAddressId(address_id);
+
            if(price==0)
            {
-               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, postCode);
+               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, cvr);
            }
            else{
-               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, price, postCode);
+               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, price, cvr);
            }
 
            streamOfSellers.forEach(pack -> {
