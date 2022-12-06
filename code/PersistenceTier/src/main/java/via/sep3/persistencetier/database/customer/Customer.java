@@ -23,14 +23,14 @@ public class Customer extends User {
     private List<Preference> preferences;
 
 
-    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, List<Preference> preferences) {
-        super(firstName, lastName, address, phoneNumber, password, email);
+    public Customer(String firstName, String lastName, Address address, Long phoneNumber, String email, String password, String role, List<Preference> preferences) {
+        super(firstName, lastName, address, phoneNumber, password, email, role);
 
         this.preferences = preferences;
     }
 
     public Customer(){
-        super("","",null,0L,"", "");
+        super("","",null,0L,"", "", "");
     }
 
 

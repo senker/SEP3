@@ -11,9 +11,9 @@ public class CustomerCreateModel
     public UserCreateModel User { get; set; }
     public List<string> Preferences { get; set; }
 
-    public CustomerCreateModel(UserCreateModel userModel, List<string> preferences)
+    public CustomerCreateModel(UserCreateModel user, List<string> preferences)
     {
-        User = userModel;
+        User = user;
         Preferences = preferences;
     }
 }

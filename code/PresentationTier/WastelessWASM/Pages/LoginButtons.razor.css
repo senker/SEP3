@@ -1,0 +1,9 @@
+.icon {
+    width: 30px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.ib {
+    display: inline-block;
+}

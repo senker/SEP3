@@ -30,7 +30,8 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
-        user.Password = seller.User.Password;    
+        user.Password = seller.User.Password;
+        user.Role = seller.User.Role;
 
         ImageModelRequestSeller image = new ImageModelRequestSeller();
         image.ImageUrl = seller.Image;
@@ -129,9 +130,25 @@ public class SellerDao : ISellerDao
         }
     }
 
-  public Task<SellerDto> GetSeller(string username, string password)
+  public Task<SellerDto> ValidateSeller(string username, string password)
   {
-      throw new NotImplementedException();
+      var sellerList = GetAllSellers();
+      var list = sellerList.Result;
+      var existingSeller = list.FirstOrDefault(u => 
+          u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
+
+
+      if (existingSeller == null)
+      {
+          throw new Exception("User not found");
+      }
+
+      if (!existingSeller.User.Password.Equals(password))
+      {
+          throw new Exception("Password mismatch");
+      }
+
+      return Task.FromResult(existingSeller);
   }
 
   public Task RegisterSeller(SellerDto seller)
