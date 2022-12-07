@@ -1,0 +1,102 @@
+@page "/CreatePack"
+@using Domain.DTOs
+@using Radzen
+@using Radzen.Blazor
+
+<PageTitle>Create food pack</PageTitle>
+
+<h3 style="text-align: center">Create food pack</h3>
+
+<div class="foodPackForm">
+    
+    <div class="field">
+        <label>Title:</label>
+        <input id="titlePack" type="text" @bind="title"/>
+    </div>
+    
+    <div class="field">
+        <label style="text-align: center">Description:</label>
+        <textarea id="textDescription" @bind="packDescription"></textarea>
+    </div>
+    <div class="field">
+            <label>Postcode:</label>
+            <input id="postcodePack" type="text" @bind="postcode"/>
+        </div>
+    
+        
+    <div id="packTypeRadio">
+        <label style="text-align: center">Chose food type:</label>
+        <div class="form-check">
+                
+            <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
+            <label class="form-check-label" for="typeVegan">Vegan</label>
+
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
+            <label class="form-check-label" for="typeMeat">
+                Meat
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
+            <label class="form-check-label" for="typePastry">
+                Pastry
+            </label>
+        </div>
+        <div class="form-check"><input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
+            <label class="form-check-label" for="typeGrocery">Grocery</label>
+        </div>
+                
+    </div>
+    <div id="packIsReady">
+        <label style="text-align: center">Ready to eat?</label>
+        <div class="form-check">
+                    
+            <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
+            <label class="form-check-label" for="typeVegan">Yes</label>
+    
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
+            <label class="form-check-label" for="typeMeat">No</label>
+        </div>
+    </div>
+    <RadzenDatePicker @bind-Value=@value DateFormat="yyyy:mm:dd:hh" />
+    
+    <div><button class="creatPackBtn" @onclick="NextStep">Create </button>
+    </div>
+    
+    
+    
+</div>
+                
+              
+               
+            
+
+@code {
+    
+    private bool isLoggedIn;
+    private string? userId;
+    private string? title;
+    private string? packDescription;
+    private string? type;
+    private bool isPepared;
+    private double? price;
+    private string? errorLabel;
+    private string? postcode;
+    
+    private void NextStep()
+    {
+    }
+    
+    DateTime? value = DateTime.Today;
+
+   
+    
+    
+    
+
+
+}
