@@ -64,6 +64,7 @@ public class Seller extends User{
             Long phoneNumber,
             String email,
             String password,
+            String role,
             Long cvr,
             String companyName,
             String description,
@@ -71,7 +72,7 @@ public class Seller extends User{
             String website,
             Float rating,
             List<FoodPack> packs, List<Image> images) {
-        super(firstName,lastName,address,phoneNumber,email, password);
+        super(firstName,lastName,address,phoneNumber,email, password, role);
         this.cvr = cvr;
         this.companyName = companyName;
         this.description = description;
@@ -83,7 +84,7 @@ public class Seller extends User{
     }
 
     public Seller() {
-        super("","",null,0L,"", "");
+        super("","",null,0L,"", "", "");
     }
 
 

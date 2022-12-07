@@ -29,7 +29,7 @@ public class SellerCreateDto
     public string Type { get; set; }
     public string Website { get; set; }
     public float Rating { get; set; }
-    public string Image{get;set;}
+    public string Image {get;set;}
 
     public SellerCreateDto() {
     }

@@ -55,6 +55,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
                     (long) request.getUser().getPhoneNumber(),
                     request.getUser().getEmail(),
                     request.getUser().getPassword(),
+                    request.getUser().getRole(),
                     (long) request.getCvr(),
                     request.getCompanyName(),
                     request.getDescription(),

@@ -17,6 +17,11 @@ public class SellerDao : ISellerDao
     }
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
+        // TODO: we have to implement getSellerByEmail and use it in this context
+        var foundSeller = await GetSellerByCvrAsync(seller.Cvr);
+
+        if (foundSeller != null) return null;
+        
         AddressModelSeller address = new AddressModelSeller()
         {
             City = seller.User.Address.City,
@@ -30,7 +35,8 @@ public class SellerDao : ISellerDao
         user.Address = address;
         user.PhoneNumber = seller.User.PhoneNumber;
         user.Email = seller.User.Email;
-        user.Password = seller.User.Password;    
+        user.Password = seller.User.Password;
+        user.Role = seller.User.Role;
 
         ImageModelRequestSeller image = new ImageModelRequestSeller();
         image.ImageUrl = seller.Image;
@@ -129,9 +135,13 @@ public class SellerDao : ISellerDao
         }
     }
 
-  public Task<SellerDto> GetSeller(string username, string password)
+  public async Task<SellerDto?> ValidateSeller(string username, string password)
   {
-      throw new NotImplementedException();
+      var sellerList = await GetAllSellers();
+      var existingSeller = sellerList.FirstOrDefault(u => 
+          u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
+
+      return existingSeller;
   }
 
   public Task RegisterSeller(SellerDto seller)

@@ -45,8 +45,9 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                         request.getUser().getAddress().getPostCode()
                 ),
                 (long) request.getUser().getPhoneNumber(),
-                request.getUser().getEmail(),
                 request.getUser().getPassword(),
+                request.getUser().getEmail(),
+                request.getUser().getRole(),
                 preferenceList
         );
         for(String preference : request.getPreferenceList())
@@ -66,9 +67,6 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
         Stream<Customer> customerList = customerRepository.findAllStream();
         customerList.forEach(customer ->{
 
-
-
-
             customerResponseBuilder
                     .setUser(
                             UserModelResponseCustomer.newBuilder()
@@ -84,7 +82,6 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
                                     .setEmail(customer.getEmail())
                                     .setPassword(customer.getPassword())
                     );
-
 
             List<String> preferences = new ArrayList<>();
             for(int i=0; i<customer.getPreference().size(); i++)
@@ -168,17 +165,10 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
             builder.addAllPreference(tempList);
         }
 
-
         var response = builder
                 .build();
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
-
-
-
-
-
-
 }

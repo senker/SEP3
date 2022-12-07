@@ -1,47 +1,52 @@
 @page "/Login"
-@using System.Security.Claims
+@using WastelessWASM.Auth
+@using HttpClients.ClientInterfaces
+@inject IAuthService authService
 @inject NavigationManager navMgr
 
-<PageTitle>Login</PageTitle>
-<style>
+<AuthorizeView>
+    <NotAuthorized>
+
+        <PageTitle>Login</PageTitle>
+        <style>
     body {background: #48b1bf; }
 </style>
-
-
-@if (!isLoggedIn)
-{
-    <div class="card ">
-                <h3>Please login</h3>
-                <div class="field">
-                    <label>Email</label>
-                    <input type="text" @bind="email"/>
-                </div>
-                <div class="field">
-                    <label style="text-align: center">Password:</label>
-                    <input type="password" @bind="password"/>
-                </div>
-                @if (!string.IsNullOrEmpty(errorLabel))
-                {
-                    <div class="field">
-                        <label style="color: red">
-                            @errorLabel
-                        </label>
-                    </div>
-                }
-                <div class="field">
-                    <button class="loginbtn" @onclick="LoginAsync">Log in</button>
-                </div>
+        <div class="card ">
+            <h3>Please login</h3>
+            <div class="field">
+                <label>Email</label>
+                <input type="text" @bind="email"/>
             </div>
-}
+            <div class="field">
+                <label style="text-align: center">Password:</label>
+                <input type="password" @bind="password"/>
+            </div>
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <div class="field">
+                    <label style="color: red">
+                        @errorLabel
+                    </label>
+                </div>
+            }
+            <div class="field">
+                <button class="loginbtn" @onclick="LoginAsync">Log in</button>
+            </div>
+        </div>
 
-
+    </NotAuthorized>
+        <Authorized>
+            <div class="card">
+                <h3>Hello, @context.User.Identity.Name</h3>
+            </div>
+        </Authorized>
+</AuthorizeView>
 
 @code {
     private string email;
     private string password;
     private string errorLabel;
     
-    private bool isLoggedIn;
     private string? userId;
     private string? userNameLogged;
 
@@ -50,7 +55,7 @@
         errorLabel = "";
         try
         {
-            // await authService.LoginAsync(userName, password);
+            await authService.LoginAsync(email, password);
             navMgr.NavigateTo("/");
         }
         catch (Exception e)

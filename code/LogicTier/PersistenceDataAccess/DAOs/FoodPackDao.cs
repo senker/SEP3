@@ -1,6 +1,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Grpc.Core;
+using PackPackage;
 using PersistenceDataAccess.Services;
 using Seller;
 
@@ -27,6 +28,7 @@ public class FoodPackDao : IFoodPackDao
                     Type = foodPack.Type,
                     IsPrepared = foodPack.IsPrepared,
                     Price = foodPack.Price,
+                    Cvr = foodPack.Cvr
                 }
             );
 
@@ -70,6 +72,30 @@ public class FoodPackDao : IFoodPackDao
         }
     }
 
+    public async Task<List<FoodPackDto>> SearchFoodPacks(bool isPrepared, string title, string type, double price, int postcode)
+    {
+        try
+        {
+            List<FoodPackDto> foodPackDtoList = new List<FoodPackDto>();
+            AsyncServerStreamingCall<FoodPackResponse> response =  _client.searchFoodPacks(
+                new SearchFoodPacks
+                {
+                    IsPrepared = isPrepared, Title = title, Type = type,
+                    Price = price, Postcode = postcode
+                });
+            while (await response.ResponseStream.MoveNext())
+            {
+                FoodPackResponse current = response.ResponseStream.Current;
+                foodPackDtoList.Add(ResponseToFoodPackDto(current));
+            }
+            return foodPackDtoList; 
+        }  
+        catch
+        {
+            throw new Exception("No food packs found");
+        }
+    }
+
     public async Task<FoodPackDto?> DeleteFoodPackByIdAsync(int id)
     {
         try
@@ -83,6 +109,25 @@ public class FoodPackDao : IFoodPackDao
         catch
         {
             throw new Exception("Could not delete the food pack");
+        }
+    }
+
+    public async Task<List<FoodPackDto>> GetFoodPacksBySellerCvr(int cvr)
+    {
+        try
+        {
+            List<FoodPackDto> foodPackDto = new List<FoodPackDto>();
+            AsyncServerStreamingCall<FoodPackResponse> response = _client.getFoodPacksBySellerCvr(new FoodPackSellerRequest {Cvr = cvr});
+            while (await response.ResponseStream.MoveNext())
+            {
+                FoodPackResponse current = response.ResponseStream.Current;
+                foodPackDto.Add(ResponseToFoodPackDto(current));
+            }
+
+            return foodPackDto;
+        }catch
+        {
+            throw new Exception("Couldn't load all food packs");
         }
     }
 
