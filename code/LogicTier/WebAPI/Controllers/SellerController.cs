@@ -14,6 +14,8 @@ public class SellerController : ControllerBase
     private readonly ISellerDao _sellerLogic;
     private static string? _imageUrl;
 
+    private readonly String _defaultImage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80";
+
     public SellerController(ISellerDao sellerLogic)
     {
         _sellerLogic = sellerLogic;
@@ -45,24 +47,13 @@ public class SellerController : ControllerBase
     [Route("/seller")]
     public async Task<ActionResult> CreateSeller(SellerCreateDto seller)
     {
-        /*try
-        {
-            SellerDto seller = await _sellerLogic.CreateSellerAsync(dto);
-            Console.WriteLine("Created seller: ", seller);
-            return Ok(seller);
-            // return Created($"/users/{seller.User.Id}", seller);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }*/
-        if(_imageUrl != null)
-        {
-                seller.Image = _imageUrl;
-        }else {seller.Image = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80";}
-            
-        return Ok(await _sellerLogic.CreateSellerAsync(seller));
+        seller.Image = _imageUrl ?? _defaultImage;
+
+        var createdSeller = await _sellerLogic.CreateSellerAsync(seller);
+
+        if (createdSeller == null) return Conflict("Email already exists");
+        
+        return Ok(createdSeller);
     }
     
     

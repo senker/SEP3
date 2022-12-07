@@ -117,21 +117,21 @@ public class AuthController : ControllerBase
     {
         try
         {
-
-            CustomerDto customer = await authCustomerService.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
+            var customer = await authCustomerService.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
             if (customer != null)
             {
                 string token = GenerateJwtCustomer(customer);
                 return Ok(token);
             }
-            SellerDto seller = await authSellerService.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
+            
+            var seller = await authSellerService.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
             if (seller != null)
             {
                 string token = GenerateJwtSeller(seller);
                 return Ok(token);
             }
     
-            return BadRequest();
+            return NotFound("User or password is incorrect");
         }
         catch (Exception e)
         {

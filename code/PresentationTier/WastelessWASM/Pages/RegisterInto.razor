@@ -208,6 +208,7 @@
 
      private async Task CreateSeller()
      {
+         _role = _userFormType;
          Console.WriteLine("Creating seller in RegisterInto");
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
@@ -240,8 +241,7 @@
     
     private async Task CreateCustomer()
     {
-
-
+        _role = _userFormType;
         _resultMsg = "";
         var addressModel = new AddressModel(_city, _streetName, Convert.ToInt32(_postcode));
         var userModel =
