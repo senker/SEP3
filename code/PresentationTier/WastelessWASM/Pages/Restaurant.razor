@@ -1,10 +1,11 @@
-﻿@page "/Restaurant"
-@using Domain.Models        
+﻿@page "/seller/{cvr:int}"
 @using HttpClients.ClientInterfaces
+@using Domain.Models
+@using System.Data.Common
 @inject SavedRestaurant _savedRestaurant;  
 @inject IFoodPackService _foodPackService;
 
-<link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css" />
+<link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css"/>
 
 <style>
   body {
@@ -15,47 +16,45 @@
 </style>
 
 <body>
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div id="top-section" style="background-image: url(@image)">
-            <div id="upper-banner">
-              <h1>   
-                @company_name
-              </h1>
-              <p class="banner_description">@description</p>
-              <button class="tag">SUBSCRIBE</button>
+        <div class="col-md-12">
+            <div id="top-section" style="background-image: url(@image)">
+                <div id="upper-banner">
+                    <h1>
+                        @company_name
+                    </h1>
+                    <p class="banner_description">@description</p>
+                    <button class="tag">SUBSCRIBE</button>
+                </div>
+                <div class="tags">
+                    <div class="tag" style="background-color: green">
+                        @type
+                    </div>
+                    <div class="tag" style="background-color: lightgreen">
+                        VEGETARIAN
+                    </div>
+                    <div class="tag" style="background-color: darkred">
+                        MEAT
+                    </div>
+                    <div class="tag" style="background-color: lightgray">
+                        GLUTEN-FREE
+                    </div>
+                </div>
+
             </div>
-            <div class="tags">
-              <div class="tag" style="background-color: green">
-                @type
-              </div>
-              <div class="tag" style="background-color: lightgreen">
-                VEGETARIAN
-              </div>
-              <div class="tag" style="background-color: darkred">
-                MEAT
-              </div>
-              <div class="tag" style="background-color: lightgray">
-                GLUTEN-FREE
-              </div>
-            </div>
 
-        </div>
+            <div class="retaurant_info">
 
-        <div class="retaurant_info">    
-
-            <div id="mapContainer">
-              <script suppress-error="BL9992">
+                <div id="mapContainer">
+                    <script suppress-error="BL9992">
                   async function foo(){
-                      let obj;
+                      let obj;      
+                      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
                       
-              
-                                    const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
-                                    obj = await res.json();
+                       obj = await res.json();
                                     
-                                    console.log(obj)       
-                                    
+                                    console.log(obj)                    
                                     let lng = obj.results[0].geometry.location.lng;
                                     let lat = obj.results[0].geometry.location.lat;
                                     
@@ -80,206 +79,109 @@
                                                     });   
                     }
                     foo();
-             
-              
-              
-              
-              
-              
-               /*
-              var latVariable;
-              var lngVariable;
-              fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Sønderbrogade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
-                               .then((response) => {
-                                   return response.json();
-                               })
-                               .then((jsonData)=>{
-                                       latVariable = jsonData.results[0].geometry.location.lat;
-                                       lngVariable = jsonData.results[0].geometry.location.lng;
-                               });
-              
-                console.log(latVariable);
-                console.log(lngVariable);
-             
-                */
-               
-            
-            
-        
               </script>
+                </div>
+
+                <div class="restaurant_description">
+                    <p>RATING: @rating </p>
+                    <p>@street_name</p>
+                    <p>Open everyday 8:00 - 16:00</p>
+                    <p>Available boxes today: X</p>
+                    <p></p>
+                </div>
             </div>
 
-            <div class="restaurant_description">
-              <p>RATING: @rating </p>                  
-              <p>@street_name</p>      
-              <p>Open everyday 8:00 - 16:00</p>
-              <p>Available boxes today: X</p>
-              <p></p>
-            </div>
-        </div>
-
-        <div class="container" style="margin:  0; padding: 0">
-          @for(int i=0; i<numberOfFoodPacks; i++)
-          {
-              FoodPackModel pack = @foodPackModels.ElementAt(i);
-              <div class="row item">
-                  <div class="col-md-4 item_photo">
-                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU" />
-                  </div>
-                  <div class="col-md-6 item_description">
-                      <div class="row">
-                          <div class="col-lg-12" style="text-align: center">
-                              <h2>Title:  @pack.Title</h2>
-                          </div>
-                      </div>
-                      <div class="row item" style="border-bottom:none">
-                          <div class="col-lg-12">    
-                              <div class="row item" style="border-bottom:none">
+            <div class="container" style="margin:  0; padding: 0">
+                @for (var i = 0; i < numberOfFoodPacks; i++)
+                {
+                    var pack = foodPackModels.ElementAt(i);
+                    <div class="row item">
+                        <div class="col-md-4 item_photo">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
+                        </div>
+                        <div class="col-md-6 item_description">
+                            <div class="row">
+                                <div class="col-lg-12" style="text-align: center">
+                                    <h2>Title: @pack.Title</h2>
+                                </div>
+                            </div>
+                            <div class="row item" style="border-bottom:none">
+                                <div class="col-lg-12">
+                                    <div class="row item" style="border-bottom:none">
                                         <div class="col-lg-6">
                                             <p>Type: @pack.Type</p>
                                             <p>Prepared: @pack.IsPrepared</p>
-                                        </div>     
+                                        </div>
                                         <div class="col-lg-6">
-                                            <p>Description</p> 
+                                            <p>Description</p>
                                             <p>@pack.Description</p>
                                         </div>
-                              </div>
+                                    </div>
 
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-2 item_add">    
-                      <p style="float:left; align-items:  center">@pack.Price DKK</p>
-                      <button class="add_btn" style="float:right">
-                          <img src="img/basket.svg" alt="basket" />
-                          <p>ADD</p>
-                      </button>
-                  </div>
-              </div>
-          }
-        </div>
-
-        <!--
-            <div class="item">
-                <div class="item_add">
-                    <button>
-                        <img src="img/basket.svg" alt="basket"/>
-                        <picture>ADD</picture>
-                    </button>
-                </div>
-                <div class="item_description">
-                </div>
-                <div class="item_photo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
-                </div>
-            </div>
-            
-            <div class="item">
-                <div class="item_add">
-                    <button>
-                        <img src="img/basket.svg" alt="basket"/>
-                        <picture>ADD</picture>
-                    </button>
-                </div>
-                <div class="item_description">
-                    <p>CONTENT: </p>
-                    <p>-Apples</p>
-                    <p>-Bananas</p>
-                    <p>-Mangoes</p>
-                </div>
-                <div class="item_photo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
-                </div>
-            </div>
-            -->
-
-        <!--
-            <section>
-                <div class="listitem">
-                    <a class="list_item_link" href="http://google.com">
-                        <div class="content">
-                            <div class="text_content">
-                                <p>Babunia spaciality</p>
-                                <p>
-                                    lorem ipsum de la tomatoe soup
-                                </p>
-                                <p>
-                                    DKK&nbsp;105.00
-                                </p>
-
-
-                            </div>
-                            <div class="list_item_image">
-
-                                <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/a8/77/b8/received-1480876638637036.jpg" alt="babunia"/>
+                                </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-
-
-            </section>
-            -->
-      </div>
-      <!--
-    <div class="col-3 d-none d-md-block" >
-        <div class="basket">
-            <h1>BASKET:</h1>
+                        <div class="col-md-2 item_add">
+                            <p style="float:left; align-items:  center">@pack.Price DKK</p>
+                            <button class="add_btn" style="float:right">
+                                <img src="img/basket.svg" alt="basket"/>
+                                <p>ADD</p>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-    -->
-    </div>
-  </div>
+</div>
 </body>
 
 @code {
-
-  private int user_id;
-  private string first_name;
-  private string last_name;
-  private string street_name;
-  private string city;
-  private int post_code;
-  private int phone_number;
-  private string email;
-  private int cvr;
-  private string company_name;
-  private string description;
-  private string type;
-  private string website;
-  private float rating;
-  private string image;
+    private string first_name;
+    private string last_name;
+    private string street_name;
+    private string city;
+    private int post_code;
+    private int phone_number;
+    private string email;
+    [Parameter]
+    public int cvr { get; set; }
+    private string company_name;
+    private string description;
+    private string type;
+    private string website;
+    private float rating;
+    private string image;
 
     List<FoodPackModel> foodPackModels;
     private int numberOfFoodPacks;
-  private int foodPackId;
-  private String foodPackTitle;
-  private String foodPackDescription;
-  private String foodPackType;
-  private bool foodPackIsPrepared;
-  private double foodPackPrice;
+    private int foodPackId;
+    private string foodPackTitle;
+    private string foodPackDescription;
+    private string foodPackType;
+    private bool foodPackIsPrepared;
+    private double foodPackPrice;
 
 
-
-  protected override async Task OnInitializedAsync()
-  {
-    List<string> seller =  _savedRestaurant.GetSeller();
-    first_name = seller[0];
-    last_name = seller[1];
-    city = seller[2];
-    post_code = Convert.ToInt32(seller[3]);
-    street_name = seller[4];
-    cvr = Convert.ToInt32(seller[5]);
-    company_name = seller[6];
-    description = seller[7];
-    type = seller[8];
-    website = seller[9];
-    rating = Convert.ToSingle((seller[10]));
-    image = seller[11];
-
+    protected override async Task OnInitializedAsync()
+    {
+        var seller = _savedRestaurant.GetSeller();
+        first_name = seller[0];
+        last_name = seller[1];
+        city = seller[2];
+        post_code = Convert.ToInt32(seller[3]);
+        street_name = seller[4];
+        cvr = Convert.ToInt32(seller[5]);
+        company_name = seller[6];
+        description = seller[7];
+        type = seller[8];
+        website = seller[9];
+        rating = Convert.ToSingle(seller[10]);
+        image = seller[11];
 
 
-    foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(12345543);
-      numberOfFoodPacks = foodPackModels.Count;
-  }
+        foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(12345543);
+        numberOfFoodPacks = foodPackModels.Count;
+    }
+
 }
