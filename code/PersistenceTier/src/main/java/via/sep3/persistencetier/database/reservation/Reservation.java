@@ -10,7 +10,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "status")
     private String status;
@@ -29,7 +29,8 @@ public class Reservation {
     @Column(name = "endPickupTime")
     private Calendar endPickupTime;
 
-    public Reservation(Long id, String status, FoodPack foodPackId, Customer customerId, Calendar startPickupTime, Calendar endPickupTime) {
+
+    public Reservation(int id, String status, FoodPack foodPackId, Customer customerId, Calendar startPickupTime, Calendar endPickupTime) {
         this.id = id;
         this.status = status;
         this.foodPackId = foodPackId;
@@ -81,11 +82,11 @@ public class Reservation {
         this.endPickupTime = endPickupTime;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
