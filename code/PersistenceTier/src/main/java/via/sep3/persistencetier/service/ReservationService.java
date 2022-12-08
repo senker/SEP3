@@ -45,33 +45,25 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
     }
 
-    @Override
-    public void getReservationById(ReservationRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        reservationRepository.findById((long) request.getId());
-    }
 
     @Override
-    public void getReservationsBySellerCvr(ReservationSellerRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        Seller seller = sellerRepository.findByCvr((long) request.getCvr());
+    public void getReservationsBySellerCvr(ReservationSellerRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
+        Seller seller = sellerRepository.findByCvr((long) reservationRequest.getCvr());
         reservationRepository.findBySellerCvr(seller);
     }
 
     @Override
-    public void deleteReservationById(ReservationRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        reservationRepository.deleteById(request.getId());
+    public void deleteReservationById(ReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
+        Reservation reservation = reservationRepository.findById(reservationRequest.getId());
+        reservationRepository.deleteById(reservationRequest.getId());
+        reservationResponseBuilder(reservation, responseObserver);
     }
 
-    @Override
-    public void searchReservation(SearchReservation request, StreamObserver<ReservationResponse> responseObserver) {
-        ReservationResponse.Builder reservationResponseBuilder = ReservationResponse.newBuilder();
 
 
-    }
 
-    @Override
-    public void getAllReservations(EmptyReservation request, StreamObserver<ReservationResponse> responseObserver) {
-        super.getAllReservations(request, responseObserver);
-    }
+
+
 
     private void reservationResponseBuilder(Reservation reservation, StreamObserver<ReservationResponse> responseObserver){
         ReservationResponse.Builder builder = ReservationResponse.newBuilder()
