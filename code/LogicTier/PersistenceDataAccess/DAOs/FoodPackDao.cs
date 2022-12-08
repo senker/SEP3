@@ -1,7 +1,10 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
+using Domain.Models;
 using FoodPack;
 using Grpc.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using PersistenceDataAccess.Services;
 using Seller;
 
@@ -18,17 +21,50 @@ public class FoodPackDao : IFoodPackDao
     
     public async Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto foodPack)
     {
+        Console.Write(DateTime.Now);
+       // DateTime startDateTime = DateTime.Parse(foodPack.StartTime);
+        //DateTime endDateTime = DateTime.Parse(foodPack.EndTime);
+
+        var format = "dd/MM/YYYY HH:mm:ss";
+        var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
+
+        DateTime startDateTime  = JsonConvert.DeserializeObject<DateTime>(foodPack.StartTime, 
+           dateTimeConverter);
+        DateTime endDateTime = JsonConvert.DeserializeObject<DateTime>(foodPack.EndTime, dateTimeConverter);
+
+
+
+
+            DateTimeFoodPack startDateTimeFoodPackModel = new DateTimeFoodPack()
+        {
+            Year = startDateTime.Year,
+            Month = startDateTime.Month,
+            Day = startDateTime.Day,
+            Hour = startDateTime.Hour,
+            Minutes = startDateTime.Minute
+        };
+
+        DateTimeFoodPack endDateTimeFoodPackModel = new DateTimeFoodPack()
+        {
+            Year = endDateTime.Year,
+            Month = endDateTime.Month,
+            Day = endDateTime.Day,
+            Hour = endDateTime.Hour,
+            Minutes = endDateTime.Minute
+        };
         try
         {
             var response =  await _client.createFoodPackAsync(
                 new CreateFoodPackRequest
                 {
+                    Cvr = foodPack.Cvr,
                     Title = foodPack.Title,
                     Description = foodPack.Description,
                     Type = foodPack.Type,
                     IsPrepared = foodPack.IsPrepared,
-                    Price = foodPack.Price,
-                    Cvr = foodPack.Cvr
+                    StartTime = startDateTimeFoodPackModel,
+                    EndTime = endDateTimeFoodPackModel,
+                    Price = foodPack.Price
                 }
             );
 
@@ -44,6 +80,11 @@ public class FoodPackDao : IFoodPackDao
 
     private FoodPackDto ResponseToFoodPackDto(FoodPackResponse response)
     {
+        //year, month, day, hour, minute, second
+        DateTime startDateTime = new DateTime(response.StartTime.Year, response.StartTime.Month, response.StartTime.Day, response.StartTime.Hour, response.StartTime.Minutes, 0);
+        DateTime endDateTime = new DateTime(response.EndTime.Year, response.EndTime.Month, response.EndTime.Day, response.EndTime.Hour, response.EndTime.Minutes, 0);
+
+
         return new FoodPackDto
         {
             Id = response.Id,
@@ -51,6 +92,8 @@ public class FoodPackDao : IFoodPackDao
             Description = response.Description,
             Type = response.Type,
             IsPrepared = response.IsPrepared,
+            StartTime = startDateTime.ToString(),
+            EndTime = endDateTime.ToString(),
             Price = response.Price,
         };
     }

@@ -8,6 +8,10 @@ public class FoodPackModel
     public String Type { get; set; }
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
+
+    public String StartTime{get;set;}
+    
+    public String EndTime{get;set;}
 }
 
 public class FoodPackCreateModel
@@ -18,5 +22,8 @@ public class FoodPackCreateModel
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
+    public String StartTime{get;set;}
+    
+    public String EndTime{get;set;}
     public int Cvr{get;set;}
 }

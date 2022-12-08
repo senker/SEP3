@@ -11,6 +11,9 @@ public class FoodPackDto
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
+    public String StartTime {get;set;}
+    public String EndTime{get;set;}
+
 
     public FoodPackDto()
     {
@@ -29,6 +32,10 @@ public class FoodPackCreateDto
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
+    public String StartTime {get;set;}
+
+    public String EndTime {get;set;}
+
     public int Cvr{get;set;}
 
     public FoodPackCreateDto()
@@ -36,6 +43,6 @@ public class FoodPackCreateDto
     }
 
     public FoodPackCreateDto(FoodPackCreateModel foodPack) =>
-        (Title, Description, Type, IsPrepared, Price, Cvr) = (
-            foodPack.Title, foodPack.Description, foodPack.Type, foodPack.IsPrepared, foodPack.Price, foodPack.Cvr);
+        (Title, Description, Type, IsPrepared, StartTime, EndTime, Price, Cvr) = (
+            foodPack.Title, foodPack.Description, foodPack.Type, foodPack.IsPrepared, foodPack.StartTime, foodPack.EndTime,  foodPack.Price, foodPack.Cvr);
 }
