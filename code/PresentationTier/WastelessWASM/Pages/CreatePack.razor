@@ -18,11 +18,11 @@
 
     <div>
         <label>Pickup start time:</label>
-        <input type="date" value="@startDate" class="form-control valid"/>
+        <input type="datetime-local" @bind="startDate" @bind:event="oninput" class="form-control valid"/>
     </div>
     <div>
         <label>Pickup end time:</label>
-        <input type="date" value="@endDate" class="form-control valid"/>
+        <input type="datetime-local" @bind="endDate" @bind:event="oninput" class="form-control valid"/>
     </div>
 
     <div id="packTypeRadio">
@@ -35,15 +35,11 @@
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
-            <label class="form-check-label" for="typeMeat">
-                Meat
-            </label>
+            <label class="form-check-label" for="typeMeat">Meat</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
-            <label class="form-check-label" for="typePastry">
-                Pastry
-            </label>
+            <label class="form-check-label" for="typePastry">Pastry</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
@@ -69,7 +65,7 @@
         <input id="price" type="number" @bind="_price"/>
     </div>
     <div class="button">
-        <button class="creatPackBtn" @onclick="NextStep">Create</button>
+        <button class="creatPackBtn" @onclick="CreateFoodPack">Create</button>
     </div>
 </div>
 
@@ -83,19 +79,17 @@
     private bool _isPrepared;
     private double? _price;
     private string? _errorLabel;
-
-    DateTime? value = DateTime.Now;
-
-    private void NextStep()
+    
+    
+    
+    
+    private DateTime startDate = DateTime.Today;    
+    private DateTime endDate = DateTime.Today;    
+    
+    
+    private void CreateFoodPack()
     {
+        Console.WriteLine(startDate.ToString());
+        Console.WriteLine(endDate.ToString());
     }
-
-    void OnChange(DateTime? value, string name, string format)
-    {
-        Console.WriteLine($"{name} value changed to {value?.ToString(format)}");
-    }
-
-    readonly DateTime? startDate = DateTime.Today;
-    readonly DateTime endDate = DateTime.Today;
-
 }
