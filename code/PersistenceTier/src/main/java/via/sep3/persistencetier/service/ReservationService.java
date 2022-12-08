@@ -45,10 +45,6 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
     }
 
-    @Override
-    public void getReservationById(ReservationRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        reservationRepository.findById((long) request.getId());
-    }
 
     @Override
     public void getReservationsBySellerCvr(ReservationSellerRequest request, StreamObserver<ReservationResponse> responseObserver) {
@@ -61,17 +57,11 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
         reservationRepository.deleteById(request.getId());
     }
 
-    @Override
-    public void searchReservation(SearchReservation request, StreamObserver<ReservationResponse> responseObserver) {
-        ReservationResponse.Builder reservationResponseBuilder = ReservationResponse.newBuilder();
 
 
     }
 
-    @Override
-    public void getAllReservations(EmptyReservation request, StreamObserver<ReservationResponse> responseObserver) {
-        super.getAllReservations(request, responseObserver);
-    }
+
 
     private void reservationResponseBuilder(Reservation reservation, StreamObserver<ReservationResponse> responseObserver){
         ReservationResponse.Builder builder = ReservationResponse.newBuilder()
