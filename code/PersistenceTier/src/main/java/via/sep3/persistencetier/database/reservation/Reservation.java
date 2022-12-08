@@ -30,13 +30,13 @@ public class Reservation {
     private Seller cvr;
 
     @Column(name = "startPickupTime")
-    private Calendar startPickupTime;
+    private String startPickupTime;
 
     @Column(name = "endPickupTime")
-    private Calendar endPickupTime;
+    private String endPickupTime;
 
 
-    public Reservation(String status, FoodPack foodPackId, Customer customerId, Calendar startPickupTime, Calendar endPickupTime, Seller cvr) {
+    public Reservation(String status, FoodPack foodPackId, Customer customerId, String startPickupTime, String endPickupTime, Seller cvr) {
         this.status = status;
         this.foodPackId = foodPackId;
         this.customerId = customerId;
@@ -46,6 +46,14 @@ public class Reservation {
     }
 
     public Reservation() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -73,27 +81,27 @@ public class Reservation {
         this.customerId = customerId;
     }
 
-    public Calendar getStartPickupTime() {
+    public String getStartPickupTime() {
         return startPickupTime;
     }
 
-    public void setStartPickupTime(Calendar startPickupTime) {
+    public void setStartPickupTime(String startPickupTime) {
         this.startPickupTime = startPickupTime;
     }
 
-    public Calendar getEndPickupTime() {
+    public String getEndPickupTime() {
         return endPickupTime;
     }
 
-    public void setEndPickupTime(Calendar endPickupTime) {
+    public void setEndPickupTime(String endPickupTime) {
         this.endPickupTime = endPickupTime;
     }
 
-    public int getId() {
-        return id;
+    public Seller getCvr() {
+        return cvr;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCvr(Seller cvr) {
+        this.cvr = cvr;
     }
 }

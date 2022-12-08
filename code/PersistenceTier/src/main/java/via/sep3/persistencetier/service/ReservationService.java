@@ -9,6 +9,8 @@ import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.database.reservation.Reservation;
 import via.sep3.persistencetier.database.reservation.ReservationRepository;
+import via.sep3.persistencetier.database.seller.Seller;
+import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.ReservationServiceGrpc;
 import via.sep3.persistencetier.protobuf.*;
 
@@ -23,16 +25,20 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
     PackRepository foodPackRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    private SellerRepository sellerRepository;
 
     @Override
     public void createReservation(CreateReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
+        FoodPack foodPack = foodPackRepository.findById(reservationRequest.getFoodPackId());
+
         Reservation reservation = new Reservation(
                 reservationRequest.getStatus(),
-                reservationRequest.getFoodPackId(),
-                customerRepository.findById(reservationRequest.getCustomerId()),
+                foodPack,
+                customerRepository.findByEmail(reservationRequest.getCustomerId()),
                 reservationRequest.getStartPickupTime(),
                 reservationRequest.getEndPickupTime(),
-                reservationRequest.getCvr());
+                sellerRepository.findByCvr((long) reservationRequest.getCvr()));
 
         var savedReservation = reservationRepository.save(reservation);
         reservationResponseBuilder(savedReservation, responseObserver);
@@ -41,17 +47,18 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
     @Override
     public void getReservationById(ReservationRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        super.getReservationById(request, responseObserver);
+        reservationRepository.findById((long) request.getId());
     }
 
     @Override
     public void getReservationsBySellerCvr(ReservationSellerRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        super.getReservationsBySellerCvr(request, responseObserver);
+        Seller seller = sellerRepository.findByCvr((long) request.getCvr());
+        reservationRepository.findBySellerCvr(seller);
     }
 
     @Override
     public void deleteReservationById(ReservationRequest request, StreamObserver<ReservationResponse> responseObserver) {
-        super.deleteReservationById(request, responseObserver);
+        reservationRepository.deleteById(request.getId());
     }
 
     @Override
@@ -72,8 +79,10 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
                 .setStatus(reservation.getStatus())
                 .setFoodPackId(reservation.getFoodPackId().getId())
                 .setCustomerId(reservation.getCustomerId().getEmail())
-                .setStartPickupTime(reservation.getStartPickupTime().getCalendarType())
-                .setEndPickupTime(reservation.getEndPickupTime().getCalendarType())
+                .setStartPickupTime(reservation.getStartPickupTime())
+                .setEndPickupTime(reservation.getEndPickupTime())
+               // .setStartPickupTime(reservation.getStartPickupTime().getCalendarType())
+               // .setEndPickupTime(reservation.getEndPickupTime().getCalendarType())
                 .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue());
 
         var response = builder.build();
