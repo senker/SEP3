@@ -24,6 +24,8 @@ message CreateReservationRequest{
   string startPickupTime = 3;
   string endPickupTime = 4;
   int32 cvr = 5;
+  int32 foodPackId = 6;
+
 }
 
 message ReservationResponse{

@@ -1,6 +1,8 @@
 package via.sep3.persistencetier.database.reservation;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
+import via.sep3.persistencetier.database.seller.Seller;
+
 import java.util.Calendar;
 import javax.persistence.*;
 
@@ -23,6 +25,10 @@ public class Reservation {
     @PrimaryKeyJoinColumn
     private Customer customerId;
 
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    private Seller cvr;
+
     @Column(name = "startPickupTime")
     private Calendar startPickupTime;
 
@@ -30,13 +36,13 @@ public class Reservation {
     private Calendar endPickupTime;
 
 
-    public Reservation(int id, String status, FoodPack foodPackId, Customer customerId, Calendar startPickupTime, Calendar endPickupTime) {
-        this.id = id;
+    public Reservation(String status, FoodPack foodPackId, Customer customerId, Calendar startPickupTime, Calendar endPickupTime, Seller cvr) {
         this.status = status;
         this.foodPackId = foodPackId;
         this.customerId = customerId;
         this.startPickupTime = startPickupTime;
         this.endPickupTime = endPickupTime;
+        this.cvr = cvr;
     }
 
     public Reservation() {
@@ -53,6 +59,7 @@ public class Reservation {
     public FoodPack getFoodPackId() {
         return foodPackId;
     }
+
 
     public void setFoodPackId(FoodPack foodPackId) {
         this.foodPackId = foodPackId;

@@ -1,5 +1,6 @@
 package via.sep3.persistencetier.service;
 
+import com.google.protobuf.Message;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,16 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
     @Override
     public void createReservation(CreateReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
+        Reservation reservation = new Reservation(
+                reservationRequest.getStatus(),
+                reservationRequest.getFoodPackId(),
+                customerRepository.findById(reservationRequest.getCustomerId()),
+                reservationRequest.getStartPickupTime(),
+                reservationRequest.getEndPickupTime(),
+                reservationRequest.getCvr());
+
+        var savedReservation = reservationRepository.save(reservation);
+        reservationResponseBuilder(savedReservation, responseObserver);
 
     }
 
@@ -45,7 +56,9 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
     @Override
     public void searchReservation(SearchReservation request, StreamObserver<ReservationResponse> responseObserver) {
-        super.searchReservation(request, responseObserver);
+        ReservationResponse.Builder reservationResponseBuilder = ReservationResponse.newBuilder();
+
+
     }
 
     @Override
