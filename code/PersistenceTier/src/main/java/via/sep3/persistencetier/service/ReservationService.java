@@ -53,14 +53,15 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
         super.getAllReservations(request, responseObserver);
     }
 
-    private void reservationResponseBuilder(StreamObserver<ReservationResponse> responseObserver, Reservation reservation){
-        ReservationResponse.Builder builder = FoodPackResponse.newBuilder()
+    private void reservationResponseBuilder(Reservation reservation, StreamObserver<ReservationResponse> responseObserver){
+        ReservationResponse.Builder builder = ReservationResponse.newBuilder()
                 .setId(reservation.getId())
                 .setStatus(reservation.getStatus())
-                .setFoodPackId(reservation.getFoodPackId())
-                .setCustomerId(reservation.getCustomerId())
-                .setStartPickupTime(reservation.getStartPickupTime())
-                .setEndPickupTime(reservation.getEndPickupTime());
+                .setFoodPackId(reservation.getFoodPackId().getId())
+                .setCustomerId(reservation.getCustomerId().getEmail())
+                .setStartPickupTime(reservation.getStartPickupTime().getCalendarType())
+                .setEndPickupTime(reservation.getEndPickupTime().getCalendarType())
+                .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue());
 
         var response = builder.build();
 
