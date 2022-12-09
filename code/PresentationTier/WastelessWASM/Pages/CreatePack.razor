@@ -4,10 +4,6 @@
 @using Domain.DTOs
 @using System.Security.Claims
 @inject IFoodPackService _foodPackService;
-
-
-@using System.Security.Claims
-@using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Create food pack</PageTitle>
@@ -16,13 +12,12 @@
 
     @if (context.User.IsInRole("seller"))
     {
-        <p>@_cvr</p>
         <h3 style="text-align: center">Create food pack</h3>
 
         <div class="foodPackForm">
 
             <div class="field">
-                <label>Title:</label>
+                <label style="text-align: center">Title:</label>
                 <input id="titlePack" type="text" @bind="_title"/>
             </div>
 
@@ -43,33 +38,31 @@
             <div id="packTypeRadio">
                 <label style="text-align: center">Choose food type:</label>
                 <div class="form-check">
-
-                    <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
-                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Vegan</label>
-
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" value="vegan" onchange="@OnSelectType">
+                    <label class="form-check-label" for="typeVegan">Vegan</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
-                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Meat</label>
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat" value="meat" onchange="@OnSelectType">
+                    <label class="form-check-label" for="typeMeat">Meat</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
-                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Pastry</label>
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typePastry" value="pastry" onchange="@OnSelectType">
+                    <label class="form-check-label" for="typePastry">Pastry</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
-                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Grocery</label>
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery" value="grocery" onchange="@OnSelectType">
+                    <label class="form-check-label" for="typeGrocery" >Grocery</label>
                 </div>
             </div>
             <div id="packIsReady">
                 <label style="text-align: center">Is the product prepared?</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
-                    <label class="form-check-label" @bind="_isPrepared" @bind:event="oninput">Yes</label>
+                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" value="true" onchange="@OnSelectPrepared">
+                    <label class="form-check-label" for="typeIsReady">Yes</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
-                    <label class="form-check-label" @bind="_isPrepared" @bind:event="oninput">No</label>
+                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady" value="false" onchange="@OnSelectPrepared">
+                    <label class="form-check-label" for="typeIsNotReady">No</label>
                 </div>
             </div>
             <div class="field">
@@ -78,7 +71,6 @@
             </div>
             <div class="button">
                 <button class="creatPackBtn" @onclick="CreateFoodPack">Create</button>
-                @*<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>*@
             </div>
         </div>
             }
@@ -91,58 +83,34 @@
 </AuthorizeView>
 
 @code {
-
-    private string? userId;
     private string _title;
-    private string? _packDescription;
+    private string _packDescription;
     private string _type;
     private bool _isPrepared;
-    private double? _price;
+    private double _price;
     private string? _errorLabel;
-
-    [Parameter]
-    public string _cvr { get; set; }
-
+    private string _cvr;
     
     private DateTime startDate = DateTime.Today;
     private DateTime endDate = DateTime.Today;
     
-    private string authMessage;/*
-    private string surnameMessage;*//*
-    private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();*/
-
-    /*private async Task GetClaimsPrincipalData()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
-        {
-            authMessage = $"{user.Identity.Name} is authenticated.";
-            claims = user.Claims;
-            _cvr = 
-                $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value}";
-        }
-        else
-        {
-            authMessage = "The user is NOT authenticated.";
-        }
-    }*/
+    
+    private void OnSelectType(ChangeEventArgs args) => _type = (string)args.Value!;
+    private void OnSelectPrepared(ChangeEventArgs args) => Boolean.TryParse((string)args.Value!, out _isPrepared);
 
     private async void CreateFoodPack()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
         _cvr = authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value;
-        //_cvr = ClaimTypes.Sid;
 
         var foodPackModel = new FoodPackCreateModel
         {
-            Title = "www",
-            Description = "www",
-            Type = "vegan",
-            IsPrepared = true,
-            Price = 22.2,
+            Title = _title,
+            Description = _packDescription,
+            Type = _type,
+            IsPrepared = _isPrepared,
+            Price = _price,
             StartTime = startDate,
             EndTime = endDate,
             Cvr = Convert.ToInt32(_cvr)
