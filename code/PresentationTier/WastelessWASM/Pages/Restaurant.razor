@@ -1,19 +1,10 @@
 ﻿@page "/seller/{cvr:int}"
 @using HttpClients.ClientInterfaces
 @using Domain.Models
-@using System.Data.Common
 @inject SavedRestaurant _savedRestaurant;  
 @inject IFoodPackService _foodPackService;
 
 <link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css"/>
-
-<style>
-  body {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    max-width: 100%;
-  }
-</style>
 
 <body>
 <div class="container">
@@ -144,8 +135,10 @@
     private int post_code;
     private int phone_number;
     private string email;
+
     [Parameter]
     public int cvr { get; set; }
+
     private string company_name;
     private string description;
     private string type;
