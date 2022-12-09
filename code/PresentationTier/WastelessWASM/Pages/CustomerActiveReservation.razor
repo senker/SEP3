@@ -1,0 +1,81 @@
+@page "/CustomerActiveReservation"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@using System.Text.RegularExpressions
+@inject NavigationManager navMgr
+@inject ISellerService sellerService; 
+@inject SavedRestaurant _savedRestaurant;
+<h3 style="text-align: center">Active reservation</h3>
+<div class="activeRes">    
+                       
+    @for(int i=0; i<@_active_reservation; i++)
+    {
+        SellerModel seller = @_sellers.ElementAt(i);
+
+        <div class="contentRes">
+            <img src="@seller.Image" alt="seller image" class="restaurant_image"/>
+            <div class="tags">
+                <div class="tag">@seller.Type</div>
+            </div>
+            <h3>@seller.CompanyName</h3>
+            <div classs="images">                            
+                @for(int j=0; j<seller.Rating; j++)
+                {
+                    <img src="img/star-fill.svg" alt="star"/>
+                }
+                @for(int k=0; k<5-seller.Rating; k++)
+                {
+                    <img src="img/star.svg" alt="star"/>
+                }
+            </div>
+            <button class="read_more" @onclick="() => ReadMore(seller)">Read more</button>
+
+        </div>
+    }
+</div>
+
+@code {
+    
+    private string errorLabel;
+    private IEnumerable<SellerModel>? _sellers;
+    private string msg = "";
+    private int? _active_reservation=0;
+    private SellerModel _seller = null;
+    private string _imageURL;
+
+
+    private void  ReadMore(SellerModel seller)
+    {
+
+        errorLabel = "";
+        try
+        {
+    //  _savedRestaurant.SetSeller(seller);
+
+            _seller = seller;
+            _savedRestaurant.SetSeller(_seller);
+            navMgr.NavigateTo("/Restaurant");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    // return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _sellers = await sellerService.GetSellers();
+            _active_reservation = _sellers.Count();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+}

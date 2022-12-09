@@ -1,0 +1,152 @@
+@page "/CustomerHome"
+@using HttpClients.ClientInterfaces
+@using Domain.Models
+@using System.Text.RegularExpressions
+@inject NavigationManager navMgr
+@inject ISellerService sellerService; 
+@inject SavedRestaurant _savedRestaurant;
+<div id="searchForm">
+<div id="textPair">
+    <div class="field">
+        <label>Keyword</label>
+        <input id="titleSearch" type="text" @bind="titleSearch"/>
+    </div>
+    
+    <div class="field">
+        <label>PostCode</label>
+        <input id="postCodeSearch" type="text" @bind="postCode"/>
+    </div>
+    <div class="field">
+            <label>Max price</label>
+            <input id="maxPrice" type="text" @bind="maxPrice"/>
+        </div>
+</div>
+<div id="packTypeRadio">
+    <label style="text-align: center">Chose food type:</label>
+    <div class="form-check">
+                
+        <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
+        <label class="form-check-label" for="typeVegan">Vegan</label>
+
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
+        <label class="form-check-label" for="typeMeat">
+            Meat
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
+        <label class="form-check-label" for="typePastry">
+            Pastry
+        </label>
+    </div>
+    <div class="form-check"><input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
+        <label class="form-check-label" for="typeGrocery">Grocery</label>
+    </div>
+                
+</div>
+<div id="packIsReady">
+    <label style="text-align: center">Ready to eat?</label>
+    <div class="form-check">
+                    
+        <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
+        <label class="form-check-label" for="typeVegan">Yes</label>
+    
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
+        <label class="form-check-label" for="typeMeat">No</label>
+    </div>
+</div>
+    
+    
+<div><button id="searchBtn" @onclick="searchBtn">Search</button>
+</div>
+</div>
+    
+    
+
+    <div class="restaurants">    
+                       
+        @for(int i=0; i<@_number_of_restaurants; i++)
+        {
+            SellerModel seller = @_sellers.ElementAt(i);
+
+            <div class="content">
+                <img src="@seller.Image" alt="Seller image" class="restaurant_image"/>
+                <div class="tags">
+                    <div class="tag">@seller.Type</div>
+                </div>
+                <h3>@seller.CompanyName</h3>
+                <div classs="images">                            
+                    @for(int j=0; j<seller.Rating; j++)
+                    {
+                        <img src="img/star-fill.svg" alt="star"/>
+                    }
+                    @for(int k=0; k<5-seller.Rating; k++)
+                    {
+                        <img src="img/star.svg" alt="star"/>
+                    }
+                </div>
+                <button class="read_more" @onclick="() => ReadMore(seller)">Read more</button>
+
+            </div>
+        }
+    </div>
+
+@code {
+
+    private string titleSearch;
+    private string postCode;
+    private int maxPrice;
+    private void searchBtn()
+    {
+    }
+    
+    
+    
+    
+    private string errorLabel;
+    private IEnumerable<SellerModel>? _sellers;
+    private string msg = "";
+    private int? _number_of_restaurants=0;
+    private SellerModel _seller = null;
+    private string _imageURL;
+
+
+    private void  ReadMore(SellerModel seller)
+    {
+
+        errorLabel = "";
+        try
+        {
+    //  _savedRestaurant.SetSeller(seller);
+
+            _seller = seller;
+            _savedRestaurant.SetSeller(_seller);
+            navMgr.NavigateTo("/Restaurant");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    // return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _sellers = await sellerService.GetSellers();
+            _number_of_restaurants = _sellers.Count();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+}
