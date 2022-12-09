@@ -22,11 +22,8 @@ public class FoodPackDao : IFoodPackDao
     
     public async Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto foodPack)
     {
+        /*
         string json = @"'"+foodPack.StartTime+"'";
-
-
-       // DateTime startDateTime = DateTime.Parse(foodPack.StartTime);
-        //DateTime endDateTime = DateTime.Parse(foodPack.EndTime);
 
         var format = "MM/dd/yyyy HH:mm:ss";
         var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
@@ -34,31 +31,24 @@ public class FoodPackDao : IFoodPackDao
         var  startDateTime  = JsonConvert.DeserializeObject<DateTime>(json, 
            dateTimeConverter); 
         var endDateTime = JsonConvert.DeserializeObject<DateTime>(json, dateTimeConverter);
-
-
-        Console.WriteLine(startDateTime);
-        Console.WriteLine(startDateTime.Year);
-        Console.WriteLine(startDateTime.Month);
-        Console.WriteLine(startDateTime.Day);
-        Console.WriteLine(startDateTime.Hour);
-        Console.WriteLine(startDateTime.Minute);
+                        */
 
             DateTimeFoodPack startDateTimeFoodPackModel = new DateTimeFoodPack()
         {
-            Year = startDateTime.Year,
-            Month = startDateTime.Month,
-            Day = startDateTime.Day,
-            Hour = startDateTime.Hour,
-            Minutes = startDateTime.Minute
+            Year = foodPack.StartTime.Year,
+            Month = foodPack.StartTime.Month,
+            Day = foodPack.StartTime.Day,
+            Hour = foodPack.StartTime.Hour,
+            Minutes = foodPack.StartTime.Minute
         };
 
         DateTimeFoodPack endDateTimeFoodPackModel = new DateTimeFoodPack()
         {
-            Year = endDateTime.Year,
-            Month = endDateTime.Month,
-            Day = endDateTime.Day,
-            Hour = endDateTime.Hour,
-            Minutes = endDateTime.Minute
+            Year = foodPack.EndTime.Year,
+            Month = foodPack.EndTime.Month,
+            Day = foodPack.EndTime.Day,
+            Hour = foodPack.EndTime.Hour,
+            Minutes = foodPack.EndTime.Minute
         };
         try
         {
@@ -100,8 +90,8 @@ public class FoodPackDao : IFoodPackDao
             Description = response.Description,
             Type = response.Type,
             IsPrepared = response.IsPrepared,
-            StartTime = startDateTime.ToString(),
-            EndTime = endDateTime.ToString(),
+            StartTime = startDateTime,
+            EndTime = endDateTime,
             Price = response.Price,
         };
     }

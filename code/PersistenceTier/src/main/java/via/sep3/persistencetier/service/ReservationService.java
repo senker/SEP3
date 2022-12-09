@@ -33,10 +33,11 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
         FoodPack foodPack = foodPackRepository.findById(reservationRequest.getFoodPackId());
 
         Reservation reservation = new Reservation(
-                reservationRequest.getStatus(),
-                foodPack,
+                // int32 customer_id = 1;
+                //  int32 foodPackId = 2;
+                "reserved",
                 customerRepository.findByEmail(reservationRequest.getCustomerId()),
-                sellerRepository.findByCvr((long) reservationRequest.getCvr()));
+                foodPack);
 
         var savedReservation = reservationRepository.save(reservation);
         reservationResponseBuilder(savedReservation, responseObserver);
