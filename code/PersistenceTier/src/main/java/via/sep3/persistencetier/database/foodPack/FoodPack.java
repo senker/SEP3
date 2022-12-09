@@ -3,6 +3,8 @@ package via.sep3.persistencetier.database.foodPack;
 import via.sep3.persistencetier.database.seller.Seller;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -29,6 +31,13 @@ public class FoodPack {
     @Column(name = "price")
     private double price;
 
+    @Column(name="start_date")
+    private LocalDateTime dateTimeStart;
+
+
+    @Column(name="end_date")
+    private LocalDateTime dateTimeEnd;
+
     @ManyToOne
     @PrimaryKeyJoinColumn
     private Seller seller;
@@ -41,12 +50,15 @@ public class FoodPack {
         this.seller = seller;
     }
 
-    public FoodPack(String title, String description, String type, boolean is_prepared, double price, Seller seller) {
+    public FoodPack(String title, String description, String type, boolean is_prepared, double price, LocalDateTime dateTimeStart,
+                    LocalDateTime dateTimeEnd, Seller seller) {
         this.title = title;
         this.description = description;
         this.type = type;
         this.is_prepared = is_prepared;
         this.price = price;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
         this.seller = seller;
     }
 
@@ -100,5 +112,21 @@ public class FoodPack {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public LocalDateTime getDateTimeStart() {
+        return dateTimeStart;
+    }
+
+    public void setDateTimeStart(LocalDateTime dateTimeStart) {
+        this.dateTimeStart = dateTimeStart;
+    }
+
+    public LocalDateTime getDateTimeEnd() {
+        return dateTimeEnd;
+    }
+
+    public void setDateTimeEnd(LocalDateTime dateTimeEnd) {
+        this.dateTimeEnd = dateTimeEnd;
     }
 }

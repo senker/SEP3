@@ -37,4 +37,20 @@ public class FoodPackHttpClient : IFoodPackService
         Console.WriteLine(foodPackModels);
         return foodPackModels;
     }
+
+    public async Task<FoodPackModel> PostFoodPack(FoodPackCreateDto dto)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/food-pack", dto);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        FoodPackModel foodPackModel = JsonSerializer.Deserialize<FoodPackModel>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return foodPackModel;
+    }
 }

@@ -17,18 +17,9 @@ public class FoodPackController : ControllerBase
     
     [HttpPost]
     [Route("/food-pack")]
-    public async Task<ActionResult> CreateFoodPack([FromBody] FoodPackCreateDto foodPack)
+    public async Task<ActionResult> CreateFoodPack(FoodPackCreateDto foodPack)
     {
-        try
-        {
-            return Ok();
-        }
-        catch(Exception e)
-        {
-            return   e.Message;
-        }
-        return Ok()
-       // return Ok(await _foodPackDao.CreateFoodPackAsync(foodPack));
+        return Ok(await _foodPackDao.CreateFoodPackAsync(foodPack));
     }
     
     [HttpGet("{id}")]

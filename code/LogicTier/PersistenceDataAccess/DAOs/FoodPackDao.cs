@@ -1,3 +1,4 @@
+using System.Collections;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
@@ -21,19 +22,26 @@ public class FoodPackDao : IFoodPackDao
     
     public async Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto foodPack)
     {
-        Console.Write(DateTime.Now);
+        string json = @"'"+foodPack.StartTime+"'";
+
+
        // DateTime startDateTime = DateTime.Parse(foodPack.StartTime);
         //DateTime endDateTime = DateTime.Parse(foodPack.EndTime);
 
-        var format = "dd/MM/YYYY HH:mm:ss";
+        var format = "MM/dd/yyyy HH:mm:ss";
         var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
 
-        DateTime startDateTime  = JsonConvert.DeserializeObject<DateTime>(foodPack.StartTime, 
-           dateTimeConverter);
-        DateTime endDateTime = JsonConvert.DeserializeObject<DateTime>(foodPack.EndTime, dateTimeConverter);
+        var  startDateTime  = JsonConvert.DeserializeObject<DateTime>(json, 
+           dateTimeConverter); 
+        var endDateTime = JsonConvert.DeserializeObject<DateTime>(json, dateTimeConverter);
 
 
-
+        Console.WriteLine(startDateTime);
+        Console.WriteLine(startDateTime.Year);
+        Console.WriteLine(startDateTime.Month);
+        Console.WriteLine(startDateTime.Day);
+        Console.WriteLine(startDateTime.Hour);
+        Console.WriteLine(startDateTime.Minute);
 
             DateTimeFoodPack startDateTimeFoodPackModel = new DateTimeFoodPack()
         {
