@@ -1,4 +1,8 @@
-@page "/CreatePack"
+@page "/CreatePack"      
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
+@using Domain.Models
+@inject IFoodPackService _foodPackService;
 
 <PageTitle>Create food pack</PageTitle>
 
@@ -79,6 +83,10 @@
     private bool _isPrepared;
     private double? _price;
     private string? _errorLabel;
+
+    [Parameter]
+    public string _cvr { get; set; }
+
     
     
     
@@ -91,5 +99,19 @@
     {
         Console.WriteLine(startDate.ToString());
         Console.WriteLine(endDate.ToString());
+
+        FoodPackCreateModel foodPackModel = new FoodPackCreateModel
+        {
+            Title = _title,
+            Description = _packDescription,
+            Type = _type,
+            IsPrepared = _isPrepared,
+            Price = (double)_price,
+            StartTime = startDate.ToString(),
+            EndTime = endDate.ToString(),
+             Cvr =  Convert.ToInt32(_cvr)
+        };
+        FoodPackCreateDto foodPackDto = new FoodPackCreateDto(foodPackModel);
+        _foodPackService.PostFoodPack(foodPackDto);
     }
 }

@@ -10,10 +10,10 @@ public static class AuthorizationPolicies
         services.AddAuthorizationCore(options =>
         {
             options.AddPolicy("MustBeCustomer", a =>
-                a.RequireAuthenticatedUser().RequireClaim("Role", "Customer"));
+                a.RequireAuthenticatedUser().RequireClaim("Role", "customer"));
             
             options.AddPolicy("MustBeSeller", a =>
-                a.RequireAuthenticatedUser().RequireClaim("Role", "Seller"));
+                a.RequireAuthenticatedUser().RequireClaim("Role", "seller"));
             
             options.AddPolicy("SecurityLevel4", a =>
                 a.RequireAuthenticatedUser().RequireClaim("SecurityLevel", "4", "5"));

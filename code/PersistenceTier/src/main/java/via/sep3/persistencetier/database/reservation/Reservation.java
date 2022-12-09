@@ -29,19 +29,11 @@ public class Reservation {
     @PrimaryKeyJoinColumn
     private Seller cvr;
 
-    @Column(name = "startPickupTime")
-    private String startPickupTime;
 
-    @Column(name = "endPickupTime")
-    private String endPickupTime;
-
-
-    public Reservation(String status, FoodPack foodPackId, Customer customerId, String startPickupTime, String endPickupTime, Seller cvr) {
+    public Reservation(String status, FoodPack foodPackId, Customer customerId, Seller cvr) {
         this.status = status;
         this.foodPackId = foodPackId;
         this.customerId = customerId;
-        this.startPickupTime = startPickupTime;
-        this.endPickupTime = endPickupTime;
         this.cvr = cvr;
     }
 
@@ -79,22 +71,6 @@ public class Reservation {
 
     public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
-    }
-
-    public String getStartPickupTime() {
-        return startPickupTime;
-    }
-
-    public void setStartPickupTime(String startPickupTime) {
-        this.startPickupTime = startPickupTime;
-    }
-
-    public String getEndPickupTime() {
-        return endPickupTime;
-    }
-
-    public void setEndPickupTime(String endPickupTime) {
-        this.endPickupTime = endPickupTime;
     }
 
     public Seller getCvr() {

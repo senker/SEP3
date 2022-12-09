@@ -36,8 +36,6 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
                 reservationRequest.getStatus(),
                 foodPack,
                 customerRepository.findByEmail(reservationRequest.getCustomerId()),
-                reservationRequest.getStartPickupTime(),
-                reservationRequest.getEndPickupTime(),
                 sellerRepository.findByCvr((long) reservationRequest.getCvr()));
 
         var savedReservation = reservationRepository.save(reservation);
@@ -71,10 +69,6 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
                 .setStatus(reservation.getStatus())
                 .setFoodPackId(reservation.getFoodPackId().getId())
                 .setCustomerId(reservation.getCustomerId().getEmail())
-                .setStartPickupTime(reservation.getStartPickupTime())
-                .setEndPickupTime(reservation.getEndPickupTime())
-               // .setStartPickupTime(reservation.getStartPickupTime().getCalendarType())
-               // .setEndPickupTime(reservation.getEndPickupTime().getCalendarType())
                 .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue());
 
         var response = builder.build();

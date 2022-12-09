@@ -37,4 +37,38 @@ public class FoodPackHttpClient : IFoodPackService
         Console.WriteLine(foodPackModels);
         return foodPackModels;
     }
+
+    public async Task<FoodPackModel> PostFoodPack(FoodPackCreateDto dto)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/food-pack", dto);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        FoodPackModel foodPackModel = JsonSerializer.Deserialize<FoodPackModel>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return foodPackModel;
+    }
+
+    public async Task<List<FoodPackModel>> SearchFoodPacks(SearchFoodPackDto dto)
+    {
+        string url = $"{dto.IsPrepared + "/" + dto.Title + "/" + dto.Type + "/" + dto.Price + "/" + dto.PostCode}";
+        HttpResponseMessage response = await client.GetAsync(url);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception("status code not equal to 200");
+        }
+        Console.WriteLine(result);
+
+        List<FoodPackModel> foodPackModels = JsonSerializer.Deserialize<List<FoodPackModel>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return foodPackModels;
+    }
 }
