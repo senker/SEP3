@@ -101,6 +101,22 @@ public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest,
                 .setDescription(pack.getDescription())
                 .setType(pack.getType())
                 .setIsPrepared(pack.isIs_prepared())
+                .setStartTime(
+                        DateTimeFoodPack.newBuilder()
+                                .setDay(pack.getDateTimeStart().getDayOfMonth())
+                                .setMonth(pack.getDateTimeStart().getMonthValue())
+                                .setYear(pack.getDateTimeStart().getYear())
+                                .setHour(pack.getDateTimeStart().getHour())
+                                .setMinutes(pack.getDateTimeStart().getMinute()).build()
+                )
+                .setEndTime(
+                        DateTimeFoodPack.newBuilder()
+                                .setDay(pack.getDateTimeEnd().getDayOfMonth())
+                                .setMonth(pack.getDateTimeEnd().getMonthValue())
+                                .setYear(pack.getDateTimeEnd().getYear())
+                                .setHour(pack.getDateTimeEnd().getHour())
+                                .setMinutes(pack.getDateTimeEnd().getMinute()).build()
+                )
                 .setPrice(pack.getPrice());
         responseObserver.onNext(response.build());
     });
