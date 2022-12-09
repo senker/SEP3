@@ -2,10 +2,16 @@
 @using WastelessWASM.Pages
 
 <div class="top-row px-4">
-    <div class="nav">
-        <SellerFunctionality/>
-    </div>
-    <div class="nav">
-        <LoginButtons/>
-    </div>
+    <AuthorizeView>
+        @if (context.User.IsInRole("seller"))
+        {
+            <div class="nav">
+                <SellerFunctionality/>
+            </div>   
+        }
+        </AuthorizeView>
+
+            <div class="nav">
+                <LoginButtons/>
+            </div>
 </div>

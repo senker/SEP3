@@ -5,6 +5,12 @@
     padding: 0;
 }
 
+.body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100%;
+}
+
 .container{
     padding: 0;
     width: 100%;
