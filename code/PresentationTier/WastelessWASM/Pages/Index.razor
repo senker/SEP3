@@ -4,7 +4,6 @@
 @using System.Text.RegularExpressions
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
-@inject SavedRestaurant _savedRestaurant;
 
 <PageTitle>Index</PageTitle>
 
@@ -62,15 +61,12 @@
 
     private void  ReadMore(SellerModel seller)
     {
-
         errorLabel = "";
         try
         {
-          //  _savedRestaurant.SetSeller(seller);
-
-            _seller = seller;
-            _savedRestaurant.SetSeller(_seller);
-            navMgr.NavigateTo("/Restaurant");
+            _seller = seller;/*
+            _savedRestaurant.SetSeller(_seller);*/
+            navMgr.NavigateTo("/seller/" + _seller.Cvr);
         }
         catch (Exception e)
         {

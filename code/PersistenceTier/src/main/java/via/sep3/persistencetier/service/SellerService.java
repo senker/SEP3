@@ -151,7 +151,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         List<Image> sellerPartialImages = seller.getImage();
         for(Image image : sellerPartialImages)
         {
-            fullImageUrl+=image;
+            fullImageUrl+=image.getPartialImage();
         }
 
         SellerResponse.Builder builder = SellerResponse.newBuilder();

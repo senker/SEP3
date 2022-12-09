@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+﻿/*using System.Globalization;
 using Domain.Models;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -60,4 +60,4 @@ public class SavedRestaurant
             //return _memoryCache.Get<SellerModel>("seller").ToString();
         return sellerList;
     }
-}
+}*/

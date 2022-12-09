@@ -47,6 +47,22 @@ public class SellerHttpClient : ISellerService
         })!;
         return sellers;
     }
+    
+    public async Task<SellerModel> GetSellerByCvr(int cvr)
+    {
+        HttpResponseMessage response = await client.GetAsync("/Seller/" + cvr);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        SellerModel seller = JsonSerializer.Deserialize<SellerModel>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return seller;
+    }
 
 
     public async Task<string> GetImage()

@@ -1,8 +1,10 @@
 ﻿@page "/seller/{cvr:int}"
 @using HttpClients.ClientInterfaces
-@using Domain.Models
-@inject SavedRestaurant _savedRestaurant;  
+@using Domain.Models@*
+@inject SavedRestaurant _savedRestaurant;  *@
 @inject IFoodPackService _foodPackService;
+
+@inject ISellerService sellerService; 
 
 <link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css"/>
 
@@ -75,7 +77,7 @@
 
                 <div class="restaurant_description">
                     <p>RATING: @rating </p>
-                    <p>@street_name</p>
+                    <p>@street_name @post_code @city</p>
                     <p>Open everyday 8:00 - 16:00</p>
                     <p>Available boxes today: X</p>
                     <p></p>
@@ -158,22 +160,24 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var seller = _savedRestaurant.GetSeller();
-        first_name = seller[0];
-        last_name = seller[1];
-        city = seller[2];
-        post_code = Convert.ToInt32(seller[3]);
-        street_name = seller[4];
-        cvr = Convert.ToInt32(seller[5]);
-        company_name = seller[6];
-        description = seller[7];
-        type = seller[8];
-        website = seller[9];
-        rating = Convert.ToSingle(seller[10]);
-        image = seller[11];
+        var seller = await sellerService.GetSellerByCvr(cvr);
+        
+        //var seller = _savedRestaurant.GetSeller();
+        first_name = seller.User.FirstName;
+        last_name = seller.User.LastName;
+        city = seller.User.Address.City;
+        post_code = seller.User.Address.Postcode;
+        street_name = seller.User.Address.Streetname;
+        cvr = seller.Cvr;
+        company_name = seller.CompanyName;
+        description = seller.Description;
+        type = seller.Type;
+        website = seller.Website;
+        rating = seller.Rating;
+        image = seller.Image;
 
 
-        foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(12345543);
+        foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(cvr);
         numberOfFoodPacks = foodPackModels.Count;
     }
 

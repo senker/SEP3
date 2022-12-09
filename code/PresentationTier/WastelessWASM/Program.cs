@@ -25,7 +25,6 @@ builder.Services.AddScoped<ICustomerService, CustomerHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<IFoodPackService, FoodPackHttpClient>();
-builder.Services.AddTransient<SavedRestaurant>();
 builder.Services.AddMemoryCache();
 
 AuthorizationPolicies.AddPolicies(builder.Services);

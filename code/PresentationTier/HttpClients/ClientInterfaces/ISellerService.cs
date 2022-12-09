@@ -7,5 +7,6 @@ public interface ISellerService
 {
     Task<SellerModel> CreateSeller(SellerCreateDto dto);
     Task<List<SellerModel>> GetSellers();
+    Task<SellerModel> GetSellerByCvr(int cvr);
     Task<string> GetImage();
 }

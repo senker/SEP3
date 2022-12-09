@@ -4,7 +4,6 @@
 @using System.Text.RegularExpressions
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
-@inject SavedRestaurant _savedRestaurant;
 <h3 style="text-align: center">Active reservation</h3>
 <div class="activeRes">    
                        
@@ -50,10 +49,6 @@
         errorLabel = "";
         try
         {
-    //  _savedRestaurant.SetSeller(seller);
-
-            _seller = seller;
-            _savedRestaurant.SetSeller(_seller);
             navMgr.NavigateTo("/Restaurant");
         }
         catch (Exception e)
