@@ -32,15 +32,15 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
     public void createReservation(CreateReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
         FoodPack foodPack = foodPackRepository.findById(reservationRequest.getFoodPackId());
 
-        Reservation reservation = new Reservation(
+/*        Reservation reservation = new Reservation(
                 // int32 customer_id = 1;
                 //  int32 foodPackId = 2;
                 "reserved",
                 customerRepository.findByEmail(reservationRequest.getCustomerId()),
-                foodPack);
+                foodPack);*/
 
-        var savedReservation = reservationRepository.save(reservation);
-        reservationResponseBuilder(savedReservation, responseObserver);
+//        var savedReservation = reservationRepository.save(reservation);
+  //      reservationResponseBuilder(savedReservation, responseObserver);
 
     }
 
