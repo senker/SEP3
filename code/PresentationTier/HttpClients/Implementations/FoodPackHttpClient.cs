@@ -40,7 +40,7 @@ public class FoodPackHttpClient : IFoodPackService
 
     public async Task<FoodPackModel> PostFoodPack(FoodPackCreateDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/food-pack", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/FoodPack", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {

@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using Application.DaoInterfaces;
 using Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -15,10 +17,11 @@ public class FoodPackController : ControllerBase
         _foodPackDao = foodPackDao;
     }
     
-    [HttpPost]
-    [Route("/food-pack")]
+    [HttpPost()]
     public async Task<ActionResult> CreateFoodPack(FoodPackCreateDto foodPack)
     {
+
+        
         return Ok(await _foodPackDao.CreateFoodPackAsync(foodPack));
     }
     
@@ -33,7 +36,7 @@ public class FoodPackController : ControllerBase
         return Ok(foodPack);
     }
 
-    [HttpGet("{isPrepared}/{title}/{type}/{price}/{postcode}")]
+    [Microsoft.AspNetCore.Mvc.HttpGet("{isPrepared}/{title}/{type}/{price}/{postcode}")]
     public async Task<IActionResult> SearchFoodPacks(bool isPrepared,  string title,
     string type, double price, int postcode)
     {

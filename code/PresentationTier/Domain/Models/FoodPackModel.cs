@@ -22,8 +22,8 @@ public class FoodPackCreateModel
     public bool IsPrepared { get; set; }
     public double Price { get; set; }
 
-    public String StartTime{get;set;}
+    public DateTime StartTime{get;set;}
     
-    public String EndTime{get;set;}
+    public DateTime EndTime{get;set;}
     public int Cvr{get;set;}
 }

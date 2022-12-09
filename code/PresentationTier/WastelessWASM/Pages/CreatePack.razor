@@ -1,85 +1,101 @@
 @page "/CreatePack"      
 @using HttpClients.ClientInterfaces
-@using Domain.DTOs
 @using Domain.Models
+@using Domain.DTOs
+@using System.Security.Claims
 @inject IFoodPackService _foodPackService;
 
+
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
 <PageTitle>Create food pack</PageTitle>
+<AuthorizeView>
+    <Authorized>
 
-<h3 style="text-align: center">Create food pack</h3>
+    @if (context.User.IsInRole("seller"))
+    {
+        <p>@_cvr</p>
+        <h3 style="text-align: center">Create food pack</h3>
 
-<div class="foodPackForm">
+        <div class="foodPackForm">
 
-    <div class="field">
-        <label>Title:</label>
-        <input id="titlePack" type="text" @bind="_title"/>
-    </div>
+            <div class="field">
+                <label>Title:</label>
+                <input id="titlePack" type="text" @bind="_title"/>
+            </div>
 
-    <div class="field">
-        <label style="text-align: center">Description:</label>
-        <textarea id="textDescription" @bind="_packDescription"></textarea>
-    </div>
+            <div class="field">
+                <label style="text-align: center">Description:</label>
+                <textarea id="textDescription" @bind="_packDescription"></textarea>
+            </div>
 
-    <div>
-        <label>Pickup start time:</label>
-        <input type="datetime-local" @bind="startDate" @bind:event="oninput" class="form-control valid"/>
-    </div>
-    <div>
-        <label>Pickup end time:</label>
-        <input type="datetime-local" @bind="endDate" @bind:event="oninput" class="form-control valid"/>
-    </div>
+            <div>
+                <label>Pickup start time:</label>
+                <input type="datetime-local" @bind="startDate" @bind:event="oninput" class="form-control valid"/>
+            </div>
+            <div>
+                <label>Pickup end time:</label>
+                <input type="datetime-local" @bind="endDate" @bind:event="oninput" class="form-control valid"/>
+            </div>
 
-    <div id="packTypeRadio">
-        <label style="text-align: center">Chose food type:</label>
-        <div class="form-check">
+            <div id="packTypeRadio">
+                <label style="text-align: center">Choose food type:</label>
+                <div class="form-check">
 
-            <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
-            <label class="form-check-label" for="typeVegan">Vegan</label>
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
+                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Vegan</label>
 
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
+                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Meat</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
+                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Pastry</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
+                    <label class="form-check-label" @bind="_type" @bind:event="oninput">Grocery</label>
+                </div>
+            </div>
+            <div id="packIsReady">
+                <label style="text-align: center">Is the product prepared?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
+                    <label class="form-check-label" @bind="_isPrepared" @bind:event="oninput">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
+                    <label class="form-check-label" @bind="_isPrepared" @bind:event="oninput">No</label>
+                </div>
+            </div>
+            <div class="field">
+                <label>Price:</label>
+                <input id="price" type="number" @bind="_price"/>
+            </div>
+            <div class="button">
+                <button class="creatPackBtn" @onclick="CreateFoodPack">Create</button>
+                @*<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>*@
+            </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
-            <label class="form-check-label" for="typeMeat">Meat</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
-            <label class="form-check-label" for="typePastry">Pastry</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
-            <label class="form-check-label" for="typeGrocery">Grocery</label>
-        </div>
+            }
+    @if (context.User.IsInRole("customer"))
+    {
+        <h3>You are not authorized!</h3>
 
-    </div>
-    <div id="packIsReady">
-        <label style="text-align: center">Is the product prepared?</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
-            <label class="form-check-label" for="typeVegan">Yes</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
-            <label class="form-check-label" for="typeMeat">No</label>
-        </div>
-    </div>
-
-
-    <div class="field">
-        <label>Price:</label>
-        <input id="price" type="number" @bind="_price"/>
-    </div>
-    <div class="button">
-        <button class="creatPackBtn" @onclick="CreateFoodPack">Create</button>
-    </div>
-</div>
-
+    }
+    </Authorized>
+</AuthorizeView>
 
 @code {
 
     private string? userId;
     private string _title;
     private string? _packDescription;
-    private string? _type;
+    private string _type;
     private bool _isPrepared;
     private double? _price;
     private string? _errorLabel;
@@ -88,30 +104,51 @@
     public string _cvr { get; set; }
 
     
+    private DateTime startDate = DateTime.Today;
+    private DateTime endDate = DateTime.Today;
     
-    
-    
-    private DateTime startDate = DateTime.Today;    
-    private DateTime endDate = DateTime.Today;    
-    
-    
-    private void CreateFoodPack()
-    {
-        Console.WriteLine(startDate.ToString());
-        Console.WriteLine(endDate.ToString());
+    private string authMessage;/*
+    private string surnameMessage;*//*
+    private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();*/
 
-        FoodPackCreateModel foodPackModel = new FoodPackCreateModel
+    /*private async Task GetClaimsPrincipalData()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
         {
-            Title = _title,
-            Description = _packDescription,
-            Type = _type,
-            IsPrepared = _isPrepared,
-            Price = (double)_price,
-            StartTime = startDate.ToString(),
-            EndTime = endDate.ToString(),
-             Cvr =  Convert.ToInt32(_cvr)
+            authMessage = $"{user.Identity.Name} is authenticated.";
+            claims = user.Claims;
+            _cvr = 
+                $"Surname: {user.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value}";
+        }
+        else
+        {
+            authMessage = "The user is NOT authenticated.";
+        }
+    }*/
+
+    private async void CreateFoodPack()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        _cvr = authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value;
+        //_cvr = ClaimTypes.Sid;
+
+        var foodPackModel = new FoodPackCreateModel
+        {
+            Title = "www",
+            Description = "www",
+            Type = "vegan",
+            IsPrepared = true,
+            Price = 22.2,
+            StartTime = startDate,
+            EndTime = endDate,
+            Cvr = Convert.ToInt32(_cvr)
         };
-        FoodPackCreateDto foodPackDto = new FoodPackCreateDto(foodPackModel);
+        var foodPackDto = new FoodPackCreateDto(foodPackModel);
         _foodPackService.PostFoodPack(foodPackDto);
     }
+
 }
