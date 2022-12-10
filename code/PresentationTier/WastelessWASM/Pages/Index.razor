@@ -38,9 +38,11 @@
 
             </div>
         }
-    </div>
+    </div>      
 
-    <style>
+<button @onclick="Reservations">Go to your reservations</button>
+
+<style>
     body {
         
         background: #48b1bf; 
@@ -58,6 +60,11 @@
     private SellerModel _seller = null;
     private string _imageURL;
 
+
+    private void Reservations()
+    {
+        navMgr.NavigateTo("/CustomerActiveReservation/11");
+    }
 
     private void  ReadMore(SellerModel seller)
     {

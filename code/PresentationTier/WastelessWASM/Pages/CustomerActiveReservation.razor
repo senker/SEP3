@@ -1,76 +1,117 @@
-@page "/CustomerActiveReservation"
+@page "/CustomerActiveReservation/{email}"
 @using HttpClients.ClientInterfaces
 @using Domain.Models
-@using System.Text.RegularExpressions
+
 @inject NavigationManager navMgr
-@inject ISellerService sellerService; 
+@inject IReservationService _reservationService; 
+
+<link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css"/>
+
+
 <h3 style="text-align: center">Active reservation</h3>
-<div class="activeRes">    
-                       
-    @for(int i=0; i<@_active_reservation; i++)
-    {
-        SellerModel seller = @_sellers.ElementAt(i);
-
-        <div class="contentRes">
-            <img src="@seller.Image" alt="seller image" class="restaurant_image"/>
-            <div class="tags">
-                <div class="tag">@seller.Type</div>
-            </div>
-            <h3>@seller.CompanyName</h3>
-            <div classs="images">                            
-                @for(int j=0; j<seller.Rating; j++)
-                {
-                    <img src="img/star-fill.svg" alt="star"/>
-                }
-                @for(int k=0; k<5-seller.Rating; k++)
-                {
-                    <img src="img/star.svg" alt="star"/>
-                }
-            </div>
-            <button class="read_more" @onclick="() => ReadMore(seller)">Read more</button>
-
-        </div>
+ 
+<style>
+    .reservation_table{
+        font-size:  20px;
+        width: 70%;
+        margin-left:  auto;
+        margin-right:  auto;
+        overflow: hidden;
     }
+    
+    .reservation_table thead{
+        border-right: 1px solid lightskyblue;
+    }
+    
+    .reservation_table thead:last-child
+    {
+        border-right:  none;
+    }
+    
+    .reservation_table thead tr{
+        background-color: lightblue;
+        color:  white;
+        font-weight: bold;
+        text-align:  left;
+    }
+    
+    .reservation_table th,
+    .reservation_table td{
+        padding:  5px 5px 5px 5px;
+    }
+    
+    .reservation_table tbody tr
+    {
+        border-bottom:  1px solid lightblue;
+    }
+    
+    .reservation_table tbody tr:hover{
+        font-weight: bold;
+        color:  lightskyblue ;
+        cursor: pointer;
+    }
+</style>
+
+
+<div class="reservations">
+    <div class="reservation_container">
+        <div class="reservation">
+            <table class="reservation_table">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>FoodPack Title</th>
+                    <th>Start Time</th> 
+                    <th>End Time</th> 
+                    <th>Full Address</th>
+                </tr>
+                </thead>  
+                <tbody>
+               @for(int i=0; i<_reservationModels.Count; i++)
+               {
+                   ReservationModel reservationModel =  _reservationModels.ElementAt(i);
+                   <tr>
+                       <td>@reservationModel.Status</td>
+                       <td>@reservationModel.FoodPack.Title</td>
+                       <td>@reservationModel.FoodPack.StartTime</td>
+                       <td>@reservationModel.FoodPack.EndTime</td>    
+                       <td>@reservationModel.FullAddress</td>
+                   </tr>
+               }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
+
 @code {
-    
+
     private string errorLabel;
-    private IEnumerable<SellerModel>? _sellers;
+    private List<ReservationModel> _reservationModels = new List<ReservationModel>();
     private string msg = "";
-    private int? _active_reservation=0;
+    private int? _active_reservation = 0;
     private SellerModel _seller = null;
     private string _imageURL;
 
 
-    private void  ReadMore(SellerModel seller)
-    {
+    [Parameter]
+    public String email { get; set; }
 
-        errorLabel = "";
-        try
-        {
-            navMgr.NavigateTo("/Restaurant");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            errorLabel = $"Error: {e.Message}";
-        }
-    // return Task.CompletedTask;
+    private void ReadMore(SellerModel seller)
+    {
     }
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            _sellers = await sellerService.GetSellers();
-            _active_reservation = _sellers.Count();
+            _reservationModels = await _reservationService.GetReservationsByCustomerEmail(email);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            msg = e.Message;
+            Console.WriteLine(e.Message);
         }
     }
-    
+
 }

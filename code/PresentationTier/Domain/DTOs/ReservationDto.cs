@@ -2,17 +2,15 @@
 
 public class ReservationDto
 {
-    public int Id {get;set;}
-    public string Status {get;set;}
-    //public int foodPack_id;
-    //public string customer_id ;
-    public string StartPickupTime {get;set;}
-    public string EndPickupTime {get;set;}
-    //int cvr = 7;
+    public String Status {get;set;}
+    public FoodPackDto FoodPack {get;set;}
+    public String CustomerId {get;set;}
+    public int Cvr {get;set;}
+    public String FullAddress {get;set;}
 }
 
 public class ReservationCreateDto
 {
-    public int CustomerId {get;set;}
+    public string CustomerId {get;set;}
     public int FoodPackId {get;set;}
 }

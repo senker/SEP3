@@ -18,9 +18,9 @@ public class SellerDao : ISellerDao
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
         // TODO: we have to implement getSellerByEmail and use it in this context
-        var foundSeller = await GetSellerByCvrAsync(seller.Cvr);
+      //  var foundSeller = await GetSellerByCvrAsync(seller.Cvr);
 
-        if (foundSeller != null) return null;
+      //  if (foundSeller != null) return null;
         
         AddressModelSeller address = new AddressModelSeller()
         {

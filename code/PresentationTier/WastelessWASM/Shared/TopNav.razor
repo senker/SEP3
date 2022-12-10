@@ -7,9 +7,15 @@
         {
             <div class="nav">
                 <SellerFunctionality/>
-            </div>   
+            </div>
         }
-        </AuthorizeView>
+        @if(context.User.IsInRole("customer"))
+        {
+            <div class="nav">
+                <CustomerFunctionality/>
+            </div>
+        }
+    </AuthorizeView>
 
             <div class="nav">
                 <LoginButtons/>

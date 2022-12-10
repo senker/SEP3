@@ -2,26 +2,25 @@ package via.sep3.persistencetier.database.reservation;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.seller.Seller;
+import via.sep3.persistencetier.database.seller.SellerId;
 
 import java.util.Calendar;
 import javax.persistence.*;
 
 @Entity
 @Table(name="reservation")
+@IdClass(ReservationId.class)
 public class Reservation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "status")
     private String status;
 
+    @Id
     @ManyToOne
    // @PrimaryKeyJoinColumn
     @JoinColumn(name="food_pack_id")
     private FoodPack foodPackId;
 
+    @Id
     @ManyToOne
    // @PrimaryKeyJoinColumn
     @JoinColumn(name="customer_id")
@@ -39,14 +38,6 @@ public class Reservation {
     }
 
     public Reservation() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getStatus() {
