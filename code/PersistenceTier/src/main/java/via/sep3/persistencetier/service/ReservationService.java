@@ -15,6 +15,8 @@ import via.sep3.persistencetier.protobuf.ReservationServiceGrpc;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @GRpcService
 @Transactional
@@ -31,16 +33,16 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
     @Override
     public void createReservation(CreateReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
         FoodPack foodPack = foodPackRepository.findById(reservationRequest.getFoodPackId());
-
-/*        Reservation reservation = new Reservation(
+        Reservation reservation = new Reservation(
                 // int32 customer_id = 1;
                 //  int32 foodPackId = 2;
                 "reserved",
-                customerRepository.findByEmail(reservationRequest.getCustomerId()),
-                foodPack);*/
+                foodPack,
+                customerRepository.findByEmail(reservationRequest.getCustomerId())
+                );
 
-//        var savedReservation = reservationRepository.save(reservation);
-  //      reservationResponseBuilder(savedReservation, responseObserver);
+         var savedReservation = reservationRepository.save(reservation);
+        reservationResponseBuilder(savedReservation, responseObserver);
 
     }
 
@@ -65,12 +67,24 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
 
 
     private void reservationResponseBuilder(Reservation reservation, StreamObserver<ReservationResponse> responseObserver){
+
+        LocalDateTime startDateTime = reservation.getFoodPackId().getDateTimeStart();
+        LocalDateTime endDateTime = reservation.getFoodPackId().getDateTimeEnd();
+
+        DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedStartDateTime = startDateTime.format(customFormat);
+        String formattedEndDateTime = endDateTime.format(customFormat);
+
         ReservationResponse.Builder builder = ReservationResponse.newBuilder()
                 .setId(reservation.getId())
                 .setStatus(reservation.getStatus())
                 .setFoodPackId(reservation.getFoodPackId().getId())
                 .setCustomerId(reservation.getCustomerId().getEmail())
+                .setStartPickupTime(formattedStartDateTime)
+                .setEndPickupTime(formattedEndDateTime)
                 .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue());
+
+
 
         var response = builder.build();
 

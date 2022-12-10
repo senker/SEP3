@@ -18,23 +18,24 @@ public class Reservation {
     private String status;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn
+   // @PrimaryKeyJoinColumn
+    @JoinColumn(name="food_pack_id")
     private FoodPack foodPackId;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn
+   // @PrimaryKeyJoinColumn
+    @JoinColumn(name="customer_id")
     private Customer customerId;
 
-    @ManyToOne
-    @PrimaryKeyJoinColumn
-    private Seller cvr;
+   // @ManyToOne
+   // @PrimaryKeyJoinColumn
+   // private Seller cvr;
 
 
-    public Reservation(String status, FoodPack foodPackId, Customer customerId, Seller cvr) {
+    public Reservation(String status, FoodPack foodPackId, Customer customerId) {
         this.status = status;
         this.foodPackId = foodPackId;
         this.customerId = customerId;
-        this.cvr = cvr;
     }
 
     public Reservation() {
@@ -73,11 +74,12 @@ public class Reservation {
         this.customerId = customerId;
     }
 
-    public Seller getCvr() {
+ /*   public Seller getCvr() {
         return cvr;
     }
 
     public void setCvr(Seller cvr) {
         this.cvr = cvr;
     }
+  */
 }
