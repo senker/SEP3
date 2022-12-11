@@ -23,8 +23,9 @@ builder.Services.AddScoped(
 builder.Services.AddScoped<ISellerService, SellerHttpClient>();
 builder.Services.AddScoped<ICustomerService, CustomerHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<IFoodPackService, FoodPackHttpClient>();
+builder.Services.AddScoped<IReservationService, ReservationHttpClient>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddMemoryCache();
 
 AuthorizationPolicies.AddPolicies(builder.Services);

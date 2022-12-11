@@ -37,6 +37,48 @@ public class ReservationDao : IReservationDao
         }
     }
 
+    public async Task<List<ReservationDto>> GetReservationsBySellerCvrDaoAsync(int cvr)
+    {
+        try
+        {
+            List<ReservationDto> reservationList = new List<ReservationDto>();
+            AsyncServerStreamingCall<ReservationResponse> response =  _client.getReservationsBySellerCvr(
+                new ReservationSellerRequest{Cvr=cvr});
+            while (await response.ResponseStream.MoveNext())
+            {
+                ReservationResponse current = response.ResponseStream.Current;
+                reservationList.Add(ResponseToReservationDto(current));
+            }
+
+            return reservationList;
+        }
+        catch(Exception e)
+        {
+            throw new Exception("Couldn't load all reservations");
+        }
+    }
+
+    public async Task<List<ReservationDto>> GetReservationsByCustomerEmailDaoAsync(string email)
+    {
+        try
+        {
+            List<ReservationDto> reservationList = new List<ReservationDto>();
+            AsyncServerStreamingCall<ReservationResponse> response =  _client.getReservationsByCustomerEmail(
+                new ReservationCustomerRequest{Email=email});
+            while (await response.ResponseStream.MoveNext())
+            {
+                ReservationResponse current = response.ResponseStream.Current;
+                reservationList.Add(ResponseToReservationDto(current));
+            }
+
+            return reservationList;
+        }
+        catch(Exception e)
+        {
+            throw new Exception("Couldn't load all reservations");
+        }
+    }
+
     private ReservationDto ResponseToReservationDto(ReservationResponse response)
     {
         /*
@@ -52,10 +94,22 @@ public class ReservationDao : IReservationDao
 
         return new ReservationDto()
         {
-            Id = response.Id,
             Status = response.Status,
-            StartPickupTime = response.StartPickupTime,
-            EndPickupTime = response.EndPickupTime
+            FoodPack = new FoodPackDto
+            {
+                Id = response.FoodPack.Id,
+                Title = response.FoodPack.Title,
+                Description = response.FoodPack.Description,
+                Type = response.FoodPack.Type,
+                IsPrepared = response.FoodPack.IsPrepared,
+                Price = response.FoodPack.Price,
+                StartTime = DateTime.Parse(response.FoodPack.StartPickupTime),
+                EndTime = DateTime.Parse(response.FoodPack.EndPickupTime)          
+            },
+             CustomerId = response.CustomerId,
+             Cvr = response.Cvr,
+             FullAddress = response.FullAddress
+
         };
     }
 }

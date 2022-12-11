@@ -14,8 +14,8 @@ message ReservationSellerRequest{
   int32 cvr = 1;
 }
 
-message ReservationRequest{
-  int32 id = 1;
+message ReservationCustomerRequest{
+  string email = 1;
 }
 
 message CreateReservationRequest{
@@ -23,18 +23,26 @@ message CreateReservationRequest{
   int32 foodPackId = 2;
 }
 
-message ReservationResponse{
+message FoodPackModel{
   int32 id = 1;
-  string status = 2;
-  int32 foodPack_id = 3;
-  string customer_id = 4;
-  string startPickupTime = 5;
-  string endPickupTime = 6;
-  int32 cvr = 7;
+  string title=2;
+  string description=3;
+  string type=4;
+  bool isPrepared=5;
+  double price=6;
+  string startPickupTime = 7;
+  string endPickupTime = 8;
+}
+
+message ReservationResponse{
+  string status = 1;
+  FoodPackModel foodPack = 2;
+  string customer_id = 3;
+  int32 cvr = 4;
+  string fullAddress = 5;
 }
 
 message SearchReservation{
-  int32 id = 1;
   string status = 2;
   int32 foodPack_id = 3;
   string customer_id = 4;
@@ -45,9 +53,8 @@ message SearchReservation{
 
 service ReservationService{
   rpc createReservation(CreateReservationRequest) returns (ReservationResponse);
-  rpc getReservationById(ReservationRequest) returns (ReservationResponse);
+  rpc getReservationsByCustomerEmail(ReservationCustomerRequest) returns (stream ReservationResponse);
   rpc getReservationsBySellerCvr(ReservationSellerRequest) returns (stream ReservationResponse);
-  rpc deleteReservationById(ReservationRequest) returns (ReservationResponse);
   rpc searchReservation(SearchReservation) returns (stream ReservationResponse);
   rpc getAllReservations(EmptyReservation) returns (stream ReservationResponse);
 }

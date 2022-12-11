@@ -16,8 +16,19 @@ public class ReservationController : ControllerBase
     }
 
     [HttpPost()]
-    public async Task<ActionResult> CreateFoodPack(ReservationCreateDto foodPack)
+    public async Task<ActionResult> CreateReservation(ReservationCreateDto foodPack)
     {
         return Ok(await _reservationDao.CreateReservationDaoAsync(foodPack));
+    }
+
+    [HttpGet("/by-seller/{cvr}")]
+    public async Task<ActionResult> GetReservationsBySellerCvr(int cvr)
+    {
+        return Ok(await _reservationDao.GetReservationsBySellerCvrDaoAsync(cvr));
+    }
+    [HttpGet("/by-customer/{email}")]
+    public async Task<ActionResult> GetReservationsByCustomerEmail(String email)
+    {
+        return Ok(await _reservationDao.GetReservationsByCustomerEmailDaoAsync(email));
     }
 }

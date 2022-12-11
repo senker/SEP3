@@ -1,22 +1,21 @@
 package via.sep3.persistencetier.service;
 
-import com.google.protobuf.Message;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.sep3.persistencetier.database.Address;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
 import via.sep3.persistencetier.database.reservation.Reservation;
 import via.sep3.persistencetier.database.reservation.ReservationRepository;
-import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.database.seller.SellerRepository;
-import via.sep3.persistencetier.protobuf.ReservationServiceGrpc;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
@@ -36,28 +35,41 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
         Reservation reservation = new Reservation(
                 // int32 customer_id = 1;
                 //  int32 foodPackId = 2;
-                "reserved",
+                "active",
                 foodPack,
                 customerRepository.findByEmail(reservationRequest.getCustomerId())
                 );
 
          var savedReservation = reservationRepository.save(reservation);
         reservationResponseBuilder(savedReservation, responseObserver);
-
+        responseObserver.onCompleted();
     }
 
 
     @Override
     public void getReservationsBySellerCvr(ReservationSellerRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
-        Seller seller = sellerRepository.findByCvr((long) reservationRequest.getCvr());
-        reservationRepository.findBySellerCvr(seller);
+     //   Seller seller = sellerRepository.findByCvr((long) reservationRequest.getCvr());
+        Stream<FoodPack> foodPacks = foodPackRepository.findBySeller(reservationRequest.getCvr());
+
+
+        foodPacks.forEach(foodPack ->{
+            Stream<Reservation> reservations = reservationRepository.findByFoodPack(foodPack);
+            reservations.forEach(reservation->{
+                reservationResponseBuilder(reservation, responseObserver);
+            });
+        });
+        responseObserver.onCompleted();
     }
 
+
     @Override
-    public void deleteReservationById(ReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
-        Reservation reservation = reservationRepository.findById(reservationRequest.getId());
-        reservationRepository.deleteById(reservationRequest.getId());
-        reservationResponseBuilder(reservation, responseObserver);
+    public void getReservationsByCustomerEmail(ReservationCustomerRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver)
+    {
+        Stream<Reservation> reservations = reservationRepository.findByCustomerEmail(reservationRequest.getEmail());
+        reservations.forEach(reservation ->{
+            reservationResponseBuilder(reservation, responseObserver);
+        });
+        responseObserver.onCompleted();
     }
 
 
@@ -75,21 +87,29 @@ public class ReservationService extends ReservationServiceGrpc.ReservationServic
         String formattedStartDateTime = startDateTime.format(customFormat);
         String formattedEndDateTime = endDateTime.format(customFormat);
 
+        //StreetName, PostCode City
+        Address addressObject = reservation.getFoodPackId().getSeller().getAddress();
+        String address = addressObject.getStreetName()+ ", "
+                + addressObject.getPostcode() + " " + addressObject.getCity();
+
         ReservationResponse.Builder builder = ReservationResponse.newBuilder()
-                .setId(reservation.getId())
                 .setStatus(reservation.getStatus())
-                .setFoodPackId(reservation.getFoodPackId().getId())
+                .setFoodPack(FoodPackModel.newBuilder()
+                        .setId(reservation.getFoodPackId().getId())
+                        .setTitle(reservation.getFoodPackId().getTitle())
+                        .setDescription(reservation.getFoodPackId().getDescription())
+                        .setType(reservation.getFoodPackId().getType())
+                        .setIsPrepared(reservation.getFoodPackId().isIs_prepared())
+                        .setPrice(reservation.getFoodPackId().getPrice())
+                        .setStartPickupTime(formattedStartDateTime)
+                        .setEndPickupTime(formattedEndDateTime)
+                )
                 .setCustomerId(reservation.getCustomerId().getEmail())
-                .setStartPickupTime(formattedStartDateTime)
-                .setEndPickupTime(formattedEndDateTime)
-                .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue());
-
-
+                .setCvr(reservation.getFoodPackId().getSeller().getCvr().intValue())
+                .setFullAddress(address);
 
         var response = builder.build();
 
         responseObserver.onNext(response);
-        responseObserver.onCompleted();
-
     }
 }

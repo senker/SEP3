@@ -92,7 +92,7 @@ public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest,
     System.out.println("Inside get food packs by seller cvr");
     FoodPackResponse.Builder response = FoodPackResponse.newBuilder();
     Seller seller = sellerRepository.findByCvr((long) foodPackSellerRequest.getCvr());
-    Stream<FoodPack> foodPackStream = packRepository.findBySeller(seller);
+    Stream<FoodPack> foodPackStream = packRepository.findBySeller(seller.getCvr().intValue());
 
     foodPackStream.forEach(pack ->{
         response
