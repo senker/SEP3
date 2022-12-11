@@ -2,3 +2,11 @@
     display: inline-block;
     
 }
+
+.nav-logo {
+    height: 55px;
+    width: 55px;
+    margin: 5px;
+    position: absolute;left: 0;top: 0;
+    cursor:pointer;
+}

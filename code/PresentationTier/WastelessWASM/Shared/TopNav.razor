@@ -1,7 +1,12 @@
 @inherits LayoutComponentBase
 @using WastelessWASM.Pages
 
+@inject NavigationManager navMgr
+
 <div class="top-row px-4">
+    <div class="nav">
+        <img class="nav-logo" src="img/logo.png" @onclick="MainPage"/>
+    </div>
     <AuthorizeView>
         @if (context.User.IsInRole("seller"))
         {
@@ -9,7 +14,7 @@
                 <SellerFunctionality/>
             </div>
         }
-        @if(context.User.IsInRole("customer"))
+        @if (context.User.IsInRole("customer"))
         {
             <div class="nav">
                 <CustomerFunctionality/>
@@ -17,7 +22,16 @@
         }
     </AuthorizeView>
 
-            <div class="nav">
-                <LoginButtons/>
-            </div>
+    <div class="nav">
+        <LoginButtons/>
+    </div>
 </div>
+
+@code {
+
+    private void MainPage()
+    {
+        navMgr.NavigateTo("/");
+    }
+
+}
