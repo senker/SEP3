@@ -155,7 +155,6 @@
     {
         var seller = await sellerService.GetSellerByCvr(cvr);
         
-    //var seller = _savedRestaurant.GetSeller();
         first_name = seller.User.FirstName;
         last_name = seller.User.LastName;
         city = seller.User.Address.City;

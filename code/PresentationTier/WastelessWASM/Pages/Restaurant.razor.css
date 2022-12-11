@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     
-    
 }
 .foodIcon {
     height: 190px;
@@ -14,16 +13,11 @@
 #coName {
     font-size: 2.5em;
 }
-#topContainer{
-    display: flex;
-    flex-direction: column;
-}
 
 #subscribeBtn {
 display: inline-block;
 outline: none;
 cursor: pointer;
-font-weight: 500;
 border: 1px solid transparent;
 border-radius: 2px;
 height: 36px;
@@ -34,14 +28,6 @@ background-color: #007c89;
 transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 padding: 0 18px;
 width: 120px;
-
-}
-
-
-#bottomContainer {
-    display: flex;
-    flex-direction:column;
-    
 }
 
 #coInfo{
