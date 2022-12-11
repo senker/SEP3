@@ -6,85 +6,70 @@
 
 @inject ISellerService sellerService; 
 
-<link rel="stylesheet" href="~/@(nameof(WastelessWASM)).styles.css" type="text/css"/>
+
 
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="top-section" style="background-image: url(@image)">
-                <div id="upper-banner">
-                    <h1>
-                        @company_name
-                    </h1>
-                    <p class="banner_description">@description</p>
-                    <button class="tag">SUBSCRIBE</button>
-                </div>
-                <div class="tags">
-                    <div class="tag" style="background-color: green">
-                        @type
-                    </div>
-                    <div class="tag" style="background-color: lightgreen">
-                        VEGETARIAN
-                    </div>
-                    <div class="tag" style="background-color: darkred">
-                        MEAT
-                    </div>
-                    <div class="tag" style="background-color: lightgray">
-                        GLUTEN-FREE
-                    </div>
-                </div>
 
-            </div>
+<div id="coName"><h1>@company_name</h1></div>
 
-            <div class="retaurant_info">
+<div id="topContainer">
+    <div id="coPicture" style="background-image: url(@image)"></div>
+    
+    <p id="coDescription">@description</p>
+</div>
 
-                <div id="mapContainer">
-                    <script suppress-error="BL9992">
-                  async function foo(){
-                      let obj;      
-                      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
-                      
-                       obj = await res.json();
-                                    
-                                    console.log(obj)                    
-                                    let lng = obj.results[0].geometry.location.lng;
-                                    let lat = obj.results[0].geometry.location.lat;
-                                    
-                                    
-                                    var map = new google.maps.Map(document.getElementById("mapContainer"), {
-                                                      zoom: 15,
-                                                      center: new google.maps.LatLng(lat, lng),
-                                                      mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                    });
-                                                    const infowindow = new google.maps.InfoWindow({
-                                                      content: "Borgergade 7, 8700 Horsens",
-                                                      ariaLabel: "Borgergade 7, 8700 Horsens",
-                                                    });
-                                                    let marker = new google.maps.Marker({
-                                                      position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
-                                                      map: map,
-                                                      animation: google.maps.Animation.DROP
-                                                    });
-                                                    infowindow.open({
-                                                      anchor: marker,
-                                                      map
-                                                    });   
-                    }
-                    foo();
-              </script>
-                </div>
+@*<div id="coType">
+    <div id="tag">@type</div>
+    </div>*@
+<button id="subscribeBtn">Subscribe</button>
 
-                <div class="restaurant_description">
-                    <p>RATING: @rating </p>
-                    <p>@street_name @post_code @city</p>
-                    <p>Open everyday 8:00 - 16:00</p>
-                    <p>Available boxes today: X</p>
-                    <p></p>
-                </div>
-            </div>
 
-            <div class="container" style="margin:  0; padding: 0">
+<div id="bottomContainer">
+    
+    <div id="coInfo">
+        <p>Rating: @rating </p>
+        <p>@street_name <br/>@post_code <br/>@city</p>
+    </div>
+    
+    <div id="mapContainer">
+        <script suppress-error="BL9992">
+                          async function foo(){
+                              let obj;      
+                              const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
+                              
+                               obj = await res.json();
+                                            
+                                            console.log(obj)                    
+                                            let lng = obj.results[0].geometry.location.lng;
+                                            let lat = obj.results[0].geometry.location.lat;
+                                            
+                                            
+                                            var map = new google.maps.Map(document.getElementById("mapContainer"), {
+                                                              zoom: 15,
+                                                              center: new google.maps.LatLng(lat, lng),
+                                                              mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                            });
+                                                            const infowindow = new google.maps.InfoWindow({
+                                                              content: "Borgergade 7, 8700 Horsens",
+                                                              ariaLabel: "Borgergade 7, 8700 Horsens",
+                                                            });
+                                                            let marker = new google.maps.Marker({
+                                                              position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                                                              map: map,
+                                                              animation: google.maps.Animation.DROP
+                                                            });
+                                                            infowindow.open({
+                                                              anchor: marker,
+                                                              map
+                                                            });   
+                            }
+                            foo();
+                      </script>
+    </div>
+
+</div>
+
+@*<div class="container" style="margin:  0; padding: 0">
                 @for (var i = 0; i < numberOfFoodPacks; i++)
                 {
                     var pack = foodPackModels.ElementAt(i);
@@ -123,11 +108,18 @@
                         </div>
                     </div>
                 }
-            </div>
-        </div>
-    </div>
-</div>
+            </div>*@
+
+
+
+
+
+
+
+
 </body>
+
+
 
 @code {
     private string first_name;
@@ -162,7 +154,7 @@
     {
         var seller = await sellerService.GetSellerByCvr(cvr);
         
-        //var seller = _savedRestaurant.GetSeller();
+    //var seller = _savedRestaurant.GetSeller();
         first_name = seller.User.FirstName;
         last_name = seller.User.LastName;
         city = seller.User.Address.City;
@@ -180,5 +172,4 @@
         foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(cvr);
         numberOfFoodPacks = foodPackModels.Count;
     }
-
 }
