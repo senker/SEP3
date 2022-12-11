@@ -131,3 +131,10 @@ width: 120px;
     float: left;
     padding: 20px;
 }  
+
+.foodItem {
+    padding: 0; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto
+}
