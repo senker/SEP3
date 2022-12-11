@@ -4,7 +4,9 @@ body{
     background: #f2f2f2;
 }
 
-
+.reservationButton {
+    color: #1a1e21;
+}
 
 h3{
     text-align:center;
