@@ -3,7 +3,7 @@
 @using Domain.Models
 @using Domain.DTOs
 @using System.Security.Claims
-@inject IFoodPackService _foodPackService;
+@inject IFoodPackService FoodPackService;
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Create food pack</PageTitle>
@@ -83,9 +83,9 @@
 </AuthorizeView>
 
 @code {
-    private string _title;
-    private string _packDescription;
-    private string _type;
+    private string _title = "";
+    private string _packDescription = "";
+    private string _type = "";
     private bool _isPrepared;
     private double _price;
     private string? _errorLabel;
@@ -116,7 +116,7 @@
             Cvr = Convert.ToInt32(_cvr)
         };
         var foodPackDto = new FoodPackCreateDto(foodPackModel);
-        _foodPackService.PostFoodPack(foodPackDto);
+        FoodPackService.PostFoodPack(foodPackDto);
     }
 
 }
