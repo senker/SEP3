@@ -8,3 +8,15 @@ public class ReservationModel
     public int Cvr {get;set;}
     public String FullAddress{get;set;}
 }
+
+public class ReservationCreateModel
+{
+    public FoodPackModel FoodPack {get;set;}
+    public String CustomerId {get;set;}
+
+    public ReservationCreateModel(FoodPackModel foodPack, string customerId)
+    {
+        FoodPack = foodPack;
+        CustomerId = customerId;
+    }
+}

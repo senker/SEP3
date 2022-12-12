@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
+using Domain.DTOs;
 using Domain.Models;
 using HttpClients.ClientInterfaces;
 
@@ -44,5 +46,21 @@ public class ReservationHttpClient : IReservationService
             PropertyNameCaseInsensitive = true
         })!;
         return reservationModels;
+    }
+
+    public async Task<ReservationModel> CreateReservation(ReservationCreateDto reserve)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Reservation", reserve);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        ReservationModel reservation = JsonSerializer.Deserialize<ReservationModel>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return reservation;
     }
 }

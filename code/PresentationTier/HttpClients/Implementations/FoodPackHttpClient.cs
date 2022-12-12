@@ -71,4 +71,20 @@ public class FoodPackHttpClient : IFoodPackService
         })!;
         return foodPackModels;
     }
+
+    public async Task<FoodPackModel> GetFoodPackById(int id)
+    {
+        HttpResponseMessage response = await client.GetAsync("/FoodPack/" + id);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        FoodPackModel foodPack = JsonSerializer.Deserialize<FoodPackModel>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return foodPack;
+    }
 }

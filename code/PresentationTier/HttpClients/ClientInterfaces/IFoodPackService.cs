@@ -9,4 +9,5 @@ public interface IFoodPackService
     Task<FoodPackModel> PostFoodPack(FoodPackCreateDto dto);
 
     Task<List<FoodPackModel>> SearchFoodPacks(SearchFoodPackDto dto);
+    Task<FoodPackModel> GetFoodPackById(int id);
 }

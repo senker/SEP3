@@ -1,10 +1,12 @@
 ﻿@page "/seller/{cvr:int}"
 @using HttpClients.ClientInterfaces
 @using Domain.Models
-@using Radzen.Blazor.Rendering
+@using Domain.DTOs
+@using System.Security.Claims
 @inject IFoodPackService FoodPackService;
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject ISellerService SellerService; 
+@inject IReservationService ReservationService;
 
 
 <body>
@@ -39,6 +41,10 @@
                                 <p>Type: @pack.Type</p>
                                 <p>Prepared: @pack.IsPrepared</p>
                             </div>
+                            @if (pack.Id != null)
+                            {
+                                selectedFoodPackId = pack.Id;
+                            }
                             <div class="col-lg-6">
                                 <p>Description</p>
                                 <p>@pack.Description</p>
@@ -109,7 +115,7 @@
         <p>You are about to save a food pack from "shop", please confirm your choice!</p>
     </ModalBody>
     <ModalFooter>
-        <button style="padding: 10px;" class="btn btn-primary">Reserve</button>
+        <button style="padding: 10px;" class="btn btn-primary" onclick="@CreateReservation">Reserve</button>
     </ModalFooter>
 </BlazorModal>
     <BlazorModal Title="You are not a customer!" IsOpened="unAuthOpened">
@@ -156,6 +162,8 @@
     bool isOpened = false;
     bool unAuthOpened = false;
 
+    private int selectedFoodPackId { get; set; }
+
     private void ReserveItem()
     {
         if (authState.User.IsInRole("customer"))
@@ -172,6 +180,24 @@
     private void CloseModal()
     {
         unAuthOpened = false;
+    }
+
+    private async void CreateReservation()
+    {
+        Console.WriteLine(selectedFoodPackId);
+        try
+        {
+            await ReservationService.CreateReservation(new ReservationCreateDto(
+                new ReservationCreateModel(
+                    await FoodPackService.GetFoodPackById(selectedFoodPackId),
+                    authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value!)
+                ));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
     }
     
     protected override async Task OnInitializedAsync()
