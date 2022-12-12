@@ -19,7 +19,6 @@ builder.Services.AddScoped(
         }
 );
 
-
 builder.Services.AddScoped<ISellerService, SellerHttpClient>();
 builder.Services.AddScoped<ICustomerService, CustomerHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtAuthService>();

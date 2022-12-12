@@ -1,125 +1,133 @@
 ﻿@page "/seller/{cvr:int}"
 @using HttpClients.ClientInterfaces
-@using Domain.Models@*
-@inject SavedRestaurant _savedRestaurant;  *@
-@inject IFoodPackService _foodPackService;
-
-@inject ISellerService sellerService; 
-
+@using Domain.Models
+@using Domain.DTOs
+@using System.Security.Claims
+@inject IFoodPackService FoodPackService;
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ISellerService SellerService; 
+@inject IReservationService ReservationService;
 
 
 <body>
-
-<div id="coName"><h1>@company_name</h1></div>
-
-<div id="topContainer">
-    <div id="coPicture" style="background-image: url(@image)"></div>
-    
-    <p id="coDescription">@description</p>
+<div id="coName">
+    <h1>@company_name</h1>
 </div>
 
-@*<div id="coType">
-    <div id="tag">@type</div>
-    </div>*@
-<button id="subscribeBtn" @onclick="Subscribe">Subscribe</button>
-
-
-<div id="bottomContainer">
-    
-    <div id="coInfo">
-        <p>Rating: @rating </p>
-        <p>@street_name <br/>@post_code <br/>@city</p>
+<div id="coPicture" style="background-image: url(@image)"></div>
+<div id="float-container">
+    <p id="coDescription">@description</p>
+    <button id="subscribeBtn">Subscribe</button>
     </div>
-    
+
+<div class="foodItem">
+    @for (var i = 0; i < numberOfFoodPacks; i++)
+    {
+        var pack = foodPackModels.ElementAt(i);
+        <div class="row item">
+            <div class="col-md-4 item_photo">
+                <img class="foodIcon" src="img/foodpack.jpg"/>
+            </div>
+            <div class="col-md-6 item_description">
+                <div class="row">
+                    <div class="col-lg-12" style="text-align: center">
+                        <h2>Title: @pack.Title</h2>
+                    </div>
+                </div>
+                <div class="row item" style="border-bottom:none">
+                    <div class="col-lg-12">
+                        <div class="row item" style="border-bottom:none">
+                            <div class="col-lg-6">
+                                <p>Type: @pack.Type</p>
+                                <p>Prepared: @pack.IsPrepared</p>
+                            </div>
+                            @if (pack.Id != null)
+                            {
+                                selectedFoodPackId = pack.Id;
+                            }
+                            <div class="col-lg-6">
+                                <p>Description</p>
+                                <p>@pack.Description</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 item_add">
+                <p style="float:left; align-items:  center">@pack.Price DKK</p>
+                <button class="add_btn" style="float:right" onclick="@ReserveItem">
+                    <img src="img/basket.svg" alt="basket"/>
+                    <p>Reserve</p>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="bottomContainer">
+    <div id="coInfo">
+                    <p>Rating: @rating </p>
+                    <p>
+                        @street_name <br/>@post_code <br/>@city
+                    </p>
+                </div>
+            </div>
     <div id="mapContainer">
         <script suppress-error="BL9992">
-                          async function foo(){
-                              let obj;      
-                              const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
-                              
-                               obj = await res.json();
-                                            
-                                            console.log(obj)                    
-                                            let lng = obj.results[0].geometry.location.lng;
-                                            let lat = obj.results[0].geometry.location.lat;
-                                            
-                                            
-                                            var map = new google.maps.Map(document.getElementById("mapContainer"), {
-                                                              zoom: 15,
-                                                              center: new google.maps.LatLng(lat, lng),
-                                                              mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                            });
-                                                            const infowindow = new google.maps.InfoWindow({
-                                                              content: "Borgergade 7, 8700 Horsens",
-                                                              ariaLabel: "Borgergade 7, 8700 Horsens",
-                                                            });
-                                                            let marker = new google.maps.Marker({
-                                                              position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
-                                                              map: map,
-                                                              animation: google.maps.Animation.DROP
-                                                            });
-                                                            infowindow.open({
-                                                              anchor: marker,
-                                                              map
-                                                            });   
-                            }
-                            foo();
-                      </script>
+                              async function foo(){
+                                  let obj;      
+                                  const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
+                                  
+                                   obj = await res.json();
+                                                
+                                                console.log(obj)                    
+                                                let lng = obj.results[0].geometry.location.lng;
+                                                let lat = obj.results[0].geometry.location.lat;
+                                                
+                                                
+                                                var map = new google.maps.Map(document.getElementById("mapContainer"), {
+                                                                  zoom: 15,
+                                                                  center: new google.maps.LatLng(lat, lng),
+                                                                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                                });
+                                                                const infowindow = new google.maps.InfoWindow({
+                                                                  content: "Borgergade 7, 8700 Horsens",
+                                                                  ariaLabel: "Borgergade 7, 8700 Horsens",
+                                                                });
+                                                                let marker = new google.maps.Marker({
+                                                                  position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                                                                  map: map,
+                                                                  animation: google.maps.Animation.DROP
+                                                                });
+                                                                infowindow.open({
+                                                                  anchor: marker,
+                                                                  map
+                                                                });   
+                                }
+                                foo();
+                          </script>
     </div>
 
-</div>
-
-@*<div class="container" style="margin:  0; padding: 0">
-                @for (var i = 0; i < numberOfFoodPacks; i++)
-                {
-                    var pack = foodPackModels.ElementAt(i);
-                    <div class="row item">
-                        <div class="col-md-4 item_photo">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-Y219QwLTdSpNaGlxL-jrqykM7J6g5HRug&usqp=CAU"/>
-                        </div>
-                        <div class="col-md-6 item_description">
-                            <div class="row">
-                                <div class="col-lg-12" style="text-align: center">
-                                    <h2>Title: @pack.Title</h2>
-                                </div>
-                            </div>
-                            <div class="row item" style="border-bottom:none">
-                                <div class="col-lg-12">
-                                    <div class="row item" style="border-bottom:none">
-                                        <div class="col-lg-6">
-                                            <p>Type: @pack.Type</p>
-                                            <p>Prepared: @pack.IsPrepared</p>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <p>Description</p>
-                                            <p>@pack.Description</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 item_add">
-                            <p style="float:left; align-items:  center">@pack.Price DKK</p>
-                            <button class="add_btn" style="float:right">
-                                <img src="img/basket.svg" alt="basket"/>
-                                <p>ADD</p>
-                            </button>
-                        </div>
-                    </div>
-                }
-            </div>*@
-
-
-
-
-
-
-
+<BlazorModal Title="Make a reservation" IsOpened="isOpened">
+    <ModalBody>
+        <p style="font-size: 24px; font-weight: bold;">Let's save the world!</p>
+        <p>You are about to save a food pack from "shop", please confirm your choice!</p>
+    </ModalBody>
+    <ModalFooter>
+        <button style="padding: 10px;" class="btn btn-primary" onclick="@CreateReservation">Reserve</button>
+    </ModalFooter>
+</BlazorModal>
+    <BlazorModal Title="You are not a customer!" IsOpened="unAuthOpened">
+        <ModalBody>
+            <p style="font-size: 24px; font-weight: bold;">Please login as a customer!</p>
+            </ModalBody>
+        <ModalFooter>
+            <button style="padding: 10px;" class="btn btn-primary" onclick="@CloseModal">Close</button>
+        </ModalFooter>
+    </BlazorModal>
 
 </body>
-
-
 
 @code {
     private string first_name;
@@ -148,19 +156,55 @@
     private string foodPackType;
     private bool foodPackIsPrepared;
     private double foodPackPrice;
+    private AuthenticationState authState;
+    
+    //Modal
+    bool isOpened = false;
+    bool unAuthOpened = false;
 
+    private int selectedFoodPackId { get; set; }
 
-    private void Subscribe()
+    private void ReserveItem()
     {
-
+        if (authState.User.IsInRole("customer"))
+        {
+            isOpened = true;
+            // if button is clicked, reserve item
+        }
+        else
+        {
+            unAuthOpened = true;
+        }
     }
 
+    private void CloseModal()
+    {
+        unAuthOpened = false;
+    }
 
+    private async void CreateReservation()
+    {
+        Console.WriteLine(selectedFoodPackId);
+        try
+        {
+            await ReservationService.CreateReservation(new ReservationCreateDto(
+                new ReservationCreateModel(
+                    await FoodPackService.GetFoodPackById(selectedFoodPackId),
+                    authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value!)
+                ));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
+    }
+    
     protected override async Task OnInitializedAsync()
     {
-        var seller = await sellerService.GetSellerByCvr(cvr);
+        var seller = await SellerService.GetSellerByCvr(cvr);
+        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         
-    //var seller = _savedRestaurant.GetSeller();
         first_name = seller.User.FirstName;
         last_name = seller.User.LastName;
         city = seller.User.Address.City;
@@ -173,9 +217,9 @@
         website = seller.Website;
         rating = seller.Rating;
         image = seller.Image;
-
-
-        foodPackModels = await _foodPackService.GetFoodPacksBySellerCvr(cvr);
+        
+        foodPackModels = await FoodPackService.GetFoodPacksBySellerCvr(cvr);
         numberOfFoodPacks = foodPackModels.Count;
     }
+
 }

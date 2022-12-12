@@ -41,7 +41,7 @@ public class AuthController : ControllerBase
             new Claim("AddressPostcode", user.User.Address.Postcode.ToString()),
             new Claim("Email", user.User.Email),
             new Claim("PhoneNumber", user.User.PhoneNumber.ToString()),
-            new Claim("Preferences", user.Preferences.ToString()),
+            new Claim(ClaimTypes.Sid, user.User.Email),
             new Claim("SecurityLevel", "3")
         };
         return claims.ToList();
