@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
+
+package subscription;
+
+message CreateSubscriptionRequest{
+  string customer_email = 1;
+  int32 cvr = 2;
+}
+
+message SubscriptionCustomerRequest{
+  string customer_email = 1;
+}
+
+message SubscriptionSellerRequest{
+  int32 cvr = 1;
+}
+
+message CreateSubscriptionResponse{
+  string customer_email = 1;
+  int32 cvr = 2;
+}
+
+message SubscribedRestaurantsResponse{
+  int32 cvr = 1;
+}
+
+message SubscribedCustomersResponse{
+  string customer_email = 1;
+}
+
+service SubscriptionService {
+  rpc createSubscription(CreateSubscriptionRequest) returns (CreateSubscriptionResponse);
+  rpc getSubscribedRestaurants(SubscriptionCustomerRequest) returns (stream SubscribedRestaurantsResponse);
+  rpc getSubscribedCustomers(SubscriptionSellerRequest) returns (stream SubscribedCustomersResponse);
+}

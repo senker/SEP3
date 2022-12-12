@@ -8,7 +8,7 @@ import via.sep3.persistencetier.database.seller.Seller;
 
 import java.util.stream.Stream;
 
-public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
 
 

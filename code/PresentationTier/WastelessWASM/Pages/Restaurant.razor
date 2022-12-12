@@ -21,7 +21,7 @@
 @*<div id="coType">
     <div id="tag">@type</div>
     </div>*@
-<button id="subscribeBtn">Subscribe</button>
+<button id="subscribeBtn" @onclick="Subscribe">Subscribe</button>
 
 
 <div id="bottomContainer">
@@ -148,6 +148,12 @@
     private string foodPackType;
     private bool foodPackIsPrepared;
     private double foodPackPrice;
+
+
+    private void Subscribe()
+    {
+
+    }
 
 
     protected override async Task OnInitializedAsync()
