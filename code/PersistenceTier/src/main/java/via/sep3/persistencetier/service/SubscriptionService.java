@@ -1,6 +1,7 @@
 package via.sep3.persistencetier.service;
 
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
@@ -10,9 +11,12 @@ import via.sep3.persistencetier.database.subscription.Subscription;
 import via.sep3.persistencetier.database.subscription.SubscriptionRepository;
 import via.sep3.persistencetier.protobuf.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@GRpcService
+@Transactional
 public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
 
     @Autowired
