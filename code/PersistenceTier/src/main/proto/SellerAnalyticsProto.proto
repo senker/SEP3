@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
+
+
+package sellerAnalytics;
+
+message CreateSellerAnalyticsRequest{
+  float rating = 1;
+  int32 cvr = 2;
+}
+
+message UpdateSellerAnalyticsRequest{
+  float rating = 1;
+  int32 cvr = 2;
+}
+
+message SellerAnalyticsResponse{
+  float rating = 1;
+  int32 cvr = 2;
+}
+
+message SellerAnalyticsRatingRequest{
+  int32 cvr = 1;
+}
+
+service SellerAnalyticsService {
+  rpc createSellerAnalytics(CreateSellerAnalyticsRequest) returns (SellerAnalyticsResponse);
+  //rpc updateSellerAnalytics(UpdateSellerAnalyticsRequest) returns (SellerAnalyticsResponse);
+  rpc getAnalyticsBySellerCvr(SellerAnalyticsRatingRequest) returns (SellerAnalyticsResponse);
+}

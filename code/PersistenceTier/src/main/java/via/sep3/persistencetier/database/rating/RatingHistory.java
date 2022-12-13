@@ -28,8 +28,7 @@ public class RatingHistory {
     public RatingHistory() {
     }
 
-    public RatingHistory(int id, Float rating, Customer customer, Seller seller) {
-        this.id = id;
+    public RatingHistory(Float rating, Customer customer, Seller seller) {
         this.rating = rating;
         this.customer = customer;
         this.seller = seller;

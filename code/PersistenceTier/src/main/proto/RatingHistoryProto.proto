@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "via.sep3.persistencetier.protobuf";
+
+
+package ratingHistory;
+
+message CreateRatingHistoryRequest{
+  float rating = 1;
+  int32 cvr = 2;
+  string customer_email = 3;
+}
+
+message RatingHistoryResponse
+{
+  float rating = 1;
+  int32 cvr = 2;
+  string customer_email = 3;
+}
+
+
+
+service RatingHistoryService {
+  rpc createRating(CreateRatingHistoryRequest) returns (RatingHistoryResponse);
+}

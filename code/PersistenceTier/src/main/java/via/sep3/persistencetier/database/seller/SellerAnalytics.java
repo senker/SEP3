@@ -4,7 +4,7 @@ import via.sep3.persistencetier.database.seller.Seller;
 
 import javax.persistence.*;
 
-@Table(name="rating_analytics")
+@Table(name="seller_analytics")
 public class SellerAnalytics {
 
     @Id
@@ -16,12 +16,15 @@ public class SellerAnalytics {
     @PrimaryKeyJoinColumn
     private Seller seller;
 
+    @Column(name="rating")
+    private float rating;
+
     public SellerAnalytics() {
     }
 
-    public SellerAnalytics(int id, Seller seller) {
-        this.id = id;
+    public SellerAnalytics( Seller seller, float rating) {
         this.seller = seller;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -38,5 +41,13 @@ public class SellerAnalytics {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
