@@ -62,10 +62,10 @@
             <label class="form-check-label" for="typeMeat">No</label>
         </div>
     </div>
-    
-    
+
     <div><button id="searchBtn" @onclick="searchBtn">Search</button>
     </div>
+
 </div>
 
 <div class="foodItem">
@@ -91,7 +91,7 @@
                             </div>
                             @if (pack.Id != null)
                             {
-                                selectedFoodPackId = pack.Id;
+                                //selectedFoodPackId = pack.Id;
                             }
                             <div class="col-lg-6">
                                 <p>Description</p>
@@ -104,7 +104,7 @@
             </div>
             <div class="col-md-2 item_add">
                 <p style="float:left; align-items:  center">@pack.Price DKK</p>
-                <button class="add_btn" style="float:right" onclick="@ReserveItem">
+                <button class="add_btn" style="float:right" onclick="">
                     <img src="img/basket.svg" alt="basket"/>
                     <p>Reserve</p>
                 </button>
@@ -135,6 +135,7 @@
     
 
    
+
     private void searchBtn()
     {
         SearchFoodPackDto searchPack = new SearchFoodPackDto
@@ -147,7 +148,7 @@
 
 
         };
-         packManModels = packMan.SearchFoodPacks(searchPack);
+        // packManModels = packMan.SearchFoodPacks(searchPack);
 
 
     }

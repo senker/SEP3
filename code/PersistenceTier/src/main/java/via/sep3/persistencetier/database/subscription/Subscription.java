@@ -24,7 +24,7 @@ public class Subscription{
     private Seller cvr;
 
     @ManyToOne
-    @JoinColumn(name="email", referencedColumnName = "email")
+    @JoinColumn(name="customer_email", referencedColumnName = "email")
     private Customer email;
 
     public Subscription() {

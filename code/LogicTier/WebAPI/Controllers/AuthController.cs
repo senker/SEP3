@@ -3,9 +3,11 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using Application.DaoInterfaces;
+using Application.LogicInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using WastelessWASM;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace WebAPI.Controllers;
@@ -17,12 +19,14 @@ public class AuthController : ControllerBase
     private readonly IConfiguration config;
     private readonly ICustomerDao authCustomerService;
     private readonly ISellerDao authSellerService;
+    private readonly IAuthLogic authLogic;
 
-    public AuthController(IConfiguration config, ICustomerDao authCustomerService, ISellerDao authSellerService)
+    public AuthController(IConfiguration config, ICustomerDao authCustomerService, ISellerDao authSellerService, IAuthLogic authLogic)
     {
         this.config = config;
         this.authCustomerService = authCustomerService;
-        this.authSellerService = authSellerService;
+        this.authSellerService = authSellerService;                                                                                 
+        this.authLogic = authLogic;
     }
     
     private List<Claim> GenerateClaimsCustomer(CustomerDto user)
@@ -118,14 +122,16 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var customer = await authCustomerService.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
+            // changed authCustomerService to authLogic
+            var customer = await authLogic.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
             if (customer != null)
             {
                 string token = GenerateJwtCustomer(customer);
                 return Ok(token);
             }
             
-            var seller = await authSellerService.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
+            // changed authSellerService to authLogic
+            var seller = await authLogic.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
             if (seller != null)
             {
                 string token = GenerateJwtSeller(seller);

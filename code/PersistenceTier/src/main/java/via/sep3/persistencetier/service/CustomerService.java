@@ -145,30 +145,49 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
 
     private void customerResponseBuilder(StreamObserver<CustomerResponse> responseObserver, Customer customer) {
         CustomerResponse.Builder builder = CustomerResponse.newBuilder();
-        builder.setUser(
-                UserModelResponseCustomer.newBuilder()
-                        .setFirstName(customer.getFirstName())
-                        .setLastName(customer.getLastName())
-                        .setAddress(
-                                AddressModelCustomer.newBuilder()
-                                        .setCity(customer.getAddress().getCity())
-                                        .setStreetName(customer.getAddress().getStreetName())
-                                        .setPostCode(customer.getAddress().getPostcode())
-                        )
-                        .setPhoneNumber(customer.getPhoneNumber().intValue())
-                        .setEmail(customer.getEmail())
-        );
-        if(customer.getPreference() == null)
+        if(customer == null)
         {
-            builder.setPreference(0, "");
+            builder.setUser(
+                    UserModelResponseCustomer.newBuilder()
+                            .setFirstName("")
+                            .setLastName("")
+                            .setAddress(
+                                    AddressModelCustomer.newBuilder()
+                                            .setCity("")
+                                            .setStreetName("")
+                                            .setPostCode(0)
+                            )
+                            .setPhoneNumber(0)
+                            .setEmail("")
+            )
+                    .addPreference("");
         }
         else{
-            List<String> tempList = new ArrayList<>();
-            for(int i=0; i<customer.getPreference().size(); i++)
+            builder.setUser(
+                    UserModelResponseCustomer.newBuilder()
+                            .setFirstName(customer.getFirstName())
+                            .setLastName(customer.getLastName())
+                            .setAddress(
+                                    AddressModelCustomer.newBuilder()
+                                            .setCity(customer.getAddress().getCity())
+                                            .setStreetName(customer.getAddress().getStreetName())
+                                            .setPostCode(customer.getAddress().getPostcode())
+                            )
+                            .setPhoneNumber(customer.getPhoneNumber().intValue())
+                            .setEmail(customer.getEmail())
+            );
+            if(customer.getPreference() == null)
             {
-                tempList.add(customer.getPreference().get(i).getPreference());
+                builder.setPreference(0, "");
             }
-            builder.addAllPreference(tempList);
+            else{
+                List<String> tempList = new ArrayList<>();
+                for(int i=0; i<customer.getPreference().size(); i++)
+                {
+                    tempList.add(customer.getPreference().get(i).getPreference());
+                }
+                builder.addAllPreference(tempList);
+            }
         }
 
         var response = builder

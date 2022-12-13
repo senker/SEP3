@@ -39,6 +39,8 @@ public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionSer
     {
 
         Seller seller = sellerRepository.findByCvr((long) request.getCvr());
+        System.out.println(seller.getRating());
+        System.out.println(seller.getCompanyName());
 
         Customer customer = customerRepository.findByEmail(request.getCustomerEmail());
 

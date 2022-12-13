@@ -1,5 +1,8 @@
 package via.sep3.persistencetier.service;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +68,7 @@ AddressRepository addressRepository;
             sellerRepository.findByCvr((long) packRequest.getCvr())
     );
     var savedFoodPack = packRepository.save(foodPack);
+    sendToMessageQueue();
     foodPackResponseBuilder(responseObserver, savedFoodPack);
 }
 
@@ -216,6 +220,25 @@ private void foodPackResponseBuilder(StreamObserver<FoodPackResponse> responseOb
 
 
 
+}
+
+
+public void sendToMessageQueue()
+{
+    String QUEUE_NAME = "subscribe.queue";
+    ConnectionFactory factory = new ConnectionFactory();
+    factory.setHost("localhost");
+
+    try(Connection conn = factory.newConnection(); Channel channel=conn.createChannel())
+    {
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        String message = "First rabbitMQ message";
+        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+        System.out.println("Message sent: " + message);
+    }catch(Exception e)
+    {
+        System.out.println(e.getMessage());
+    }
 }
 
 

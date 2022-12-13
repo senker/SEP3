@@ -21,7 +21,7 @@ public class CustomerDao : ICustomerDao
     {
         var foundCustomer = await GetCustomerByEmailAsync(customer.User.Email);
 
-        if (foundCustomer != null)
+        if (!foundCustomer.User.Email.Equals("") && !foundCustomer.User.Password.Equals(""))
         {
             return null;
         }

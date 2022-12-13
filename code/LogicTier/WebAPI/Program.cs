@@ -1,5 +1,7 @@
 using System.Text;
 using Application.DaoInterfaces;
+using Application.Logic;
+using Application.LogicInterfaces;
 using Domain.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +33,7 @@ builder.Services.AddScoped<ICustomerDao, CustomerDao>();
 builder.Services.AddScoped<IFoodPackDao, FoodPackDao>();
 builder.Services.AddScoped<IReservationDao, ReservationDao>();
 builder.Services.AddScoped<ISubscriptionDao, SubscriptionDao>();
+builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 //builder.Services.AddScoped<ISellerLogic, SellerLogic>();
 
 // Swagger
