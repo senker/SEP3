@@ -1,8 +1,6 @@
 ﻿using Application.DaoInterfaces;
 using Domain.DTOs;
 using PersistenceDataAccess.Services;
-using Reservation;
-
 namespace PersistenceDataAccess.DAOs;
 
 public class SubscriptionDao : ISubscriptionDao
@@ -33,10 +31,7 @@ public class SubscriptionDao : ISubscriptionDao
         {
             Console.WriteLine("{0} Exception caught.", e);
             throw new Exception("",e);
-
         }
-
-
     }
 
     private SubscriptionDto ResponseToSubscriptionDto(CreateSubscriptionResponse response)
@@ -47,4 +42,6 @@ public class SubscriptionDao : ISubscriptionDao
             Cvr = response.Cvr
         };
     }
+    
+    
 }
