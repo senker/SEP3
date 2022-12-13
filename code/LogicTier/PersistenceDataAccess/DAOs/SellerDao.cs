@@ -1,10 +1,8 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
-using Seller;
 namespace PersistenceDataAccess.DAOs;
 
 public class SellerDao : ISellerDao

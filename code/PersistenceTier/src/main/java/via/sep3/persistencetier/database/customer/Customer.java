@@ -1,14 +1,10 @@
 package via.sep3.persistencetier.database.customer;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import via.sep3.persistencetier.database.Address;
-import via.sep3.persistencetier.database.User;
+import via.sep3.persistencetier.database.userInfo.Address;
+import via.sep3.persistencetier.database.userInfo.User;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 @Entity(name="Customer")
 @Table(name="customer")

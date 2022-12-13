@@ -3,7 +3,7 @@ package via.sep3.persistencetier.service;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import via.sep3.persistencetier.database.Address;
+import via.sep3.persistencetier.database.userInfo.Address;
 import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.customer.Preference;
