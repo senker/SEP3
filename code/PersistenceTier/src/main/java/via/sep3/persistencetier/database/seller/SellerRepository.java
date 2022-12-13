@@ -21,6 +21,9 @@ public interface SellerRepository extends JpaRepository<Seller, String> {
     @Query(value = "select * from Seller where Seller.cvr=?1", nativeQuery = true)
     Seller findByCvr(Long cvr);
 
+    @Query(value = "select * from Seller where Seller.email=?1", nativeQuery = true)
+    Seller findByEmail(String email);
+
     @Query(value="select cvr from Seller where Seller.address_id=?1", nativeQuery = true)
     Long findByAddressId(Long id);
 
