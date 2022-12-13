@@ -1,8 +1,8 @@
 package via.sep3.persistencetier.database.seller;
 
 
-import via.sep3.persistencetier.database.Address;
-import via.sep3.persistencetier.database.User;
+import via.sep3.persistencetier.database.userInfo.Address;
+import via.sep3.persistencetier.database.userInfo.User;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 
 import javax.persistence.*;

@@ -1,4 +1,6 @@
-package via.sep3.persistencetier.database;
+package via.sep3.persistencetier.database.userInfo;
+
+import via.sep3.persistencetier.database.userInfo.Address;
 
 import javax.persistence.*;
 
