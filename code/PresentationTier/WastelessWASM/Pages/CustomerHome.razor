@@ -2,45 +2,47 @@
 @using HttpClients.ClientInterfaces
 @using Domain.Models
 @using System.Text.RegularExpressions
+@using Domain.DTOs
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
+@inject IFoodPackService packMan;
 <div id="searchForm">
 <div id="textPair">
     <div class="field">
         <label>Keyword</label>
-        <input id="titleSearch" type="text" @bind="titleSearch"/>
+        <input id="titleSearch" type="text" @bind="titleSearch" />
     </div>
     
     <div class="field">
         <label>PostCode</label>
-        <input id="postCodeSearch" type="text" @bind="postCode"/>
+        <input id="postCodeSearch" type="text" @bind="postCode" />
     </div>
     <div class="field">
             <label>Max price</label>
-            <input id="maxPrice" type="text" @bind="maxPrice"/>
+            <input id="maxPrice" type="text" @bind="maxPrice" />
         </div>
 </div>
 <div id="packTypeRadio">
     <label style="text-align: center">Chose food type:</label>
     <div class="form-check">
                 
-        <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked">
+        <input class="form-check-input" type="radio" name="typeRadio" id="typeVegan" checked="checked" @onchange="radioVegan">
         <label class="form-check-label" for="typeVegan">Vegan</label>
 
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat">
+        <input class="form-check-input" type="radio" name="typeRadio" id="typeMeat" @onchange="radioMeat">
         <label class="form-check-label" for="typeMeat">
             Meat
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="typeRadio" id="typePastry">
+        <input class="form-check-input" type="radio" name="typeRadio" id="typePastry" @onchange="radioPastry">
         <label class="form-check-label" for="typePastry">
             Pastry
         </label>
     </div>
-    <div class="form-check"><input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery">
+    <div class="form-check"><input class="form-check-input" type="radio" name="typeRadio" id="typeGrocery" @onchange="radioGrocery">
         <label class="form-check-label" for="typeGrocery">Grocery</label>
     </div>
                 
@@ -49,12 +51,12 @@
     <label style="text-align: center">Ready to eat?</label>
     <div class="form-check">
                     
-        <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked">
+        <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked" @onchange="ready">
         <label class="form-check-label" for="typeVegan">Yes</label>
     
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady">
+        <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady" @onchange="notReady">
         <label class="form-check-label" for="typeMeat">No</label>
     </div>
 </div>
@@ -97,24 +99,111 @@
 @code {
 
     private string titleSearch;
-    private string postCode;
+    private int postCode;
     private int maxPrice;
-    private void searchBtn()
-    {
-    }
-    
-    
-    
-    
     private string errorLabel;
     private IEnumerable<SellerModel>? _sellers;
     private string msg = "";
     private int? _number_of_restaurants=0;
     private SellerModel _seller = null;
     private string _imageURL;
+    private string veganChoice;
+    private string meatChoice;
+    private string pastryChoice;
+    private string groceryChoice;
+    private bool readyChoice;
+    private string typeChoice;
+    
+    private void searchBtn()
+    {
+        SearchFoodPackDto searchPack = new SearchFoodPackDto
+        {
+            IsPrepared = readyChoice,
+            Title = titleSearch,
+            Type = typeChoice,
+            Price = maxPrice,
+            PostCode = postCode
 
 
-    private void  ReadMore(SellerModel seller)
+        };
+        packMan.SearchFoodPacks(searchPack);
+
+
+    }
+    
+    
+    
+    
+    
+    private void radioVegan(ChangeEventArgs args)
+    {
+       typeChoice = args.Value.ToString();
+    }
+    private void radioMeat(ChangeEventArgs args)
+    {
+        typeChoice = args.Value.ToString();
+    }
+    private void radioPastry(ChangeEventArgs args)
+    {
+        typeChoice = args.Value.ToString();
+    }
+    private void radioGrocery(ChangeEventArgs args)
+    {
+        typeChoice = args.Value.ToString();
+    }
+    private void ready(ChangeEventArgs args)
+    {
+        String red; red=args.Value.ToString();
+        if (red.ToLower() == "yes") readyChoice = true;
+        else readyChoice = false;
+
+    }
+    private void notReady (ChangeEventArgs args)
+    {
+        String notRed; notRed=args.Value.ToString();
+        if (notRed.ToLower() == "yes") readyChoice = true;
+        else readyChoice = false;
+    }
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*private void  ReadMore(SellerModel seller)
     {
 
         errorLabel = "";
@@ -142,6 +231,6 @@
             Console.WriteLine(e);
             msg = e.Message;
         }
-    }
+    }*/
 
 }
