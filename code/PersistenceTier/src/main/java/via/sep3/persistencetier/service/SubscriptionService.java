@@ -19,14 +19,20 @@ import java.util.List;
 @Transactional
 public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
 
-    @Autowired
+    final
     SubscriptionRepository subscriptionRepository;
 
-    @Autowired
+    final
     SellerRepository sellerRepository;
 
-    @Autowired
+    final
     CustomerRepository customerRepository;
+@Autowired
+    public SubscriptionService(SubscriptionRepository subscriptionRepository, SellerRepository sellerRepository, CustomerRepository customerRepository) {
+        this.subscriptionRepository = subscriptionRepository;
+        this.sellerRepository = sellerRepository;
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public void createSubscription(CreateSubscriptionRequest request, StreamObserver<CreateSubscriptionResponse> responseObserver)

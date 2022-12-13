@@ -19,16 +19,22 @@ import java.util.stream.Stream;
 @Transactional
 public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase {
 
-@Autowired
+final
 PackRepository packRepository;
 
-@Autowired
-    SellerRepository sellerRepository;
+final
+SellerRepository sellerRepository;
 
+final
+AddressRepository addressRepository;
 @Autowired
-    AddressRepository addressRepository;
+    public FoodPackService(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository) {
+        this.packRepository = packRepository;
+        this.sellerRepository = sellerRepository;
+        this.addressRepository = addressRepository;
+    }
 
-@Override
+    @Override
     public void createFoodPack(CreateFoodPackRequest packRequest, StreamObserver<FoodPackResponse> responseObserver){
     System.out.println("year: " + packRequest.getStartTime().getYear());
     System.out.println("month: " + packRequest.getStartTime().getMonth());

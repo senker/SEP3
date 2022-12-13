@@ -20,14 +20,20 @@ import java.util.stream.Stream;
 @Transactional
 public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
 
-    @Autowired
+    final
     CustomerRepository customerRepository;
 
-    @Autowired
+    final
     PackRepository packRepository;
 
-    @Autowired
+    final
     PreferenceRepository preferenceRepository;
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository, PackRepository packRepository, PreferenceRepository preferenceRepository) {
+        this.customerRepository = customerRepository;
+        this.packRepository = packRepository;
+        this.preferenceRepository = preferenceRepository;
+    }
 
 
     @Override

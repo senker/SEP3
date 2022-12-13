@@ -22,15 +22,21 @@ import java.util.stream.Stream;
 @Transactional
 public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
-    @Autowired
+    final
     SellerRepository sellerRepository;
 
-    @Autowired
+    final
     PackRepository packRepository;
 
-    @Autowired
+    final
     ImageRepository imageRepository;
 
+    @Autowired
+    public SellerService(SellerRepository sellerRepository, PackRepository packRepository, ImageRepository imageRepository) {
+        this.sellerRepository = sellerRepository;
+        this.packRepository = packRepository;
+        this.imageRepository = imageRepository;
+    }
 
 
     @Override

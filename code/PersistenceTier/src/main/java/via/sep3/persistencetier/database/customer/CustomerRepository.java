@@ -9,15 +9,12 @@ import java.util.stream.Stream;
 
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
-    //@Query(value = "select * from Customer where Customer.email=?1", nativeQuery = true)
+    @Query(value = "select * from Customer where Customer.email=?1", nativeQuery = true)
     Customer findByEmail(String email);
 
     @Modifying
     @Query(value = "delete from customer where customer.email=?1", nativeQuery = true)
     void deleteByEmail(String email);
-
-    @Query(value = "select * from Customer c where c.firstName=?1 and c.lastName = ?2", nativeQuery = true)
-    List<Customer> findByFirstNameAndLastName(String firstName, String LastName);
 
     @Query(value="select * from Customer", nativeQuery = true)
     Stream<Customer> findAllStream();

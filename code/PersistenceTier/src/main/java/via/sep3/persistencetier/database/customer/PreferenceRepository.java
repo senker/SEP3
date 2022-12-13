@@ -18,9 +18,6 @@ public interface PreferenceRepository extends JpaRepository<Preference, Integer>
     @Query(value="delete from preference where preference.customer_email=?1", nativeQuery = true)
     void deleteByCustomer(Customer customer);
 
-    @Query(value="delete from preference where preference.customer.email=?1", nativeQuery = true)
-    void deleteByEmail(String email);
-
 
 /*
     @Query("delete from Preference p where p.customer.email in(:list)")

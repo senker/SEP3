@@ -20,14 +20,21 @@ import java.util.stream.Stream;
 @GRpcService
 @Transactional
 public class ReservationService extends ReservationServiceGrpc.ReservationServiceImplBase{
-    @Autowired
+    final
     ReservationRepository reservationRepository;
-    @Autowired
+    final
     PackRepository foodPackRepository;
-    @Autowired
+    final
     CustomerRepository customerRepository;
+    private final SellerRepository sellerRepository;
+
     @Autowired
-    private SellerRepository sellerRepository;
+    public ReservationService(ReservationRepository reservationRepository, PackRepository foodPackRepository, CustomerRepository customerRepository, SellerRepository sellerRepository) {
+        this.reservationRepository = reservationRepository;
+        this.foodPackRepository = foodPackRepository;
+        this.customerRepository = customerRepository;
+        this.sellerRepository = sellerRepository;
+    }
 
     @Override
     public void createReservation(CreateReservationRequest reservationRequest, StreamObserver<ReservationResponse> responseObserver) {
