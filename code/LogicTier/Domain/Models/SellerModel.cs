@@ -24,4 +24,16 @@ public class SellerCreateModel
     public float Rating { get; set; }
 
     public string Image {get;set;}
+    
+    public SellerCreateModel(UserCreateModel user, int cvr, string companyName, string description, string type, string website, float rating, string image)
+    {
+        User = user;
+        Cvr = cvr;
+        CompanyName = companyName;
+        Description = description;
+        Type = type;
+        Website = website;
+        Rating = rating;
+        Image = image;
+    }
 }
