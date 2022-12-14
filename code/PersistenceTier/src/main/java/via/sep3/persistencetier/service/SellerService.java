@@ -23,24 +23,21 @@ import java.util.stream.Stream;
 public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     final
-    SellerRepository sellerRepository;
+    SellerRepository SELLER_REPOSITORY;
 
     final
-    PackRepository packRepository;
+    PackRepository PACK_REPOSITORY;
 
     final
-    ImageRepository imageRepository;
+    ImageRepository IMAGE_REPOSITORY;
 
     //final Address addressRepository;
 
     @Autowired
-    public SellerService(SellerRepository sellerRepository,
-                         PackRepository packRepository,
-                         ImageRepository imageRepository
-                         ) {
-        this.sellerRepository = sellerRepository;
-        this.packRepository = packRepository;
-        this.imageRepository = imageRepository;
+    public SellerService(SellerRepository sellerRepository, PackRepository packRepository, ImageRepository imageRepository) {
+        this.SELLER_REPOSITORY = sellerRepository;
+        this.PACK_REPOSITORY = packRepository;
+        this.IMAGE_REPOSITORY = imageRepository;
     }
 
 
@@ -86,7 +83,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         seller.setImage(listOfPartialImage);
 
 
-        var savedSeller = sellerRepository.save(seller);
+        var savedSeller = SELLER_REPOSITORY.save(seller);
 
         sellerResponseBuilder(responseObserver, savedSeller);
     }
@@ -97,7 +94,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
 
         SellerResponse.Builder sellerResponseBuilder = SellerResponse.newBuilder();
-        Stream<Seller> sellerList = sellerRepository.findAllStream();
+        Stream<Seller> sellerList = SELLER_REPOSITORY.findAllStream();
         sellerList.forEach(seller ->{
 
                     String fullImageUrl="";
@@ -144,17 +141,17 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Override
     public void getSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.findByCvr((long) request.getCvr());
+        var seller = SELLER_REPOSITORY.findByCvr((long) request.getCvr());
         sellerResponseBuilder(responseObserver, seller);
     }
 
     @Override
     public void deleteSellerByCvr(SellerRequest request, StreamObserver<SellerResponse> responseObserver) {
-        Seller seller = sellerRepository.findByCvr((long) request.getCvr());
+        Seller seller = SELLER_REPOSITORY.findByCvr((long) request.getCvr());
 
-        packRepository.deleteBySeller(seller);
-        imageRepository.deleteBySeller(seller);
-        sellerRepository.deleteByCvr((long) request.getCvr());
+        PACK_REPOSITORY.deleteBySeller(seller);
+        IMAGE_REPOSITORY.deleteBySeller(seller);
+        SELLER_REPOSITORY.deleteByCvr((long) request.getCvr());
         sellerResponseBuilder(responseObserver, seller);
     }
 
@@ -196,7 +193,7 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
 
     @Override
     public void getSellerByEmail(SellerRequestEmail request, StreamObserver<SellerResponse> responseObserver) {
-        var seller = sellerRepository.findByEmail(request.getEmail());
+        var seller = SELLER_REPOSITORY.findByEmail(request.getEmail());
         sellerResponseBuilder(responseObserver, seller);
     }
 }
