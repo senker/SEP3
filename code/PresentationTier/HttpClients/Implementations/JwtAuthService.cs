@@ -10,7 +10,7 @@ public class JwtAuthService : IAuthService
 {
 
     private readonly HttpClient client = new();
-    public static string? Jwt { get; private set; } = "";
+    private static string? Jwt { get; set; } = "";
 
     public async Task LoginAsync(string username, string password)
     {
