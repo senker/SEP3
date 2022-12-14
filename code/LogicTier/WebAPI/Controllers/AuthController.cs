@@ -14,12 +14,12 @@ namespace WebAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _config;
-    private readonly IAuthLogic _authLogic;
+    private readonly IAuthService _authService;
 
-    public AuthController(IConfiguration config, IAuthLogic authLogic)
+    public AuthController(IConfiguration config, IAuthService authService)
     {
         _config = config;                                                                              
-        _authLogic = authLogic;
+        _authService = authService;
     }
     
     private List<Claim> GenerateClaimsCustomer(CustomerDto user)
@@ -103,14 +103,14 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var customer = await _authLogic.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
+            var customer = await _authService.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
             if (customer != null)
             {
                 string token = GenerateJwtCustomer(customer);
                 return Ok(token);
             }
             
-            var seller = await _authLogic.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
+            var seller = await _authService.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
             if (seller != null)
             {
                 string token = GenerateJwtSeller(seller);

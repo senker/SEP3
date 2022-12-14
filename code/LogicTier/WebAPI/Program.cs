@@ -31,7 +31,7 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IFoodPackService, FoodPackService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
-builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

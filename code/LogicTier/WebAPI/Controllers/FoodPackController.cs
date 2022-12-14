@@ -35,7 +35,7 @@ public class FoodPackController : ControllerBase
         return Ok(foodPack);
     }
 
-    [Microsoft.AspNetCore.Mvc.HttpGet("{isPrepared}/{title}/{type}/{price}/{postcode}")]
+    [HttpGet("{isPrepared}/{title}/{type}/{price}/{postcode}")]
     public async Task<IActionResult> SearchFoodPacks(bool isPrepared,  string title,
     string type, double price, int postcode)
     {
