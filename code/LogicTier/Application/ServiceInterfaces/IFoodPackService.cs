@@ -1,8 +1,8 @@
 using Domain.DTOs;
 
-namespace Application.DaoInterfaces;
+namespace Application.ServiceInterfaces;
 
-public interface IFoodPackDao
+public interface IFoodPackService
 {
     Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto seller);
     Task<FoodPackDto?> GetFoodPackByIdAsync(int id);

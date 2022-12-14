@@ -1,8 +1,8 @@
 ﻿using Domain.DTOs;
 
-namespace Application.DaoInterfaces;
+namespace Application.ServiceInterfaces;
 
-public interface ISubscriptionDao
+public interface ISubscriptionService
 {
     Task<SubscriptionDto> CreateSubscriptionDaoAsync(SubscriptionDto dto);
 }

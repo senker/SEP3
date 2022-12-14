@@ -1,17 +1,17 @@
-﻿using Application.DaoInterfaces;
+﻿using Application.ServiceInterfaces;
 using Domain.DTOs;
 using PersistenceDataAccess.Services;
 using Grpc.Core;
 
-namespace PersistenceDataAccess.DAOs;
+namespace PersistenceDataAccess.Services;
 
-public class ReservationDao : IReservationDao
+public class ReservationService : IReservationService
 {
-     private readonly ReservationService.ReservationServiceClient _client;
+     private readonly PersistenceDataAccess.ReservationService.ReservationServiceClient _client;
 
-     public ReservationDao(IGrpcService grpcService)
+     public ReservationService(IGrpcService grpcService)
      {
-         _client = new ReservationService.ReservationServiceClient(grpcService.GetChannel());
+         _client = new PersistenceDataAccess.ReservationService.ReservationServiceClient(grpcService.GetChannel());
      }
 
     public async Task<ReservationDto> CreateReservationDaoAsync(ReservationCreateDto dto)

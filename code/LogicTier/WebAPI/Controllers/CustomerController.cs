@@ -1,4 +1,4 @@
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class CustomerController : ControllerBase
 {
-    private readonly ICustomerDao _customerLogic;
+    private readonly ICustomerService _customerLogic;
 
-    public CustomerController(ICustomerDao customerLogic)
+    public CustomerController(ICustomerService customerLogic)
     {
         _customerLogic = customerLogic;
     }

@@ -1,4 +1,4 @@
-﻿using Application.DaoInterfaces;
+﻿using Application.ServiceInterfaces;
 using Application.LogicInterfaces;
 using Domain.DTOs;
 using WastelessWASM;
@@ -7,24 +7,24 @@ namespace Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
-    private readonly ICustomerDao customerDao;
-    private readonly ISellerDao sellerDao;
+    private readonly ICustomerService _customerService;
+    private readonly ISellerService _sellerService;
 
-    public AuthLogic(ICustomerDao customerDao, ISellerDao sellerDao)
+    public AuthLogic(ICustomerService customerService, ISellerService sellerService)
     {
-        this.customerDao = customerDao;
-        this.sellerDao = sellerDao;
+        this._customerService = customerService;
+        this._sellerService = sellerService;
     }
 
     public Task<CustomerDto?> ValidateCustomer(String Username, String Password)
     {
         MessageQueue messageQueue = new MessageQueue();
         MessageQueueLogic.send(messageQueue);
-        return customerDao.ValidateCustomer(Username, Password);
+        return _customerService.ValidateCustomer(Username, Password);
     }
 
     public Task<SellerDto?> ValidateSeller(String Username, String Password)
     {
-        return sellerDao.ValidateSeller(Username, Password);
+        return _sellerService.ValidateSeller(Username, Password);
     }
 }

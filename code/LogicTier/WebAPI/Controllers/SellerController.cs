@@ -1,5 +1,5 @@
 using System.Transactions;
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Google.Protobuf;
@@ -11,12 +11,12 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SellerController : ControllerBase
 {
-    private readonly ISellerDao _sellerLogic;
+    private readonly ISellerService _sellerLogic;
     private static string? _imageUrl;
 
     private readonly String _defaultImage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80";
 
-    public SellerController(ISellerDao sellerLogic)
+    public SellerController(ISellerService sellerLogic)
     {
         _sellerLogic = sellerLogic;
     }

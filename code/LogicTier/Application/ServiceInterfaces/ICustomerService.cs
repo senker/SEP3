@@ -1,8 +1,8 @@
 using Domain.DTOs;
 
-namespace Application.DaoInterfaces;
+namespace Application.ServiceInterfaces;
 
-public interface ICustomerDao
+public interface ICustomerService
 {
     Task<CustomerDto?> CreateCustomerAsync(CustomerCreateDto customer);
     Task<CustomerDto?> GetCustomerByEmailAsync(string email);
