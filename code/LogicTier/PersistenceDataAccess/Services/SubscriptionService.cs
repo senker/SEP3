@@ -1,6 +1,5 @@
-﻿using Application.ServiceInterfaces;
-using Domain.DTOs;
-using PersistenceDataAccess.Services;
+﻿using Domain.DTOs;
+using PersistenceDataAccess.ServiceInterfaces;
 namespace PersistenceDataAccess.Services;
 
 public class SubscriptionService : ISubscriptionService
@@ -13,7 +12,7 @@ public class SubscriptionService : ISubscriptionService
         _client = new PersistenceDataAccess.SubscriptionService.SubscriptionServiceClient(grpcService.GetChannel());
     }
 
-    public async Task<SubscriptionDto> CreateSubscriptionDaoAsync(SubscriptionDto dto)
+    public async Task<SubscriptionDto> CreateSubscriptionAsync(SubscriptionDto dto)
     {
         try
         {

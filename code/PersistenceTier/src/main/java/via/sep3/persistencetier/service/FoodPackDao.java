@@ -7,6 +7,8 @@ import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep3.persistencetier.database.userInfo.Address;
+import via.sep3.persistencetier.database.reservation.Reservation;
+import via.sep3.persistencetier.database.reservation.ReservationRepository;
 import via.sep3.persistencetier.database.userInfo.AddressRepository;
 import via.sep3.persistencetier.database.foodPack.FoodPack;
 import via.sep3.persistencetier.database.foodPack.PackRepository;
@@ -17,12 +19,15 @@ import via.sep3.persistencetier.protobuf.*;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
 public class FoodPackDao extends FoodPackServiceGrpc.FoodPackServiceImplBase {
 
+    final ReservationRepository RESERVATION_REPOSITORY;
 final
 PackRepository PACK_REPOSITORY;
 
@@ -32,10 +37,11 @@ SellerRepository SELLER_REPOSITORY;
 final
 AddressRepository ADDRESS_REPOSITORY;
 @Autowired
-    public FoodPackDao(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository) {
+    public FoodPackDao(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository, ReservationRepository reservationRepository) {
         this.PACK_REPOSITORY = packRepository;
         this.SELLER_REPOSITORY = sellerRepository;
         this.ADDRESS_REPOSITORY = addressRepository;
+        this.RESERVATION_REPOSITORY = reservationRepository;
     }
 
     @Override
@@ -107,33 +113,49 @@ public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest,
     FoodPackResponse.Builder response = FoodPackResponse.newBuilder();
     Seller seller = SELLER_REPOSITORY.findByCvr((long) foodPackSellerRequest.getCvr());
     Stream<FoodPack> foodPackStream = PACK_REPOSITORY.findBySeller(seller.getCvr().intValue());
+    Stream<Reservation> reservationStream = RESERVATION_REPOSITORY.findAllStream();
+
+    var reservationsList = reservationStream.collect(Collectors.toList());
 
     foodPackStream.forEach(pack ->{
-        response
-                .setId(pack.getId())
-                .setTitle(pack.getTitle())
-                .setDescription(pack.getDescription())
-                .setType(pack.getType())
-                .setIsPrepared(pack.isIs_prepared())
-                .setStartTime(
-                        DateTimeFoodPack.newBuilder()
-                                .setDay(pack.getDateTimeStart().getDayOfMonth())
-                                .setMonth(pack.getDateTimeStart().getMonthValue())
-                                .setYear(pack.getDateTimeStart().getYear())
-                                .setHour(pack.getDateTimeStart().getHour())
-                                .setMinutes(pack.getDateTimeStart().getMinute()).build()
-                )
-                .setEndTime(
-                        DateTimeFoodPack.newBuilder()
-                                .setDay(pack.getDateTimeEnd().getDayOfMonth())
-                                .setMonth(pack.getDateTimeEnd().getMonthValue())
-                                .setYear(pack.getDateTimeEnd().getYear())
-                                .setHour(pack.getDateTimeEnd().getHour())
-                                .setMinutes(pack.getDateTimeEnd().getMinute()).build()
-                )
-                .setPrice(pack.getPrice());
-        responseObserver.onNext(response.build());
+        boolean isReservationFound = false;
+
+        for (Reservation reservation : reservationsList) {
+            if (reservation.getFoodPackId().getId() == pack.getId()) {
+                isReservationFound = true;
+                break;
+            }
+        }
+
+        if (!isReservationFound) {
+            response
+                    .setId(pack.getId())
+                    .setTitle(pack.getTitle())
+                    .setDescription(pack.getDescription())
+                    .setType(pack.getType())
+                    .setIsPrepared(pack.isIs_prepared())
+                    .setStartTime(
+                            DateTimeFoodPack.newBuilder()
+                                    .setDay(pack.getDateTimeStart().getDayOfMonth())
+                                    .setMonth(pack.getDateTimeStart().getMonthValue())
+                                    .setYear(pack.getDateTimeStart().getYear())
+                                    .setHour(pack.getDateTimeStart().getHour())
+                                    .setMinutes(pack.getDateTimeStart().getMinute()).build()
+                    )
+                    .setEndTime(
+                            DateTimeFoodPack.newBuilder()
+                                    .setDay(pack.getDateTimeEnd().getDayOfMonth())
+                                    .setMonth(pack.getDateTimeEnd().getMonthValue())
+                                    .setYear(pack.getDateTimeEnd().getYear())
+                                    .setHour(pack.getDateTimeEnd().getHour())
+                                    .setMinutes(pack.getDateTimeEnd().getMinute()).build()
+                    )
+                    .setPrice(pack.getPrice());
+
+            responseObserver.onNext(response.build());
+        }
     });
+
     responseObserver.onCompleted();
 }
 

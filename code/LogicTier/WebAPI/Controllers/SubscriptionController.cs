@@ -1,6 +1,6 @@
-﻿using Application.ServiceInterfaces;
-using Domain.DTOs;
+﻿using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using PersistenceDataAccess.ServiceInterfaces;
 
 namespace WebAPI.Controllers;
 
@@ -18,6 +18,6 @@ public class SubscriptionController : ControllerBase
     [HttpPost()]
     public async Task<ActionResult> CreateSubscription(SubscriptionDto subscription)
     {
-        return Ok(await _subscriptionService.CreateSubscriptionDaoAsync(subscription));
+        return Ok(await _subscriptionService.CreateSubscriptionAsync(subscription));
     }
 }

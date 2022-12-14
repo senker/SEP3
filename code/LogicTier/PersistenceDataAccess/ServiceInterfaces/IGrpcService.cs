@@ -1,6 +1,6 @@
 using Grpc.Net.Client;
 
-namespace Application.ServiceInterfaces;
+namespace PersistenceDataAccess.ServiceInterfaces;
 
 public interface IGrpcService
 {

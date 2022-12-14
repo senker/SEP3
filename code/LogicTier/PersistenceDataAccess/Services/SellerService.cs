@@ -1,7 +1,7 @@
-using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Grpc.Core;
+using PersistenceDataAccess.ServiceInterfaces;
 using PersistenceDataAccess.Services;
 namespace PersistenceDataAccess.Services;
 
@@ -67,12 +67,10 @@ public class SellerService : ISellerService
 
     private SellerDto ResponseToSellerDto(SellerResponse response)
     {
-        var address = new Domain.Models.AddressModel
-        {
-            City = response.User.Address.City,
-            Streetname = response.User.Address.StreetName,
-            Postcode = response.User.Address.PostCode
-        };
+        var address = new AddressModel(
+            response.User.Address.City,
+            response.User.Address.StreetName,
+            response.User.Address.PostCode);
 
         UserModel user = new UserModel();
         user.FirstName = response.User.FirstName;

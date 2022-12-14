@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Google.Protobuf.Collections;
 using Grpc.Core;
-using PersistenceDataAccess.Services;
+using PersistenceDataAccess.ServiceInterfaces;
 
 namespace PersistenceDataAccess.Services;
 
@@ -25,6 +24,8 @@ public class CustomerService : ICustomerService
         {
             return null;
         }
+
+        customer = ValidateCreateCustomer(customer);
         
         AddressModelCustomer address = new AddressModelCustomer()
         {
@@ -129,7 +130,7 @@ public class CustomerService : ICustomerService
         return existingCustomer;
     }
 
-    public Task RegisterCustomer(CustomerDto customer)
+    private CustomerCreateDto ValidateCreateCustomer(CustomerCreateDto customer)
     {
         if (string.IsNullOrEmpty(customer.User.Email))
         {
@@ -140,22 +141,16 @@ public class CustomerService : ICustomerService
         {
             throw new ValidationException("Password cannot be null");
         }
-        // Do more user info validation here
-        
-        // save to persistence instead of list
-        
-        
-        return Task.CompletedTask;
+
+        return customer;
     }
 
     private CustomerDto ResponseToCustomerDto(CustomerResponse response)
     {
-        var address = new Domain.Models.AddressModel
-        {
-            City = response.User.Address.City,
-            Streetname = response.User.Address.StreetName,
-            Postcode = response.User.Address.PostCode
-        };
+        var address = new AddressModel(            
+            response.User.Address.City,
+            response.User.Address.StreetName,
+            response.User.Address.PostCode);
 
         UserModel user = new UserModel();
         user.FirstName = response.User.FirstName;

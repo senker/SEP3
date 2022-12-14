@@ -1,13 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
-using Application.ServiceInterfaces;
-using Application.LogicInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using WastelessWASM;
+using PersistenceDataAccess.ServiceInterfaces;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace WebAPI.Controllers;
@@ -16,35 +13,25 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly IConfiguration config;
-    private readonly ICustomerService authCustomerService;
-    private readonly ISellerService authSellerService;
-    private readonly IAuthLogic authLogic;
+    private readonly IConfiguration _config;
+    private readonly IAuthService _authService;
 
-    public AuthController(IConfiguration config, ICustomerService authCustomerService, ISellerService authSellerService, IAuthLogic authLogic)
+    public AuthController(IConfiguration config, IAuthService authService)
     {
-        this.config = config;
-        this.authCustomerService = authCustomerService;
-        this.authSellerService = authSellerService;                                                                                 
-        this.authLogic = authLogic;
+        _config = config;                                                                              
+        _authService = authService;
     }
     
     private List<Claim> GenerateClaimsCustomer(CustomerDto user)
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, config["Jwt:Subject"]),
+            new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
             new Claim(ClaimTypes.Name, user.User.Email),
             new Claim(ClaimTypes.Role, "customer"),
             new Claim("DisplayFirstName", user.User.FirstName),
-            new Claim("DisplayLastName", user.User.LastName),
-            new Claim("AddressCity", user.User.Address.City),
-            new Claim("AddressStreet", user.User.Address.Streetname),
-            new Claim("AddressPostcode", user.User.Address.Postcode.ToString()),
-            new Claim("Email", user.User.Email),
-            new Claim("PhoneNumber", user.User.PhoneNumber.ToString()),
             new Claim(ClaimTypes.Sid, user.User.Email),
             new Claim("SecurityLevel", "3")
         };
@@ -55,18 +42,12 @@ public class AuthController : ControllerBase
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, config["Jwt:Subject"]),
+            new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
             new Claim(ClaimTypes.Name, user.User.Email),
             new Claim(ClaimTypes.Role, "seller"),
             new Claim("DisplayFirstName", user.User.FirstName),
-            new Claim("DisplayLastName", user.User.LastName),
-            new Claim("AddressCity", user.User.Address.City),
-            new Claim("AddressStreet", user.User.Address.Streetname),
-            new Claim("AddressPostcode", user.User.Address.Postcode.ToString()),
-            new Claim("Email", user.User.Email),
-            new Claim("PhoneNumber", user.User.PhoneNumber.ToString()),
             new Claim(ClaimTypes.Sid, user.Cvr.ToString()),
             new Claim("SecurityLevel", "5")
         };
@@ -77,14 +58,14 @@ public class AuthController : ControllerBase
     {
         List<Claim> claims = GenerateClaimsCustomer(user);
     
-        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
         SigningCredentials signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
     
         JwtHeader header = new JwtHeader(signIn);
     
         JwtPayload payload = new JwtPayload(
-            config["Jwt:Issuer"],
-            config["Jwt:Audience"],
+            _config["Jwt:Issuer"],
+            _config["Jwt:Audience"],
             claims, 
             null,
             DateTime.UtcNow.AddMinutes(60));
@@ -99,14 +80,14 @@ public class AuthController : ControllerBase
     {
         List<Claim> claims = GenerateClaimsSeller(user);
     
-        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
         SigningCredentials signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
     
         JwtHeader header = new JwtHeader(signIn);
     
         JwtPayload payload = new JwtPayload(
-            config["Jwt:Issuer"],
-            config["Jwt:Audience"],
+            _config["Jwt:Issuer"],
+            _config["Jwt:Audience"],
             claims, 
             null,
             DateTime.UtcNow.AddMinutes(60));
@@ -122,16 +103,14 @@ public class AuthController : ControllerBase
     {
         try
         {
-            // changed authCustomerService to authLogic
-            var customer = await authLogic.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
+            var customer = await _authService.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
             if (customer != null)
             {
                 string token = GenerateJwtCustomer(customer);
                 return Ok(token);
             }
             
-            // changed authSellerService to authLogic
-            var seller = await authLogic.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
+            var seller = await _authService.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
             if (seller != null)
             {
                 string token = GenerateJwtSeller(seller);

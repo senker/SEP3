@@ -1,7 +1,6 @@
-﻿using Application.ServiceInterfaces;
-using Domain.DTOs;
-using PersistenceDataAccess.Services;
+﻿using Domain.DTOs;
 using Grpc.Core;
+using PersistenceDataAccess.ServiceInterfaces;
 
 namespace PersistenceDataAccess.Services;
 
@@ -14,7 +13,7 @@ public class ReservationService : IReservationService
          _client = new PersistenceDataAccess.ReservationService.ReservationServiceClient(grpcService.GetChannel());
      }
 
-    public async Task<ReservationDto> CreateReservationDaoAsync(ReservationCreateDto dto)
+    public async Task<ReservationDto> CreateReservationAsync(ReservationCreateDto dto)
     {
         try
         {
@@ -36,7 +35,7 @@ public class ReservationService : IReservationService
         }
     }
 
-    public async Task<List<ReservationDto>> GetReservationsBySellerCvrDaoAsync(int cvr)
+    public async Task<List<ReservationDto>> GetReservationsBySellerCvrAsync(int cvr)
     {
         try
         {
@@ -57,7 +56,7 @@ public class ReservationService : IReservationService
         }
     }
 
-    public async Task<List<ReservationDto>> GetReservationsByCustomerEmailDaoAsync(string email)
+    public async Task<List<ReservationDto>> GetReservationsByCustomerEmailAsync(string email)
     {
         try
         {

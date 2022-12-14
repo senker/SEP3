@@ -1,10 +1,9 @@
 using System.Text;
-using Application.ServiceInterfaces;
 using Application.Logic;
-using Application.LogicInterfaces;
 using Domain.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using PersistenceDataAccess.ServiceInterfaces;
 using PersistenceDataAccess.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,8 +31,7 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IFoodPackService, FoodPackService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
-builder.Services.AddScoped<IAuthLogic, AuthLogic>();
-//builder.Services.AddScoped<ISellerLogic, SellerLogic>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

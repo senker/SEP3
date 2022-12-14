@@ -1,6 +1,6 @@
 using Domain.DTOs;
 
-namespace Application.ServiceInterfaces;
+namespace PersistenceDataAccess.ServiceInterfaces;
 
 public interface ICustomerService
 {
@@ -9,5 +9,4 @@ public interface ICustomerService
     Task<CustomerDto?> DeleteCustomerByEmailAsync(string email);
     Task<List<CustomerDto>> GetAllCustomers();
     Task<CustomerDto?> ValidateCustomer(string username, string password);
-    Task RegisterCustomer(CustomerDto customer);
 }
