@@ -147,12 +147,10 @@ public class CustomerService : ICustomerService
 
     private CustomerDto ResponseToCustomerDto(CustomerResponse response)
     {
-        var address = new Domain.Models.AddressModel
-        {
-            City = response.User.Address.City,
-            Streetname = response.User.Address.StreetName,
-            Postcode = response.User.Address.PostCode
-        };
+        var address = new AddressModel(            
+            response.User.Address.City,
+            response.User.Address.StreetName,
+            response.User.Address.PostCode);
 
         UserModel user = new UserModel();
         user.FirstName = response.User.FirstName;
