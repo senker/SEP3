@@ -31,8 +31,13 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     final
     ImageRepository imageRepository;
 
+    //final Address addressRepository;
+
     @Autowired
-    public SellerService(SellerRepository sellerRepository, PackRepository packRepository, ImageRepository imageRepository) {
+    public SellerService(SellerRepository sellerRepository,
+                         PackRepository packRepository,
+                         ImageRepository imageRepository
+                         ) {
         this.sellerRepository = sellerRepository;
         this.packRepository = packRepository;
         this.imageRepository = imageRepository;
@@ -48,6 +53,8 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         List<Image> listOfPartialImage = new ArrayList<>();
 
            // byte[] byteData = request.getImage().getImageUrl().getBytes();
+
+      //  Address address = addressRepository.findByStreet(request.getUser().getAddress().getStreetName());
 
             Seller seller = new Seller(
                     request.getUser().getFirstName(),
