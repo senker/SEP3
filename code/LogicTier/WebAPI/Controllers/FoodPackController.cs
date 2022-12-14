@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,23 +11,23 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class FoodPackController : ControllerBase
 {
-    private readonly IFoodPackDao _foodPackDao;
+    private readonly IFoodPackService _foodPackService;
     
-    public FoodPackController(IFoodPackDao foodPackDao)
+    public FoodPackController(IFoodPackService foodPackService)
     {
-        _foodPackDao = foodPackDao;
+        _foodPackService = foodPackService;
     }
     
     [HttpPost()]
     public async Task<ActionResult> CreateFoodPack(FoodPackCreateDto foodPack)
     {
-        return Ok(await _foodPackDao.CreateFoodPackAsync(foodPack));
+        return Ok(await _foodPackService.CreateFoodPackAsync(foodPack));
     }
     
     [HttpGet("{id}")]
     public async Task<IActionResult> GetFoodPackById(int id)
     {
-        var foodPack = await _foodPackDao.GetFoodPackByIdAsync(id);
+        var foodPack = await _foodPackService.GetFoodPackByIdAsync(id);
 
         if (foodPack == null)
             return NotFound("Food pack not found");
@@ -40,7 +40,7 @@ public class FoodPackController : ControllerBase
     string type, double price, int postcode)
     {
 
-        var foodPacks = await _foodPackDao.SearchFoodPacks(isPrepared, title,  type, price, postcode);
+        var foodPacks = await _foodPackService.SearchFoodPacks(isPrepared, title,  type, price, postcode);
         return Ok(foodPacks);
     }
 
@@ -48,7 +48,7 @@ public class FoodPackController : ControllerBase
     [Route("/by-seller-cvr/{cvr}")]
     public async Task<IActionResult> GetFoodPacksBySellerCvr(int cvr)
     {
-        var foodPacks = await _foodPackDao.GetFoodPacksBySellerCvr(cvr);
+        var foodPacks = await _foodPackService.GetFoodPacksBySellerCvr(cvr);
         return Ok(foodPacks);
     }
 
@@ -56,7 +56,7 @@ public class FoodPackController : ControllerBase
     [Route("/all-food-packs")]
     public async Task<IActionResult> GetAllFoodPacks()
     {
-        var foodPacks = await _foodPackDao.GetAllFoodPacks();
+        var foodPacks = await _foodPackService.GetAllFoodPacks();
         return Ok(foodPacks);
     }
     
@@ -64,6 +64,6 @@ public class FoodPackController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteFoodPackById(int id)
     {
-        return Ok(await _foodPackDao.DeleteFoodPackByIdAsync(id));
+        return Ok(await _foodPackService.DeleteFoodPackByIdAsync(id));
     }
 }

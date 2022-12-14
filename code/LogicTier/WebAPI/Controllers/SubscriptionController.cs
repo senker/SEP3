@@ -1,4 +1,4 @@
-﻿using Application.DaoInterfaces;
+﻿using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,16 +8,16 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SubscriptionController : ControllerBase
 {
-    private readonly ISubscriptionDao _subscriptionDao;
+    private readonly ISubscriptionService _subscriptionService;
 
-    public SubscriptionController(ISubscriptionDao subscriptionDao)
+    public SubscriptionController(ISubscriptionService subscriptionService)
     {
-        _subscriptionDao = subscriptionDao;
+        _subscriptionService = subscriptionService;
     }
 
     [HttpPost()]
     public async Task<ActionResult> CreateSubscription(SubscriptionDto subscription)
     {
-        return Ok(await _subscriptionDao.CreateSubscriptionDaoAsync(subscription));
+        return Ok(await _subscriptionService.CreateSubscriptionDaoAsync(subscription));
     }
 }

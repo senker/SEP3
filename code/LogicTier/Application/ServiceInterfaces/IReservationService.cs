@@ -1,8 +1,8 @@
 ﻿using Domain.DTOs;
 
-namespace Application.DaoInterfaces;
+namespace Application.ServiceInterfaces;
 
-public interface IReservationDao
+public interface IReservationService
 {
     Task<ReservationDto> CreateReservationDaoAsync(ReservationCreateDto dto);
     Task<List<ReservationDto>> GetReservationsBySellerCvrDaoAsync(int cvr);

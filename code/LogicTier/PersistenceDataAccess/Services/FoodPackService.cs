@@ -1,17 +1,17 @@
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
 
-namespace PersistenceDataAccess.DAOs;
+namespace PersistenceDataAccess.Services;
 
-public class FoodPackDao : IFoodPackDao
+public class FoodPackService : IFoodPackService
 {
-    private readonly FoodPackService.FoodPackServiceClient _client;
+    private readonly PersistenceDataAccess.FoodPackService.FoodPackServiceClient _client;
     
-    public FoodPackDao(IGrpcService grpcService)
+    public FoodPackService(IGrpcService grpcService)
     {
-        _client = new FoodPackService.FoodPackServiceClient(grpcService.GetChannel());
+        _client = new PersistenceDataAccess.FoodPackService.FoodPackServiceClient(grpcService.GetChannel());
     }
     
     public async Task<FoodPackDto?> CreateFoodPackAsync(FoodPackCreateDto foodPack)

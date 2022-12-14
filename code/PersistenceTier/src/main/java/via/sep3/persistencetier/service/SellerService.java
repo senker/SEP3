@@ -186,4 +186,10 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void getSellerByEmail(SellerRequestEmail request, StreamObserver<SellerResponse> responseObserver) {
+        var seller = sellerRepository.findByEmail(request.getEmail());
+        sellerResponseBuilder(responseObserver, seller);
+    }
 }

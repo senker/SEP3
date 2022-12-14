@@ -1,16 +1,16 @@
-﻿using Application.DaoInterfaces;
+﻿using Application.ServiceInterfaces;
 using Domain.DTOs;
 using PersistenceDataAccess.Services;
-namespace PersistenceDataAccess.DAOs;
+namespace PersistenceDataAccess.Services;
 
-public class SubscriptionDao : ISubscriptionDao
+public class SubscriptionService : ISubscriptionService
 {
 
-    private readonly SubscriptionService.SubscriptionServiceClient _client;
+    private readonly PersistenceDataAccess.SubscriptionService.SubscriptionServiceClient _client;
 
-    public SubscriptionDao(IGrpcService grpcService)
+    public SubscriptionService(IGrpcService grpcService)
     {
-        _client = new SubscriptionService.SubscriptionServiceClient(grpcService.GetChannel());
+        _client = new PersistenceDataAccess.SubscriptionService.SubscriptionServiceClient(grpcService.GetChannel());
     }
 
     public async Task<SubscriptionDto> CreateSubscriptionDaoAsync(SubscriptionDto dto)

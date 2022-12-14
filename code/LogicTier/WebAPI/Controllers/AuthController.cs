@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Application.LogicInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +17,11 @@ namespace WebAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration config;
-    private readonly ICustomerDao authCustomerService;
-    private readonly ISellerDao authSellerService;
+    private readonly ICustomerService authCustomerService;
+    private readonly ISellerService authSellerService;
     private readonly IAuthLogic authLogic;
 
-    public AuthController(IConfiguration config, ICustomerDao authCustomerService, ISellerDao authSellerService, IAuthLogic authLogic)
+    public AuthController(IConfiguration config, ICustomerService authCustomerService, ISellerService authSellerService, IAuthLogic authLogic)
     {
         this.config = config;
         this.authCustomerService = authCustomerService;

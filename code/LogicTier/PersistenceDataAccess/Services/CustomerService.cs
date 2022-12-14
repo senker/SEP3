@@ -1,20 +1,20 @@
 using System.ComponentModel.DataAnnotations;
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Google.Protobuf.Collections;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
 
-namespace PersistenceDataAccess.DAOs;
+namespace PersistenceDataAccess.Services;
 
-public class CustomerDao : ICustomerDao
+public class CustomerService : ICustomerService
 {
-    private readonly CustomerService.CustomerServiceClient _client;
+    private readonly PersistenceDataAccess.CustomerService.CustomerServiceClient _client;
 
-    public CustomerDao(IGrpcService grpcService)
+    public CustomerService(IGrpcService grpcService)
     {
-        _client = new CustomerService.CustomerServiceClient(grpcService.GetChannel());
+        _client = new PersistenceDataAccess.CustomerService.CustomerServiceClient(grpcService.GetChannel());
     }
 
     public async Task<CustomerDto?> CreateCustomerAsync(CustomerCreateDto customer)

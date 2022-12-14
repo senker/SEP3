@@ -1,17 +1,17 @@
-using Application.DaoInterfaces;
+using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Grpc.Core;
 using PersistenceDataAccess.Services;
-namespace PersistenceDataAccess.DAOs;
+namespace PersistenceDataAccess.Services;
 
-public class SellerDao : ISellerDao
+public class SellerService : ISellerService
 {
-    private readonly SellerService.SellerServiceClient _client;
+    private readonly PersistenceDataAccess.SellerService.SellerServiceClient _client;
     
-    public SellerDao(IGrpcService grpcService)
+    public SellerService(IGrpcService grpcService)
     {
-        _client = new SellerService.SellerServiceClient(grpcService.GetChannel());
+        _client = new PersistenceDataAccess.SellerService.SellerServiceClient(grpcService.GetChannel());
     }
     public async Task<SellerDto?> CreateSellerAsync(SellerCreateDto seller)
     {
@@ -140,11 +140,6 @@ public class SellerDao : ISellerDao
           u.User.Email.Equals(username, StringComparison.OrdinalIgnoreCase));
 
       return existingSeller;
-  }
-
-  public Task RegisterSeller(SellerDto seller)
-  {
-      throw new NotImplementedException();
   }
 
   public async Task<SellerDto?> DeleteSellerByCvrAsync(int cvr)

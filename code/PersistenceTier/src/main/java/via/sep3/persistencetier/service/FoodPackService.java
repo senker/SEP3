@@ -23,18 +23,18 @@ import java.util.stream.Stream;
 public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase {
 
 final
-PackRepository packRepository;
+PackRepository PACK_REPOSITORY;
 
 final
-SellerRepository sellerRepository;
+SellerRepository SELLER_REPOSITORY;
 
 final
-AddressRepository addressRepository;
+AddressRepository ADDRESS_REPOSITORY;
 @Autowired
     public FoodPackService(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository) {
-        this.packRepository = packRepository;
-        this.sellerRepository = sellerRepository;
-        this.addressRepository = addressRepository;
+        this.PACK_REPOSITORY = packRepository;
+        this.SELLER_REPOSITORY = sellerRepository;
+        this.ADDRESS_REPOSITORY = addressRepository;
     }
 
     @Override
@@ -65,9 +65,9 @@ AddressRepository addressRepository;
                     packRequest.getEndTime().getHour(),
                     packRequest.getEndTime().getMinutes()
             ).truncatedTo(ChronoUnit.MINUTES),
-            sellerRepository.findByCvr((long) packRequest.getCvr())
+            SELLER_REPOSITORY.findByCvr((long) packRequest.getCvr())
     );
-    var savedFoodPack = packRepository.save(foodPack);
+    var savedFoodPack = PACK_REPOSITORY.save(foodPack);
     sendToMessageQueue();
     foodPackResponseBuilder(responseObserver, savedFoodPack);
 }
@@ -76,7 +76,7 @@ AddressRepository addressRepository;
     public void getAllFoodPacks(EmptyFoodPack packRequest, StreamObserver<FoodPackResponse> responseObserver)
 {
     FoodPackResponse.Builder foodPackResponseBuilder = FoodPackResponse.newBuilder();
-    Stream<FoodPack> foodPackStream = packRepository.findAllStream();
+    Stream<FoodPack> foodPackStream = PACK_REPOSITORY.findAllStream();
 
     foodPackStream.forEach(pack ->{
        foodPackResponseBuilder
@@ -92,7 +92,7 @@ AddressRepository addressRepository;
 
 @Override
 public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
-    var foodPack = packRepository.findById(foodPackRequest.getId());
+    var foodPack = PACK_REPOSITORY.findById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
@@ -101,8 +101,8 @@ public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest,
 {
     System.out.println("Inside get food packs by seller cvr");
     FoodPackResponse.Builder response = FoodPackResponse.newBuilder();
-    Seller seller = sellerRepository.findByCvr((long) foodPackSellerRequest.getCvr());
-    Stream<FoodPack> foodPackStream = packRepository.findBySeller(seller.getCvr().intValue());
+    Seller seller = SELLER_REPOSITORY.findByCvr((long) foodPackSellerRequest.getCvr());
+    Stream<FoodPack> foodPackStream = PACK_REPOSITORY.findBySeller(seller.getCvr().intValue());
 
     foodPackStream.forEach(pack ->{
         response
@@ -136,8 +136,8 @@ public void getFoodPacksBySellerCvr(FoodPackSellerRequest foodPackSellerRequest,
 
 @Override
 public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
-    FoodPack foodPack = packRepository.findById(foodPackRequest.getId());
-    packRepository.deleteById(foodPackRequest.getId());
+    FoodPack foodPack = PACK_REPOSITORY.findById(foodPackRequest.getId());
+    PACK_REPOSITORY.deleteById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
 }
 
@@ -159,18 +159,18 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
             postCode = request.getPostcode();
             price = request.getPrice();
 
-            Long address_id = addressRepository.findByPostCode(postCode);
+            Long address_id = ADDRESS_REPOSITORY.findByPostCode(postCode);
 
             Stream<FoodPack> streamOfSellers;
 
-            Long cvr = sellerRepository.findByAddressId(address_id);
+            Long cvr = SELLER_REPOSITORY.findByAddressId(address_id);
 
            if(price==0)
            {
-               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, cvr);
+               streamOfSellers = PACK_REPOSITORY.searchPacks(title, isPrepared, type, cvr);
            }
            else{
-               streamOfSellers = packRepository.searchPacks(title, isPrepared, type, price, cvr);
+               streamOfSellers = PACK_REPOSITORY.searchPacks(title, isPrepared, type, price, cvr);
            }
 
            streamOfSellers.forEach(pack -> {

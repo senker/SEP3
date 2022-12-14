@@ -21,18 +21,18 @@ import java.util.stream.Stream;
 public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
 
     final
-    CustomerRepository customerRepository;
+    CustomerRepository CUSTOMER_REPOSITORY;
 
     final
-    PackRepository packRepository;
+    PackRepository PACK_REPOSITORY;
 
     final
-    PreferenceRepository preferenceRepository;
+    PreferenceRepository PREFERENCE_REPOSITORY;
     @Autowired
     public CustomerService(CustomerRepository customerRepository, PackRepository packRepository, PreferenceRepository preferenceRepository) {
-        this.customerRepository = customerRepository;
-        this.packRepository = packRepository;
-        this.preferenceRepository = preferenceRepository;
+        this.CUSTOMER_REPOSITORY = customerRepository;
+        this.PACK_REPOSITORY = packRepository;
+        this.PREFERENCE_REPOSITORY = preferenceRepository;
     }
 
 
@@ -61,7 +61,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
             preferenceList.add(new Preference(preference, customer));
         }
 
-        var savedCustomer = customerRepository.save(customer);
+        var savedCustomer = CUSTOMER_REPOSITORY.save(customer);
 
         customerResponseBuilder(responseObserver, savedCustomer);
     }
@@ -70,7 +70,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     public void getAllCustomers(EmptyCustomer empty, StreamObserver<CustomerResponse> responseObserver)
     {
         CustomerResponse.Builder customerResponseBuilder = CustomerResponse.newBuilder();
-        Stream<Customer> customerList = customerRepository.findAllStream();
+        Stream<Customer> customerList = CUSTOMER_REPOSITORY.findAllStream();
         customerList.forEach(customer ->{
 
             customerResponseBuilder
@@ -104,7 +104,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
 
     @Override
     public void getCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
-        var customer = customerRepository.findByEmail(request.getEmail());
+        var customer = CUSTOMER_REPOSITORY.findByEmail(request.getEmail());
         customerResponseBuilder(responseObserver, customer);
     }
 
@@ -112,9 +112,9 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     public void deleteCustomerByEmail(CustomerRequest request, StreamObserver<CustomerResponse> responseObserver) {
 
 
-        Customer customer = customerRepository.findByEmail(request.getEmail());
-        preferenceRepository.deleteByCustomer(customer);
-        customerRepository.deleteByEmail(request.getEmail());
+        Customer customer = CUSTOMER_REPOSITORY.findByEmail(request.getEmail());
+        PREFERENCE_REPOSITORY.deleteByCustomer(customer);
+        CUSTOMER_REPOSITORY.deleteByEmail(request.getEmail());
         customerResponseBuilder(responseObserver, customer);
 
 /*
