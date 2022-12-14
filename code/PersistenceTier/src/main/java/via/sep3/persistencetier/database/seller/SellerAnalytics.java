@@ -4,6 +4,7 @@ import via.sep3.persistencetier.database.seller.Seller;
 
 import javax.persistence.*;
 
+@Entity
 @Table(name="seller_analytics")
 public class SellerAnalytics {
 

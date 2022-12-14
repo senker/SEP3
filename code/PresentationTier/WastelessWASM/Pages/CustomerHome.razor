@@ -5,7 +5,9 @@
 @using Domain.DTOs
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
-@inject IFoodPackService packMan;
+@inject IFoodPackService foodPackService;     
+@inject IJSRuntime JS;
+
 <div id="searchForm">
     <div id="textPair">
        
@@ -48,30 +50,29 @@
         </div>
                 
     </div>
-   
-    <div id="packIsReady">
-        <label style="text-align: center">Ready to eat?</label>
-        <div class="form-check">
-                    
-            <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked" @onchange="ready">
-            <label class="form-check-label" for="typeVegan">Yes</label>
-    
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady" @onchange="notReady">
-            <label class="form-check-label" for="typeMeat">No</label>
-        </div>
-    </div>
+
+<div id="packIsReady">
+            <label style="text-align: center">Ready to eat?</label>
+     <div class="form-check">
+          <input class="form-check-input" type="radio" name="typeReady" id="typeIsReady" checked="checked" @onchange="ready">
+          <label class="form-check-label" for="typeVegan">Yes</label>
+           </div>
+         <div class="form-check">
+             <input class="form-check-input" type="radio" name="typeReady" id="typeIsNotReady" @onchange="notReady">
+             <label class="form-check-label" for="typeMeat">No</label>
+         </div>
 
     <div><button id="searchBtn" @onclick="searchBtn">Search</button>
-    </div>
+         </div>
+      </div>
 
-</div>
+     </div>
 
 <div class="foodItem">
-    @for (var i = 0; i < packManModels.Count; i++)
+
+    @for (var i = 0; i < foodPackModels.Count; i++)
     {
-        var pack = packManModels.ElementAt(i);
+        var pack = foodPackModels.ElementAt(i);
         <div class="row item">
             <div class="col-md-4 item_photo">
                 <img class="foodIcon" src="img/foodpack.jpg"/>
@@ -129,29 +130,41 @@
     private string pastryChoice;
     private string groceryChoice;
     private bool readyChoice = true;
-    private string typeChoice;
-    List<FoodPackModel> packManModels;
-    
-    
+    private string typeChoice = "Vegan";
+    List<FoodPackModel> foodPackModels;
 
-   
 
-    private void searchBtn()
+    protected override async Task OnInitializedAsync()
     {
+        try
+        {
+            foodPackModels = new List<FoodPackModel>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+
+
+    private async Task searchBtn()
+    {
+
         SearchFoodPackDto searchPack = new SearchFoodPackDto
         {
             IsPrepared = readyChoice,
             Title = titleSearch,
-            Type = typeChoice,
+            Type = typeChoice.ToLower(),
             Price = maxPrice,
             PostCode = postCode
 
 
         };
-        // packManModels = packMan.SearchFoodPacks(searchPack);
-
-
+        foodPackModels = await foodPackService.SearchFoodPacks(searchPack);
     }
+
     private void ready(ChangeEventArgs args)
     {
         String red; 
