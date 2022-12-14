@@ -11,6 +11,7 @@ import via.sep3.persistencetier.database.seller.Image;
 import via.sep3.persistencetier.database.seller.ImageRepository;
 import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.database.seller.SellerRepository;
+import via.sep3.persistencetier.database.userInfo.AddressRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
-public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
+public class SellerDao extends SellerServiceGrpc.SellerServiceImplBase {
 
     final
     SellerRepository SELLER_REPOSITORY;
@@ -31,10 +32,9 @@ public class SellerService extends SellerServiceGrpc.SellerServiceImplBase {
     final
     ImageRepository IMAGE_REPOSITORY;
 
-    //final Address addressRepository;
 
     @Autowired
-    public SellerService(SellerRepository sellerRepository, PackRepository packRepository, ImageRepository imageRepository) {
+    public SellerDao(SellerRepository sellerRepository, PackRepository packRepository, ImageRepository imageRepository) {
         this.SELLER_REPOSITORY = sellerRepository;
         this.PACK_REPOSITORY = packRepository;
         this.IMAGE_REPOSITORY = imageRepository;

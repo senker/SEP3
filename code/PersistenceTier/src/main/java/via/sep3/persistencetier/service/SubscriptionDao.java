@@ -12,12 +12,10 @@ import via.sep3.persistencetier.database.subscription.SubscriptionRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @GRpcService
 @Transactional
-public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
+public class SubscriptionDao extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
 
     final
     SubscriptionRepository subscriptionRepository;
@@ -28,7 +26,7 @@ public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionSer
     final
     CustomerRepository customerRepository;
 @Autowired
-    public SubscriptionService(SubscriptionRepository subscriptionRepository, SellerRepository sellerRepository, CustomerRepository customerRepository) {
+    public SubscriptionDao(SubscriptionRepository subscriptionRepository, SellerRepository sellerRepository, CustomerRepository customerRepository) {
         this.subscriptionRepository = subscriptionRepository;
         this.sellerRepository = sellerRepository;
         this.customerRepository = customerRepository;

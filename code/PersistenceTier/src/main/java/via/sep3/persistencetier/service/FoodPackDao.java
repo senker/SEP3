@@ -6,6 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.sep3.persistencetier.database.userInfo.Address;
 import via.sep3.persistencetier.database.reservation.Reservation;
 import via.sep3.persistencetier.database.reservation.ReservationRepository;
 import via.sep3.persistencetier.database.userInfo.AddressRepository;
@@ -24,7 +25,7 @@ import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
-public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase {
+public class FoodPackDao extends FoodPackServiceGrpc.FoodPackServiceImplBase {
 
     final ReservationRepository RESERVATION_REPOSITORY;
 final
@@ -36,7 +37,7 @@ SellerRepository SELLER_REPOSITORY;
 final
 AddressRepository ADDRESS_REPOSITORY;
 @Autowired
-    public FoodPackService(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository, ReservationRepository reservationRepository) {
+    public FoodPackDao(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository, ReservationRepository reservationRepository) {
         this.PACK_REPOSITORY = packRepository;
         this.SELLER_REPOSITORY = sellerRepository;
         this.ADDRESS_REPOSITORY = addressRepository;
@@ -76,6 +77,7 @@ AddressRepository ADDRESS_REPOSITORY;
     var savedFoodPack = PACK_REPOSITORY.save(foodPack);
     sendToMessageQueue();
     foodPackResponseBuilder(responseObserver, savedFoodPack);
+    responseObserver.onCompleted();
 }
 
 @Override
@@ -85,6 +87,7 @@ AddressRepository ADDRESS_REPOSITORY;
     Stream<FoodPack> foodPackStream = PACK_REPOSITORY.findAllStream();
 
     foodPackStream.forEach(pack ->{
+        System.out.println("pack ");
        foodPackResponseBuilder
                .setId(pack.getId())
                .setTitle(pack.getTitle())
@@ -100,6 +103,7 @@ AddressRepository ADDRESS_REPOSITORY;
 public void getFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<FoodPackResponse> responseObserver) {
     var foodPack = PACK_REPOSITORY.findById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
+    responseObserver.onCompleted();
 }
 
 @Override
@@ -161,6 +165,7 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
     FoodPack foodPack = PACK_REPOSITORY.findById(foodPackRequest.getId());
     PACK_REPOSITORY.deleteById(foodPackRequest.getId());
     foodPackResponseBuilder(responseObserver, foodPack);
+    responseObserver.onCompleted();
 }
 
 
@@ -181,30 +186,24 @@ public void deleteFoodPackById(FoodPackRequest foodPackRequest, StreamObserver<F
             postCode = request.getPostcode();
             price = request.getPrice();
 
-            Long address_id = ADDRESS_REPOSITORY.findByPostCode(postCode);
+            Stream<Address> address_list = ADDRESS_REPOSITORY.findByPostCode(request.getPostcode());
 
-            Stream<FoodPack> streamOfSellers;
 
-            Long cvr = SELLER_REPOSITORY.findByAddressId(address_id);
+            address_list.forEach(address -> {
+                System.out.println("city: " + address.getId());
 
-           if(price==0)
-           {
-               streamOfSellers = PACK_REPOSITORY.searchPacks(title, isPrepared, type, cvr);
-           }
-           else{
-               streamOfSellers = PACK_REPOSITORY.searchPacks(title, isPrepared, type, price, cvr);
-           }
+                Stream<Seller> sellerList = SELLER_REPOSITORY.findByAddress(address.getId());
+                sellerList.forEach(seller ->
+                {
+                    System.out.println("cvr: " + seller.getCvr());
+                    Stream<FoodPack> streamOfSellers = PACK_REPOSITORY.searchPacks(title, isPrepared, type, price, seller.getCvr());
 
-           streamOfSellers.forEach(pack -> {
-               foodPackResponseBuilder
-                       .setId(pack.getId())
-                       .setTitle(pack.getTitle())
-                       .setDescription(pack.getDescription())
-                       .setType(pack.getType())
-                       .setIsPrepared(pack.isIs_prepared())
-                       .setPrice(pack.getPrice());
-               responseObserver.onNext(foodPackResponseBuilder.build());
-           });
+                    streamOfSellers.forEach(pack -> {
+                        System.out.println("packId: " + pack.getId());
+                        foodPackResponseBuilder(responseObserver, pack);
+                    });
+                });
+            });
         responseObserver.onCompleted();
 
     }
@@ -237,7 +236,6 @@ private void foodPackResponseBuilder(StreamObserver<FoodPackResponse> responseOb
             var response = builder.build();
 
     responseObserver.onNext(response);
-    responseObserver.onCompleted();
 
 
 
