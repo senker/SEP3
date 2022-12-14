@@ -1,16 +1,19 @@
 ﻿@page "/"
 @using HttpClients.ClientInterfaces
 @using Domain.Models
+@using System.Security.Claims
 @inject NavigationManager navMgr
 @inject ISellerService sellerService; 
+@inject IAuthService authService
 
-<PageTitle>Index</PageTitle>
 
-<div class="introPage" align="center">
-    <h1>Wasteless</h1>
-    <p>Let's start saving food</p>
-</div>
-<CustomerHome/>
+<PageTitle>Wasteless</PageTitle>
+
+        <div class="introPage" align="center">
+            <h1>Wasteless</h1>
+            <p>Let's start saving food</p>
+        </div>
+        <CustomerHome/>
 
 <div class="restaurants">
 
@@ -40,15 +43,11 @@
     }
 </div>
 
-<button class="reservationButton" @onclick="Reservations">Go to your reservations</button>
 
-<style>
-    body {
-        
-        background: #48b1bf; 
-        }
-</style>
-<script suppress-error="BL9992" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY"></script>
+        <script suppress-error="BL9992" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY"></script>
+
+
+
 
 @code {
 
@@ -59,20 +58,17 @@
     private int? _number_of_restaurants = 0;
     private SellerModel _seller;
     private string _imageURL;
+    private AuthenticationState authState;
+    private string customerEmail;
 
 
-    private void Reservations()
-    {
-        navMgr.NavigateTo("/CustomerActiveReservation/11");
-    }
 
     private void ReadMore(SellerModel seller)
     {
         errorLabel = "";
         try
         {
-            _seller = seller; /*
-            _savedRestaurant.SetSeller(_seller);*/
+            _seller = seller;
             navMgr.NavigateTo("/seller/" + _seller.Cvr);
         }
         catch (Exception e)
@@ -80,7 +76,6 @@
             Console.WriteLine(e);
             errorLabel = $"Error: {e.Message}";
         }
-    // return Task.CompletedTask;
     }
 
     protected override async Task OnInitializedAsync()
