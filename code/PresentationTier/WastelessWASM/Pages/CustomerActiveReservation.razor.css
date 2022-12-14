@@ -37,3 +37,8 @@
     color:  lightskyblue ;
     cursor: pointer;
 }
+
+.icons {
+    height: 50px;
+    width: 50px;
+}

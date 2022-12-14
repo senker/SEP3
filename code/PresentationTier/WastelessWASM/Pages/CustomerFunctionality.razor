@@ -12,24 +12,10 @@
     </Authorized>
 </AuthorizeView>
 
-
-@*<AuthorizeView>
-            @if (context.User.IsInRole("customer"))
-            {
-                <button class="reservationButton" @onclick="Reservations)">Go to your reservations</button>
-            }
-</AuthorizeView>*@
-
 @code {
 
     public void OpenReservations(string email)
     {
         navMgr.NavigateTo("/CustomerActiveReservation/"+email);
-    //customerEmail = authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value!;
-    //customerEmail = authState.User.FindFirst(c => c.Type == ClaimTypes.Sid)?.Value!;
-    /*private void Reservations()
-    {
-        navMgr.NavigateTo("/CustomerActiveReservation/" + customerEmail);
-    }*/
     }
 }

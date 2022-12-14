@@ -19,6 +19,49 @@
     <p id="coDescription">@description</p>
     <button id="subscribeBtn">Subscribe</button>
     </div>
+<div class="bottomContainer">
+    <div id="coInfo">
+                    <p>Rating: @rating </p>
+                    <p>
+                        @street_name <br/>@post_code <br/>@city
+                    </p>
+                </div>
+            </div>
+<div id="mapContainer">
+    <script suppress-error="BL9992">
+                              async function foo(){
+                                  let obj;      
+                                  const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
+                                  
+                                   obj = await res.json();
+                                                
+                                                console.log(obj)                    
+                                                let lng = obj.results[0].geometry.location.lng;
+                                                let lat = obj.results[0].geometry.location.lat;
+                                                
+                                                
+                                                var map = new google.maps.Map(document.getElementById("mapContainer"), {
+                                                                  zoom: 15,
+                                                                  center: new google.maps.LatLng(lat, lng),
+                                                                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                                });
+                                                                const infowindow = new google.maps.InfoWindow({
+                                                                  content: "Borgergade 7, 8700 Horsens",
+                                                                  ariaLabel: "Borgergade 7, 8700 Horsens",
+                                                                });
+                                                                let marker = new google.maps.Marker({
+                                                                  position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
+                                                                  map: map,
+                                                                  animation: google.maps.Animation.DROP
+                                                                });
+                                                                infowindow.open({
+                                                                  anchor: marker,
+                                                                  map
+                                                                });   
+                                }
+                                foo();
+                          </script>
+</div>
 
 <div class="foodItem">
     @for (var i = 0; i < numberOfFoodPacks; i++)
@@ -61,49 +104,7 @@
     }
 </div>
 
-<div class="bottomContainer">
-    <div id="coInfo">
-                    <p>Rating: @rating </p>
-                    <p>
-                        @street_name <br/>@post_code <br/>@city
-                    </p>
-                </div>
-            </div>
-    <div id="mapContainer">
-        <script suppress-error="BL9992">
-                              async function foo(){
-                                  let obj;      
-                                  const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Borgergade+5,+8700+Horsens,+DK&key=AIzaSyDecST4-GSgcx5pAQbq0h2kbU55wlUfeuY`)
-                                  
-                                   obj = await res.json();
-                                                
-                                                console.log(obj)                    
-                                                let lng = obj.results[0].geometry.location.lng;
-                                                let lat = obj.results[0].geometry.location.lat;
-                                                
-                                                
-                                                var map = new google.maps.Map(document.getElementById("mapContainer"), {
-                                                                  zoom: 15,
-                                                                  center: new google.maps.LatLng(lat, lng),
-                                                                  mapTypeId: google.maps.MapTypeId.ROADMAP
-                                                                });
-                                                                const infowindow = new google.maps.InfoWindow({
-                                                                  content: "Borgergade 7, 8700 Horsens",
-                                                                  ariaLabel: "Borgergade 7, 8700 Horsens",
-                                                                });
-                                                                let marker = new google.maps.Marker({
-                                                                  position: new google.maps.LatLng(55.86006434102756, 9.84509932092715),
-                                                                  map: map,
-                                                                  animation: google.maps.Animation.DROP
-                                                                });
-                                                                infowindow.open({
-                                                                  anchor: marker,
-                                                                  map
-                                                                });   
-                                }
-                                foo();
-                          </script>
-    </div>
+
 
 <BlazorModal Title="Make a reservation" IsOpened="isOpened">
     <ModalBody>
