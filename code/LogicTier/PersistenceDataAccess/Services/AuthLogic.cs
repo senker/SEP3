@@ -1,9 +1,9 @@
-﻿using Application.ServiceInterfaces;
-using Application.LogicInterfaces;
+﻿using Application.Logic;
 using Domain.DTOs;
+using PersistenceDataAccess.ServiceInterfaces;
 using WastelessWASM;
 
-namespace Application.Logic;
+namespace PersistenceDataAccess.Services;
 
 public class AuthLogic : IAuthLogic
 {

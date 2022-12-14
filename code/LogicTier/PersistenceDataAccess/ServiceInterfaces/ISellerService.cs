@@ -1,7 +1,6 @@
 using Domain.DTOs;
-using Grpc.Core;
 
-namespace Application.ServiceInterfaces;
+namespace PersistenceDataAccess.ServiceInterfaces;
 
 
 public interface ISellerService 

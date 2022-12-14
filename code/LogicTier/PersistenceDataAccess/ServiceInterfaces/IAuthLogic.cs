@@ -1,6 +1,6 @@
 ﻿using Domain.DTOs;
 
-namespace Application.LogicInterfaces;
+namespace PersistenceDataAccess.ServiceInterfaces;
 
 public interface IAuthLogic
 {

@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using Application.ServiceInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Google.Protobuf.Collections;
 using Grpc.Core;
-using PersistenceDataAccess.Services;
+using PersistenceDataAccess.ServiceInterfaces;
 
 namespace PersistenceDataAccess.Services;
 

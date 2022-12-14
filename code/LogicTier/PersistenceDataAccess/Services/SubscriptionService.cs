@@ -1,6 +1,5 @@
-﻿using Application.ServiceInterfaces;
-using Domain.DTOs;
-using PersistenceDataAccess.Services;
+﻿using Domain.DTOs;
+using PersistenceDataAccess.ServiceInterfaces;
 namespace PersistenceDataAccess.Services;
 
 public class SubscriptionService : ISubscriptionService

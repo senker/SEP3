@@ -9,8 +9,8 @@ import via.sep3.persistencetier.database.seller.Seller;
 import java.util.stream.Stream;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
-
-
+    @Query(value="select * from reservation", nativeQuery = true)
+    Stream<Reservation> findAllStream();
 
     @Query(value="SELECT * FROM reservation WHERE reservation.id=?1", nativeQuery = true)
     Reservation findById(int id);

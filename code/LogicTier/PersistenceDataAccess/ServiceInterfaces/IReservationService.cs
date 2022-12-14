@@ -1,6 +1,6 @@
 ﻿using Domain.DTOs;
 
-namespace Application.ServiceInterfaces;
+namespace PersistenceDataAccess.ServiceInterfaces;
 
 public interface IReservationService
 {

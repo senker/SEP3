@@ -1,11 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Application.ServiceInterfaces;
-using Application.LogicInterfaces;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using PersistenceDataAccess.ServiceInterfaces;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace WebAPI.Controllers;
@@ -15,16 +14,12 @@ namespace WebAPI.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _config;
-    private readonly ICustomerService authCustomerService;
-    private readonly ISellerService authSellerService;
     private readonly IAuthLogic _authLogic;
 
-    public AuthController(IConfiguration config, ICustomerService authCustomerService, ISellerService authSellerService, IAuthLogic authLogic)
+    public AuthController(IConfiguration config, IAuthLogic authLogic)
     {
-        this._config = config;
-        this.authCustomerService = authCustomerService;
-        this.authSellerService = authSellerService;                                                                                 
-        this._authLogic = authLogic;
+        _config = config;                                                                              
+        _authLogic = authLogic;
     }
     
     private List<Claim> GenerateClaimsCustomer(CustomerDto user)
@@ -108,7 +103,6 @@ public class AuthController : ControllerBase
     {
         try
         {
-            // changed authCustomerService to authLogic
             var customer = await _authLogic.ValidateCustomer(userLoginDto.Username, userLoginDto.Password);
             if (customer != null)
             {
@@ -116,7 +110,6 @@ public class AuthController : ControllerBase
                 return Ok(token);
             }
             
-            // changed authSellerService to authLogic
             var seller = await _authLogic.ValidateSeller(userLoginDto.Username, userLoginDto.Password);
             if (seller != null)
             {
