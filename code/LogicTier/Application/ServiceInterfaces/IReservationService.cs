@@ -4,7 +4,7 @@ namespace Application.ServiceInterfaces;
 
 public interface IReservationService
 {
-    Task<ReservationDto> CreateReservationDaoAsync(ReservationCreateDto dto);
-    Task<List<ReservationDto>> GetReservationsBySellerCvrDaoAsync(int cvr);
-    Task<List<ReservationDto>> GetReservationsByCustomerEmailDaoAsync(String email);
+    Task<ReservationDto> CreateReservationAsync(ReservationCreateDto dto);
+    Task<List<ReservationDto>> GetReservationsBySellerCvrAsync(int cvr);
+    Task<List<ReservationDto>> GetReservationsByCustomerEmailAsync(String email);
 }

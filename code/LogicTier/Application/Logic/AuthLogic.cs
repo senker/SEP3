@@ -12,8 +12,8 @@ public class AuthLogic : IAuthLogic
 
     public AuthLogic(ICustomerService customerService, ISellerService sellerService)
     {
-        this._customerService = customerService;
-        this._sellerService = sellerService;
+        _customerService = customerService;
+        _sellerService = sellerService;
     }
 
     public Task<CustomerDto?> ValidateCustomer(String Username, String Password)

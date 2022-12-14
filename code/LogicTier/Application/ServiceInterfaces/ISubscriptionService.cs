@@ -4,5 +4,5 @@ namespace Application.ServiceInterfaces;
 
 public interface ISubscriptionService
 {
-    Task<SubscriptionDto> CreateSubscriptionDaoAsync(SubscriptionDto dto);
+    Task<SubscriptionDto> CreateSubscriptionAsync(SubscriptionDto dto);
 }

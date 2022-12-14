@@ -18,6 +18,6 @@ public class SubscriptionController : ControllerBase
     [HttpPost()]
     public async Task<ActionResult> CreateSubscription(SubscriptionDto subscription)
     {
-        return Ok(await _subscriptionService.CreateSubscriptionDaoAsync(subscription));
+        return Ok(await _subscriptionService.CreateSubscriptionAsync(subscription));
     }
 }

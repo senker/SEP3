@@ -25,6 +25,8 @@ public class CustomerService : ICustomerService
         {
             return null;
         }
+
+        customer = ValidateCreateCustomer(customer);
         
         AddressModelCustomer address = new AddressModelCustomer()
         {
@@ -129,7 +131,7 @@ public class CustomerService : ICustomerService
         return existingCustomer;
     }
 
-    public Task RegisterCustomer(CustomerDto customer)
+    private CustomerCreateDto ValidateCreateCustomer(CustomerCreateDto customer)
     {
         if (string.IsNullOrEmpty(customer.User.Email))
         {
@@ -140,12 +142,8 @@ public class CustomerService : ICustomerService
         {
             throw new ValidationException("Password cannot be null");
         }
-        // Do more user info validation here
-        
-        // save to persistence instead of list
-        
-        
-        return Task.CompletedTask;
+
+        return customer;
     }
 
     private CustomerDto ResponseToCustomerDto(CustomerResponse response)

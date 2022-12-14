@@ -13,7 +13,7 @@ public class SubscriptionService : ISubscriptionService
         _client = new PersistenceDataAccess.SubscriptionService.SubscriptionServiceClient(grpcService.GetChannel());
     }
 
-    public async Task<SubscriptionDto> CreateSubscriptionDaoAsync(SubscriptionDto dto)
+    public async Task<SubscriptionDto> CreateSubscriptionAsync(SubscriptionDto dto)
     {
         try
         {
