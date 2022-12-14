@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
-public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase{
+public class CustomerDao extends CustomerServiceGrpc.CustomerServiceImplBase{
 
     final
     CustomerRepository CUSTOMER_REPOSITORY;
@@ -29,7 +29,7 @@ public class CustomerService extends CustomerServiceGrpc.CustomerServiceImplBase
     final
     PreferenceRepository PREFERENCE_REPOSITORY;
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, PackRepository packRepository, PreferenceRepository preferenceRepository) {
+    public CustomerDao(CustomerRepository customerRepository, PackRepository packRepository, PreferenceRepository preferenceRepository) {
         this.CUSTOMER_REPOSITORY = customerRepository;
         this.PACK_REPOSITORY = packRepository;
         this.PREFERENCE_REPOSITORY = preferenceRepository;

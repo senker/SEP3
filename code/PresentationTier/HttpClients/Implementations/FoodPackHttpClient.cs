@@ -56,7 +56,7 @@ public class FoodPackHttpClient : IFoodPackService
 
     public async Task<List<FoodPackModel>> SearchFoodPacks(SearchFoodPackDto dto)
     {
-        string url = $"{dto.IsPrepared + "/" + dto.Title + "/" + dto.Type + "/" + dto.Price + "/" + dto.PostCode}";
+        string url = $"{"FoodPack/" + dto.IsPrepared + "/" + dto.Title + "/" + dto.Type + "/" + dto.Price + "/" + dto.PostCode}";
         HttpResponseMessage response = await client.GetAsync(url);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)

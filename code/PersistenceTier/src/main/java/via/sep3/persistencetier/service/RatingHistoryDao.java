@@ -7,28 +7,24 @@ import via.sep3.persistencetier.database.customer.Customer;
 import via.sep3.persistencetier.database.customer.CustomerRepository;
 import via.sep3.persistencetier.database.rating.RatingHistory;
 import via.sep3.persistencetier.database.rating.RatingHistoryRepository;
-import via.sep3.persistencetier.database.reservation.Reservation;
 import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.database.seller.SellerAnalyticsRepository;
 import via.sep3.persistencetier.database.seller.SellerRepository;
-import via.sep3.persistencetier.database.userInfo.Address;
 import via.sep3.persistencetier.protobuf.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @GRpcService
-public class RatingHistoryService extends RatingHistoryServiceGrpc.RatingHistoryServiceImplBase {
+public class RatingHistoryDao extends RatingHistoryServiceGrpc.RatingHistoryServiceImplBase {
     private final CustomerRepository customerRepository;
     private final SellerRepository sellerRepository;
     private final RatingHistoryRepository ratingHistoryRepository;
     private final SellerAnalyticsRepository sellerAnalyticsRepository;
 
     @Autowired
-    public RatingHistoryService(CustomerRepository customerRepository,
-                                SellerRepository sellerRepository, RatingHistoryRepository ratingHistoryRepository,
-                                SellerAnalyticsRepository sellerAnalyticsRepository) {
+    public RatingHistoryDao(CustomerRepository customerRepository,
+                            SellerRepository sellerRepository, RatingHistoryRepository ratingHistoryRepository,
+                            SellerAnalyticsRepository sellerAnalyticsRepository) {
         this.customerRepository = customerRepository;
         this.sellerRepository = sellerRepository;
         this.ratingHistoryRepository = ratingHistoryRepository;

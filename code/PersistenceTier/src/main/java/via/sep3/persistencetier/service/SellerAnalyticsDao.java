@@ -3,27 +3,22 @@ package via.sep3.persistencetier.service;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import via.sep3.persistencetier.database.customer.CustomerRepository;
-import via.sep3.persistencetier.database.rating.RatingHistory;
-import via.sep3.persistencetier.database.rating.RatingHistoryRepository;
 import via.sep3.persistencetier.database.seller.Seller;
 import via.sep3.persistencetier.database.seller.SellerAnalytics;
 import via.sep3.persistencetier.database.seller.SellerAnalyticsRepository;
 import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
-import java.util.List;
-
 @GRpcService
-public class SellerAnalyticsService extends SellerAnalyticsServiceGrpc.SellerAnalyticsServiceImplBase {
+public class SellerAnalyticsDao extends SellerAnalyticsServiceGrpc.SellerAnalyticsServiceImplBase {
 
     private final SellerRepository sellerRepository;
     private final SellerAnalyticsRepository sellerAnalyticsRepository;
 
 
     @Autowired
-    public SellerAnalyticsService(SellerRepository sellerRepository,
-                                  SellerAnalyticsRepository sellerAnalyticsRepository) {
+    public SellerAnalyticsDao(SellerRepository sellerRepository,
+                              SellerAnalyticsRepository sellerAnalyticsRepository) {
         this.sellerRepository = sellerRepository;
         this.sellerAnalyticsRepository = sellerAnalyticsRepository;
     }

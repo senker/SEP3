@@ -15,7 +15,11 @@ public interface PackRepository extends JpaRepository<FoodPack, Integer> {
     Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Double price, Long cvr);
 
 
-    @Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.seller_cvr=?4", nativeQuery = true)
+    //@Query(value="select * from food_pack p where p.title like CONCAT(CONCAT('%', ?1), '%') and p.is_prepared=?2 and p.type=?3 and p.seller_cvr=?4", nativeQuery = true)
+   // Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Long cvr);
+
+
+    @Query(value="select * from food_pack p where p.title=?1 and p.is_prepared=?2 and p.type=?3 and p.seller_cvr=?4", nativeQuery = true)
     Stream<FoodPack> searchPacks(String title, boolean isPrepared, String type, Long cvr);
 
 
