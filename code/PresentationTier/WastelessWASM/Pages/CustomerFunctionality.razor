@@ -1,10 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
 @namespace WastelessWASM.Pages
 @inject NavigationManager navMgr
 
 <AuthorizeView>
     <Authorized>                         
-       @{String email = context.User.FindFirst(c=>c.Type=="Email").Value;}
+       @{String email = context.User.FindFirst(c=>c.Type==ClaimTypes.Sid)!.Value;}
         <div class="top-row px-4">
             <img class="icon" src="img/reserved.png" @onclick="() => OpenReservations(email)" style="width: 50px; height:  50px; border-bottom:  10px; cursor: pointer"/>
         </div>
@@ -16,6 +17,5 @@
     public void OpenReservations(string email)
     {
         navMgr.NavigateTo("/CustomerActiveReservation/"+email);
-
     }
 }

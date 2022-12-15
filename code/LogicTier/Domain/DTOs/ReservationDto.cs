@@ -15,9 +15,5 @@ public class ReservationCreateDto
 {
     public string CustomerId {get;set;}
     public int FoodPackId {get;set;}
-    
-    public ReservationCreateDto(ReservationCreateModel seller) =>
-        (CustomerId, FoodPackId) = (
-            seller.CustomerId, seller.FoodPack.Id);
 
 }

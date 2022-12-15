@@ -10,7 +10,7 @@ public class JwtAuthService : IAuthService
 {
 
     private readonly HttpClient client = new();
-    public static string? Jwt { get; private set; } = "";
+    private static string? Jwt { get; set; } = "";
 
     public async Task LoginAsync(string username, string password)
     {
@@ -47,23 +47,13 @@ public class JwtAuthService : IAuthService
         return Task.CompletedTask;
     }
 
-    public Task RegisterCustomerAsync(CustomerDto customer)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task RegisterSellerAsync(SellerDto seller)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<ClaimsPrincipal> GetAuthAsync()
     {
         ClaimsPrincipal principal = CreateClaimsPrincipal();
         return Task.FromResult(principal);
     }
     
-    // Below 2 methods stolen from https://github.com/SteveSandersonMS/presentation-2019-06-NDCOslo/blob/master/demos/MissionControl/MissionControl.Client/Util/ServiceExtensions.cs
+    // Below 2 methods taken from https://github.com/SteveSandersonMS/presentation-2019-06-NDCOslo/blob/master/demos/MissionControl/MissionControl.Client/Util/ServiceExtensions.cs
     private static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
     {
         string payload = jwt.Split('.')[1];
