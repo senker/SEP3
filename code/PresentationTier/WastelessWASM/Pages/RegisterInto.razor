@@ -242,9 +242,7 @@
             _resultMsg = e.Message;
             _color = "red";
         }
-    }
-
-
+    } 
 }
 
 <script suppress-error="BL9992" type="text/javascript">
@@ -263,19 +261,7 @@
                                        console.log(reader.result);
                                        window.localStorage.setItem("resultURL", reader.result); 
                                        urlResult = reader.result;
-                                  };
-                             //  window.localStorage.setItem("resultURL", reader.result); 
-                          
-                            
-                 
-                             
-                           //  console.log("url from localstorage");
-                         //    console.log(JSON.stringify(window.localStorage.getItem("resultURL")));
-
-                                // DotNet.invokeMethodAsync('WastelessWASM', 'ReturnString', JSON.stringify(window.localStorage.getItem("resultURL")));
-      
-                               
-                                await $.ajax({
+                                  };await $.ajax({
                                    type: "POST",
                                    url: "https://localhost:7133/image",
                                    data: JSON.stringify(window.localStorage.getItem("resultURL")),
@@ -289,51 +275,5 @@
                                         alert(error);    
                                    }
                                 });
-                               
-      
-                               
-                                
-                              }  
-                          
-                        
+                              }
                     </script>
-
-
-@*<div class="field">
-                 <label style="text-align: center">Password:</label>
-                 <input type="password" @bind="password"/>
-             </div>
-             <div class="field">
-                                 <label style="text-align: center">Repeat password:</label>
-                                 <input type="password" @bind="repeatedPassword"/>
-                             </div>
-                         @if (!string.IsNullOrEmpty(errorLabel))
-                         {
-                             <div class="field">
-                                 <label style="color: red">
-                                     @errorLabel
-                                 </label>
-                             </div>
-                         }*@
-
-@*/*
-     private string? password;
-     private string? repeatedPassword;
-     private string? errorLabel;*/*@
-
-@*private async Task RegisterAsync()
-{
-/*errorLabel = "";
-try
-{
-if (!repeatedPassword.Equals(password))
-{
-throw new Exception("Passwords are not matching");
-}
-             
-}
-catch (Exception e)
-{
-errorLabel = e.Message;
-}*/
-}*@
