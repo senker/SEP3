@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 
 @GRpcService
 @Transactional
-public class SubscriptionDao extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
+public class SubscriptionService extends SubscriptionServiceGrpc.SubscriptionServiceImplBase {
 
     final
     SubscriptionRepository subscriptionRepository;
@@ -26,7 +26,7 @@ public class SubscriptionDao extends SubscriptionServiceGrpc.SubscriptionService
     final
     CustomerRepository customerRepository;
 @Autowired
-    public SubscriptionDao(SubscriptionRepository subscriptionRepository, SellerRepository sellerRepository, CustomerRepository customerRepository) {
+    public SubscriptionService(SubscriptionRepository subscriptionRepository, SellerRepository sellerRepository, CustomerRepository customerRepository) {
         this.subscriptionRepository = subscriptionRepository;
         this.sellerRepository = sellerRepository;
         this.customerRepository = customerRepository;

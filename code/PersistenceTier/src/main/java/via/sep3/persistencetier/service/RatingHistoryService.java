@@ -15,16 +15,16 @@ import via.sep3.persistencetier.protobuf.*;
 import java.util.List;
 
 @GRpcService
-public class RatingHistoryDao extends RatingHistoryServiceGrpc.RatingHistoryServiceImplBase {
+public class RatingHistoryService extends RatingHistoryServiceGrpc.RatingHistoryServiceImplBase {
     private final CustomerRepository customerRepository;
     private final SellerRepository sellerRepository;
     private final RatingHistoryRepository ratingHistoryRepository;
     private final SellerAnalyticsRepository sellerAnalyticsRepository;
 
     @Autowired
-    public RatingHistoryDao(CustomerRepository customerRepository,
-                            SellerRepository sellerRepository, RatingHistoryRepository ratingHistoryRepository,
-                            SellerAnalyticsRepository sellerAnalyticsRepository) {
+    public RatingHistoryService(CustomerRepository customerRepository,
+                                SellerRepository sellerRepository, RatingHistoryRepository ratingHistoryRepository,
+                                SellerAnalyticsRepository sellerAnalyticsRepository) {
         this.customerRepository = customerRepository;
         this.sellerRepository = sellerRepository;
         this.ratingHistoryRepository = ratingHistoryRepository;

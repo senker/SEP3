@@ -6,14 +6,12 @@ public class SellerId implements Serializable {
     private Long cvr;
     private String email;
 
-    public SellerId(Long cvr, String email)
-    {
+    public SellerId(Long cvr, String email) {
         this.cvr = cvr;
         this.email = email;
     }
 
-    public SellerId()
-    {
+    public SellerId() {
 
     }
 

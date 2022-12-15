@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
-public class ReservationDao extends ReservationServiceGrpc.ReservationServiceImplBase{
+public class ReservationService extends ReservationServiceGrpc.ReservationServiceImplBase{
     final
     ReservationRepository reservationRepository;
     final
@@ -29,7 +29,7 @@ public class ReservationDao extends ReservationServiceGrpc.ReservationServiceImp
     private final SellerRepository sellerRepository;
 
     @Autowired
-    public ReservationDao(ReservationRepository reservationRepository, PackRepository foodPackRepository, CustomerRepository customerRepository, SellerRepository sellerRepository) {
+    public ReservationService(ReservationRepository reservationRepository, PackRepository foodPackRepository, CustomerRepository customerRepository, SellerRepository sellerRepository) {
         this.reservationRepository = reservationRepository;
         this.foodPackRepository = foodPackRepository;
         this.customerRepository = customerRepository;

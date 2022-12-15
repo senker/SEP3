@@ -1,8 +1,6 @@
 package via.sep3.persistencetier;
 
 import io.restassured.RestAssured;
-import org.junit.Before;
-import org.junit.Test;
 
 import io.restassured.RestAssured.*;
 import io.restassured.matcher.RestAssuredMatchers.*;
@@ -17,14 +15,12 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 
 public class RestSellerTests {
 
-    @Before
     public static void main(String[] args) throws Exception {
         RestAssured.useRelaxedHTTPSValidation();
         getCustomerByEmailResponseStatusREST();
         getCustomerByEmailREST();
     }
 
-    @Test
     public static void getCustomerByEmailREST(){
         given().relaxedHTTPSValidation()
               //  .queryParam("id","1")
@@ -32,7 +28,6 @@ public class RestSellerTests {
     }
 
 
-    @Test
     public static void getCustomerByEmailResponseStatusREST()
     {
         int statusCode = given().relaxedHTTPSValidation()
@@ -44,3 +39,5 @@ public class RestSellerTests {
 
     }
 }
+
+

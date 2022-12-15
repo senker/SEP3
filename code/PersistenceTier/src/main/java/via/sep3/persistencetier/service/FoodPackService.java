@@ -19,13 +19,12 @@ import via.sep3.persistencetier.protobuf.*;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @GRpcService
 @Transactional
-public class FoodPackDao extends FoodPackServiceGrpc.FoodPackServiceImplBase {
+public class FoodPackService extends FoodPackServiceGrpc.FoodPackServiceImplBase {
 
     final ReservationRepository RESERVATION_REPOSITORY;
 final
@@ -37,7 +36,7 @@ SellerRepository SELLER_REPOSITORY;
 final
 AddressRepository ADDRESS_REPOSITORY;
 @Autowired
-    public FoodPackDao(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository, ReservationRepository reservationRepository) {
+    public FoodPackService(PackRepository packRepository, SellerRepository sellerRepository, AddressRepository addressRepository, ReservationRepository reservationRepository) {
         this.PACK_REPOSITORY = packRepository;
         this.SELLER_REPOSITORY = sellerRepository;
         this.ADDRESS_REPOSITORY = addressRepository;

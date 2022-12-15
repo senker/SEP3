@@ -1,4 +1,4 @@
-/*
+
 package via.sep3.persistencetier;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import via.sep3.persistencetier.protobuf.*;
-import via.sep3.persistencetier.service.SellerService;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -34,17 +33,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 @WebMvcTest
 class SellerTests {
-
-	@Autowired
-	private MockMvc mockMvc;
-
-	@MockBean
-	private SellerService sellerService;
-
-	@Autowired
-	private ObjectMapper objectMapper;
-
-
 	ManagedChannel managedChannel = ManagedChannelBuilder
 			.forAddress("localhost", 6565)
 			.usePlaintext()
@@ -59,7 +47,6 @@ class SellerTests {
 	{
 		synchronousStub = SellerServiceGrpc.newBlockingStub(managedChannel);
 		asynchronousStub = SellerServiceGrpc.newStub(managedChannel);
-		sellerService = new SellerService();
 	}
 
 	@Test
@@ -76,7 +63,7 @@ class SellerTests {
 	@Test
 	public void grpcGetAllSellers() throws Exception{
 		List<SellerResponse> sellerResponseList = new ArrayList<>();
-			asynchronousStub.getAllSellers(Empty.newBuilder().build(), new StreamObserver<SellerResponse>() {
+			asynchronousStub.getAllSellers(EmptySeller.newBuilder().build(), new StreamObserver<SellerResponse>() {
 			@Override
 			public void onNext(SellerResponse sellerResponse) {
 				sellerResponseList.add(sellerResponse);
@@ -96,46 +83,6 @@ class SellerTests {
 
 		assertEquals(sellerResponseList.get(0).getCvr(), 0);
 	}
-
-
-	@Test
-	public void CreateSellerRest() throws Exception{
-		//HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.github.com/users/vogella")).build();
-
-		String exampleSeller="{\"user\":{\"firstName\":\"SellerFirstName\"," +
-					"\"lastName\":\"SellerLastName\"," +
-					"\"address\":{" +
-						"\"city\":\"city\"," +
-						"\"streetname\":\"StreetName\"," +
-						"\"postcode\":\"9000\"}," +
-					"\"phoneNumber\":\"987987987\"," +
-					"\"email\":\"seller@gmail.com\"}," +
-				"\"cvr\":5," +
-				"\"companyName\":\"CompanyName\"," +
-				"\"description\":\"Description\"," +
-				"\"type\"                   }";
-
-
-		String exampleSeller2 = "{\"firstName\":\"SellerFirstName\"," +
-				"\"lastName\":\"SellerLastName\"," +
-				"\"address\":{\"city\":\"City\"," +
-				"\"First Example\",\"Second Example\"]}";
-
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
-				"/seller"
-		).accept(MediaType.APPLICATION_JSON).content(exampleSeller).contentType(MediaType.APPLICATION_JSON);
-
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		MockHttpServletResponse response = result.getResponse();
-
-		assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-		assertEquals("http://localhost/seller/1",
-				response.getHeader(HttpHeaders.LOCATION));
-
-	}
-
-
-
 
 
 	private static CreateSellerRequest setRandomSellerRequest()
@@ -177,5 +124,3 @@ class SellerTests {
 		return responseObject;
 	}
 }
-
-*/

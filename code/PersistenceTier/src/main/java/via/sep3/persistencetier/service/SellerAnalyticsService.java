@@ -10,15 +10,15 @@ import via.sep3.persistencetier.database.seller.SellerRepository;
 import via.sep3.persistencetier.protobuf.*;
 
 @GRpcService
-public class SellerAnalyticsDao extends SellerAnalyticsServiceGrpc.SellerAnalyticsServiceImplBase {
+public class SellerAnalyticsService extends SellerAnalyticsServiceGrpc.SellerAnalyticsServiceImplBase {
 
     private final SellerRepository sellerRepository;
     private final SellerAnalyticsRepository sellerAnalyticsRepository;
 
 
     @Autowired
-    public SellerAnalyticsDao(SellerRepository sellerRepository,
-                              SellerAnalyticsRepository sellerAnalyticsRepository) {
+    public SellerAnalyticsService(SellerRepository sellerRepository,
+                                  SellerAnalyticsRepository sellerAnalyticsRepository) {
         this.sellerRepository = sellerRepository;
         this.sellerAnalyticsRepository = sellerAnalyticsRepository;
     }
