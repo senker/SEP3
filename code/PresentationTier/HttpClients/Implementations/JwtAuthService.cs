@@ -5,7 +5,7 @@ using Domain.DTOs;
 using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
-
+// reference https://troelsmortensen.github.io/CodeLabs/Tutorials/BlazorWasmJwtAuth/Page.html
 public class JwtAuthService : IAuthService
 {
 

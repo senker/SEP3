@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PersistenceDataAccess.ServiceInterfaces;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
-
+// reference https://troelsmortensen.github.io/CodeLabs/Tutorials/BlazorWasmJwtAuth/Page.html
 namespace WebAPI.Controllers;
 
 [ApiController]

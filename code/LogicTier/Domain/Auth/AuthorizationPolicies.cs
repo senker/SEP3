@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain.Auth;
-
+// reference : https://troelsmortensen.github.io/CodeLabs/Tutorials/BlazorWasmJwtAuth/Page.html
 public static class AuthorizationPolicies
 {
     public static void AddPolicies(IServiceCollection services)

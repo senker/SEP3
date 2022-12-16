@@ -4,7 +4,7 @@ using PersistenceDataAccess.ServiceInterfaces;
 using WastelessWASM;
 
 namespace PersistenceDataAccess.Services;
-
+// references https://troelsmortensen.github.io/CodeLabs/Tutorials/BlazorWasmJwtAuth/Page.html
 public class AuthService : IAuthService
 {
     private readonly ICustomerService _customerService;

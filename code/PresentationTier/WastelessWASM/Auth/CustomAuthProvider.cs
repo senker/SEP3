@@ -3,7 +3,7 @@ using HttpClients.ClientInterfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace WastelessWASM.Auth;
-
+// reference https://troelsmortensen.github.io/CodeLabs/Tutorials/BlazorWasmJwtAuth/Page.html
 public class CustomAuthProvider : AuthenticationStateProvider
 {
     private readonly IAuthService authService;
