@@ -4,7 +4,9 @@
 @using Domain.Models
 @using Domain.DTOs
 @inject ISellerService SellerService;
-@inject ICustomerService CustomerService;    
+@inject ICustomerService CustomerService;   
+@inject NavigationManager navMgr
+
 
 <PageTitle>Register</PageTitle>
 
@@ -34,7 +36,7 @@
         </div>
         <div class="field">
             <label>Password:</label>
-            <input type="text" @bind="_password" @bind:event="oninput"/>
+            <input type="password" @bind="_password" @bind:event="oninput"/>
         </div>
         <div class="field">
             <label>City:</label>
@@ -208,6 +210,7 @@
                 ));
             _resultMsg = "User successfully created";
             _color = "green";
+            navMgr.NavigateTo("/");
         }
         catch (Exception e)
         {
@@ -235,6 +238,8 @@
 
             _resultMsg = "User successfully created";
             _color = "green";
+            navMgr.NavigateTo("/");
+
         }
         catch (Exception e)
         {
