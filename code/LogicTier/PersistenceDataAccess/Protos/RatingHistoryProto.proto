@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace="PersistenceDataAccess";
+
+
+package ratingHistory;
+
+message CreateRatingHistoryRequest{
+  float rating = 1;
+  int32 cvr = 2;
+  string customer_email = 3;
+}
+
+message RatingHistoryResponse
+{
+  float rating = 1;
+  int32 cvr = 2;
+  string customer_email = 3;
+}
+
+
+
+service RatingHistoryService {
+  rpc createRating(CreateRatingHistoryRequest) returns (RatingHistoryResponse);
+}
