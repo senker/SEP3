@@ -5,6 +5,8 @@
 @using System.Security.Claims
 @inject IFoodPackService FoodPackService;
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager navMgr
+
 
 <PageTitle>Create food pack</PageTitle>
 <AuthorizeView>
@@ -117,6 +119,7 @@
         };
         var foodPackDto = new FoodPackCreateDto(foodPackModel);
         FoodPackService.PostFoodPack(foodPackDto);
+        navMgr.NavigateTo("/");
     }
 
 }
